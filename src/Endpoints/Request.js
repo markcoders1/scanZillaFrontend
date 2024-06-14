@@ -8,10 +8,9 @@ try{
     return response.data
 }
 catch(error){
-    throw new Error(error.response.data.message)
+  throw new Error(error) ;
 }
 }
-
 
 export const Get = async(endpint, data)=>{
     try{
