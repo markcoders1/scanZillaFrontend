@@ -4,7 +4,7 @@ const appUrl= import.meta.env.VITE_REACT_APP_API_URL
 
 const axiosInstance=axios.create({
   baseURL:appUrl,
-  timeout: 30000,
+  timeout: 60000,
 })
 
 axiosInstance.interceptors.request.use(
