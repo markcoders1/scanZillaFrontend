@@ -41,7 +41,6 @@ const Login = () => {
     try {
       let response = await axiosInstance({url:appUrl+"/login", method:"post", data:data});
       response = response?.data
-      console.log(response)
         const responseData = {
           user: response?.user,
           accessToken: response?.accessToken,
