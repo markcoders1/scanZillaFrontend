@@ -33,7 +33,7 @@ const CustomTextField = forwardRef(({ label="", rows=4, multiline=false, handlek
           p: "10px",
           color: "red",
           mt: "8px",
-          wordBreak: "break-all"
+          wordBreak: "break-word"
         }}>{error}</Typography>}
       </Box>
     );

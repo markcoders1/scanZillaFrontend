@@ -37,6 +37,20 @@ const Login = () => {
     setIsLoading(true)
 
     setErrors({password:"",email:""})
+    if (data?.email==="" && data?.password===""){
+    setIsLoading(false)
+     return setErrors({password:"Password can not be empty",email:"Email can not be empty"})
+
+    }
+    if (data?.email===""){
+    setIsLoading(false)
+      return setErrors({password:"",email:"Email can not be empty"})
+     }
+     if (data?.password===""){
+    setIsLoading(false)
+      return setErrors({password:"Password can not be empty",email:""})
+     }
+
 
     try {
       let response = await axiosInstance({url:appUrl+"/login", method:"post", data:data});

@@ -22,12 +22,17 @@ const Home = () => {
     bulletpoints: "",
     description: "",
   });
+  // const [errors, setErrors] = useState({
+  //   title: "",
+  //   bulletpoints: "",
+  //   description: "",
+  // });
   const [isLoading, setIsLoading] = useState(false)
-  const handleData = (errorsData)=>{
-const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.path[0]]:error.message}))))
+//   const handleData = (errorsData)=>{
+// const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.path[0]]:error.message}))))
 
 
-  }
+//   }
   const dispatch = useDispatch()
   const hanldeInput = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
@@ -43,7 +48,14 @@ const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.p
         data: data,
       });
     setIsLoading(false)
-      handleData(response.data)
+    console.log(response?.data?.message?.TE)
+    setErrors({
+      title: response.data.message.TE,
+      bulletpoints: response.data.message.BE,
+      description: response.data.message.DE,
+    })
+
+      // handleData(response.data)
       dispatch(
         handleSnackAlert({
           open: true,

@@ -1,10 +1,8 @@
 import { Box } from "@mui/material";
-import { Navigate, Outlet } from "react-router-dom";
-import backgrund from "./../../assets/images/background.svg"
+import {Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SnackAlert from "./../../Components/SnackAlert/SnackAlert"
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
-import { useEffect } from "react";
 const Layout = () => {
   const snackAlert = useSelector(state=> state?.snackAlert)
   const dispatch = useDispatch()
@@ -15,7 +13,6 @@ const Layout = () => {
 }
   return (
     <Box sx={{
-      // background:`url(${backgrund})`,
       background:"black",
       width:"100%",
       height:"100%",
