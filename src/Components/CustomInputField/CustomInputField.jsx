@@ -1,7 +1,7 @@
 import { Box, FormControl, TextField, Typography } from "@mui/material";
 import { forwardRef } from "react";
 
-const CustomTextField = forwardRef(({ label="", rows=4, multiline=false, handleKeyDown=()=>{}, onChange=()=>{}, name="", value="", error="" , mb="0px"}, ref) => {
+const CustomTextField = forwardRef(({ label="", rows=4, multiline=false, handlekeydown=()=>{}, onChange=()=>{}, name="", value="", error="" , mb="0px"}, ref) => {
     return (
       <Box sx={{ mb: mb }}>
         <FormControl variant="standard" fullWidth>
@@ -15,7 +15,7 @@ const CustomTextField = forwardRef(({ label="", rows=4, multiline=false, handleK
                 border: "#1e1e20"
               }
             }}
-            onKeyDown={handleKeyDown}
+            onKeyDown={handlekeydown}
             name={name}
             label={label}
             onChange={onChange}

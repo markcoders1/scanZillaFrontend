@@ -4,8 +4,8 @@ import backgrund from "./../../assets/images/background.svg"
 import { useDispatch, useSelector } from "react-redux";
 import SnackAlert from "./../../Components/SnackAlert/SnackAlert"
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+import { useEffect } from "react";
 const Layout = () => {
-  const auth = useSelector(state=>state?.auth)
   const snackAlert = useSelector(state=> state?.snackAlert)
   const dispatch = useDispatch()
   const handleCloseSnackAlert=()=>{
@@ -15,7 +15,8 @@ const Layout = () => {
 }
   return (
     <Box sx={{
-      background:`url(${backgrund})`,
+      // background:`url(${backgrund})`,
+      background:"black",
       width:"100%",
       height:"100%",
       minHeight:"100dvh",

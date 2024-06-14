@@ -83,7 +83,7 @@ const Login = () => {
     }
   };
 
-  const handleKeyDown = (e) => {
+  const handlekeydown = (e) => {
     if (e.key === "Enter") {
       handleLogin();
     }
@@ -159,7 +159,7 @@ const Login = () => {
 
           <CustomTextField
           ref={inputRef}
-          handleKeyDown={handleKeyDown}
+          handlekeydown={handlekeydown}
             error={errors?.email}
             onChange={handleInput}
             name={"email"}
@@ -168,7 +168,7 @@ const Login = () => {
             label="Email"
           />
           <CustomTextField
-          handleKeyDown={handleKeyDown}
+          handlekeydown={handlekeydown}
             error={errors?.password}
             onChange={handleInput}
             name={"password"}
@@ -207,7 +207,6 @@ const Login = () => {
               },
             }}
             variant="contained"
-            handleKeyDown={(e) => console.log(e)}
             onClick={handleLogin}
           >
             Login

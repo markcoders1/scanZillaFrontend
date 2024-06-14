@@ -67,7 +67,7 @@ const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.p
     setIsLoading(false)
 
   };
-  const handleKeyDown = (e) => {
+  const handlekeydown = (e) => {
     if (e.key === "Enter") {
       handleAnalyze();
     }
@@ -135,7 +135,7 @@ const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.p
           }}
         >
           <CustomTextField
-          handleKeyDown={handleKeyDown}
+          handlekeydown={handlekeydown}
             mb="20px"
             error={errors?.title}
             onChange={hanldeInput}
@@ -145,7 +145,7 @@ const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.p
             label="Add Title"
           />
           <CustomTextField
-          handleKeyDown={handleKeyDown}
+          handlekeydown={handlekeydown}
             mb="20px"
         multiline={true}
 
@@ -158,7 +158,7 @@ const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.p
           <CustomTextField
         multiline={true}
 
-          handleKeyDown={handleKeyDown}
+          handlekeydown={handlekeydown}
             mb="20px"
             error={errors?.description}
             onChange={hanldeInput}

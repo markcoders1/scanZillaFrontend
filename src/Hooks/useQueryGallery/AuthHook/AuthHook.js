@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
                 if (tokenError.response && tokenError.response.status === 403) {
                     sessionStorage.removeItem('accessToken');
                     sessionStorage.removeItem('refreshToken');
-                    localStorage.removeItem('refreshToken');
+                    localStorage.removeItem("persist:root")
                     window.location.href='/'
                 }
             }
