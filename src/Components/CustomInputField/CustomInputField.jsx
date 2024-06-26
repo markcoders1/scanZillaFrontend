@@ -1,11 +1,12 @@
 import { Box, FormControl, TextField, Typography } from "@mui/material";
 import { forwardRef } from "react";
 
-const CustomTextField = forwardRef(({ label="", rows=4, multiline=false, handlekeydown=()=>{}, onChange=()=>{}, name="", value="", error="" , mb="0px"}, ref) => {
+const CustomTextField = forwardRef(({ label="",  type="text",rows=4, multiline=false, handlekeydown=()=>{}, onChange=()=>{}, name="", value="", error="" , mb="0px"}, ref) => {
     return (
       <Box sx={{ mb: mb }}>
         <FormControl variant="standard" fullWidth>
           <TextField
+          type={type}
             ref={ref}
             sx={{
               "&:hover": {

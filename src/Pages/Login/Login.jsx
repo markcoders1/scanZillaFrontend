@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import backgrund from "./../../assets/images/login logo.svg";
+import backgrund from "./../../assets/images/robot.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
@@ -125,7 +125,7 @@ const Login = () => {
         p: {
           xs: "50px 30px",
           sm: "50px 50px",
-          md: "100px 50px",
+          md: "70px 50px",
         },
         maxWidth: "1200px",
         margin: "0 auto",
@@ -139,6 +139,9 @@ const Login = () => {
           md: "row",
           xs: "column",
         },
+        minWidth:{
+          md:"400px"
+        }
       }}
     >
       <Box
@@ -185,6 +188,7 @@ const Login = () => {
             error={errors?.password}
             onChange={handleInput}
             name={"password"}
+            type="password"
             value={data.password}
             rows={1}
             label="Password"
@@ -235,7 +239,6 @@ const Login = () => {
           },
           flexShrink: "1",
           display: {
-            md: "flex",
             xs: "none",
           },
           flexDirection: "column",
@@ -247,7 +250,7 @@ const Login = () => {
         <Box
           sx={{
             background: `url(${backgrund})`,
-            backgroundSize: "cover",
+            backgroundSize: "contain",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             width: "200px",
@@ -264,7 +267,7 @@ const Login = () => {
             textAlign: "center",
           }}
         >
-          Check Your Daily Timing
+         ScanZilla AI
         </Typography>
         <Typography
           sx={{
@@ -276,8 +279,7 @@ const Login = () => {
             fontWeight: "400",
           }}
         >
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia quam
-          atque, iusto saepe ad nobis dolore.
+    EBC A+ brakes ensure unmatched durability, consistent performance, and top-tier safety, guaranteeing confident driving in every situation.
         </Typography>
       </Box>
     </Box>
