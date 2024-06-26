@@ -265,7 +265,6 @@ const Home = () => {
             fontWeight: "400",
           }}
         >
-          EBC A+ brakes deliver exceptional durability, reliable performance, and superior safety for confident driving in all conditions.
         </Typography>
       </Box>
     </Box>
