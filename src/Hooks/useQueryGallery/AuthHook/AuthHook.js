@@ -3,8 +3,7 @@ import axios from "axios";
 const appUrl= import.meta.env.VITE_REACT_APP_API_URL
 
 const axiosInstance=axios.create({
-  baseURL:appUrl,
-  timeout: 60000,
+  baseURL:appUrl
 })
 
 axiosInstance.interceptors.request.use(
@@ -27,6 +26,7 @@ axiosInstance.interceptors.response.use(
     async error => {
         const originalRequest = error.config;
         if (error.response.status === 401 && !originalRequest._retry) {
+            console.log("hi")
             originalRequest._retry = true;
             try {
                 const refreshToken=sessionStorage.getItem("refreshToken")
@@ -42,7 +42,7 @@ axiosInstance.interceptors.response.use(
                 if (tokenError.response && tokenError.response.status === 403) {
                     sessionStorage.removeItem('accessToken');
                     sessionStorage.removeItem('refreshToken');
-                    localStorage.removeItem("persist:root")
+                    localStorage.removeItem('refreshToken');
                     window.location.href='/'
                 }
             }

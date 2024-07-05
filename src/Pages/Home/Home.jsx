@@ -22,17 +22,12 @@ const Home = () => {
     bulletpoints: "",
     description: "",
   });
-  // const [errors, setErrors] = useState({
-  //   title: "",
-  //   bulletpoints: "",
-  //   description: "",
-  // });
   const [isLoading, setIsLoading] = useState(false)
-//   const handleData = (errorsData)=>{
-// const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.path[0]]:error.message}))))
+  const handleData = (errorsData)=>{
+const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.path[0]]:error.message}))))
 
 
-//   }
+  }
   const dispatch = useDispatch()
   const hanldeInput = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
@@ -48,14 +43,7 @@ const Home = () => {
         data: data,
       });
     setIsLoading(false)
-    console.log(response?.data?.message?.TE)
-    setErrors({
-      title: response.data.message.TE,
-      bulletpoints: response.data.message.BE,
-      description: response.data.message.DE,
-    })
-
-      // handleData(response.data)
+      handleData(response.data)
       dispatch(
         handleSnackAlert({
           open: true,
@@ -79,7 +67,7 @@ const Home = () => {
     setIsLoading(false)
 
   };
-  const handlekeydown = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleAnalyze();
     }
@@ -147,7 +135,7 @@ const Home = () => {
           }}
         >
           <CustomTextField
-          handlekeydown={handlekeydown}
+          handleKeyDown={handleKeyDown}
             mb="20px"
             error={errors?.title}
             onChange={hanldeInput}
@@ -157,7 +145,7 @@ const Home = () => {
             label="Add Title"
           />
           <CustomTextField
-          handlekeydown={handlekeydown}
+          handleKeyDown={handleKeyDown}
             mb="20px"
         multiline={true}
 
@@ -170,7 +158,7 @@ const Home = () => {
           <CustomTextField
         multiline={true}
 
-          handlekeydown={handlekeydown}
+          handleKeyDown={handleKeyDown}
             mb="20px"
             error={errors?.description}
             onChange={hanldeInput}
@@ -265,6 +253,7 @@ const Home = () => {
             fontWeight: "400",
           }}
         >
+          EBC A+ brakes deliver exceptional durability, reliable performance, and superior safety for confident driving in all conditions.
         </Typography>
       </Box>
     </Box>
