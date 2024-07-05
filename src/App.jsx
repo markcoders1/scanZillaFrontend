@@ -12,6 +12,8 @@ const LayoutForOnePageScreens = React.lazy(() => import('./Pages/Layout/LayoutSi
 const Signup = React.lazy(() => import('./Pages/Signup/Signup'));
 const OTP = React.lazy(() => import('./Pages/OTP/OTP'));
 const SetPassword = React.lazy(() => import('./Pages/SetPassword/SetPassword'));
+const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'));
+
 
 function App() {
   return (
@@ -29,14 +31,14 @@ function App() {
                 {/* <Route path='*' element={<NotFound />} /> */}
               </Route>
 
-              {/* <Route path='/dashboard' element={<ProtectedRoute><DefaultLayout /></ProtectedRoute>}>
-                <Route path='' element={<Progress />} />
-                <Route path='profile' element={<Profile />} />
-                <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
+              <Route path='/dashboard' element={<DashboardLayout/>}>
+                {/* <Route path='' element={<Progress />} />
+                <Route path='profile' element={<Profile />} /> */}
+                {/* <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
                 <Route path='admin/attendance/:id' element={<ProtectedAdmin><Attendance /></ProtectedAdmin>} />
                 <Route path='admin/register' element={<ProtectedAdmin><Register /></ProtectedAdmin>} />
-                <Route path='admin/viewInformation/:id' element={<ProtectedAdmin><ViewInformation /></ProtectedAdmin>} />
-              </Route> */}
+                <Route path='admin/viewInformation/:id' element={<ProtectedAdmin><ViewInformation /></ProtectedAdmin>} /> */}
+              </Route>
             </Routes>
           </Suspense>
         </BrowserRouter>
