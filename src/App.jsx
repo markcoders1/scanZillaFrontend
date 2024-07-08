@@ -7,41 +7,49 @@ import Login from "./Pages/Login/Login";
 import Protected from "./Pages/Protected/Protected";
 import { PageLoader } from "./Components/Loader/PageLoader";
 import { Suspense } from 'react';
+import Credits from "./Pages/Credits/Credits";
 
 const LayoutForOnePageScreens = React.lazy(() => import('./Pages/Layout/LayoutSinglePage'));
 const Signup = React.lazy(() => import('./Pages/Signup/Signup'));
 const OTP = React.lazy(() => import('./Pages/OTP/OTP'));
 const SetPassword = React.lazy(() => import('./Pages/SetPassword/SetPassword'));
 const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'));
-
+const Dashboard = React.lazy(() => import('./Pages/Dashboard/Dashboard'));
 
 function App() {
   return (
 
     <BrowserRouter>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
-              <Route path='/' element={<LayoutForOnePageScreens />}>
-                <Route path='' element={<Login />} />
-                 <Route path='signup' element={<Signup/>} />
-                 <Route path='otp' element={<OTP/>} />
-                 <Route path='setpassword' element={<SetPassword/>} />
-               {/* <Route path='changePassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path='/' element={<LayoutForOnePageScreens />}>
+            <Route path='' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
+            <Route path='otp' element={<OTP />} />
+            <Route path='setpassword' element={<SetPassword />} />
+            {/* <Route path='changePassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
                 <Route path='forgotPassword' element={<ForgotPassword />} /> */}
-                {/* <Route path='*' element={<NotFound />} /> */}
-              </Route>
+            {/* <Route path='*' element={<NotFound />} /> */}
+          </Route>
 
-              <Route path='/dashboard' element={<DashboardLayout/>}>
-                {/* <Route path='' element={<Progress />} />
+          <Route path='/' element={<DashboardLayout />}>
+            <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
+            <Route path="analyze" element={<Protected children={<Credits />} />} />
+            <Route path="credits" element={<Protected children={<Credits />} />} />
+            <Route path="history" element={<Protected children={<Credits />} />} />
+            <Route path="profile" element={<Protected children={<Credits />} />} />
+
+
+            {/* <Route path='' element={<Progress />} />
                 <Route path='profile' element={<Profile />} /> */}
-                {/* <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
+            {/* <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
                 <Route path='admin/attendance/:id' element={<ProtectedAdmin><Attendance /></ProtectedAdmin>} />
                 <Route path='admin/register' element={<ProtectedAdmin><Register /></ProtectedAdmin>} />
                 <Route path='admin/viewInformation/:id' element={<ProtectedAdmin><ViewInformation /></ProtectedAdmin>} /> */}
-              </Route>
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
+          </Route>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
 
 
 

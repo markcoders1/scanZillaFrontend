@@ -1,0 +1,22 @@
+import { Box, Typography } from '@mui/material'
+import React from 'react'
+import { useLocation } from 'react-router-dom'
+
+const Header = () => {
+    const {pathname} = useLocation()
+  return (
+    <Box>
+              <Typography sx={{
+                color:"#333333",
+                fontWeight:"600",
+                fontSize:"40px",
+                lineHeight:"50px"
+              }}>
+              {pathname?.split("/")[1]}
+              </Typography>
+            
+            </Box>
+  )
+}
+
+export default Header

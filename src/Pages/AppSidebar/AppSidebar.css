@@ -1,0 +1,11 @@
+.anchortag{
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: #6985bd;
+
+}
+.anchorActive{
+    font-weight: 600;
+    font-size: 1.75rem;
+    color:  rgba(255, 255, 255, 1);
+}

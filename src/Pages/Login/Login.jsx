@@ -31,7 +31,7 @@ const Login = () => {
   const navigate = useNavigate();
   if (auth?.authenticated) {
     // dispatch(handleSnackAlert({open:true, message:"Logout first.", severity:"error"}))
-    return <Navigate to="/text-analyze" replace={true} />;
+    return <Navigate to="/dashboard" replace={true} />;
   }
 
   const handleInput = (e) => {
@@ -85,10 +85,10 @@ const Login = () => {
 
     } catch (error) {
       const errorData = error.response.data
-      if (error.response.data.errorType.includes("email")) {
+      if (error?.response?.data?.errorType?.includes("email")) {
         setErrors({ password: "", email: error.response.data.message })
       }
-      if (error.response.data.errorType.includes("password")) {
+      if (error?.response?.data?.errorType?.includes("password")) {
         setErrors({ email: "", password: error.response.data.message })
       }
       setIsLoading(false)

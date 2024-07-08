@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
+import CustomButton from "../CustomButton/CustomButton";
 
 const Logout = () => {
   const auth = useSelector((state) => state?.auth);
@@ -25,13 +26,19 @@ const Logout = () => {
     <>
       {auth?.authenticated ? (
         <Box
-        onClick={handleLogout}
+      onClick={handleLogout}
           sx={{
             fontSize: "clamp(1vw, 2rem, 10vw)",
             cursor:"pointer"
           }}
         >
-          <FaPowerOff />
+          <CustomButton
+          border={"2px solid white"}
+          ButtonText={"Log out"}
+          color={"white"}
+          fontSize={"14px"}
+          
+          />
         </Box>
       ) : null}
     </>
