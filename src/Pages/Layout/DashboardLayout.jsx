@@ -17,47 +17,60 @@ const DashboardLayout = () => {
           backgroundPosition: "center",
           width: "100vw",
           height: "100vh",
-          display: "flex",
-          justifyContent: "space-between",
-          padding:"30px"
+          padding: "30px",
+          gap: "2rem",
         }}
       >
         <Box
           sx={{
-            color: "white",
-            width: {
-              xl: "500px",
-            },
-            
-            flexGrow: "0",
-            flexShrink: "1",
-          }}
-        >
-          <AppSidebar />
-        </Box>
+            display: "flex",
+            justifyContent: "space-between",
+            gap: "2rem",
+            margin:"auto",
+            maxWidth:"1470px",
 
-        <Box
-          sx={{
-            flexGrow:"1",
-            backgroundColor:"white",
-            borderRadius:"30px",
           }}
         >
+
+
           <Box
-          sx={{
-            p:{
-              lg:"68px 48px"
-            }
-          }}
+            sx={{
+              color: "white",
+              padding:"0px 20px",
+
+              flexGrow: "0",
+              flexShrink: "1",
+            }}
           >
-            <Header/>
-          <Outlet />
+            <AppSidebar />
+          </Box>
+
+          <Box
+            sx={{
+              flexGrow: "1",
+              backgroundColor: "white",
+              borderRadius: "30px",
+            }}
+          >
+            <Box
+              sx={{
+                flexBasis:"70%",
+                flexShrink:"1",
+                p: {
+                  lg: "56px 68px 48px 68px",
+                  md: "50px 58px 38px 48px"
+                }
+              }}
+            >
+              <Header />
+              <Outlet />
+            </Box>
           </Box>
         </Box>
       </Box>
 
 
-      
+
     </>
   )
 }

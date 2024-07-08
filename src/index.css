@@ -101,3 +101,10 @@ a{
   80% {background-size: 20% 50% ,20% 50% ,20% 100%}
   100%{background-size: 20% 50% ,20% 50% ,20% 50% }
 }
+
+
+/* setting background for body */
+
+body{
+  background-image: ;
+}

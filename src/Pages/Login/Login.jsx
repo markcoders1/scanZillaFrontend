@@ -75,7 +75,7 @@ const Login = () => {
       );
       setIsLoading(false)
 
-      navigate("/text-analyze");
+      navigate("/dashboard");
       sessionStorage.setItem("accessToken", response?.accessToken);
       sessionStorage.setItem("refreshToken", response?.refreshToken);
       setData({

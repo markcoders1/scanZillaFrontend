@@ -13,6 +13,7 @@ const CustomButton = ({
     fullWidth = false,
     variant = "outlined",
     padding,
+    onClick
 
 
 
@@ -20,20 +21,18 @@ const CustomButton = ({
 
 }) => {
     return (
-        <Button variant={variant} fullWidth={fullWidth} sx={{
+        <Button variant={variant} fullWidth={fullWidth}
+        onClick={onClick}
+        sx={{
             border: border,
             ...buttonStyle,
             borderRadius,
-            padding
-
-        }}><Typography sx={{
-            ...buttonTextStyle,
+            padding,
             fontSize,
-           color,
-            fontWeight,
+            color,
+            ButtonText
 
-
-        }}></Typography>{ButtonText}</Button>
+        }}>{ButtonText}</Button>
     )
 }
 

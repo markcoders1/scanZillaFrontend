@@ -7,14 +7,26 @@ import Login from "./Pages/Login/Login";
 import Protected from "./Pages/Protected/Protected";
 import { PageLoader } from "./Components/Loader/PageLoader";
 import { Suspense } from 'react';
-import Credits from "./Pages/Credits/Credits";
 
 const LayoutForOnePageScreens = React.lazy(() => import('./Pages/Layout/LayoutSinglePage'));
 const Signup = React.lazy(() => import('./Pages/Signup/Signup'));
 const OTP = React.lazy(() => import('./Pages/OTP/OTP'));
 const SetPassword = React.lazy(() => import('./Pages/SetPassword/SetPassword'));
 const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'));
-const Dashboard = React.lazy(() => import('./Pages/Dashboard/Dashboard'));
+
+// const Analyzed = React.lazy(() => import('./Pages/Analyze/Analyze'));
+// const History = React.lazy(() => import('./Pages/History/History'));
+// const Profile = React.lazy(() => import('./Pages/Profile/Profile'));
+// const Credits = React.lazy(() => import('./Pages/Credits/Credits'));
+// const Dashboard = React.lazy(() => import('./Pages/Dashboard/Dashboard'));
+
+import Analyzed from  './Pages/Analyze/Analyze';
+import History from  './Pages/History/History';
+import Profile from  './Pages/Profile/Profile';
+import Credits from  './Pages/Credits/Credits';
+import Dashboard from  './Pages/Dashboard/Dashboard';
+
+
 
 function App() {
   return (
@@ -34,10 +46,10 @@ function App() {
 
           <Route path='/' element={<DashboardLayout />}>
             <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
-            <Route path="analyze" element={<Protected children={<Credits />} />} />
+            <Route path="analyze" element={<Protected children={<Analyzed />} />} />
             <Route path="credits" element={<Protected children={<Credits />} />} />
-            <Route path="history" element={<Protected children={<Credits />} />} />
-            <Route path="profile" element={<Protected children={<Credits />} />} />
+            <Route path="history" element={<Protected children={<History />} />} />
+            <Route path="profile" element={<Protected children={<Profile />} />} />
 
 
             {/* <Route path='' element={<Progress />} />

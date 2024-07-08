@@ -12,7 +12,7 @@ const Header = () => {
                 fontSize:"40px",
                 lineHeight:"50px"
               }}>
-              {pathname?.split("/")[1]}
+              {`${pathname?.split("/")[1]?.charAt(0).toLocaleUpperCase()}${pathname?.split("/")[1]?.slice(1)}`}
               </Typography>
             
             </Box>
