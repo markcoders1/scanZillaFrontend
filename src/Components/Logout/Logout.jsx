@@ -36,7 +36,10 @@ const Logout = () => {
           <CustomButton
           buttonStyle={{
             borderRadius:"8px",
-            padding:"15px 35px"
+            padding:{
+              md : "15px 35px",
+              xs: "5px 10px"
+            }
           }}
           border={"2px solid white"}
           ButtonText={"Log out"}

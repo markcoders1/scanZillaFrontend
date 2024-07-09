@@ -1,0 +1,21 @@
+.anchortag{
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #000000;
+    transition: all ease-in 80ms;
+
+}
+.anchorActive{
+    font-weight: 600;
+    font-size: 1.5rem;
+    color:  rgb(73, 70, 70);
+}
+.sidebar {
+    transform: translateX(-300px);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  

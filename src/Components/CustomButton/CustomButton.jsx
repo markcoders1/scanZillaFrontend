@@ -13,7 +13,9 @@ const CustomButton = ({
     fullWidth = false,
     variant = "outlined",
     padding,
-    onClick
+    onClick,
+    width,
+    margin
 
 
 
@@ -31,6 +33,8 @@ const CustomButton = ({
             color,
             ButtonText,
             ...buttonStyle,
+            width,
+            margin
 
 
         }}>{ButtonText}</Button>

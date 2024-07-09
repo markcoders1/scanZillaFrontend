@@ -5,6 +5,7 @@ import AppSidebar from '../AppSidebar/AppSidebar'
 import dashboardImg from '../../assets/images/dashoardImg.png'
 import dashboardImg1 from '../../assets/images/dashboard.png'
 import Header from '../../Components/Header/Header'
+import MobileSidebar from '../../Components/MobileSidebar/MobileSidebar'
 
 const DashboardLayout = () => {
   return (
@@ -51,6 +52,11 @@ const DashboardLayout = () => {
           > 
 
             <AppSidebar />
+            <Box
+            
+            >
+              <MobileSidebar/>
+            </Box>
           </Box>
 
           <Box
