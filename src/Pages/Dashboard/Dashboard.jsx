@@ -19,9 +19,9 @@ const Home = () => {
       <Box sx={{
         display: "flex",
         justifyContent: "space-between",
-        flexDirection:{
-          xs:"column",
-          md:"row"
+        flexDirection: {
+          xs: "column",
+          md: "row"
         },
         gap: "40px",
 
@@ -34,7 +34,7 @@ const Home = () => {
           flexBasis: {
             md: "45%"
           },
-          flexShrink:0
+          flexShrink: 0
         }}>
           <Box
             sx={{
@@ -100,41 +100,26 @@ const Home = () => {
           <Box sx={{
             maxHeight: "400px",
             minHeight: "350px",
-            boxSizing:"border-box",
+            boxSizing: "border-box",
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-            padding:"20px", borderRadius:"10px"
+            padding: "20px", borderRadius: "10px"
           }}>
-            <CustomChart  height={350}/>
+            <CustomChart height={350} />
           </Box>
 
         </Box>
 
 
 
-
-        <Box sx={{
+        <Box
+        sx={{
           flexBasis: {
             md: "45%",
           },
-          flexShrink:0,
+          flexShrink: 0,
           flexGrow: 1,
           maxHeight: "550px",
-          overflowY: "auto",
-          "&::-webkit-scrollbar": {
-            width: "8px"
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "#DFDFDF",
-            borderRadius: "10px"
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "black",
-            borderRadius: "10px"
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            background: "#b30000"
-          },
-          p: "30px",
+          p: "30px 0px 30px 30px",
           display: "flex",
           flexDirection: "column",
           gap: "40px",
@@ -142,13 +127,49 @@ const Home = () => {
           borderRadius: "10px",
           position: "relative"
 
-        }}>
-          {Array.from({ length: 60 }).map((_, index) => (
-            <GiftCard key={index} index={index} />
-          ))}
+        }}
+        >
+
+          <Typography
+            sx={{
+              fontSize: "27px",
+              fontWeight: "600",
+              color: "#333333"
+            }}
+          >
+            Analysis History
+          </Typography>
           <Box sx={{
-            position: "sticky",
-            bottom: "0px",
+           
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              width: "8px"
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "#DFDFDF",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "black",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#b30000"
+            },
+           paddingRight:"30px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "40px",
+            borderRadius: "10px",
+
+          }}>
+            {Array.from({ length: 60 }).map((_, index) => (
+              <GiftCard key={index} index={index} />
+            ))}
+          </Box>
+          <Box sx={{
+            // position: "sticky",
+            // bottom: "0px",
           }}>
             <CustomButton
               fullWidth={true}
@@ -166,7 +187,7 @@ const Home = () => {
               fontWeight
               variant="contained"
               padding
-              onClick={()=>alert("view history")}
+              onClick={() => alert("view history")}
               hoverBg="#1A0049"
               hovercolor="white"
               background="#1A0049"
@@ -174,15 +195,14 @@ const Home = () => {
 
           </Box>
         </Box>
-
       </Box>
 
       <Box sx={{
         display: "flex",
         gap: "40px",
-        flexDirection:{
-          xs:"column",
-          md:"row"
+        flexDirection: {
+          xs: "column",
+          md: "row"
         }
       }}>
 
@@ -210,7 +230,12 @@ const Home = () => {
 
         <Box
           onClick={() => alert("Lets analyze")}
-          sx={{ flexBasis: "45%", cursor: "pointer", flexGrow: 1, justifyContent: "center", display: "flex", gap: "20px", flexDirection: "column", background: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${bg})`, boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px" }}>
+          sx={{
+            flexBasis: "45%", cursor: "pointer", flexGrow: 1, justifyContent: "center", display: "flex", gap: "20px", flexDirection: "column",
+
+            background: `linear-gradient(rgba(27, 2, 75, .1), rgba(27, 2, 75, .1)), url(${bg})`,
+            boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px"
+          }}>
 
           <Typography sx={{
             fontSize: "30px",

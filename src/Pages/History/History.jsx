@@ -12,7 +12,7 @@ const History = () => {
                 gap: "2.2rem",
                 flexDirection:{
                  lg: "row",
-                 md: 'column'
+                 xs: 'column',
                 },
             }}
         >

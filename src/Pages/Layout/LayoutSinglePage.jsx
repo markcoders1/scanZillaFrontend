@@ -41,7 +41,8 @@ const LayoutSinglePage = () => {
             },
             minWidth: {
               md: "400px"
-            }
+            },
+          
           }}
         >
             <Box

@@ -9,7 +9,7 @@ const CardIWithImageBackground = ({
 }) => {
   return (
     <Box sx={{
-        background: `linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(${bg})`,
+        background: `linear-gradient(rgba(27, 2, 75, .1), rgba(27, 2, 75, .1)), url(${bg})`,
         backgroundSize: "cover", backgroundRepeat: "no-repeat",
         borderRadius: "10px",
         position: "relative",
