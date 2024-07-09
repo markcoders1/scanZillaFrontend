@@ -12,7 +12,8 @@ const GiftCard = ({ index }) => {
             sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: 'center'
+                alignItems: 'center',
+                gap:"50px"
             }}
         >
             <Typography

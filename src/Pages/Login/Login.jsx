@@ -175,6 +175,7 @@ const Login = () => {
               }}
             >Email</label>
             <CustomTextField
+            border={true}
               ref={inputRef}
               handlekeydown={handlekeydown}
               error={errors?.email}
@@ -198,6 +199,7 @@ const Login = () => {
               }}
             >Password</label>
             <CustomTextField
+            border={true}
               handlekeydown={handlekeydown}
               error={errors?.password}
               onChange={handleInput}

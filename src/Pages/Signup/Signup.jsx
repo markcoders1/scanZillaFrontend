@@ -182,6 +182,8 @@ const Signup = () => {
                             }}
                         >Full Name</label>
                         <CustomTextField
+                            border={true}
+
                             ref={inputRef}
                             handlekeydown={handlekeydown}
                             error={errors?.fullName}
@@ -205,6 +207,8 @@ const Signup = () => {
                             }}
                         >Email</label>
                         <CustomTextField
+                            border={true}
+
                             handlekeydown={handlekeydown}
                             error={errors?.email}
                             onChange={handleInput}
@@ -228,6 +232,8 @@ const Signup = () => {
                             }}
                         >Set Password</label>
                         <CustomTextField
+                            border={true}
+
                             handlekeydown={handlekeydown}
                             error={errors?.password}
                             onChange={handleInput}

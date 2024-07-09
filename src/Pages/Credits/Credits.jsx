@@ -10,7 +10,7 @@ const Credits = () => {
                 marginTop: "15px",
                 display: "flex",
                 gap: "2.2rem",
-                marginTop: "30px"
+                // marginTop: "30px"
             }}
         >
             <Box

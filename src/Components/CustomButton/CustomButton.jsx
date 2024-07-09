@@ -3,17 +3,20 @@ import React from 'react'
 
 const CustomButton = ({
     border = "",
-    borderRadius,
+    borderRadius="",
     buttonTextStyle = {},
     buttonStyle = {},
-    ButtonText,
-    fontSize,
-    color,
-    fontWeight,
+    ButtonText="",
+    fontSize="",
+    color="",
+    fontWeight="",
     fullWidth = false,
     variant = "outlined",
-    padding,
-    onClick
+    padding="",
+    onClick=()=>{},
+    background="",
+    hoverBg="",
+    hovercolor=""
 
 
 
@@ -30,8 +33,12 @@ const CustomButton = ({
             fontSize,
             color,
             ButtonText,
+            background,
             ...buttonStyle,
-
+            '&:hover':{
+                background:hoverBg,
+                color:hovercolor
+            }
 
         }}>{ButtonText}</Button>
     )
