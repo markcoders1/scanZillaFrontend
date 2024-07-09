@@ -25,12 +25,13 @@ const CustomButton = ({
         onClick={onClick}
         sx={{
             border: border,
-            ...buttonStyle,
             borderRadius,
             padding,
             fontSize,
             color,
-            ButtonText
+            ButtonText,
+            ...buttonStyle,
+
 
         }}>{ButtonText}</Button>
     )

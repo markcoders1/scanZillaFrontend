@@ -105,6 +105,9 @@ a{
 
 /* setting background for body */
 
-body{
-  background-image: ;
+.anchortag{
+  color:rgba(255, 255, 255, .5) !important;
+}
+.anchortag.anchorActive{
+  color: white !important;
 }

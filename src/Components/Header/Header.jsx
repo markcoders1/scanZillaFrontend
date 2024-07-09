@@ -5,7 +5,9 @@ import { useLocation } from 'react-router-dom'
 const Header = () => {
     const {pathname} = useLocation()
   return (
-    <Box>
+    <Box sx={{
+      mb:"26px"
+    }}>
               <Typography sx={{
                 color:"#333333",
                 fontWeight:"600",

@@ -6,6 +6,7 @@ import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSl
 import { Navigate, useNavigate } from "react-router-dom";
 import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
 import CustomButton from "../CustomButton/CustomButton";
+import { BiBorderRadius } from "react-icons/bi";
 
 const Logout = () => {
   const auth = useSelector((state) => state?.auth);
@@ -33,6 +34,10 @@ const Logout = () => {
           }}
         >
           <CustomButton
+          buttonStyle={{
+            borderRadius:"8px",
+            padding:"15px 35px"
+          }}
           border={"2px solid white"}
           ButtonText={"Log out"}
           color={"white"}

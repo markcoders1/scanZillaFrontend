@@ -258,9 +258,42 @@ const errors = errorsData.message.map(error=>(setErrors(prev=>({...prev,[error.p
     //     </Typography>
     //   </Box>
     // </Box>
-    <Box>
-        Dashboard
+    <Box sx={{
+      maxHeight: "680px",
+      display: "flex",
+      gap: "20px",
+      flexDirection: "column",
+      overflow: "auto",
+      padding: "20px 0", // Add padding to prevent shadow clipping
+      "&::-webkit-scrollbar": {
+        width: "8px"
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#DFDFDF",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "black",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        background: "#b30000"
+      }
+    }}>
+      <Box sx={{
+        display: "flex",
+        padding: "22px 26px",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderRadius: "10px",
+        boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+        margin: "10px" // Add margin to inner box
+      }}>
+        hello
+      </Box>
+      
     </Box>
+    
   );
 };
 

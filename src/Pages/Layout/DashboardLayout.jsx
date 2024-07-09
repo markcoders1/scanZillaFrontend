@@ -15,17 +15,21 @@ const DashboardLayout = () => {
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
-          width: "100vw",
-          height: "100vh",
-          padding: "30px",
+          padding: "50px",
+          minHeight:"100vh",
           gap: "2rem",
+          boxSizing:"border-box",
+
         }}
       >
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            gap: "2rem",
+            gap: {
+              lg:"2rem",
+              xs:"0px"
+            },
             margin:"auto",
             maxWidth:"1470px",
 
@@ -36,12 +40,16 @@ const DashboardLayout = () => {
           <Box
             sx={{
               color: "white",
-              padding:"0px 20px",
+              padding:{
+                lg:"0px 20px",
+                xs:"0"
+              },
 
               flexGrow: "0",
               flexShrink: "1",
             }}
-          >
+          > 
+
             <AppSidebar />
           </Box>
 
@@ -56,9 +64,11 @@ const DashboardLayout = () => {
               sx={{
                 flexBasis:"70%",
                 flexShrink:"1",
+                boxSizing:"border-box",
                 p: {
                   lg: "56px 68px 48px 68px",
-                  md: "50px 58px 38px 48px"
+                  md: "50px 58px 38px 48px",
+                  xs:"40px"
                 }
               }}
             >

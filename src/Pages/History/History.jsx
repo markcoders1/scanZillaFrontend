@@ -24,8 +24,24 @@ const History = () => {
                     flexBasis: "50%",
                     padding: "24px 30px",
                     borderRadius: "10px",
-                    boxShadow: "4px 5px 15px 0px #C8C8C8 ",
                     flexDirection: "column",
+                    maxHeight:"680px",
+                    overflow:"auto",
+                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                    "&::-webkit-scrollbar": {
+                        width: "8px" // Adjust the width of the scrollbar here
+                      },
+                      "&::-webkit-scrollbar-track": {
+                        background:"#DFDFDF",
+                        borderRadius: "10px"
+                      },
+                      "&::-webkit-scrollbar-thumb": {
+                        background: "black", // Change this for different scrollbar thumb color
+                        borderRadius: "10px"
+                      },
+                      "&::-webkit-scrollbar-thumb:hover": {
+                        background: "#b30000" // Change this for scrollbar thumb color on hover
+                      }
                    
                 }}
             >
@@ -38,8 +54,8 @@ const History = () => {
                 >
                     Analyze History
                 </Typography>
-
-                {Array.from({ length: 10 }).map((_, index) => (
+                    
+                {Array.from({ length: 60 }).map((_, index) => (
                     <GiftCard key={index} index={index} />
                 ))}
 
@@ -52,9 +68,24 @@ const History = () => {
                     flexBasis: "50%",
                     padding: "24px 30px",
                     borderRadius: "10px",
-                    boxShadow: "4px 5px 15px 0px #C8C8C8 ",
                     flexDirection: "column",
-                    
+                    maxHeight:"680px",
+                    overflow:"auto",
+                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                    "&::-webkit-scrollbar": {
+                        width: "8px" // Adjust the width of the scrollbar here
+                      },
+                      "&::-webkit-scrollbar-track": {
+                        background:"#DFDFDF",
+                        borderRadius: "10px"
+                      },
+                      "&::-webkit-scrollbar-thumb": {
+                        background: "black", // Change this for different scrollbar thumb color
+                        borderRadius: "10px"
+                      },
+                      "&::-webkit-scrollbar-thumb:hover": {
+                        background: "#b30000" // Change this for scrollbar thumb color on hover
+                      }
                 }}
             >
                 <Typography
@@ -68,7 +99,7 @@ const History = () => {
                     
                     Credits History
                 </Typography>
-                {Array.from({ length: 10 }).map((_, index) => (
+                {Array.from({ length: 60 }).map((_, index) => (
                     <CreditsHistory key={index} index={index} />
                 ))}
               

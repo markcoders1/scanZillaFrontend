@@ -11,11 +11,13 @@ const AppSidebar = () => {
   return (
     <Box
       sx={{
-        display: 'flex',
+        display: {
+          xs:"none",
+          lg:'flex'
+        },
         flexDirection: 'column',
-        gap: '110px',
+        gap: '2rem',
         justifyContent: 'center',
-        alignItems: "",
       }}
     >
       <Box
@@ -29,7 +31,8 @@ const AppSidebar = () => {
       >
         <Box
           sx={{
-            marginTop: '90px',
+            // marginTop: '90px',
+            gap:"20px",
           }}
         >
           <Typography
