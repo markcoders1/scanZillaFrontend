@@ -56,8 +56,8 @@ const LayoutSinglePage = () => {
                     md:"1"
                 },
                 p: {
-                  md: "80px 50px",
-                  xs: "80px 50px"
+                  md: "23px 30px",
+                  xs: "60px 20px",
       
                 }
               }}
@@ -67,12 +67,12 @@ const LayoutSinglePage = () => {
             <Box
         sx={{
           flexBasis: {
-            lg:"600px",
-            md: "50%",
+            // lg:"500px",
+            md: "45%",
 
 
           },
-          flexShrink: 0,
+          flexShrink: 1,
           flexGrow:0,
           display: {
             xs: "none",

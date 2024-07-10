@@ -121,7 +121,7 @@ const Login = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "10px",
+          gap: "0px",
         }}
       >
         <Typography
@@ -156,7 +156,7 @@ const Login = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "30px"
+            gap: "20px"
           }}
         >
           <Typography
@@ -164,7 +164,7 @@ const Login = () => {
               display: "flex",
               gap: "5px",
               flexDirection: "column",
-              marginTop: "50px"
+              marginTop: "30px"
             }}
           >
 

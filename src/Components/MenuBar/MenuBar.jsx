@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleSidebar } from '../../Redux/Slice/ToggleSidebarSlice/ToggleSidearSlice';
+import { toggleSidebar,openSidebar } from '../../Redux/Slice/ToggleSidebarSlice/ToggleSidearSlice';
 // import menuImg from './../../assets/images/noun-icon.png'
 import { HiMenuAlt1 } from "react-icons/hi";
 import { Box } from '@mui/material';
@@ -10,6 +10,7 @@ const MenuBar = () => {
 
     const handleToggle = () => {
         dispatch(toggleSidebar());
+        
     };
 
     return (

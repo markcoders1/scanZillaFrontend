@@ -6,6 +6,9 @@ import { toggleSidebar } from '../../Redux/Slice/ToggleSidebarSlice/ToggleSidear
 import './MobileSidebar.css';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
+import { RxCross2 } from "react-icons/rx";
+
+// import { toggleSidebar, openSidebar } from '../../Redux/Slice/ToggleSidebarSlice/ToggleSidearSlice';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -30,25 +33,38 @@ const MobileSidebar = () => {
         justifyContent: 'center',
         position: "fixed",
         top: 0,
-        left: 0,
-        width: '300px',
+        right: 0,
+        width: {
+          sm: "330px",
+          xs: "250px",
+        },
         height: '100%',
         backgroundColor: '#060413',
-        transform: isOpen ? 'translateX(0)' : 'translateX(-300px)',
+        transform: isOpen ? 'translateX(0)' : 'translateX(300px)',
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
-        paddingLeft:"20px",
+        paddingLeft: "20px",
+
         //  margin:"auto"
-       
+
       }}
     >
+      <Box
+        sx={{
+          position: "absolute",
+          color: "white",
+          top: "10px",
+          left: "20px",
+          
+        }}
+      ><RxCross2 onClick={handleToggle} /></Box>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           gap: '60px',
-          justifyContent: 'center',
-        
+          justifyContent: 'center', 
+
         }}
       >
         <Box

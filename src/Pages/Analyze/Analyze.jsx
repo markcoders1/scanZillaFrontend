@@ -484,6 +484,10 @@ const Analyze = () => {
         display:'flex',
         gap:"20px",
         justifyContent:"space-between",
+        flexDirection:{
+          sm :"row",
+          xs:"column-reverse"
+        },
         mt:"20px"
       }}>
         <Typography style={{

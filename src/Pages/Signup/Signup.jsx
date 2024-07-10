@@ -126,7 +126,7 @@ const Signup = () => {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "center",
-                    gap: "10px",
+                    // gap: "10px",
                 }}
             >
                 <Typography
@@ -163,7 +163,7 @@ const Signup = () => {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: "30px"
+                        gap: "10px"
                     }}
                 >
                     <Typography

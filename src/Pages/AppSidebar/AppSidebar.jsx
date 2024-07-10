@@ -5,21 +5,16 @@ import './AppSidebar.css';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 
-const appUrl = import.meta.env.VITE_REACT_APP_API_URL
-
 const AppSidebar = () => {
   return (
     <Box
       sx={{
-        display: {
-          xs:"none",
-          lg:'flex'
-        },
+        display: 'flex',
         flexDirection: 'column',
         gap: '2rem',
         justifyContent: 'center',
-        marginTop:"40px"
-        
+        marginTop: '40px',
+        padding: '20px', // Added padding for better spacing
       }}
     >
       <Box
@@ -28,15 +23,9 @@ const AppSidebar = () => {
           flexDirection: 'column',
           gap: '80px',
           justifyContent: 'center',
-        
         }}
       >
-        <Box
-          sx={{
-            // marginTop: '90px',
-            gap:"20px",
-          }}
-        >
+        <Box>
           <Typography
             sx={{
               fontWeight: '600',
@@ -50,9 +39,9 @@ const AppSidebar = () => {
         </Box>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.5rem"
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem',
           }}
         >
           <Typography>
@@ -65,7 +54,6 @@ const AppSidebar = () => {
               DashBoard
             </NavLink>
           </Typography>
-
           <Typography>
             <NavLink
               to="/analyze"
@@ -106,7 +94,6 @@ const AppSidebar = () => {
               Profile
             </NavLink>
           </Typography>
-
         </Box>
       </Box>
       <Box
@@ -119,28 +106,27 @@ const AppSidebar = () => {
       >
         <Typography
           sx={{
-            fontWeight: "600",
-            fontSize: "1.9rem"
+            fontWeight: '600',
+            fontSize: '1.9rem',
+            color:"#ffff"
           }}
         >
           Samantha
         </Typography>
         <Typography
           sx={{
-            fontWeight: "400",
-            fontSize: "1.1rem",
-            color: "#a49ab7",
-
+            fontWeight: '400',
+            fontSize: '1.1rem',
+            color: '#a49ab7',
           }}
         >
           samantha@email.com
-        </Typography >
+        </Typography>
         <Typography
           sx={{
-            marginTop: "10px"
+            marginTop: '10px',  
           }}
         >
-
           <Logout />
         </Typography>
       </Box>

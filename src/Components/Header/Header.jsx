@@ -16,7 +16,10 @@ const Header = () => {
               <Typography sx={{
                 color:"#333333",
                 fontWeight:"600",
-                fontSize:"40px",
+                fontSize:{
+                  sm:"40px",
+                  xs:"29px"
+                },
               }}>
               {`${pathname?.split("/")[1]?.charAt(0).toLocaleUpperCase()}${pathname?.split("/")[1]?.slice(1)}`}
               </Typography>

@@ -14,7 +14,8 @@ const Home = () => {
     <Box sx={{
       display: "flex",
       flexDirection: "column",
-      gap: "40px"
+      gap: "40px",
+      // border: "3px solid black"
     }}>
       <Box sx={{
         display: "flex",
@@ -24,33 +25,42 @@ const Home = () => {
           md: "row"
         },
         gap: "40px",
+        // border: "3px solid black"
 
       }}>
         <Box sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "40px",
+          gap: {
+            md:"40px",
+            xs:"40px"
+          },
           flexGrow: 1,
           flexBasis: {
-            md: "45%"
+            md: "45%",
+            xs:"100%"
           },
-          flexShrink: 0
+          flexShrink: 0,
         }}>
           <Box
             sx={{
               display: "flex",
-              gap: "40px",
+              gap: {
+                sm:"40px",
+                xs:"10px"
+              },
               flexBasis: {
                 xl: "45%"
               },
               flexGrow: 1,
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}>
             <Box sx={{
               flexBasis: {
                 xl: "243px"
               },
-              flexGrow: 3
+              flexGrow: 3,
+              flexShrink:"1"
             }}>
               <CardIWithImageBackground
                 text="Samatha"
@@ -59,20 +69,25 @@ const Home = () => {
             </Box>
             <Box sx={{
               flexBasis: {
-                xl: "164px"
+                xl: "154px"
               },
               flexGrow: 1,
+              flexShrink:"1"
             }}>
 
               <Box sx={{
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-                padding: "22px 26px",
+                padding: {
+                  sm:"22px 26px",
+                  xs:"20px 10px"
+                },
                 borderRadius: "10px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 height: "100%",
-                justifyContent: "center"
+                justifyContent: "center",
+
               }}>
 
                 <Typography sx={{
@@ -112,22 +127,22 @@ const Home = () => {
 
 
         <Box
-        sx={{
-          flexBasis: {
-            md: "45%",
-          },
-          flexShrink: 0,
-          flexGrow: 1,
-          maxHeight: "550px",
-          p: "30px 0px 30px 30px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "40px",
-          boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-          borderRadius: "10px",
-          position: "relative"
+          sx={{
+            flexBasis: {
+              md: "45%",
+            },
+            flexShrink: 0,
+            flexGrow: 1,
+            maxHeight: "550px",
+            p: "30px 30px 30px 30px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "40px",
+            boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+            borderRadius: "10px",
+            position: "relative"
 
-        }}
+          }}
         >
 
           <Typography
@@ -140,7 +155,7 @@ const Home = () => {
             Analysis History
           </Typography>
           <Box sx={{
-           
+
             overflowY: "auto",
             "&::-webkit-scrollbar": {
               width: "8px"
@@ -156,14 +171,15 @@ const Home = () => {
             "&::-webkit-scrollbar-thumb:hover": {
               background: "#b30000"
             },
-           paddingRight:"30px",
+            //  paddingRight:"30px",
             display: "flex",
             flexDirection: "column",
-            gap: "40px",
+            gap: "50px",
             borderRadius: "10px",
+            paddingRight: "10px"
 
           }}>
-            {Array.from({ length: 60 }).map((_, index) => (
+            {Array.from({ length: 4 }).map((_, index) => (
               <GiftCard key={index} index={index} />
             ))}
           </Box>
