@@ -33,14 +33,14 @@ const MobileSidebar = () => {
         justifyContent: 'center',
         position: "fixed",
         top: 0,
-        right: 0,
+        right: -30,
         width: {
           sm: "330px",
           xs: "250px",
         },
         height: '100%',
         backgroundColor: '#060413',
-        transform: isOpen ? 'translateX(0)' : 'translateX(300px)',
+        transform: isOpen ? 'translateX(0)' : 'translateX(330px)',
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
         paddingLeft: "20px",
@@ -55,7 +55,7 @@ const MobileSidebar = () => {
           color: "white",
           top: "10px",
           left: "20px",
-          
+
         }}
       ><RxCross2 onClick={handleToggle} /></Box>
       <Box
@@ -63,7 +63,9 @@ const MobileSidebar = () => {
           display: 'flex',
           flexDirection: 'column',
           gap: '60px',
-          justifyContent: 'center', 
+          justifyContent: 'center',
+          // backgroundColor: "red",
+          marginBottom:"120px "
 
         }}
       >
@@ -75,7 +77,10 @@ const MobileSidebar = () => {
           <Typography
             sx={{
               fontWeight: '600',
-              fontSize: '2.8rem',
+              fontSize: {
+                sm: "'2.8rem'",
+                xs: "2rem"
+              },
               lineHeight: '35px',
               color: '#D081FF',
             }}
@@ -154,7 +159,8 @@ const MobileSidebar = () => {
         <Typography
           sx={{
             fontWeight: "600",
-            fontSize: "1.9rem"
+            fontSize: "1.6rem",
+            color:"white"
           }}
         >
           Samantha
@@ -162,7 +168,7 @@ const MobileSidebar = () => {
         <Typography
           sx={{
             fontWeight: "400",
-            fontSize: "1.1rem",
+            fontSize: "0.9rem",
             color: "#a49ab7",
           }}
         >
