@@ -635,7 +635,7 @@ const Credits = () => {
                             flexDirection: "column",
                             gap: "2.6rem",
                             height: "280px",
-                            padding: "0px 30px 0px 0px",
+                            padding: "0px 0px 0px 0px",
                             overflowY: "scroll",
                             "&::-webkit-scrollbar": {
                                 width: "8px" // Adjust the width of the scrollbar here
@@ -663,12 +663,14 @@ const Credits = () => {
                     <Box>
 
 
-                        <Typography>
+                        <Typography
+                        >
                             <NavLink
                                 to="/history"
                             >
                                 <Button
                                     sx={{
+                                        
                                         p: "15px 20px",
                                         background: "linear-gradient(to right, #1A0049, #41016C)",
                                         width: "100%",
