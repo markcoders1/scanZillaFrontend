@@ -8,7 +8,7 @@ const CustomSelect = ({data=[], }) => {
     sx={{
       display: "flex",
       flexDirection: "column",
-      padding: "10px 26px",
+      padding: "0px 26px",
       alignItems: "center",
       justifyContent: "space-between",
       borderRadius: "10px",

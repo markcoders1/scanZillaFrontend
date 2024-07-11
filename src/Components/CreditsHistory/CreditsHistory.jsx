@@ -19,13 +19,13 @@ const CreditsHistory = ({ index }) => {
                 color:"#A0A4A9",
             }}
             >
-                90 Credits Buy
+                90 Credits 
             </Typography>
             <Typography
              sx={{
                 fontSize: "16px",
                 fontWeight: "600",
-                color: "#333333"
+                color: "#333333",
             }}
             >
                 Price: 180$
