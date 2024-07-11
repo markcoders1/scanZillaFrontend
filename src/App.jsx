@@ -25,6 +25,7 @@ import History from  './Pages/History/History';
 import Profile from  './Pages/Profile/Profile';
 import Credits from  './Pages/Credits/Credits';
 import Dashboard from  './Pages/Dashboard/Dashboard';
+import Debit from "./Pages/Debit&CreditCard/Debit&CreditCard";
 
 
 
@@ -48,6 +49,8 @@ function App() {
             <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
             <Route path="analyze" element={<Protected children={<Analyzed />} />} />
             <Route path="credits" element={<Protected children={<Credits />} />} />
+            <Route path="debit/credit" element={<Protected children={<Debit />} />} />
+
             <Route path="history" element={<Protected children={<History />} />} />
             <Route path="profile" element={<Protected children={<Profile />} />} />
 

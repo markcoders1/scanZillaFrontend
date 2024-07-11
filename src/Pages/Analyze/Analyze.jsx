@@ -455,6 +455,7 @@ const Analyze = () => {
           value={data?.title}
           error={errors?.title}
           placeholder="Bullet Text"
+          
         />
       </Box>
     </Box>

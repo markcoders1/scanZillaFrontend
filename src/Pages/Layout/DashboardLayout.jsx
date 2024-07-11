@@ -28,6 +28,7 @@ const DashboardLayout = () => {
           width: '100%',
           maxWidth: '1440px',
           boxSizing: 'border-box',
+          gap:"1rem"
         }}
       >
         <Box
@@ -36,13 +37,14 @@ const DashboardLayout = () => {
               lg: '300px',
               xs: '0px', // Hidden on smaller screens
             },
-            position: 'relative',
+            position: 'fixed', // Fixed position
             height: '100%',
             zIndex: 1,
             display: {
               xs: 'none',
               lg: 'block',
             },
+            // backgroundColor:"red"
           }}
         >
           <AppSidebar />
@@ -53,11 +55,11 @@ const DashboardLayout = () => {
         <Box
           sx={{
             marginLeft: {
-              lg: '0px', // Adjust to match sidebar width
+              lg: '300px', // Adjust to match fixed sidebar width
               xs: '0px',
             },
             width: '100%',
-            maxWidth: '1240px',
+            maxWidth: '1140px', // Reduced to fit within the available space
             padding: {
               sm: '50px',
               xs: '30px 20px',
@@ -65,6 +67,7 @@ const DashboardLayout = () => {
             backgroundColor: 'white',
             borderRadius: '30px',
             boxSizing: 'border-box',
+            overflowY: 'auto', // Enable scrolling for the main content
           }}
         >
           <Header />

@@ -7,8 +7,11 @@ import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
 import GiftCard from "../../Components/GiftCard/GiftCard";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomChart from "../../Components/CustomChart/CustomChart";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+
+  const navigate = useNavigate();
 
   return (
     <Box sx={{
@@ -245,7 +248,7 @@ const Home = () => {
 
 
         <Box
-          onClick={() => alert("Lets analyze")}
+          onClick={() => navigate("/analyze")}
           sx={{
             flexBasis: "45%", cursor: "pointer", flexGrow: 1, justifyContent: "center", display: "flex", gap: "20px", flexDirection: "column",
 

@@ -377,7 +377,7 @@ const Credits = () => {
                                     flexBasis: {
                                         md: "218px",
                                     },
-                                    padding: "12px 16px 0px 16px ",
+                                    padding: "12px 16px 15px 16px ",
                                     boxShadow: "4px 5px 15px 0px #C8C8C8",
                                     borderRadius: "10px  ",
                                     height: "322px",
@@ -699,7 +699,9 @@ const Credits = () => {
 
                 </Box>
                 <Typography>
+                <NavLink to="/debit/credit">
                     <Customcard />
+                </NavLink>
                 </Typography>
             </Box>
         </Box>

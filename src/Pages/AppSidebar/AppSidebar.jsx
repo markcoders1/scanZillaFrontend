@@ -29,7 +29,7 @@ const AppSidebar = () => {
           <Typography
             sx={{
               fontWeight: '600',
-              fontSize: '3.2rem',
+              fontSize: '3rem',
               lineHeight: '35px',
               color: '#D081FF',
             }}

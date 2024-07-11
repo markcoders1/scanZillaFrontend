@@ -1,7 +1,7 @@
 import { Box, FormControl, TextField, Typography } from "@mui/material";
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 
-const CustomTextField = forwardRef(({
+const CustomInputShadow = forwardRef(({
   type = "text",
   rows = 4,
   multiline = false,
@@ -12,9 +12,11 @@ const CustomTextField = forwardRef(({
   error = "",
   mb = "0px",
   placeholder = "",
-  border = true,
+  border = false,
   boxShadow,
 }, ref) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <Box sx={{ mb: mb }}>
       <FormControl variant="standard" fullWidth
@@ -28,12 +30,20 @@ const CustomTextField = forwardRef(({
           padding: "0px 10px",
           justifyContent: "space-between",
           borderRadius: "10px",
-          // boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
           mb: 2, width: '100%',
           position: "relative",
-          // boxShadow: boxShadow ? "0px 8px 26px -4px rgba(0, 0, 0, 0.1)": "",
+          boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+          '&::after': {
+            content: '""',
+            display: isFocused ? 'block' : 'none',
+            width: '100%',
+            height: '3px',
+            backgroundColor: '#190247',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+          }
         }}
-
       >
         <TextField
           placeholder={placeholder}
@@ -74,6 +84,8 @@ const CustomTextField = forwardRef(({
           name={name}
           onChange={onChange}
           value={value}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
           InputLabelProps={{
             shrink: true, // This will keep the label on top
           }}
@@ -96,4 +108,4 @@ const CustomTextField = forwardRef(({
   );
 });
 
-export default CustomTextField;
+export default CustomInputShadow;
