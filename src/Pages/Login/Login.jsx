@@ -13,7 +13,7 @@ import LoaderW from "../../Components/Loader/LoaderW";
 import GoogleIcon from '../../assets/images/googleIcon.png'
 import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
-import { signInWithGooglePopup } from "../../../firebase.config";
+// import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const Login = () => {
   const [data, setData] = useState({
@@ -104,10 +104,10 @@ const Login = () => {
     }
   };
 
-  const logGoogleUser = async () => {
-    const response = await signInWithGooglePopup();
-    console.log(response);
-  }
+  // const logGoogleUser = async () => {
+  //   const response = await signInWithGooglePopup();
+  //   console.log(response);
+  // }
 
 
   const handlekeydown = (e) => {
@@ -311,14 +311,14 @@ const Login = () => {
               transition: "background 0.9s ease, color 0.4s ease",
               "&:hover": {
                 background: "linear-gradient(to right, #1A0049, #41016C)",
-                color: "white"
+                color: "white",
               },
               boxShadow: "none",
               border: "1px solid grey",
               color: "black"
             }}
             variant="contained"
-            onClick={logGoogleUser}
+        
           >
             <span style={{ display: "flex", alignItems: "center", gap: "15px" }}>
               <img src={GoogleIcon} alt="Google Icon" style={{ height: "40px" }} />

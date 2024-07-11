@@ -11,7 +11,7 @@ const AppSidebar = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '2rem',
+        gap: '4rem',
         justifyContent: 'center',
         marginTop: '40px',
         padding: '20px', // Added padding for better spacing
