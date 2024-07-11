@@ -31,7 +31,7 @@ const CustomTextField = forwardRef(({
           mb: 2,
           width: '100%',
           position: "relative",
-          boxShadow: boxShadow ? "0px 8px 26px -4px rgba(0, 0, 0, 0.1)" : "", // Conditional boxShadow
+          boxShadow: boxShadow ? "0px 8px 26px -4px rgba(0, 0, 0, 0.15)" : "", // Conditional boxShadow
         }}
       >
         <TextField

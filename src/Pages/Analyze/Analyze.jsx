@@ -1,63 +1,56 @@
-// import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import backgrund from "./../../assets/images/robot.svg";
-import Logout from "../../Components/Logout/Logout";
-import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
-import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
-import { useDispatch } from "react-redux";
-import Loader from "../../Components/Loader/Loader";
-import CustomTextField from "../../Components/CustomInputField/CustomInputField";
-import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel, IconButton, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import CustomSelect from "../../Components/CustomSelect/CustomSelect";
 import Heading from "../../Components/Heading/Heading";
+import CustomTextField from "../../Components/CustomInputField/CustomInputField";
 import CustomButton from "../../Components/CustomButton/CustomButton";
-
 import { Editor } from '@tinymce/tinymce-react';
+import { useDispatch } from "react-redux";
+import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
 
 const Analyze = () => {
-
-  const [categories, setCategories] = useState(["Food", "Gadgets", "OutFits"])
-  const [bullets, setBullets] = useState([{ index: 0, value: "" }])
+  const [categories, setCategories] = useState(["Food", "Gadgets", "OutFits"]);
   const [data, setData] = useState({
     title: "",
-    bulletpoints: [{ index: 1, value: "" }],
+    bulletpoints: [{ index: 0, value: "" }],
     description: "",
+    keywords: "",
+    categories: ""
   });
   const [errors, setErrors] = useState({
     title: "",
     bulletpoints: "",
     description: "",
+    keywords: "",
+    categories: ""
   });
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const handleData = (errorsData) => {
-    const errors = errorsData.message.map(error => (setErrors(prev => ({ ...prev, [error.path[0]]: error.message }))))
+    const errors = errorsData.message.map(error => (setErrors(prev => ({ ...prev, [error.path[0]]: error.message }))));
+  };
 
-
-  }
-  const dispatch = useDispatch()
   const hanldeInput = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
   };
 
-  const handleBullet = (e) => {
-    // const newData = { ...bullets };
-    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
-  };
-
   const handleAnalyze = async () => {
-    setIsLoading(true)
-    setErrors({ title: "", bulletpoints: "", description: "" });
+    // setIsLoading(true);
+    setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
+
     try {
       const response = await axiosInstance({
         url: appUrl + "/verifyText",
         method: "post",
         data: data,
       });
-      setIsLoading(false)
-      handleData(response.data)
+      setIsLoading(false);
+      handleData(response.data);
       dispatch(
         handleSnackAlert({
           open: true,
@@ -65,11 +58,9 @@ const Analyze = () => {
           severity: "success",
         })
       );
-
     } catch (error) {
       const errorData = error?.response?.data;
-      setIsLoading(false)
-
+      setIsLoading(false);
       return dispatch(
         handleSnackAlert({
           open: true,
@@ -78,36 +69,45 @@ const Analyze = () => {
         })
       );
     }
-    setIsLoading(false)
-
+    setIsLoading(false);
   };
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleAnalyze();
     }
   };
 
-
-  const addBullet = (index) => {
-    if (bullets.length < 10) {
-      setBullets([...bullets, { index, value: "" }]);
+  const addBullet = () => {
+    if (data.bulletpoints.length < 10) {
+      setData(prev => ({
+        ...prev,
+        bulletpoints: [...prev.bulletpoints, { index: prev.bulletpoints.length, value: "" }]
+      }));
     }
   };
 
   const removeBullet = () => {
-    if (bullets.length > 1) {
-      const newList = bullets.slice(0, -1);
-      setBullets(newList);
+    if (data.bulletpoints.length > 1) {
+      setData(prev => ({
+        ...prev,
+        bulletpoints: prev.bulletpoints.slice(0, -1)
+      }));
     }
   };
 
   const handleBulletPointChange = (index, value) => {
-    setBullets(current =>
-      current.map((item, idx) => (idx === index ? { ...item, value: value } : item))
-    );
+    setData(prev => ({
+      ...prev,
+      bulletpoints: prev.bulletpoints.map((bullet, idx) => idx === index ? { ...bullet, value: value } : bullet)
+    }));
   };
 
-  useEffect(() => { console.log(data) }, [data])
+  const handleCategoryChange = (category) => {
+    setData(prev => ({ ...prev, categories: category }));
+  };
+
+  useEffect(() => { console.log(data) }, [data]);
   // <Box
   //   sx={{
   //     boxSizing: "border-box",
@@ -415,7 +415,7 @@ const Analyze = () => {
         flexDirection: "column",
         overflowY: "auto",
         overflowX: "hidden",
-        padding: "20px 5px", // Add padding to prevent shadow clipping
+        padding: "20px 5px",
         "&::-webkit-scrollbar": {
           width: "8px"
         },
@@ -430,23 +430,21 @@ const Analyze = () => {
         "&::-webkit-scrollbar-thumb:hover": {
           background: "#b30000"
         },
-        // border: "2px solid red"
       }}
-
     >
       <Box
         sx={{
-          padding: "0px 10px"
+          padding: "0px 10px",
+          display:"flex",
+          flexDirection:"column",
+          gap:".7rem"
         }}
       >
-
-
-        <CustomSelect data={categories} />
+        <CustomSelect data={categories} handleChange={handleCategoryChange} />
         <Box sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "20",
-
+          gap: "20px",
         }}>
           <Box
             sx={{
@@ -455,7 +453,6 @@ const Analyze = () => {
               gap: "15px"
             }}
           >
-
             <Heading Heading="Title" />
             <CustomTextField
               handleKeyDown={() => { }}
@@ -466,21 +463,20 @@ const Analyze = () => {
               placeholder="Add Title"
               border=""
               boxShadow={true}
-
             />
           </Box>
         </Box>
         <Box>
           <Heading Heading="Bullet Points" />
-          {bullets.map((item, index) => (
+          {data.bulletpoints.map((item, index) => (
             <Box
               key={index}
               sx={{
                 display: "flex",
                 flexDirection: "column",
                 gap: "15px"
-              }}>
-
+              }}
+            >
               <CustomTextField
                 handleKeyDown={() => { }}
                 onChange={(e) => handleBulletPointChange(index, e.target.value)}
@@ -496,51 +492,40 @@ const Analyze = () => {
           <Box sx={{
             display: 'flex',
             gap: "20px",
-            justifyContent: "space-between",
+            justifyContent: "end",
             flexDirection: {
               sm: "row",
               xs: "column-reverse"
             },
             mt: "20px"
           }}>
-            <Typography style={{
-              fontSize: {
-                lg: "20px"
-              },
-              lineHeight: {
-                lg: "30px"
-              },
-              fontWeight: {
-                lg: "500"
-              },
-              color: "#A0A4A9"
-            }}>
-              Add More (Up to 10 in Total)
-            </Typography>
+            
             <Box sx={{
               display: "flex",
               gap: "20px"
             }}>
-              <CustomButton
-                border="2px solid #1A0049"
-                borderRadius="10px"
-                buttonTextStyle={{}}
-                buttonStyle={{
-                  padding: {
-                    lg: "12px 20px"
-                  }
-                }}
-                ButtonText="Remove Bullet"
-                fontSize
-                color="#1A0049"
-                fontWeight
-                fullWidth={false}
-                variant="outlined"
-                padding
-                onClick={removeBullet}
-                hoverBg="#1A0049"
-                hovercolor="white"
-              />
+              {data.bulletpoints.length > 1 && (
+                <CustomButton
+                  border="2px solid #1A0049"
+                  borderRadius="10px"
+                  buttonTextStyle={{}}
+                  buttonStyle={{
+                    padding: {
+                      lg: "12px 20px"
+                    }
+                  }}
+                  ButtonText="Remove Bullet"
+                  fontSize
+                  color="#1A0049"
+                  fontWeight
+                  fullWidth={false}
+                  variant="outlined"
+                  padding
+                  onClick={removeBullet}
+                  hoverBg="#1A0049"
+                  hovercolor="white"
+                />
+              )}
 
               <CustomButton
                 border="2px solid #1A0049"
@@ -548,10 +533,7 @@ const Analyze = () => {
                 background="#1A0049"
                 hoverBg="white"
                 hovercolor="#1A0049"
-
-                buttonTextStyle={{
-
-                }}
+                buttonTextStyle={{}}
                 buttonStyle={{
                   padding: {
                     lg: "12px 20px"
@@ -564,14 +546,13 @@ const Analyze = () => {
                 fullWidth={false}
                 variant="contained"
                 padding
-                onClick={() => addBullet(bullets.length - 1)}
-              /></Box>
-
+                onClick={addBullet}
+              />
+            </Box>
           </Box>
-
         </Box>
         <Box>
-          <Heading Heading="Product Descrition" />
+          <Heading Heading="Product Description" />
           <Editor
             apiKey={tinyMCEAPIKey}
             init={{
@@ -589,12 +570,65 @@ const Analyze = () => {
             onEditorChange={(e) => setData(prev => ({ ...prev, description: e?.replace(/^\<p\>/, "").replace(/\<\/p\>$/, "") }))}
           />
         </Box>
+        <Box
+          sx={{
+            mt: "20px"
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "20px",
+              fontWeight: "500",
+              lineHeight: "33px"
+            }}
+          >
+            Search Terms (Backend keywords)
+          </Typography>
+          <Box>
+            <CustomTextField
+              handleKeyDown={() => { }}
+              onChange={hanldeInput}
+              name="keywords"
+              value={data?.keywords}
+              error={errors?.keywords}
+              placeholder=""
+              border=""
+              boxShadow={true}
+            />
+          </Box>
+        </Box>
 
-        
+        <Box
+          sx={{
+            marginTop: "40px"
+          }}
+        >
+          <CustomButton
+            border="2px solid #1A0049"
+            borderRadius="10px"
+            background="#1A0049"
+            hoverBg="white"
+            hovercolor="#1A0049"
+            buttonTextStyle={{}}
+            buttonStyle={{
+              padding: {
+                lg: "12px 20px"
+              },
+            }}
+            ButtonText="Analyze"
+            fontSize
+            color="white"
+            fontWeight
+            fullWidth={true}
+            variant="contained"
+            padding
+            onClick={handleAnalyze}
+          />
+        </Box>
+
       </Box>
     </Box>
-
   )
 }
 
-export default Analyze
+export default Analyze;
