@@ -13,7 +13,7 @@ import LoaderW from "../../Components/Loader/LoaderW";
 import GoogleIcon from '../../assets/images/googleIcon.png'
 import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
-
+import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const Login = () => {
   const [data, setData] = useState({
@@ -81,7 +81,7 @@ const Login = () => {
       setData({
         email: "",
         password: "",
-    });
+      });
 
     } catch (error) {
       const errorData = error.response.data
@@ -103,6 +103,12 @@ const Login = () => {
 
     }
   };
+
+  const logGoogleUser = async () => {
+    const response = await signInWithGooglePopup();
+    console.log(response);
+  }
+
 
   const handlekeydown = (e) => {
     if (e.key === "Enter") {
@@ -175,7 +181,7 @@ const Login = () => {
               }}
             >Email</label>
             <CustomTextField
-            border={true}
+              border={true}
               ref={inputRef}
               handlekeydown={handlekeydown}
               error={errors?.email}
@@ -199,7 +205,7 @@ const Login = () => {
               }}
             >Password</label>
             <CustomTextField
-            border={true}
+              border={true}
               handlekeydown={handlekeydown}
               error={errors?.password}
               onChange={handleInput}
@@ -312,7 +318,7 @@ const Login = () => {
               color: "black"
             }}
             variant="contained"
-          // onClick={handleLogin}
+            onClick={logGoogleUser}
           >
             <span style={{ display: "flex", alignItems: "center", gap: "15px" }}>
               <img src={GoogleIcon} alt="Google Icon" style={{ height: "40px" }} />
