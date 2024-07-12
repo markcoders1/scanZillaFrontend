@@ -8,10 +8,16 @@ import GiftCard from "../../Components/GiftCard/GiftCard";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomChart from "../../Components/CustomChart/CustomChart";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Home = () => {
 
   const navigate = useNavigate();
+  const auth = useSelector((state) => state.auth);
+  useEffect(()=>{
+    console.log(auth)
+  },[])
 
   return (
     <Box sx={{

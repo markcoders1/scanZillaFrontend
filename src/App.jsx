@@ -30,15 +30,23 @@ import Debit from "./Pages/Debit&CreditCard/Debit&CreditCard";
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-// import PaymentForm from './PaymentForm'; // Import your payment form component
+import CheckoutForm from "./Components/CheckoutForm/CheckoutForm";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 
 
 function App() {
+
+  const options = {
+    // passing the client secret obtained in step 3
+    clientSecret: '{{CLIENT_SECRET}}',
+    // Fully customizable with appearance API.
+    appearance: {/*...*/ },
+  };
+
   return (
-    <Elements stripe={stripePromise}>
+    <Elements stripe={stripePromise}  >
 
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
@@ -48,9 +56,7 @@ function App() {
               <Route path='signup' element={<Signup />} />
               <Route path='otp' element={<OTP />} />
               <Route path='setpassword' element={<SetPassword />} />
-              {/* <Route path='changePassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
-                <Route path='forgotPassword' element={<ForgotPassword />} /> */}
-              {/* <Route path='*' element={<NotFound />} /> */}
+
             </Route>
 
             <Route path='/' element={<DashboardLayout />}>
@@ -61,14 +67,10 @@ function App() {
 
               <Route path="history" element={<Protected children={<History />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
+              <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
 
 
-              {/* <Route path='' element={<Progress />} />
-                <Route path='profile' element={<Profile />} /> */}
-              {/* <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
-                <Route path='admin/attendance/:id' element={<ProtectedAdmin><Attendance /></ProtectedAdmin>} />
-                <Route path='admin/register' element={<ProtectedAdmin><Register /></ProtectedAdmin>} />
-                <Route path='admin/viewInformation/:id' element={<ProtectedAdmin><ViewInformation /></ProtectedAdmin>} /> */}
+
             </Route>
           </Routes>
         </Suspense>
@@ -76,17 +78,6 @@ function App() {
 
     </Elements>
 
-
-
-
-    // <BrowserRouter>
-    // <Routes>
-    //   <Route path="/" element={<Layout/>}>
-    //     <Route index element={<Login/>}/>
-    //     <Route path="text-analyze" element={<Protected children={<Home />} />}/>
-    //   </Route>
-    // </Routes>
-    // </BrowserRouter>
   );
 }
 

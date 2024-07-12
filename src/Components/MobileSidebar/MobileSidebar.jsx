@@ -54,6 +54,8 @@ const MobileSidebar = () => {
           color: "white",
           top: "10px",
           left: "20px",
+          fontSize:"2rem",
+          fontWeight:"600"
         }}
       ><RxCross2 onClick={handleToggle} /></Box>
       <Box
@@ -179,6 +181,7 @@ const MobileSidebar = () => {
           sx={{
             marginTop: "10px"
           }}
+          onClick={handleNavLinkClick}
         >
           <Logout />
         </Typography>

@@ -13,7 +13,7 @@ import LoaderW from "../../Components/Loader/LoaderW";
 import GoogleIcon from '../../assets/images/googleIcon.png'
 import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
-// import { signInWithGooglePopup } from "../../../firebase.config";
+import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const Login = () => {
   const [data, setData] = useState({
@@ -26,9 +26,52 @@ const Login = () => {
   });
   const [isLoading, setIsLoading] = useState(false)
   const auth = useSelector((state) => state.auth);
+
   const inputRef = useRef(null)
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+
+  const handleSignIn = async () => {
+    try {
+      const responseData = await signInWithGooglePopup();
+      console.log("ssa")
+      console.log("heheh", responseData)
+      const data = {
+        accessToken: responseData?.accessToken,
+        refreshToken: responseData?.refreshToken,
+        authenticated: true,
+
+      }
+
+      dispatch(handleAuth(data))
+
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: data.message,
+          severity: "success",
+        })
+      );
+
+      navigate("/dashboard");
+      sessionStorage.setItem("accessToken", data?.accessToken);
+      sessionStorage.setItem("refreshToken", data?.refreshToken);
+
+      const sessionAccess = sessionStorage.getItem("accessToken")
+      const sessionRefresh = sessionStorage.getItem("refreshToken")
+      console.log("sessionAccess",sessionAccess)
+      console.log("sessionRefresh",sessionRefresh)
+    } catch (error) {
+      console.error("Sign-in failed:", error);
+    }
+  };
+
+  useEffect(() => {
+    console.log(auth)
+  }, [])
+
   if (auth?.authenticated) {
     // dispatch(handleSnackAlert({open:true, message:"Logout first.", severity:"error"}))
     return <Navigate to="/dashboard" replace={true} />;
@@ -103,11 +146,6 @@ const Login = () => {
 
     }
   };
-
-  // const logGoogleUser = async () => {
-  //   const response = await signInWithGooglePopup();
-  //   console.log(response);
-  // }
 
 
   const handlekeydown = (e) => {
@@ -318,7 +356,8 @@ const Login = () => {
               color: "black"
             }}
             variant="contained"
-        
+            onClick={handleSignIn}
+
           >
             <span style={{ display: "flex", alignItems: "center", gap: "15px" }}>
               <img src={GoogleIcon} alt="Google Icon" style={{ height: "40px" }} />
