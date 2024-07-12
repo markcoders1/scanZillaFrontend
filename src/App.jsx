@@ -46,7 +46,7 @@ function App() {
   };
 
   return (
-    <Elements stripe={stripePromise}  >
+    <Elements stripe={stripePromise} >
 
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
