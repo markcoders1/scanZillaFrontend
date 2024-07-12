@@ -8,6 +8,7 @@ import { FaCheck } from "react-icons/fa6";
 import checkImg from '../../assets/images/check.png'
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Customcard from '../../Components/Customcard/Customcard';
+import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
 const Credits = () => {
     return (
         <Box
@@ -563,8 +564,21 @@ const Credits = () => {
                                         backgroundRepeat: "no-repeat",
                                         backgroundPosition: "center",
                                         padding: "24px 23px",
+                                        position:"relative",
+                                        
                                     }}
                                 >
+                                    <Box
+                                    sx={{
+                                        position:"absolute",
+                                        right:"10px",
+                                        top:"15px",
+                                        // padding:"1rem",
+                                        // backgroundColor:"red"
+                                    }}
+                                    >
+                                        <SwitchCheckBox/>
+                                    </Box>
                                     <Typography
                                         sx={{
                                             fontWeight: "600",
@@ -573,7 +587,7 @@ const Credits = () => {
 
                                         }}
                                     >
-                                        Let's
+                                        Auto
                                     </Typography>
                                     <Typography
                                         sx={{
@@ -582,8 +596,7 @@ const Credits = () => {
                                             color: "#fff ",
 
                                         }}
-                                    >
-                                        Analyze
+                                    >Credits
                                     </Typography>
                                 </Box>
                             </Box>

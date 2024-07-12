@@ -1,4 +1,5 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useEffect, useState } from 'react';
+import { TbBackground } from 'react-icons/tb';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 
@@ -8,7 +9,6 @@ const CustomChart = ({
           name: 'jan',
           credits: 0,
        
-        
         },
         {
           name: 'feb',
@@ -46,11 +46,29 @@ const CustomChart = ({
       
         },
       ],
-    height=200,
-    width=500
+    // height="100%",
+    width="100%"
 }) => {
+  const [dynamicWidth, setDynamicWidth] = useState("100%")
+  const [dynamicheight, setDynamicHeight] = useState("100%")
+
+const getAutomaticHeightAndWidth =()=>{
+  console.log("window.innerWidth", window.innerWidth)
+  console.log("window.innerHeight", window.innerHeight)
+  if(window.innerWidth<=300){
+    setDynamicWidth(200)
+    setDynamicHeight("350px")
+  }
+  return {width:window.innerWidth, height:window.innerHeight}
+
+}
+
+  useEffect(()=>{
+    window.addEventListener("resize", getAutomaticHeightAndWidth)
+    return ()=> window.removeEventListener("resize", getAutomaticHeightAndWidth)
+  },[])
     return (
-        <><ResponsiveContainer width="100%" height={"100%"}>
+        <><ResponsiveContainer width="100%" height={dynamicheight}>
             <AreaChart
                 data={data}
                 margin={{
@@ -60,6 +78,8 @@ const CustomChart = ({
                     bottom: 0,
                 }}
                 style={{
+                  height:dynamicheight,
+                  width:dynamicWidth,
                 }}
             >
                 <CartesianGrid strokeDasharray="3 8" />

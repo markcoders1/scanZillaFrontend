@@ -122,7 +122,7 @@ const Home = () => {
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
             padding: "20px", borderRadius: "10px"
           }}>
-            <CustomChart height={350} />
+            <CustomChart  />
           </Box>
 
         </Box>
