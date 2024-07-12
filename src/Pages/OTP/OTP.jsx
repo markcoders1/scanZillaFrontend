@@ -36,6 +36,7 @@ const OTP = () => {
         const otpValue = otp.join("");
         console.log("OTP Value: ", otpValue);
         // Add your API call logic here
+        
     };
 
     return (

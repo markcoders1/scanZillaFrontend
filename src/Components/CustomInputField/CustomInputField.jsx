@@ -67,7 +67,8 @@ const CustomTextField = forwardRef(({
             fontWeight: {
               lg: "500"
             },
-            color: "black"
+            color: "black",
+            backgroundColor:"none"
           }}
           onKeyDown={handleKeyDown}
           name={name}
