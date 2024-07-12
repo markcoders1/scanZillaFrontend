@@ -38,12 +38,12 @@ const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function App() {
 
-  const options = {
-    // passing the client secret obtained in step 3
-    clientSecret: '{{CLIENT_SECRET}}',
-    // Fully customizable with appearance API.
-    appearance: {/*...*/ },
-  };
+  // const options = {
+  //   // passing the client secret obtained in step 3
+  //   clientSecret: '{{CLIENT_SECRET}}',
+  //   // Fully customizable with appearance API.
+  //   appearance: {/*...*/ },
+  // };
 
   return (
     <Elements stripe={stripePromise} >
