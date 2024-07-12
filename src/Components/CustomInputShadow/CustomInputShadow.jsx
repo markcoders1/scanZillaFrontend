@@ -14,6 +14,7 @@ const CustomInputShadow = forwardRef(({
   placeholder = "",
   border = false,
   boxShadow,
+  fontSize = "20px", // New fontSize prop with default value
 }, ref) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -21,8 +22,8 @@ const CustomInputShadow = forwardRef(({
     <Box sx={{ mb: mb }}>
       <FormControl variant="standard" fullWidth
         sx={{
-          border: border ? "1px solid #666666":"",
-        '& fieldset': {
+          border: border ? "1px solid #666666" : "",
+          '& fieldset': {
             display: "none",
           },
           display: "flex",
@@ -52,7 +53,7 @@ const CustomInputShadow = forwardRef(({
           sx={{
             '& ::placeholder': {
               fontSize: {
-                lg: "20px"
+                lg: fontSize // Use fontSize prop
               },
               lineHeight: {
                 lg: "30px"
@@ -63,14 +64,14 @@ const CustomInputShadow = forwardRef(({
               color: "#2a2b2d",
               fontFamily: "poppins"
             },
-            borderRadius: "12px", // Setting borderRadius to 12px
-            height: "56px", // Setting height to 56px
-            '& .MuiOutlinedInput-root': { // Override styles for MuiOutlinedInput
+            borderRadius: "12px",
+            height: "56px",
+            '& .MuiOutlinedInput-root': {
               borderRadius: "12px",
-              border: "1px solid rgba(102, 102, 102, 0)", // Default border color and style
+              border: "1px solid rgba(102, 102, 102, 0)",
             },
             fontSize: {
-              lg: "20px"
+              lg: fontSize // Use fontSize prop
             },
             lineHeight: {
               lg: "30px"
@@ -87,7 +88,7 @@ const CustomInputShadow = forwardRef(({
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           InputLabelProps={{
-            shrink: true, // This will keep the label on top
+            shrink: true,
           }}
           multiline={multiline}
           rows={rows}

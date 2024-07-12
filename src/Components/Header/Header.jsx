@@ -10,7 +10,10 @@ const Header = () => {
     <Box sx={{
       display:"flex",
       justifyContent:"space-between",
-      p:"0px 30px 0px 0px",
+      p:{
+        sm:"0px 30px 0px 0px",
+        xs:"0px 20px 0px 20px"
+      },
       alignItems:"center",
     }}>
               <Typography sx={{

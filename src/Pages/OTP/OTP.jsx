@@ -1,8 +1,42 @@
-import React from 'react'
-import { Box, Button, FormControl, TextField, Typography, Checkbox } from "@mui/material";
-import { NavLink } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { Box, Button, Typography, TextField } from "@mui/material";
 
 const OTP = () => {
+    const [otp, setOtp] = useState(new Array(6).fill(""));
+    const inputsRef = useRef([]);
+
+    const handleChange = (element, index) => {
+        const value = element.value;
+        if (/^[0-9]$/.test(value) || value === "") {
+            let newOtp = [...otp];
+            newOtp[index] = value;
+            setOtp(newOtp);
+
+            // Move to next input field if a number is entered
+            if (value !== "" && index < 5) {
+                inputsRef.current[index + 1].focus();
+            }
+        }
+    };
+
+    const handlePaste = (e) => {
+        const paste = e.clipboardData.getData('text');
+        if (/^[0-9]{6}$/.test(paste)) {
+            const newOtp = paste.split("");
+            setOtp(newOtp);
+            newOtp.forEach((value, index) => {
+                inputsRef.current[index].value = value;
+            });
+            inputsRef.current[5].focus(); // Move focus to the last input
+        }
+        e.preventDefault();
+    };
+
+    const handleSubmit = () => {
+        const otpValue = otp.join("");
+        console.log("OTP Value: ", otpValue);
+        // Add your API call logic here
+    };
 
     return (
         <Box
@@ -22,7 +56,6 @@ const OTP = () => {
             >
                 <Typography
                     sx={{
-
                         color: "#1B004D",
                         lineHeight: "36.9px",
                         fontSize: "40px",
@@ -38,7 +71,7 @@ const OTP = () => {
                         fontWeight: "400",
                     }}
                 >
-                    Please send OTP sent tou your Email.
+                    Please send OTP sent to your Email.
                 </Typography>
             </Typography>
             <Box
@@ -55,152 +88,41 @@ const OTP = () => {
                     },
                     marginTop: "70px"
                 }}
+                onPaste={handlePaste}
             >
-
-                <TextField
-
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                        fontSize: "3rem",
-                        "& .MuiInputBase-input": {
-                            textAlign: "center",
-                            borderRadius: "12px",
-                            height: {
-                                lg: "56px",
-                                md: "30px",
-
+                {otp.map((data, index) => (
+                    <TextField
+                        key={index}
+                        value={data}
+                        onChange={(e) => handleChange(e.target, index)}
+                        inputRef={el => inputsRef.current[index] = el}
+                        variant="outlined"
+                        
+                        inputProps={{
+                            maxLength: 1,
+                            style: { textAlign: "center" }
+                        }}
+                        sx={{
+                            "& .MuiInputBase-input": {
+                                textAlign: "center",
+                                borderRadius: "12px",
+                                height: {
+                                    lg: "56px",
+                                    md: "30px",
+                                },
+                                width: {
+                                    lg: "50.46px",
+                                    md: "25px"
+                                },
                             },
-                            width: {
-                                lg: "50.46px",
-                                md: "25px"
-
+                            
+                            "& .MuiOutlinedInput-root": {
+                                borderRadius: "12px",
                             },
-                        },
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
-                        },
-                    }}
-                />
-                <TextField
-
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                        "& .MuiInputBase-input": {
-                            textAlign: "center",
-                            borderRadius: "12px",
-                            height: {
-                                lg: "56px",
-                                md: "30px",
-
-                            },
-                            width: {
-                                lg: "50.46px",
-                                md: "25px"
-
-                            },
-                        },
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
-                        },
-                    }}
-                />
-                <TextField
-
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                        "& .MuiInputBase-input": {
-                            textAlign: "center",
-                            borderRadius: "12px",
-                            height: {
-                                lg: "56px",
-                                md: "30px",
-
-                            },
-                            width: {
-                                lg: "50.46px",
-                                md: "25px"
-
-                            },
-                        },
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
-                        },
-                    }}
-                />
-                <TextField
-
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                        "& .MuiInputBase-input": {
-                            textAlign: "center",
-                            borderRadius: "12px",
-                            height: {
-                                lg: "56px",
-                                md: "30px",
-
-                            },
-                            width: {
-                                lg: "50.46px",
-                                md: "25px"
-
-                            },
-                        },
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
-                        },
-                    }}
-                />
-                <TextField
-
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                        "& .MuiInputBase-input": {
-                            textAlign: "center",
-                            borderRadius: "12px",
-                            height: {
-                                lg: "56px",
-                                md: "30px",
-
-                            },
-                            width: {
-                                lg: "50.46px",
-                                md: "25px"
-
-                            },
-                        },
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
-                        },
-                    }}
-                />
-                <TextField
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                        "& .MuiInputBase-input": {
-                            textAlign: "center",
-                            borderRadius: "12px",
-                            height: {
-                                lg: "56px",
-                                md: "30px",
-
-                            },
-                            width: {
-                                lg: "50.46px",
-                                md: "25px"
-
-                            },
-                        },
-                        "& .MuiOutlinedInput-root": {
-                            borderRadius: "12px",
-                        },
-                    }}
-                />
+                            
+                        }}
+                    />
+                ))}
             </Box>
             <Box sx={{
                 position: "relative",
@@ -228,12 +150,10 @@ const OTP = () => {
                         boxShadow: "none"
                     }}
                     variant="contained"
-                // onClick={handleLogin}
+                    onClick={handleSubmit}
                 >
-                    {/* {isLoading ? <LoaderW /> : "Submit OTP"} */}
                     Submit OTP
                 </Button>
-
             </Box>
 
             <Box
@@ -256,13 +176,16 @@ const OTP = () => {
                 <Typography
                     sx={{
                         color: "#1E004D",
-                        textDecoration: "underline"
+                        textDecoration: "underline",
+                        cursor: "pointer"
                     }}
-                >Resend OTP</Typography>
+                    onClick={() => { /* Add logic to resend OTP */ }}
+                >
+                    Resend OTP
+                </Typography>
             </Box>
-
         </Box>
-    )
+    );
 }
 
-export default OTP
+export default OTP;

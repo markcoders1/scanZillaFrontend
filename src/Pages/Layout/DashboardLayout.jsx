@@ -18,7 +18,11 @@ const DashboardLayout = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        padding: "20px 30px",
+        padding: {
+          sm:"20px 30px",
+          xs:"10px 10px"
+        },
+        marginLeft:"-15px",
         boxSizing: 'border-box',
       }}
     >
@@ -62,7 +66,7 @@ const DashboardLayout = () => {
             maxWidth: '1140px', // Reduced to fit within the available space
             padding: {
               sm: '50px',
-              xs: '30px 20px',
+              xs: '30px 5px',
             },
             backgroundColor: 'white',
             borderRadius: '30px',

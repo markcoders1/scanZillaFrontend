@@ -2,6 +2,7 @@ import { Box, Typography, Select, MenuItem, FormControl } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow'
 import visaCircles from '../../assets/images/visa circles.png'
+import CustomButton from '../../Components/CustomButton/CustomButton'
 
 const Debit = () => {
     const [month, setMonth] = useState('');
@@ -11,11 +12,9 @@ const Debit = () => {
         credit_card_number: "",
         card_number: "",
         name: "",
-        cvv:""
+        cvv: ""
+    });
 
-
-
-    })
     const handleMonthChange = (event) => {
         setMonth(event.target.value);
     };
@@ -23,12 +22,34 @@ const Debit = () => {
     const handleYearChange = (event) => {
         setYear(event.target.value);
     };
+
     const hanldeInput = (e) => {
         setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
     };
 
+    const handlePayNow = () => {
+        console.log("Payment Data: ", {
+            ...data,
+            expiryMonth: month,
+            expiryYear: year,
+        });
+        // Add your API call logic here
+    };
 
-    useEffect(() => { console.log(data) }, [data])
+    const handleCancelPayment = () => {
+        setData({
+            debit_card_number: "",
+            credit_card_number: "",
+            card_number: "",
+            name: "",
+            cvv: ""
+        });
+        setMonth('');
+        setYear('');
+    };
+
+    // useEffect(() => { console.log(data) }, [data]);
+
     return (
         <Box
             sx={{
@@ -60,7 +81,6 @@ const Debit = () => {
                         onChange={hanldeInput}
                         name="debit_card_number"
                         value={data.debit_card_number}
-
                     />
                 </Box>
 
@@ -106,8 +126,6 @@ const Debit = () => {
                         onChange={hanldeInput}
                         name="card_number"
                         value={data.card_number}
-
-
                     />
                     <img
                         style={{
@@ -125,8 +143,8 @@ const Debit = () => {
                 sx={{
                     display: "flex",
                     flexDirection: {
-                        xs:"column",
-                        lg:"row"
+                        xs: "column",
+                        lg: "row"
                     },
                     gap: {
                         lg: "2rem",
@@ -162,7 +180,7 @@ const Debit = () => {
 
                 <Box
                     sx={{
-                        flexGrow:"1",
+                        flexGrow: "1",
                         flexShrink: "1",
                         flexBasis: "45%",
                         display: "flex",
@@ -171,12 +189,14 @@ const Debit = () => {
                             sm: "row",
                         },
                         gap: "2rem",
-                     
+                        
                     }}
                 >
-                    <Box>
-
-
+                    <Box
+                    sx={{
+                        flexShrink:"2"
+                    }}
+                    >
                         <Typography
                             sx={{
                                 fontWeight: "600",
@@ -191,13 +211,10 @@ const Debit = () => {
                             sx={{
                                 display: "flex",
                                 gap: "1rem",
-
                                 boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
                                 borderRadius: "4px",
-
                                 backgroundColor: "#fff",
                                 padding: "6px 0px 6px 0px"
-
                             }}
                         >
                             <FormControl sx={{ minWidth: 120 }}>
@@ -244,14 +261,13 @@ const Debit = () => {
                             </FormControl>
                         </Box>
                     </Box>
-                    <Box
-                    >
+                    <Box>
                         <Typography
                             sx={{
                                 fontWeight: "600",
                                 fontSize: "22px",
                                 letterSpacing: "0.34px",
-                                color: "#333333"
+                                color: "#333333",
                             }}
                         >
                             CVV
@@ -261,14 +277,73 @@ const Debit = () => {
                                 onChange={hanldeInput}
                                 name="cvv"
                                 value={data.cvv}
-                                type="password"
+                                type="text"
+                                fontSize="40px"
+                                padding="0px 5px"
                             />
                         </Box>
                     </Box>
                 </Box>
             </Box>
+            <Box sx={{
+                display: 'flex',
+                gap: "20px",
+                justifyContent: "end",
+                flexDirection: {
+                    sm: "row",
+                    xs: "column-reverse"
+                },
+                mt: "20px"
+            }}>
+                <Box sx={{
+                    display: "flex",
+                    gap: "20px"
+                }}>
+                    <CustomButton
+                        border="2px solid #1A0049"
+                        borderRadius="10px"
+                        buttonTextStyle={{}}
+                        buttonStyle={{
+                            padding: {
+                                lg: "12px 20px"
+                            }
+                        }}
+                        ButtonText="Cancel Payment"
+                        fontSize
+                        color="#1A0049"
+                        fontWeight
+                        fullWidth={false}
+                        variant="outlined"
+                        padding
+                        onClick={handleCancelPayment}
+                        hoverBg="#1A0049"
+                        hovercolor="white"
+                    />
+                    <CustomButton
+                        border="2px solid #1A0049"
+                        borderRadius="10px"
+                        background="#1A0049"
+                        hoverBg="white"
+                        hovercolor="#1A0049"
+                        buttonTextStyle={{}}
+                        buttonStyle={{
+                            padding: {
+                                lg: "12px 20px"
+                            },
+                        }}
+                        ButtonText="Pay Now"
+                        fontSize="14px"
+                        color="white"
+                        fontWeight
+                        fullWidth={false}
+                        variant="contained"
+                        padding
+                        onClick={handlePayNow}
+                    />
+                </Box>
+            </Box>
         </Box>
-    )
+    );
 }
 
-export default Debit
+export default Debit;
