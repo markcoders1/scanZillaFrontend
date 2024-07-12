@@ -20,51 +20,61 @@ const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'
 // const Credits = React.lazy(() => import('./Pages/Credits/Credits'));
 // const Dashboard = React.lazy(() => import('./Pages/Dashboard/Dashboard'));
 
-import Analyzed from  './Pages/Analyze/Analyze';
-import History from  './Pages/History/History';
-import Profile from  './Pages/Profile/Profile';
-import Credits from  './Pages/Credits/Credits';
-import Dashboard from  './Pages/Dashboard/Dashboard';
+import Analyzed from './Pages/Analyze/Analyze';
+import History from './Pages/History/History';
+import Profile from './Pages/Profile/Profile';
+import Credits from './Pages/Credits/Credits';
+import Dashboard from './Pages/Dashboard/Dashboard';
 import Debit from "./Pages/Debit&CreditCard/Debit&CreditCard";
+
+
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+// import PaymentForm from './PaymentForm'; // Import your payment form component
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 
 
 function App() {
   return (
+    <Elements stripe={stripePromise}>
 
-    <BrowserRouter>
-      <Suspense fallback={<PageLoader />}>
-        <Routes>
-          <Route path='/' element={<LayoutForOnePageScreens />}>
-            <Route path='' element={<Login />} />
-            <Route path='signup' element={<Signup />} />
-            <Route path='otp' element={<OTP />} />
-            <Route path='setpassword' element={<SetPassword />} />
-            {/* <Route path='changePassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+      <BrowserRouter>
+        <Suspense fallback={<PageLoader />}>
+          <Routes>
+            <Route path='/' element={<LayoutForOnePageScreens />}>
+              <Route path='' element={<Login />} />
+              <Route path='signup' element={<Signup />} />
+              <Route path='otp' element={<OTP />} />
+              <Route path='setpassword' element={<SetPassword />} />
+              {/* <Route path='changePassword' element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
                 <Route path='forgotPassword' element={<ForgotPassword />} /> */}
-            {/* <Route path='*' element={<NotFound />} /> */}
-          </Route>
+              {/* <Route path='*' element={<NotFound />} /> */}
+            </Route>
 
-          <Route path='/' element={<DashboardLayout />}>
-            <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
-            <Route path="analyze" element={<Protected children={<Analyzed />} />} />
-            <Route path="credits" element={<Protected children={<Credits />} />} />
-            <Route path="debit/credit" element={<Protected children={<Debit />} />} />
+            <Route path='/' element={<DashboardLayout />}>
+              <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
+              <Route path="analyze" element={<Protected children={<Analyzed />} />} />
+              <Route path="credits" element={<Protected children={<Credits />} />} />
+              <Route path="debit/credit" element={<Protected children={<Debit />} />} />
 
-            <Route path="history" element={<Protected children={<History />} />} />
-            <Route path="profile" element={<Protected children={<Profile />} />} />
+              <Route path="history" element={<Protected children={<History />} />} />
+              <Route path="profile" element={<Protected children={<Profile />} />} />
 
 
-            {/* <Route path='' element={<Progress />} />
+              {/* <Route path='' element={<Progress />} />
                 <Route path='profile' element={<Profile />} /> */}
-            {/* <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
+              {/* <Route path='admin' element={<ProtectedAdmin><Employee /></ProtectedAdmin>} />
                 <Route path='admin/attendance/:id' element={<ProtectedAdmin><Attendance /></ProtectedAdmin>} />
                 <Route path='admin/register' element={<ProtectedAdmin><Register /></ProtectedAdmin>} />
                 <Route path='admin/viewInformation/:id' element={<ProtectedAdmin><ViewInformation /></ProtectedAdmin>} /> */}
-          </Route>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+            </Route>
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+
+    </Elements>
 
 
 

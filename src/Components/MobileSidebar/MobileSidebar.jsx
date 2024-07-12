@@ -8,8 +8,6 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 import { RxCross2 } from "react-icons/rx";
 
-// import { toggleSidebar, openSidebar } from '../../Redux/Slice/ToggleSidebarSlice/ToggleSidearSlice';
-
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const MobileSidebar = () => {
@@ -17,6 +15,10 @@ const MobileSidebar = () => {
   const isOpen = useSelector((state) => state.sidebarToggle.isOpen);
 
   const handleToggle = () => {
+    dispatch(toggleSidebar());
+  };
+
+  const handleNavLinkClick = () => {
     dispatch(toggleSidebar());
   };
 
@@ -44,9 +46,6 @@ const MobileSidebar = () => {
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
         paddingLeft: "20px",
-
-        //  margin:"auto"
-
       }}
     >
       <Box
@@ -55,7 +54,6 @@ const MobileSidebar = () => {
           color: "white",
           top: "10px",
           left: "20px",
-
         }}
       ><RxCross2 onClick={handleToggle} /></Box>
       <Box
@@ -64,9 +62,7 @@ const MobileSidebar = () => {
           flexDirection: 'column',
           gap: '60px',
           justifyContent: 'center',
-          // backgroundColor: "red",
           marginBottom:"120px "
-
         }}
       >
         <Box
@@ -101,6 +97,7 @@ const MobileSidebar = () => {
               className={({ isActive }) =>
                 isActive ? 'anchortag anchorActive' : 'anchortag'
               }
+              onClick={handleNavLinkClick}
             >
               DashBoard
             </NavLink>
@@ -112,6 +109,7 @@ const MobileSidebar = () => {
               className={({ isActive }) =>
                 isActive ? 'anchortag anchorActive' : 'anchortag'
               }
+              onClick={handleNavLinkClick}
             >
               Analyze
             </NavLink>
@@ -122,6 +120,7 @@ const MobileSidebar = () => {
               className={({ isActive }) =>
                 isActive ? 'anchortag anchorActive' : 'anchortag'
               }
+              onClick={handleNavLinkClick}
             >
               Credits
             </NavLink>
@@ -132,6 +131,7 @@ const MobileSidebar = () => {
               className={({ isActive }) =>
                 isActive ? 'anchortag anchorActive' : 'anchortag'
               }
+              onClick={handleNavLinkClick}
             >
               History
             </NavLink>
@@ -142,6 +142,7 @@ const MobileSidebar = () => {
               className={({ isActive }) =>
                 isActive ? 'anchortag anchorActive' : 'anchortag'
               }
+              onClick={handleNavLinkClick}
             >
               Profile
             </NavLink>

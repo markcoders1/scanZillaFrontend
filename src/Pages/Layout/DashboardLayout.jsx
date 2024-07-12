@@ -66,7 +66,7 @@ const DashboardLayout = () => {
             maxWidth: '1140px', // Reduced to fit within the available space
             padding: {
               sm: '50px',
-              xs: '30px 5px',
+              xs: '30px 12px',
             },
             backgroundColor: 'white',
             borderRadius: '30px',

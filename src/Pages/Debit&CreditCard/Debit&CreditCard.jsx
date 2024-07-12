@@ -55,7 +55,7 @@ const Debit = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "1.7rem"
+                gap: "1.7rem",
             }}
         >
             <Box
