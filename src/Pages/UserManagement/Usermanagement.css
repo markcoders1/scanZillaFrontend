@@ -1,0 +1,94 @@
+.datatable-responsive-demo .p-datatable {
+    border: none;
+}
+
+.p-datatable-header {
+    /* background: "linear-gradient(to right, #1A0049, #41016C)"; */
+    /* Match the header background color */
+    color: #FDFDFD;
+    font-weight: 500 !important;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px 8px 0 0;
+    /* border: 2px solid red !important; */
+    border-radius: 10px;
+}
+
+.p-datatable {
+    /* border: 2px solid red !important; */
+}
+.p-datatable-thead{
+    border-radius: 10px !important;
+}
+.p-datatable .p-datatable-thead>tr>th {
+    background: #1A0049;
+    /* Match the header background color */
+    color: #FDFDFD;
+    text-align: start;
+    font-weight: 600;
+    padding: 10px;
+   
+  
+    
+}
+
+.p-datatable-tbody>tr>td {
+    text-align: center;
+    padding: 10px;
+    color: #333333;
+    font-weight: 500;
+}
+
+.p-datatable-tbody>tr {
+    background: white;
+    /* Set row background to white */
+    margin-top: 20px !important;
+}
+
+.p-datatable-tbody {
+
+    border: 2px solid red !important;
+}
+
+.p-datatable-tbody>tr:nth-child(odd) {
+    /* background: #f9f9f9; */
+    /* Alternate row color */
+}
+
+.p-datatable-tbody>tr:hover {
+    background: #f1f1f1;
+    /* Row hover effect */
+}
+
+/* Custom button styles */
+.p-button-danger {
+    background: #ff4d4d;
+    border: none;
+}
+
+.p-button-success {
+    background: #28a745;
+    border: none;
+}
+
+.p-button-secondary {
+    background: #6c757d;
+    border: none;
+}
+
+.p-button-rounded {
+    border-radius: 25px;
+}
+
+.p-datatable-thead {
+    background-color: rgb(35, 35, 35);
+    width: 100%;
+    
+}
+
+.p-datatable-thead>tr {
+    justify-content: space-between;
+    width: 100%;
+   
+}

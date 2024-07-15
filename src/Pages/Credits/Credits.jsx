@@ -726,7 +726,7 @@ const Credits = () => {
 
                 </Box>
                 <Typography>
-                    <NavLink to="/debit/credit">
+                    <NavLink to="/card-details">
                         <Customcard />
                     </NavLink>
                 </Typography>

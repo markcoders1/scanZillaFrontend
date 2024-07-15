@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import './AppSidebar.css';
@@ -6,6 +6,9 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 
 const AppSidebar = () => {
+
+  const [admin, setAdmin] = useState(true)
+
   return (
     <Box
       sx={{
@@ -37,64 +40,120 @@ const AppSidebar = () => {
             ScanZilla
           </Typography>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1.5rem',
-          }}
-        >
-          <Typography>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
+
+        {
+          admin ?
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+              }}
             >
-              DashBoard
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/analyze"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
+              <Typography>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  DashBoard
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/tool-management"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  Tool Managemnet
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/user-management"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  User Managemnet
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/credits-management"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  Credits Management
+                </NavLink>
+              </Typography>
+
+            </Box>
+            :
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1.5rem',
+              }}
             >
-              Analyze
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/credits"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-            >
-              Credits
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/history"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-            >
-              History
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/profile"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-            >
-              Profile
-            </NavLink>
-          </Typography>
-        </Box>
+              <Typography>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  DashBoard
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/analyze"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  Analyze
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/credits"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  Credits
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/history"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  History
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                >
+                  Profile
+                </NavLink>
+              </Typography>
+            </Box>
+        }
+
+
       </Box>
       <Box
         sx={{
@@ -108,7 +167,7 @@ const AppSidebar = () => {
           sx={{
             fontWeight: '600',
             fontSize: '1.9rem',
-            color:"#ffff"
+            color: "#ffff"
           }}
         >
           Samantha
@@ -124,7 +183,7 @@ const AppSidebar = () => {
         </Typography>
         <Typography
           sx={{
-            marginTop: '10px',  
+            marginTop: '10px',
           }}
         >
           <Logout />

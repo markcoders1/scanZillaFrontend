@@ -1,7 +1,7 @@
-import { Box, FormControl, TextField, Typography } from "@mui/material";
-import { forwardRef } from "react";
-import EyeOpen from '../../assets/images/eyeOpen.png'
-import { GoEyeClosed } from "react-icons/go";
+import { Box, FormControl, TextField, Typography, IconButton } from "@mui/material";
+import { forwardRef, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const CustomTextField = forwardRef(({
   type = "text",
@@ -16,7 +16,14 @@ const CustomTextField = forwardRef(({
   placeholder = "",
   border = true,
   boxShadow = false, // Add default value for boxShadow
+  showPasswordToggle = false // Add prop to control password visibility toggle
 }, ref) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <Box sx={{ mb: mb }}>
       <FormControl variant="standard" fullWidth
@@ -38,7 +45,7 @@ const CustomTextField = forwardRef(({
       >
         <TextField
           placeholder={placeholder}
-          type={type}
+          type={showPassword ? "text" : type}
           ref={ref}
           sx={{
             '& ::placeholder': {
@@ -70,7 +77,7 @@ const CustomTextField = forwardRef(({
               lg: "500"
             },
             color: "black",
-            backgroundColor:"none"
+            backgroundColor: "none"
           }}
           onKeyDown={handleKeyDown}
           name={name}
@@ -82,6 +89,20 @@ const CustomTextField = forwardRef(({
           multiline={multiline}
           rows={rows}
         />
+        {showPasswordToggle && (
+          <IconButton
+            onClick={handleTogglePasswordVisibility}
+            sx={{
+              position: 'absolute',
+              right: 25,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              
+            }}
+          >
+            {showPassword ? <FontAwesomeIcon  icon={faEyeSlash} /> : <FontAwesomeIcon icon={faEye} />}
+          </IconButton>
+        )}
       </FormControl>
       {error && (
         <Typography sx={{

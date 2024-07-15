@@ -4,8 +4,17 @@ import ProfileCard from '../../Components/ProfileCard/ProfileCard'
 import Heading from '../../Components/Heading/Heading'
 import DetailedCard from '../../Components/DetailedCard/DetailedCard'
 import Customcard from '../../Components/Customcard/Customcard'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
+
+
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/card-details")
+  }
+
   return (
     <Box sx={{
       display: "flex",
@@ -108,26 +117,49 @@ const Profile = () => {
           flexDirection: "column",
           flexBasis: "190px",
           flexGrow: 1,
-          gap: "10px"
+          gap: "10px",
+          // border: "2px solid red"
         }}>
           <Heading Heading="Debit Card Detail" />
-          <Box sx={{
-            display: "flex",
-            gap: "33px",
-            flexDirection: {
-              md: "row",
-              xs: "column"
-            }
-          }}>
+          <Box
+
+            sx={{
+              display: "flex",
+              gap: "33px",
+              flexDirection: {
+                md: "row",
+                xs: "column",
+
+              }
+            }}>
             <Box sx={{
               flexGrow: 3,
-            }}>
-
+              // border: "2px solid red"
+            }}
+              onClick={handleNavigate}
+            >
               <Customcard />
+              <Typography
+                sx={{
+                  color: "#333333",
+                  fontWeight: "500",
+                  fontSize: "15px",
+                  letterSpacing: "0.34px",
+                  marginTop: "11px",
+                  // border:"2px solid blue",
+                  textAlign: "end",
+                  cursor:"pointer"
+                }}
+              >
+                Add new Card+
+              </Typography>
             </Box>
             <Box sx={{
-              flexGrow: 1
-            }}>
+              flexGrow: 1,
+
+            }}
+
+            >
               <DetailedCard title='Total Analyze' name="50" action="View Detail" />
             </Box>
 

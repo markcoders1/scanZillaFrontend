@@ -61,8 +61,8 @@ const Login = () => {
 
       const sessionAccess = sessionStorage.getItem("accessToken")
       const sessionRefresh = sessionStorage.getItem("refreshToken")
-      console.log("sessionAccess",sessionAccess)
-      console.log("sessionRefresh",sessionRefresh)
+      console.log("sessionAccess", sessionAccess)
+      console.log("sessionRefresh", sessionRefresh)
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
@@ -251,6 +251,7 @@ const Login = () => {
               type="password"
               value={data.password}
               rows={1}
+              showPasswordToggle={true} // Add this prop
             />
           </Typography>
         </Box>

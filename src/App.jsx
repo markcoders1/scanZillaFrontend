@@ -28,6 +28,9 @@ import Dashboard from './Pages/Dashboard/Dashboard';
 import Debit from "./Pages/Debit&CreditCard/Debit&CreditCard";
 import PaymentScreen from "./Pages/PaymentScreen/PaymentScreen";
 
+import ToolManagement from "./Pages/ToolMangement/ToolManagement";
+import UserManagement from "./Pages/UserManagement/UserManagement";
+import CreditsManagement from "./Pages/CreditsManagement/CreditsManagement";
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -64,13 +67,17 @@ function App() {
               <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
               <Route path="analyze" element={<Protected children={<Analyzed />} />} />
               <Route path="credits" element={<Protected children={<Credits />} />} />
-              <Route path="debit/credit" element={<Protected children={<Debit />} />} />
-            
+              <Route path="card-details" element={<Protected children={<Debit />} />} />
+
 
               <Route path="history" element={<Protected children={<History />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
               <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
               <Route path="payments" element={<Protected children={<PaymentScreen />} />} />
+
+              <Route path="tool-management" element={<Protected children={<ToolManagement />} />} />
+              <Route path="user-management" element={<Protected children={<UserManagement />} />} />
+              <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
 
 
 

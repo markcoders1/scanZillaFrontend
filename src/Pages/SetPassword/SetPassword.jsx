@@ -183,6 +183,7 @@ const SetPassword = () => {
                         value={data.password}
                         rows={1}
                         type="password"
+                        showPasswordToggle={true} // Add this prop
                     />
                 </Typography>
                 <Typography
@@ -206,6 +207,7 @@ const SetPassword = () => {
                         type="password"
                         value={data.confirmPassword}
                         rows={1}
+                        showPasswordToggle={true} // Add this prop
                     />
                 </Typography>
             </Box>
@@ -229,7 +231,7 @@ const SetPassword = () => {
                             color: "white"
                         },
                         boxShadow: "none",
-                        marginTop:"80px"
+                        marginTop: "80px"
                     }}
                     variant="contained"
                     onClick={handleSetPassword}

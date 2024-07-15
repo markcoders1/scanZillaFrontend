@@ -36,6 +36,7 @@ const CustomButton = ({
             ButtonText,
             background,
             ...buttonStyle,
+            fontWeight,
             width,
             '&:hover':{
                 background:hoverBg,
