@@ -16,7 +16,8 @@ const CustomButton = ({
     onClick=()=>{},
     background="",
     hoverBg="",
-    hovercolor=""
+    hovercolor="",
+    width
 
 
 
@@ -35,6 +36,7 @@ const CustomButton = ({
             ButtonText,
             background,
             ...buttonStyle,
+            width,
             '&:hover':{
                 background:hoverBg,
                 color:hovercolor

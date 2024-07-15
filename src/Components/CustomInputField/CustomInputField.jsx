@@ -1,5 +1,7 @@
 import { Box, FormControl, TextField, Typography } from "@mui/material";
 import { forwardRef } from "react";
+import EyeOpen from '../../assets/images/eyeOpen.png'
+import { GoEyeClosed } from "react-icons/go";
 
 const CustomTextField = forwardRef(({
   type = "text",

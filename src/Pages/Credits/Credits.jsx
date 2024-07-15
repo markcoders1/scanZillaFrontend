@@ -3,25 +3,22 @@ import { Box, Typography, Button } from '@mui/material';
 import dashboardImg1 from '../../assets/images/dashboard.png'
 import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
 import PricingBox from '../../Components/PricingBox/PricingBox';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate } from 'react-router-dom';
 import { FaCheck } from "react-icons/fa6";
 import checkImg from '../../assets/images/check.png'
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Customcard from '../../Components/Customcard/Customcard';
 import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+// import SwitchCheckBox from '../components/SwitchCheckBox';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Credits = () => {
+    const navigate = useNavigate();
 
-    const handleCredit = async () => {
-        const response = axiosInstance({
-            url: appUrl + "/buycredits",
-            method: "post",
-
-        })
-        console.log(response)
+    const handleNavigate = () => {
+        navigate("/payments")
     }
     return (
         <Box
@@ -31,7 +28,7 @@ const Credits = () => {
                 marginTop: "10px",
                 flexDirection: {
                     md: "row",
-                    xs: "column"
+                    xs: "column",
                 }
             }}
         >
@@ -213,7 +210,8 @@ const Credits = () => {
                                         fontWeight={"500"}
                                         color={"#333333"}
                                         margin={"auto"}
-                                        onClick={handleCredit}
+                                        onClick={handleNavigate}
+
                                     />
                                 </Box>
                             </Box>
@@ -365,7 +363,7 @@ const Credits = () => {
                                         color={"#333333"}
 
                                         margin={"auto"}
-                                        onClick={handleCredit}
+                                        onClick={handleNavigate}
 
                                     />
                                 </Box>
@@ -516,7 +514,7 @@ const Credits = () => {
                                         color={"#333333"}
 
                                         margin={"auto"}
-                                        onClick={handleCredit}
+                                        onClick={handleNavigate}
 
                                     />
                                 </Box>
@@ -593,7 +591,7 @@ const Credits = () => {
                                             // backgroundColor:"red"
                                         }}
                                     >
-                                        <SwitchCheckBox />
+                                        <SwitchCheckBox theme="alternate" />
                                     </Box>
                                     <Typography
                                         sx={{

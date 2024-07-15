@@ -26,6 +26,7 @@ import Profile from './Pages/Profile/Profile';
 import Credits from './Pages/Credits/Credits';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Debit from "./Pages/Debit&CreditCard/Debit&CreditCard";
+import PaymentScreen from "./Pages/PaymentScreen/PaymentScreen";
 
 
 import { loadStripe } from '@stripe/stripe-js';
@@ -64,10 +65,12 @@ function App() {
               <Route path="analyze" element={<Protected children={<Analyzed />} />} />
               <Route path="credits" element={<Protected children={<Credits />} />} />
               <Route path="debit/credit" element={<Protected children={<Debit />} />} />
+            
 
               <Route path="history" element={<Protected children={<History />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
               <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
+              <Route path="payments" element={<Protected children={<PaymentScreen />} />} />
 
 
 

@@ -3,13 +3,12 @@ import React, { useEffect, useState } from 'react'
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow'
 import visaCircles from '../../assets/images/visa circles.png'
 import CustomButton from '../../Components/CustomButton/CustomButton'
+import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox'
 
 const Debit = () => {
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
     const [data, setData] = useState({
-        debit_card_number: "",
-        credit_card_number: "",
         card_number: "",
         name: "",
         cvv: ""
@@ -38,8 +37,7 @@ const Debit = () => {
 
     const handleCancelPayment = () => {
         setData({
-            debit_card_number: "",
-            credit_card_number: "",
+
             card_number: "",
             name: "",
             cvv: ""
@@ -55,10 +53,107 @@ const Debit = () => {
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "1.7rem",
+                gap: "1.6rem",
+                marginTop: "20px"
             }}
         >
 
+            <Box
+                sx={{
+                    display: "flex",
+                    gap: "2rem"
+                }}
+            >
+                <Box
+                    sx={{
+                        flexBasis: "50%",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.5rem",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontWeight: "600",
+                            fontSize: "22px",
+                            letterSpacing: "0.34px",
+                            color: "#333333"
+                        }}
+                    >
+                        Name
+                    </Typography>
+                    <Box>
+                        <CustomInputShadow
+                            placeholder="Enter Name"
+                            onChange={hanldeInput}
+                            name="name"
+                            value={"Pro"}
+                        />
+                    </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        flexBasis: "30%",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.5rem",
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontWeight: "600",
+                            fontSize: "22px",
+                            letterSpacing: "0.34px",
+                            color: "#333333"
+                        }}
+                    >
+                        Total Amount
+                    </Typography>
+                    <Box>
+                        <CustomInputShadow
+                            placeholder="Enter Name"
+                            onChange={hanldeInput}
+                            name="name"
+                            value={"30$"}
+                        />
+                    </Box>
+                </Box>
+
+                <Box
+                    sx={{
+                        flexBasis: "20%",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.5rem",
+                        alignItems:"end",
+                        // border:"2px solid red"
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontWeight: "600",
+                            fontSize: "22px",
+                            letterSpacing: "0.34px",
+                            color: "#333333"
+                        }}
+                    >
+                        Auto Credits
+                    </Typography>
+                    <Box
+                    sx={{
+                        // border:"2px solid red",
+                        display:"flex",
+                        justifyContent:"end",
+                        padding:"12px"
+                       
+                    }}
+                    >
+                       <SwitchCheckBox  theme="default" />
+                    </Box>
+                </Box>
+
+            </Box>
 
             <Box
                 sx={{
@@ -251,7 +346,7 @@ const Debit = () => {
                                 onChange={hanldeInput}
                                 name="cvv"
                                 value={data.cvv}
-                                type="password"
+                                type="text"
                                 fontSize="40px"
                                 padding="0px 5px"
                             />

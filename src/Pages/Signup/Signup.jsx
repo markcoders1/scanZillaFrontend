@@ -230,7 +230,7 @@ const Signup = () => {
                                 color: "#666666",
                                 fontWeight: "400"
                             }}
-                        >Set Password</label>
+                        >Password</label>
                         <CustomTextField
                             border={true}
 
@@ -244,7 +244,7 @@ const Signup = () => {
                         />
                     </Typography>
                 </Box>
-                <Box
+                {/* <Box
                     sx={{
                         display: "flex  ",
                         alignItems: "center",
@@ -276,10 +276,10 @@ const Signup = () => {
                         >Remember Me</p>
                     </Typography>
 
-                </Box>
+                </Box> */}
                 <Box sx={{
                     position: "relative",
-                    marginTop: "40px",
+                    marginTop: "65px",
                     display: "flex",
                     flexDirection: "column",
                     gap: "1.56rem",
