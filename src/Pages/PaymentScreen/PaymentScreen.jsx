@@ -29,7 +29,7 @@ const StripeCardForm = () => {
         if (error) {
             console.error(error);
             return;
-        } 
+        }
 
         const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: paymentMethod.id,
@@ -229,6 +229,33 @@ const StripeCardForm = () => {
                                     display: "flex",
                                     flexDirection: "column",
                                     gap: "0.5rem",
+                                    flexBasis:"55%"
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontWeight: "600",
+                                        fontSize: "22px",
+                                        letterSpacing: "0.34px",
+                                        color: "#333333"
+                                    }}
+                                >
+                                    Name
+                                </Typography>
+                                <Box
+                                  
+                                >
+                                   <CustomInputShadow
+                                   
+                                   />
+                                </Box>
+                            </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "0.5rem",
+                                    flexBasis:"25%"
                                 }}
                             >
                                 <Typography
@@ -257,6 +284,7 @@ const StripeCardForm = () => {
                                     display: "flex",
                                     flexDirection: "column",
                                     gap: "0.5rem",
+                                    flexBasis:"20%"
                                 }}
                             >
                                 <Typography
@@ -264,7 +292,9 @@ const StripeCardForm = () => {
                                         fontWeight: "600",
                                         fontSize: "22px",
                                         letterSpacing: "0.34px",
-                                        color: "#333333"
+                                        color: "#333333",
+                                  
+
                                     }}
                                 >
                                     CVC
@@ -272,8 +302,9 @@ const StripeCardForm = () => {
                                 <Box
                                     sx={{
                                         padding: "10px",
-                                        boxShadow: "4px 5px 15px 0px 30%",
-                                        borderRadius: "4px"
+                                        boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+                                        borderRadius: "4px",
+                                        padding:"17px"
                                     }}
                                 >
                                     <CardCvcElement options={elementStyle} />
