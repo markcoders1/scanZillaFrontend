@@ -9,16 +9,29 @@ import checkImg from '../../assets/images/check.png'
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Customcard from '../../Components/Customcard/Customcard';
 import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
+import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+
 const Credits = () => {
+
+    const handleCredit = async () => {
+        const response = axiosInstance({
+            url: appUrl + "/buycredits",
+            method: "post",
+
+        })
+        console.log(response)
+    }
     return (
         <Box
             sx={{
                 display: "flex",
                 gap: "2.2rem",
                 marginTop: "10px",
-                flexDirection:{
-                    md:"row",
-                    xs:"column"
+                flexDirection: {
+                    md: "row",
+                    xs: "column"
                 }
             }}
         >
@@ -48,9 +61,9 @@ const Credits = () => {
                                 // backgroundColor: "red",
                                 display: "flex",
                                 gap: "20px",
-                                flexDirection:{
-                                    sm:"row",
-                                    xs:"column",
+                                flexDirection: {
+                                    sm: "row",
+                                    xs: "column",
                                 }
 
                             }}
@@ -65,9 +78,9 @@ const Credits = () => {
                                     borderRadius: "10px  ",
                                     height: "322px",
                                     flexGrow: {
-                                        sm:"1",
+                                        sm: "1",
                                     },
-                                    
+
                                     // flexShrink: "1"
                                 }}
                             >
@@ -200,6 +213,7 @@ const Credits = () => {
                                         fontWeight={"500"}
                                         color={"#333333"}
                                         margin={"auto"}
+                                        onClick={handleCredit}
                                     />
                                 </Box>
                             </Box>
@@ -337,7 +351,7 @@ const Credits = () => {
                                         marginTop: "20PX",
                                         display: "flex",
                                         justifyContent: "center",
-                                        
+
 
 
                                     }}
@@ -351,6 +365,7 @@ const Credits = () => {
                                         color={"#333333"}
 
                                         margin={"auto"}
+                                        onClick={handleCredit}
 
                                     />
                                 </Box>
@@ -366,9 +381,9 @@ const Credits = () => {
                                 // backgroundColor: "red",
                                 display: "flex",
                                 gap: "20px",
-                                flexDirection:{
-                                    sm :"row",
-                                    xs:"column"
+                                flexDirection: {
+                                    sm: "row",
+                                    xs: "column"
                                 }
 
                             }}
@@ -501,6 +516,7 @@ const Credits = () => {
                                         color={"#333333"}
 
                                         margin={"auto"}
+                                        onClick={handleCredit}
 
                                     />
                                 </Box>
@@ -564,20 +580,20 @@ const Credits = () => {
                                         backgroundRepeat: "no-repeat",
                                         backgroundPosition: "center",
                                         padding: "24px 23px",
-                                        position:"relative",
-                                        
+                                        position: "relative",
+
                                     }}
                                 >
                                     <Box
-                                    sx={{
-                                        position:"absolute",
-                                        right:"10px",
-                                        top:"15px",
-                                        // padding:"1rem",
-                                        // backgroundColor:"red"
-                                    }}
+                                        sx={{
+                                            position: "absolute",
+                                            right: "10px",
+                                            top: "15px",
+                                            // padding:"1rem",
+                                            // backgroundColor:"red"
+                                        }}
                                     >
-                                        <SwitchCheckBox/>
+                                        <SwitchCheckBox />
                                     </Box>
                                     <Typography
                                         sx={{
@@ -683,7 +699,7 @@ const Credits = () => {
                             >
                                 <Button
                                     sx={{
-                                        
+
                                         p: "15px 20px",
                                         background: "linear-gradient(to right, #1A0049, #41016C)",
                                         width: "90%",
@@ -712,9 +728,9 @@ const Credits = () => {
 
                 </Box>
                 <Typography>
-                <NavLink to="/debit/credit">
-                    <Customcard />
-                </NavLink>
+                    <NavLink to="/debit/credit">
+                        <Customcard />
+                    </NavLink>
                 </Typography>
             </Box>
         </Box>

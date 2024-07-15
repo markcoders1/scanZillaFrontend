@@ -49,9 +49,15 @@ export default function CheckoutForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const response = axiosInstance({
+            url: appUrl + "/buycredits", method: "post", data: data,
+
+        })
+        console.log(response)
+
         if (!stripe || !elements) {
-            // Stripe.js hasn't yet loaded.
-            // Make sure to disable form submission until Stripe.js has loaded.
+         
+
             return;
         }
 
