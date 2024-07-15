@@ -1,15 +1,31 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ProfileCard from '../../Components/ProfileCard/ProfileCard'
 import Heading from '../../Components/Heading/Heading'
 import DetailedCard from '../../Components/DetailedCard/DetailedCard'
 import Customcard from '../../Components/Customcard/Customcard'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Profile = () => {
 
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
 
+
+  const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(auth)
+
+    console.log(auth.email)
+    console.log(auth.username)
+
+    setUsername(auth.username)
+    setEmail(auth.email)
+
+  }, [])
 
   const handleNavigate = () => {
     navigate("/card-details")
@@ -47,7 +63,7 @@ const Profile = () => {
               xs: "100%"
             }
           }}>
-            <ProfileCard title='Edit Name' name="Samanta" action="Edit Name" />
+            <ProfileCard title=' Name' name={username} action="Edit Name" />
           </Box>
           <Box sx={{
             flexBasis: {
@@ -55,7 +71,7 @@ const Profile = () => {
               xs: "100%"
             }, flexGrow: 1
           }}>
-            <ProfileCard title='Edit Email' name="samantha@email.com" action="Edit Email" />
+            <ProfileCard title='Email' name={email}/>
           </Box>
         </Box>
 
@@ -138,7 +154,7 @@ const Profile = () => {
             }}
               onClick={handleNavigate}
             >
-              <Customcard />
+              <Customcard name={username} />
               <Typography
                 sx={{
                   color: "#333333",
@@ -148,7 +164,7 @@ const Profile = () => {
                   marginTop: "11px",
                   // border:"2px solid blue",
                   textAlign: "end",
-                  cursor:"pointer"
+                  cursor: "pointer"
                 }}
               >
                 Add new Card+

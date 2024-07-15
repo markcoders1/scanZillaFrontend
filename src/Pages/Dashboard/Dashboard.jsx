@@ -8,15 +8,26 @@ import GiftCard from "../../Components/GiftCard/GiftCard";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import CustomChart from "../../Components/CustomChart/CustomChart";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Home = () => {
 
-  const navigate = useNavigate();
+  const [username,setUsername] = useState()
+  const [email,setEmail] = useState()
+
+
   const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   useEffect(()=>{
     console.log(auth)
+
+    console.log(auth.email)
+    console.log(auth.username)
+
+    setUsername(auth.username)
+    setEmail(auth.email)
+
   },[])
 
   return (
@@ -72,7 +83,7 @@ const Home = () => {
               flexShrink:"1"
             }}>
               <CardIWithImageBackground
-                text="Samatha"
+                text={username}
                 title="Hello,"
               />
             </Box>

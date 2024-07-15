@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
@@ -8,11 +8,26 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 import { RxCross2 } from "react-icons/rx";
 
+
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const MobileSidebar = () => {
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.sidebarToggle.isOpen);
+
+  useEffect(() => {
+    console.log(auth)
+
+    console.log(auth.email)
+    console.log(auth.username)
+
+    setUsername(auth.username)
+    setEmail(auth.email)
+
+  }, [])
 
   const handleToggle = () => {
     dispatch(toggleSidebar());
@@ -54,8 +69,8 @@ const MobileSidebar = () => {
           color: "white",
           top: "10px",
           left: "20px",
-          fontSize:"2rem",
-          fontWeight:"600"
+          fontSize: "2rem",
+          fontWeight: "600"
         }}
       ><RxCross2 onClick={handleToggle} /></Box>
       <Box
@@ -64,7 +79,7 @@ const MobileSidebar = () => {
           flexDirection: 'column',
           gap: '60px',
           justifyContent: 'center',
-          marginBottom:"120px "
+          marginBottom: "120px "
         }}
       >
         <Box
@@ -163,10 +178,10 @@ const MobileSidebar = () => {
           sx={{
             fontWeight: "600",
             fontSize: "1.6rem",
-            color:"white"
+            color: "white"
           }}
         >
-          Samantha
+         {username}
         </Typography>
         <Typography
           sx={{
@@ -175,7 +190,7 @@ const MobileSidebar = () => {
             color: "#a49ab7",
           }}
         >
-          samantha@email.com
+          {email}
         </Typography>
         <Typography
           sx={{

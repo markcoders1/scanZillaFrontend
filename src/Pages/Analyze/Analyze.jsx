@@ -8,12 +8,14 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+import { useNavigate } from "react-router-dom";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
 
 const Analyze = () => {
   const [categories, setCategories] = useState(["Food", "Gadgets", "OutFits"]);
+  const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
     bulletpoints: [{ index: 0, value: "" }],
@@ -44,12 +46,14 @@ const Analyze = () => {
     setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
 
     try {
+      setIsLoading(true);
       const response = await axiosInstance({
         url: appUrl + "/verifyText",
         method: "post",
         data: data,
       });
       setIsLoading(false);
+     
       handleData(response.data);
       dispatch(
         handleSnackAlert({

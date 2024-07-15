@@ -5,7 +5,19 @@ import visaCircles from '../../assets/images/visa circles.png'
 import CustomButton from '../../Components/CustomButton/CustomButton'
 import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox'
 
+
+// stripe integration
+
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
+
+
 const Debit = () => {
+
+    const [clientSecret, setClientSecret] = useState("");
+
     const [month, setMonth] = useState('');
     const [year, setYear] = useState('');
     const [data, setData] = useState({
@@ -126,7 +138,7 @@ const Debit = () => {
                         display: "flex",
                         flexDirection: "column",
                         gap: "0.5rem",
-                        alignItems:"end",
+                        alignItems: "end",
                         // border:"2px solid red"
                     }}
                 >
@@ -141,15 +153,15 @@ const Debit = () => {
                         Auto Credits
                     </Typography>
                     <Box
-                    sx={{
-                        // border:"2px solid red",
-                        display:"flex",
-                        justifyContent:"end",
-                        padding:"12px"
-                       
-                    }}
+                        sx={{
+                            // border:"2px solid red",
+                            display: "flex",
+                            justifyContent: "end",
+                            padding: "12px"
+
+                        }}
                     >
-                       <SwitchCheckBox  theme="default" />
+                        <SwitchCheckBox theme="default" />
                     </Box>
                 </Box>
 

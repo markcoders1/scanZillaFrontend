@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import './AppSidebar.css';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
+import { useSelector } from 'react-redux';
 
 const AppSidebar = () => {
 
-  const [admin, setAdmin] = useState(true)
+
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+
+
+  const auth = useSelector((state) => state.auth);
+
+  const [admin, setAdmin] = useState(false)
+
+  useEffect(() => {
+    console.log(auth)
+
+    console.log(auth.email)
+    console.log(auth.username)
+
+    setUsername(auth.username)
+    setEmail(auth.email)
+
+  }, [])
 
   return (
     <Box
@@ -170,7 +189,7 @@ const AppSidebar = () => {
             color: "#ffff"
           }}
         >
-          Samantha
+          {username}
         </Typography>
         <Typography
           sx={{
@@ -179,7 +198,7 @@ const AppSidebar = () => {
             color: '#a49ab7',
           }}
         >
-          samantha@email.com
+          {email}
         </Typography>
         <Typography
           sx={{

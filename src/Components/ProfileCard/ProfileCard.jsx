@@ -12,6 +12,7 @@ const ProfileCard = ({
         boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
         padding:"22px 26px",
         borderRadius:"10px",
+        height:"150px"
      }}>
 
        <Typography sx={{

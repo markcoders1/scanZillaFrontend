@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Typography, Button } from '@mui/material';
 import dashboardImg1 from '../../assets/images/dashboard.png'
 import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
 import PricingBox from '../../Components/PricingBox/PricingBox';
-import { NavLink,useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { FaCheck } from "react-icons/fa6";
 import checkImg from '../../assets/images/check.png'
 import CustomButton from '../../Components/CustomButton/CustomButton';
@@ -11,15 +11,45 @@ import Customcard from '../../Components/Customcard/Customcard';
 import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
 // import SwitchCheckBox from '../components/SwitchCheckBox';
+import { useSelector } from 'react-redux';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Credits = () => {
+
+    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
+    const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
-    const handleNavigate = () => {
+    useEffect(() => {
+        console.log(auth)
+
+        console.log(auth.email)
+        console.log(auth.username)
+
+        setUsername(auth.username)
+        setEmail(auth.email)
+
+    }, [])
+
+    const handleNavigate = async (variant) => {
+        console.log("hello",variant)
+        const response = await axiosInstance({
+            url: appUrl + "/buycredits",
+            method: "post",
+            data: {
+                email: email,
+                variant:variant
+            }
+        });
+        console.log("hello",variant) 
         navigate("/payments")
+
+        console.log(response.data.clientSecret)
+        localStorage.setItem("clientSecret",response.data.clientSecret )
     }
+
     return (
         <Box
             sx={{
@@ -210,7 +240,7 @@ const Credits = () => {
                                         fontWeight={"500"}
                                         color={"#333333"}
                                         margin={"auto"}
-                                        onClick={handleNavigate}
+                                        onClick={() => {handleNavigate(1)}}
 
                                     />
                                 </Box>
@@ -363,7 +393,7 @@ const Credits = () => {
                                         color={"#333333"}
 
                                         margin={"auto"}
-                                        onClick={handleNavigate}
+                                        onClick={() => {handleNavigate(2)}}
 
                                     />
                                 </Box>
@@ -514,8 +544,7 @@ const Credits = () => {
                                         color={"#333333"}
 
                                         margin={"auto"}
-                                        onClick={handleNavigate}
-
+                                        onClick={() =>{ handleNavigate(3)}}
                                     />
                                 </Box>
                             </Box>

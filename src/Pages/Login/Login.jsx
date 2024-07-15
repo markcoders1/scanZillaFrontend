@@ -44,7 +44,7 @@ const Login = () => {
         authenticated: true,
 
       }
-
+      
       dispatch(handleAuth(data))
 
       dispatch(
@@ -101,12 +101,15 @@ const Login = () => {
 
     try {
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
+      console.log(response)
       response = response?.data
       const responseData = {
         user: response?.user,
         accessToken: response?.accessToken,
         refreshToken: response?.refreshToken,
         authenticated: true,
+        email: response?.email,
+        username: response?.username
       };
       dispatch(handleAuth(responseData));
       dispatch(
