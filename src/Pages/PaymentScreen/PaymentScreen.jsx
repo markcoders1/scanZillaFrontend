@@ -1,79 +1,86 @@
-import { Box, Typography, Select, MenuItem, FormControl } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow'
-import visaCircles from '../../assets/images/visa circles.png'
-import CustomButton from '../../Components/CustomButton/CustomButton'
-import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox'
+import React from 'react';
+import { Box, Typography } from '@mui/material';
+import { useStripe, useElements, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
+import CustomButton from '../../Components/CustomButton/CustomButton';
+import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow';
+import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
+import cardIcon from '../../assets/images/visa circles.png';
 
+const StripeCardForm = () => {
+    const stripe = useStripe();
+    const elements = useElements();
 
-// stripe integration
+    const clientSecret = localStorage.getItem("clientSecret");
 
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
+        if (!stripe || !elements) {
+            return;
+        }
 
+        const cardNumberElement = elements.getElement(CardNumberElement);
 
-const Debit = () => {
-
-    const [clientSecret, setClientSecret] = useState("");
-
-    const [month, setMonth] = useState('');
-    const [year, setYear] = useState('');
-    const [data, setData] = useState({
-        card_number: "",
-        name: "",
-        cvv: ""
-    });
-
-    const handleMonthChange = (event) => {
-        setMonth(event.target.value);
-    };
-
-    const handleYearChange = (event) => {
-        setYear(event.target.value);
-    };
-
-    const hanldeInput = (e) => {
-        setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
-    };
-
-    const handlePayNow = () => {
-        console.log("Payment Data: ", {
-            ...data,
-            expiryMonth: month,
-            expiryYear: year,
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardNumberElement,
         });
-        // Add your API call logic here
-    };
 
-    const handleCancelPayment = () => {
-        setData({
+        if (error) {
+            console.error(error);
+            return;
+        } 
 
-            card_number: "",
-            name: "",
-            cvv: ""
+        const { error: confirmError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: paymentMethod.id,
+            return_url: 'https://example.com/success',
         });
-        setMonth('');
-        setYear('');
+
+        if (confirmError) {
+            console.error(confirmError);
+        } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+            // Payment successful, handle the success state (e.g., show success message, redirect)
+            window.location.href = 'https://example.com/success';
+        } else {
+            // Handle other statuses (e.g., processing, requires_action)
+            console.log('Payment status:', paymentIntent.status);
+        }
     };
 
-    // useEffect(() => { console.log(data) }, [data]);
+    const elementStyle = {
+        style: {
+            base: {
+                fontSize: '16px',
+                color: '#424770',
+                '::placeholder': {
+                    color: '#aab7c4',
+                },
+            },
+            invalid: {
+                color: '#9e2146',
+            },
+        },
+    };
 
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "1.6rem",
-                marginTop: "20px"
+                gap: "0rem"
             }}
         >
-
             <Box
                 sx={{
                     display: "flex",
-                    gap: "2rem"
+                    gap: {
+                        xs: "1rem",
+                        lg: "2rem"
+                    },
+                    flexDirection: {
+                        xs: "column-reverse",
+                        lg: "row"
+                    }
                 }}
             >
                 <Box
@@ -97,7 +104,6 @@ const Debit = () => {
                     <Box>
                         <CustomInputShadow
                             placeholder="Enter Name"
-                            onChange={hanldeInput}
                             name="name"
                             value={"Pro"}
                         />
@@ -125,7 +131,6 @@ const Debit = () => {
                     <Box>
                         <CustomInputShadow
                             placeholder="Enter Name"
-                            onChange={hanldeInput}
                             name="name"
                             value={"30$"}
                         />
@@ -139,7 +144,6 @@ const Debit = () => {
                         flexDirection: "column",
                         gap: "0.5rem",
                         alignItems: "end",
-                        // border:"2px solid red"
                     }}
                 >
                     <Typography
@@ -154,279 +158,154 @@ const Debit = () => {
                     </Typography>
                     <Box
                         sx={{
-                            // border:"2px solid red",
                             display: "flex",
                             justifyContent: "end",
                             padding: "12px"
-
                         }}
                     >
                         <SwitchCheckBox theme="default" />
                     </Box>
                 </Box>
-
             </Box>
 
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.5rem",
-                    position: "relative"
-                }}
-            >
-                <Typography
-                    sx={{
-                        fontWeight: "600",
-                        fontSize: "22px",
-                        letterSpacing: "0.34px",
-                        color: "#333333"
-                    }}
-                >
-                    Card Number
-                </Typography>
-                <Box
-                    sx={{
-                        position: "relative",
-                    }}
-                >
-                    <CustomInputShadow
-                        placeholder="Enter Card Number"
-                        onChange={hanldeInput}
-                        name="card_number"
-                        value={data.card_number}
-                    />
-                    <img
-                        style={{
-                            width: "50px",
-                            height: "40px",
-                            position: "absolute",
-                            top: "10px",
-                            right: "20px"
-                        }}
-                        src={visaCircles} alt="" />
-                </Box>
-            </Box>
-
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: {
-                        xs: "column",
-                        lg: "row"
-                    },
-                    gap: {
-                        lg: "2rem",
-                        xs: "2rem"
-                    },
-                    position: "relative"
-                }}
-            >
-                <Box
-                    sx={{
-                        flexBasis: "55%",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            fontWeight: "600",
-                            fontSize: "22px",
-                            letterSpacing: "0.34px",
-                            color: "#333333"
-                        }}
-                    >
-                        Name
-                    </Typography>
-                    <Box>
-                        <CustomInputShadow
-                            placeholder="Enter Name"
-                            onChange={hanldeInput}
-                            name="name"
-                            value={data.name}
-                        />
-                    </Box>
-                </Box>
-
-                <Box
-                    sx={{
-                        flexGrow: "1",
-                        flexShrink: "1",
-                        flexBasis: "45%",
-                        display: "flex",
-                        flexDirection: {
-                            xs: "column",
-                            sm: "row",
-                        },
-                        gap: "2rem",
-
-                    }}
-                >
+            <Box>
+                <form onSubmit={handleSubmit}>
                     <Box
                         sx={{
-                            flexShrink: "2",
                             display: "flex",
                             flexDirection: "column",
-                            gap: "0.5rem",
+                            gap: "1.6rem",
+                            marginTop: "10px"
                         }}
                     >
-                        <Typography
-                            sx={{
-                                fontWeight: "600",
-                                fontSize: "22px",
-                                letterSpacing: "0.34px",
-                                color: "#333333"
-                            }}
-                        >
-                            Expiry Date
-                        </Typography>
                         <Box
                             sx={{
                                 display: "flex",
-                                gap: "1rem",
-                                boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-                                borderRadius: "4px",
-                                backgroundColor: "#fff",
-                                padding: "6px 0px 6px 0px"
+                                flexDirection: "column",
+                                gap: "0.5rem",
                             }}
                         >
-                            <FormControl sx={{ minWidth: 120 }}>
-                                <Select
-                                    id="month-select"
-                                    value={month}
-                                    onChange={handleMonthChange}
-                                    displayEmpty
+                            <Typography
+                                sx={{
+                                    fontWeight: "600",
+                                    fontSize: "22px",
+                                    letterSpacing: "0.34px",
+                                    color: "#333333"
+                                }}
+                            >
+                                Card Number
+                            </Typography>
+                            <Box
+                                sx={{
+                                    position: "relative"
+                                }}
+                            >
+                                <Box
                                     sx={{
-                                        '& .MuiOutlinedInput-notchedOutline': { border: 0 },
-                                        '& .MuiSelect-select': { padding: '10px 14px' }
+                                        padding: "17px",
+                                        boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+                                        borderRadius: "4px",
                                     }}
                                 >
-                                    <MenuItem value="" disabled>
-                                        Month
-                                    </MenuItem>
-                                    {Array.from({ length: 12 }, (_, index) => (
-                                        <MenuItem key={index + 1} value={index + 1}>
-                                            {new Date(0, index).toLocaleString('default', { month: 'long' })}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            <FormControl sx={{ minWidth: 120 }}>
-                                <Select
-                                    id="year-select"
-                                    value={year}
-                                    onChange={handleYearChange}
-                                    displayEmpty
-                                    sx={{
-                                        '& .MuiOutlinedInput-notchedOutline': { border: 0 },
-                                        '& .MuiSelect-select': { padding: '10px 14px' }
+                                    <CardNumberElement options={elementStyle} />
+                                </Box>
+                                <img
+                                    style={{
+                                        position: "absolute",
+                                        right: "20px",
+                                        top: "10px"
                                     }}
-                                >
-                                    <MenuItem value="" disabled>
-                                        Year
-                                    </MenuItem>
-                                    {Array.from({ length: 20 }, (_, index) => (
-                                        <MenuItem key={index + 2023} value={index + 2023}>
-                                            {index + 2023}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                                    src={cardIcon} alt="" />
+                            </Box>
                         </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "0.5rem",
-                        }}
-                    >
-                        <Typography
+                        <Box
                             sx={{
-                                fontWeight: "600",
-                                fontSize: "22px",
-                                letterSpacing: "0.34px",
-                                color: "#333333",
+                                display: "flex",
+                                gap: "2rem",
                             }}
                         >
-                            CVV
-                        </Typography>
-                        <Box>
-                            <CustomInputShadow
-                                onChange={hanldeInput}
-                                name="cvv"
-                                value={data.cvv}
-                                type="text"
-                                fontSize="40px"
-                                padding="0px 5px"
-                            />
-                        </Box>
-                    </Box>
-                </Box>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                gap: "20px",
-                justifyContent: "end",
-                flexDirection: {
-                    sm: "row",
-                    xs: "column-reverse"
-                },
-                mt: "20px"
-            }}>
-                <Box sx={{
-                    display: "flex",
-                    gap: "20px"
-                }}>
-                    <CustomButton
-                        border="2px solid #1A0049"
-                        borderRadius="10px"
-                        buttonTextStyle={{}}
-                        buttonStyle={{
-                            padding: {
-                                lg: "12px 20px"
-                            }
-                        }}
-                        ButtonText="Cancel Payment"
-                        fontSize
-                        color="#1A0049"
-                        fontWeight
-                        fullWidth={false}
-                        variant="outlined"
-                        padding
-                        onClick={handleCancelPayment}
-                        hoverBg="#1A0049"
-                        hovercolor="white"
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "0.5rem",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontWeight: "600",
+                                        fontSize: "22px",
+                                        letterSpacing: "0.34px",
+                                        color: "#333333"
+                                    }}
+                                >
+                                    Expiry Date
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        padding: "17px",
+                                        boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+                                        borderRadius: "4px"
+                                    }}
+                                >
+                                    <CardExpiryElement options={elementStyle} />
+                                </Box>
+                            </Box>
 
-                    />
-                    <CustomButton
-                        border="2px solid #1A0049"
-                        borderRadius="10px"
-                        background="#1A0049"
-                        hoverBg="white"
-                        hovercolor="#1A0049"
-                        buttonTextStyle={{}}
-                        buttonStyle={{
-                            padding: {
-                                lg: "12px 20px"
-                            },
-                        }}
-                        ButtonText="Pay Now"
-                        fontSize="14px"
-                        color="white"
-                        fontWeight
-                        // fullWidth={false} 
-                        variant="contained"
-                        padding
-                        onClick={handlePayNow}
-                        width={"143px"}
-                    />
-                </Box>
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    gap: "0.5rem",
+                                }}
+                            >
+                                <Typography
+                                    sx={{
+                                        fontWeight: "600",
+                                        fontSize: "22px",
+                                        letterSpacing: "0.34px",
+                                        color: "#333333"
+                                    }}
+                                >
+                                    CVC
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        padding: "10px",
+                                        boxShadow: "4px 5px 15px 0px 30%",
+                                        borderRadius: "4px"
+                                    }}
+                                >
+                                    <CardCvcElement options={elementStyle} />
+                                </Box>
+                            </Box>
+                        </Box>
+
+                        <CustomButton
+                            border="2px solid #1A0049"
+                            borderRadius="10px"
+                            background="#1A0049"
+                            hoverBg="white"
+                            hovercolor="#1A0049"
+                            buttonTextStyle={{}}
+                            buttonStyle={{
+                                padding: {
+                                    lg: "12px 20px"
+                                },
+                            }}
+                            ButtonText="Pay Now"
+                            fontSize="14px"
+                            color="white"
+                            fontWeight
+                            variant="contained"
+                            padding
+                            type="submit"
+                        />
+                    </Box>
+                </form>
             </Box>
         </Box>
     );
-}
+};
 
-export default Debit;
+export default StripeCardForm;
