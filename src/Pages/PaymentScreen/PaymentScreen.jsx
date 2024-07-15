@@ -20,10 +20,17 @@ const StripeCardForm = () => {
         }
 
         const cardNumberElement = elements.getElement(CardNumberElement);
+        const cardExpiryElement = elements.getElement(CardExpiryElement);
+        const cardCvcElement = elements.getElement(CardCvcElement);
 
         const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
-            card: cardNumberElement,
+            card: {
+                number: cardNumberElement,
+                exp_month: cardExpiryElement,
+                exp_year: cardExpiryElement,
+                cvc: cardCvcElement,
+            },
         });
 
         if (error) {
@@ -222,6 +229,10 @@ const StripeCardForm = () => {
                             sx={{
                                 display: "flex",
                                 gap: "2rem",
+                                flexDirection:{
+                                    lg:"row",
+                                    xs:"column"
+                                }
                             }}
                         >
                             <Box
@@ -229,7 +240,7 @@ const StripeCardForm = () => {
                                     display: "flex",
                                     flexDirection: "column",
                                     gap: "0.5rem",
-                                    flexBasis:"55%"
+                                    flexBasis: "55%"
                                 }}
                             >
                                 <Typography
@@ -242,12 +253,8 @@ const StripeCardForm = () => {
                                 >
                                     Name
                                 </Typography>
-                                <Box
-                                  
-                                >
-                                   <CustomInputShadow
-                                   
-                                   />
+                                <Box>
+                                    <CustomInputShadow />
                                 </Box>
                             </Box>
                             <Box
@@ -255,7 +262,7 @@ const StripeCardForm = () => {
                                     display: "flex",
                                     flexDirection: "column",
                                     gap: "0.5rem",
-                                    flexBasis:"25%"
+                                    flexBasis: "25%"
                                 }}
                             >
                                 <Typography
@@ -284,7 +291,7 @@ const StripeCardForm = () => {
                                     display: "flex",
                                     flexDirection: "column",
                                     gap: "0.5rem",
-                                    flexBasis:"20%"
+                                    flexBasis: "20%"
                                 }}
                             >
                                 <Typography
@@ -293,8 +300,6 @@ const StripeCardForm = () => {
                                         fontSize: "22px",
                                         letterSpacing: "0.34px",
                                         color: "#333333",
-                                  
-
                                     }}
                                 >
                                     CVC
@@ -304,7 +309,7 @@ const StripeCardForm = () => {
                                         padding: "10px",
                                         boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
                                         borderRadius: "4px",
-                                        padding:"17px"
+                                        padding: "17px"
                                     }}
                                 >
                                     <CardCvcElement options={elementStyle} />
