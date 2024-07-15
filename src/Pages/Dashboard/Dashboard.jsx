@@ -10,25 +10,53 @@ import CustomChart from "../../Components/CustomChart/CustomChart";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
+import { useDispatch } from "react-redux";
+import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Home = () => {
 
   const [username,setUsername] = useState()
   const [email,setEmail] = useState()
+  const [credits,setCredits] = useState(0)
+  const dispatch = useDispatch()
 
 
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
-  useEffect(()=>{
-    console.log(auth)
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        console.log(auth);
 
-    console.log(auth.email)
-    console.log(auth.username)
+        const response = await axiosInstance({
+          url: `${appUrl}/getuser`,
+          method: 'get',
+          params: { email: auth.email },
+        });
 
-    setUsername(auth.username)
-    setEmail(auth.email)
+        console.log('API Response:', response);
 
-  },[])
+        // Assuming response.data contains the user data you need
+        const userData = response.data.user;
+
+        setUsername(userData.userName);
+        setEmail(userData.email);
+        setCredits(userData.credits);
+
+        // Dispatch the action to update the Redux store
+        dispatch(handleAuth({credits:userData.credits}));
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    if (auth.email) {
+      fetchUser();
+    }
+  }, []);
 
   return (
     <Box sx={{
@@ -125,7 +153,7 @@ const Home = () => {
                   lineHeight: "65px",
                   color: "#190247"
                 }}>
-                  50
+                  {credits}
                 </Typography>
 
               </Box>

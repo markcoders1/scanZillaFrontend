@@ -36,8 +36,6 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const responseData = await signInWithGooglePopup();
-      console.log("ssa")
-      console.log("heheh", responseData)
       const data = {
         accessToken: responseData?.accessToken,
         refreshToken: responseData?.refreshToken,
@@ -109,7 +107,8 @@ const Login = () => {
         refreshToken: response?.refreshToken,
         authenticated: true,
         email: response?.email,
-        username: response?.username
+        username: response?.username,
+        credits:response?.credits
       };
       dispatch(handleAuth(responseData));
       dispatch(

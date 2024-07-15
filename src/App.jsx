@@ -79,8 +79,6 @@ function App() {
               <Route path="user-management" element={<Protected children={<UserManagement />} />} />
               <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
 
-
-
             </Route>
           </Routes>
         </Suspense>

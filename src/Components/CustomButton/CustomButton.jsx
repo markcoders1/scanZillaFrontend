@@ -17,6 +17,7 @@ const CustomButton = ({
     background="",
     hoverBg="",
     hovercolor="",
+    type,
     width
 
 
@@ -37,13 +38,15 @@ const CustomButton = ({
             background,
             ...buttonStyle,
             fontWeight,
+            type,
             width,
             '&:hover':{
                 background:hoverBg,
                 color:hovercolor
             }
+            
 
-        }}>{ButtonText}</Button>
+        }} type={`${type}`}>{ButtonText}</Button>
     )
 }
 
