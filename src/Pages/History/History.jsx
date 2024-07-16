@@ -1,29 +1,29 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import GiftCard from '../../Components/GiftCard/GiftCard';
 import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
-const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const History = () => {
-    const [snackAlertData, setSnackAlertData] = React.useState({
+    const [snackAlertData, setSnackAlertData] = useState({
         message: "",
         severity: "success",
         open: false,
-    })
-    const [loading, setLoading] = useState(false)
-    const [creditsHistory, setCreditsHistory] = useState([])
-    const [analyzeHistory, setAnalyzeHistory] = useState([])
+    });
+    const [loading, setLoading] = useState(false);
+    const [creditsHistory, setCreditsHistory] = useState([]);
+    const [analyzeHistory, setAnalyzeHistory] = useState([]);
 
-    const fetchCreditsHisotry = async () => {
+    const fetchCreditsHistory = async () => {
         setSnackAlertData({
             open: false,
             message: "",
             severity: "success",
-        })
+        });
         try {
-
             setLoading(true);
             const response = await axiosInstance({
                 url: appUrl + "/getpurchasehistory",
@@ -31,86 +31,70 @@ const History = () => {
             });
             setLoading(false);
             if (response) {
-                setCreditsHistory(response?.data?.payments)
+                setCreditsHistory(response?.data?.payments);
                 setSnackAlertData({
                     open: true,
                     message: response?.data?.message,
                     severity: "success",
-                })
+                });
                 if (response?.code > 200) {
                     setSnackAlertData({
                         open: true,
                         message: response?.message,
                         severity: "error",
-                    })
+                    });
                 }
             }
-
-
         } catch (error) {
             setLoading(false);
             setSnackAlertData({
                 open: true,
                 message: error.toString(),
                 severity: "error",
-            })
-
+            });
         }
+    };
 
-    }
-
-
-    const fetchAnalyzeHisotry = async () => {
+    const fetchAnalyzeHistory = async () => {
         setSnackAlertData({
             open: false,
             message: "",
             severity: "success",
-        })
+        });
         try {
-            console.log("hi")
-
-            // setLoading(true);
             const response = await axiosInstance({
                 url: appUrl + "/getuserhistory",
                 method: "get",
-
             });
-            console.log("response from history",response)
-            // setLoading(false);
             if (response) {
-                // setAnalyzeHistory()
+                setAnalyzeHistory(response.data.Histories);
                 setSnackAlertData({
                     open: true,
                     message: response?.data?.message,
                     severity: "success",
-                })
+                });
                 if (response?.code > 200) {
                     setSnackAlertData({
                         open: true,
                         message: response?.message,
                         severity: "error",
-                    })
+                    });
                 }
             }
-
-
         } catch (error) {
             setLoading(false);
             setSnackAlertData({
                 open: true,
                 message: error.toString(),
                 severity: "error",
-            })
-
+            });
         }
-
-    }
-
+    };
 
     useEffect(() => {
-        fetchCreditsHisotry()
-        fetchAnalyzeHisotry()
-    }, [])
+        fetchCreditsHistory();
+        fetchAnalyzeHistory();
+    }, []);
 
     return (
         <Box
@@ -124,7 +108,7 @@ const History = () => {
                 },
             }}
         >
-            
+
             <Box
                 sx={{
                     marginTop: "15px",
@@ -138,20 +122,19 @@ const History = () => {
                     overflow: "auto",
                     boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                     "&::-webkit-scrollbar": {
-                        width: "8px" // Adjust the width of the scrollbar here
+                        width: "8px"
                     },
                     "&::-webkit-scrollbar-track": {
                         background: "#DFDFDF",
                         borderRadius: "10px"
                     },
                     "&::-webkit-scrollbar-thumb": {
-                        background: "black", // Change this for different scrollbar thumb color
+                        background: "black",
                         borderRadius: "10px"
                     },
                     "&::-webkit-scrollbar-thumb:hover": {
-                        background: "#b30000" // Change this for scrollbar thumb color on hover
+                        background: "#b30000"
                     }
-
                 }}
             >
                 <Typography
@@ -164,10 +147,9 @@ const History = () => {
                     Analyze History
                 </Typography>
 
-                {Array.from({ length: 60 }).map((_, index) => (
-                    <GiftCard key={index} index={index} />
+                {loading? "loading...." :analyzeHistory.map((item, index) => (
+                    <GiftCard key={item._id} id={item._id} index={index} />
                 ))}
-
             </Box>
             <Box
                 sx={{
@@ -182,18 +164,18 @@ const History = () => {
                     overflow: "auto",
                     boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                     "&::-webkit-scrollbar": {
-                        width: "8px" // Adjust the width of the scrollbar here
+                        width: "8px"
                     },
                     "&::-webkit-scrollbar-track": {
                         background: "#DFDFDF",
                         borderRadius: "10px"
                     },
                     "&::-webkit-scrollbar-thumb": {
-                        background: "black", // Change this for different scrollbar thumb color
+                        background: "black",
                         borderRadius: "10px"
                     },
                     "&::-webkit-scrollbar-thumb:hover": {
-                        background: "#b30000" // Change this for scrollbar thumb color on hover
+                        background: "#b30000"
                     }
                 }}
             >
@@ -202,27 +184,19 @@ const History = () => {
                         fontSize: "27px",
                         fontWeight: "600",
                         color: "#333333",
-
                     }}
                 >
-
                     Credits History
                 </Typography>
-                {
-                    (loading && creditsHistory?.length < 1) ? "loading..." : creditsHistory.map((item, index) => (
-                        <CreditsHistory item={item} key={index} index={index} />
-                    ))
-                }
-
-
+                {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
+                    <CreditsHistory item={item} key={index} index={index} />
+                ))}
             </Box>
             <SnackAlert
                 message={snackAlertData.message}
                 severity={snackAlertData.severity}
                 open={snackAlertData.open}
                 handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
-
-
             />
         </Box>
     );

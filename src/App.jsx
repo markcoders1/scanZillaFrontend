@@ -27,6 +27,7 @@ import Credits from './Pages/Credits/Credits';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import Debit from "./Pages/Debit&CreditCard/Debit&CreditCard";
 import PaymentScreen from "./Pages/PaymentScreen/PaymentScreen";
+import Details from "./Pages/Details/Details";
 
 import ToolManagement from "./Pages/ToolMangement/ToolManagement";
 import UserManagement from "./Pages/UserManagement/UserManagement";
@@ -71,6 +72,7 @@ function App() {
 
 
               <Route path="history" element={<Protected children={<History />} />} />
+              <Route path="details/:id" element={<Protected children={<Details />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
               <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
               <Route path="payments" element={<Protected children={<PaymentScreen />} />} />

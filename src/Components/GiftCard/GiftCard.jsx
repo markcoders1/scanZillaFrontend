@@ -1,11 +1,13 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
-import { forwardRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const GiftCard = ({ index }) => {
+const GiftCard = ({ id, index }) => {
+    const navigate = useNavigate();
+
     const handleClick = () => {
-        alert(`GiftCard index: ${index}`);
+        navigate(`/details/${id}`);
     };
 
     return (
@@ -14,15 +16,15 @@ const GiftCard = ({ index }) => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: 'center',
-                gap:"50px"
+                gap: "50px"
             }}
         >
             <Typography
-            sx={{
-                fontWeight:"400",
-                fontSize:"20px",
-                color:"#A0A4A9",
-            }}
+                sx={{
+                    fontWeight: "400",
+                    fontSize: "20px",
+                    color: "#A0A4A9",
+                }}
             >
                 Gift Card Amazon
             </Typography>
