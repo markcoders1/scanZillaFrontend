@@ -64,7 +64,7 @@ const Details = () => {
   return (
     <Box
       sx={{
-        padding: '20px',
+        padding: '30px',
       }}
     >
      {id}
