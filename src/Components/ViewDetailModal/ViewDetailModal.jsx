@@ -5,6 +5,8 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Heading from '../Heading/Heading';
+import CustomButton from '../CustomButton/CustomButton';
 
 const style = {
     position: 'absolute',
@@ -20,6 +22,7 @@ const style = {
     outline: "none",
     borderRadius: "20px",
     p: 4,
+
 };
 
 export const ViewDetailModal = ({ open, handleClose, title, bullets, description }) => {
@@ -39,19 +42,76 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
         >
             <Fade in={open}>
                 <Box sx={style}>
-                    <Typography variant="h6" component="h2">
-                        {title}
-                    </Typography>
-                    <Typography sx={{ mt: 2 }}>
-                        {bullets && bullets.map((bullet, index) => (
-                            <li key={index}>{bullet}</li>
-                        ))}
-                    </Typography>
-                    <Typography sx={{ mt: 2 }}>
-                        {description}
-                    </Typography>
+                    <Box>
+                        <Heading Heading="Title" />
+
+                        <Typography sx={{
+                            fontSize: "17px",
+                            fontWeight: "500",
+                            color: "#A0A4A9"
+
+                        }}>
+                            {title}
+                        </Typography>
+                    </Box>
+
+                    <Box>
+                        <Typography>
+                            <Heading Heading="Bullets" />
+                        </Typography>
+                        <Typography sx={{
+                            fontSize: "17px",
+                            fontWeight: "500",
+                            color: "#A0A4A9"
+
+                        }}>
+                            {bullets && bullets.length >= 1 ? bullets.map((bullet, index) => (
+                                <li key={index}>{bullet}</li>
+                            )) : ""}
+                        </Typography>
+
+                    </Box>
+
+
+                    <Box>
+                        <Typography>
+                            <Heading Heading="Description" />
+                        </Typography>
+                        <Typography sx={{
+                            fontSize: "17px",
+                            fontWeight: "500",
+                            color: "#A0A4A9"
+
+                        }}>
+                            {description}
+                        </Typography>
+                    </Box>
                     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
-                        <Button variant="contained" onClick={handleClose}>Close</Button>
+                    <CustomButton
+                
+                border="2px solid #1A0049"
+                borderRadius="10px"
+                background="#1A0049"
+                hoverBg="white"
+                hovercolor="#1A0049"
+                buttonTextStyle={{}}
+                buttonStyle={{
+                  padding: {
+                    // lg: "12px 20px",
+                    xs:"20px 40px"
+
+                  },
+                }}
+                ButtonText="close"
+                fontSize
+                color={"white"}
+                fontWeight
+                fullWidth={false}
+                variant="contained"
+                padding
+                onClick={handleClose}
+              />
+                      
                     </Box>
                 </Box>
             </Fade>

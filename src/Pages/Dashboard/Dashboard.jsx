@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';
+import { ViewDetailModal } from "../../Components/ViewDetailModal/ViewDetailModal";
 import React from "react";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
@@ -33,6 +34,9 @@ const Home = () => {
     severity: "success",
     open: false,
   });
+
+  const [open, setOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -138,6 +142,16 @@ const Home = () => {
     fetchAnalysed();
     fetchAnalyzeHistory();
   }, []);
+
+  const openModal = (data) => {
+    setModalData(data);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setModalData({});
+  };
 
   return (
     <Box sx={{
@@ -300,8 +314,17 @@ const Home = () => {
             borderRadius: "10px",
             paddingRight: "10px"
           }}>
+
             {analyzeHistory.map((item, index) => (
-              <GiftCard key={item._id} id={item._id} index={index} />
+              <GiftCard 
+                key={item._id} 
+                id={item._id} 
+                title={item.title} 
+                description={item.description} 
+                bullets={item.bullets} 
+                index={index} 
+                openModal={openModal} 
+              />
             ))}
           </Box>
           <Box>
@@ -380,6 +403,21 @@ const Home = () => {
 
         </Box>
       </Box>
+
+      <ViewDetailModal
+        open={open}
+        handleClose={handleClose}
+        title={modalData.title}
+        bullets={modalData.bullets}
+        description={modalData.description}
+      />
+
+      <SnackAlert
+        message={snackAlertData.message}
+        severity={snackAlertData.severity}
+        open={snackAlertData.open}
+        handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+      />
     </Box>
   );
 };
