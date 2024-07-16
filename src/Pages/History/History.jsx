@@ -158,9 +158,11 @@ useEffect(()=>{
                     
                     Credits History
                 </Typography>
-                {creditsHistory.map((item, index) => (
-                    <CreditsHistory item={item} key={index} index={index} />
-                ))}
+                {
+                                (loading &&creditsHistory?.length<1)? "loading...":   creditsHistory.map((item, index) => (
+                                    <CreditsHistory item={item} key={index} index={index} />
+                                ))
+                            }
               
 
             </Box>

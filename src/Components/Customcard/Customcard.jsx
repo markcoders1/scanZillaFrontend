@@ -3,10 +3,10 @@ import bg from "./../../assets/images/bg.png";
 import visa from "./../../assets/images/visa circles.png";
 import { Box, Typography } from '@mui/material';
 
-const CustomCard = forwardRef(({ name }, ref) => {
+const CustomCard = ({ name ,cardStyle, cb}) => {
     return (
         <Box
-            ref={ref}
+        onClick={cb}
             sx={{
                 background: `linear-gradient(rgba(27, 2, 75, .7), rgba(27, 2, 75, .8)), url(${bg})`,
                 backgroundSize: "cover",
@@ -18,15 +18,16 @@ const CustomCard = forwardRef(({ name }, ref) => {
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
-                height: "100%",
+                flexGrow:1,
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                ...cardStyle
             }}
         >
             <Typography
                 sx={{
                     fontWeight: "600",
                     fontSize: "16px",
-                    lineHeight: "24px"
+                    lineHeight: "24px",
                 }}
             >
                 Debit Card
@@ -71,6 +72,6 @@ const CustomCard = forwardRef(({ name }, ref) => {
             </Box>
         </Box>
     );
-});
+};
 
 export default CustomCard;

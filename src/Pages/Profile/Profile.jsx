@@ -7,16 +7,20 @@ import Customcard from '../../Components/Customcard/Customcard'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ChangePasswordModal from '../../Components/ChangePasswordModal/ChangePasswordModal'
+import SnackAlert from '../../Components/SnackAlert/SnackAlert'
+import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook'
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Profile = () => {
 
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
   const [open,setOpen] = useState(false)
-
+  const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null)
 
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
 
   useEffect(() => {
     console.log(auth)
@@ -32,6 +36,68 @@ const Profile = () => {
   const handleNavigate = () => {
     navigate("/card-details")
   }
+
+
+
+
+
+
+  const [snackAlertData, setSnackAlertData]= React.useState({
+    message:"",
+    severity:"success",
+    open:false,
+})
+const [loading, setLoading] = useState(false)
+
+const fetchCreditsHisotry = async()=>{
+    setSnackAlertData({
+        open:false,
+        message:"",
+        severity:"success",
+    })
+        try{
+
+            setLoading(true);
+            const response = await axiosInstance({
+              url: appUrl + "/getAnalysedNum",
+              method: "get",
+            });
+            setLoading(false);
+            if(response){
+              setNumberOfAnalyzed(response?.data?.count)
+                setSnackAlertData({
+                    open:true,
+                    message:response?.data?.message,
+                    severity:"success",
+                })
+                if (response?.code>200){
+                    setSnackAlertData({
+                        open:true,
+                        message:response?.message,
+                        severity:"error",
+                    })
+                }
+            }
+           
+
+        }catch(error){
+            console.log(error)
+            setLoading(false);
+            setSnackAlertData({
+                open:true,
+                message:error.toString(),
+                severity:"error",
+            })
+
+        }
+
+}
+
+
+useEffect(()=>{
+fetchCreditsHisotry()
+},[])
+
 
   return (
     <Box sx={{
@@ -178,7 +244,7 @@ const Profile = () => {
             }}
 
             >
-              <DetailedCard title='Total Analyze' name="50" action="View Detail" />
+              <DetailedCard title='Total Analyze' detailedCardStyles={{justifyContent:"center"}} name={numberOfAnalyzed} action="" />
             </Box>
 
           </Box>
@@ -207,6 +273,14 @@ const Profile = () => {
       handleClose={()=>{setOpen(false)}}
       
       />
+        <SnackAlert
+                message={snackAlertData.message}
+                severity={snackAlertData.severity}
+                open={snackAlertData.open}
+                handleClose={()=>{setSnackAlertData(prev=>({...prev, open:false}))}}
+
+            
+            />
     </Box>
   )
 }

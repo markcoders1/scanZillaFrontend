@@ -5,6 +5,7 @@ const DetailedCard = ({
     name="",
     title="",
     action="",
+    detailedCardStyles={},
     cb=()=>{}
 }) => {
     return (
@@ -15,7 +16,8 @@ const DetailedCard = ({
             display:"flex",
             flexDirection:"column",
             alignItems:"center",
-            height:"100%"
+            height:"100%",
+          ...detailedCardStyles
          }}>
     
            <Typography sx={{

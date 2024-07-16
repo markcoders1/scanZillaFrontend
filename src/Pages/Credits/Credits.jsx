@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import dashboardImg1 from "../../assets/images/dashboard.png";
 import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
@@ -10,6 +10,8 @@ import SwitchCheckBox from "../../Components/SwitchCheckBox/SwitchCheckBox";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 // import SwitchCheckBox from '../components/SwitchCheckBox';
 import { useSelector } from "react-redux";
+import DetailedCard from "../../Components/DetailedCard/DetailedCard";
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -45,6 +47,69 @@ const Credits = () => {
         console.log(response.data.clientSecret);
         localStorage.setItem("clientSecret", response.data.clientSecret);
     };
+
+
+
+
+
+
+    const [snackAlertData, setSnackAlertData]= React.useState({
+        message:"",
+        severity:"success",
+        open:false,
+    })
+    const [loading, setLoading] = useState(false)
+    const [creditsHistory, setCreditsHistory] = useState([])
+
+    const fetchCreditsHisotry = async()=>{
+        setSnackAlertData({
+            open:false,
+            message:"",
+            severity:"success",
+        })
+            try{
+    
+                setLoading(true);
+                const response = await axiosInstance({
+                  url: appUrl + "/getpurchasehistory",
+                  method: "get",
+                });
+                setLoading(false);
+                if(response){
+                    setCreditsHistory(response?.data?.payments)
+                    setSnackAlertData({
+                        open:true,
+                        message:response?.data?.message,
+                        severity:"success",
+                    })
+                    if (response?.code>200){
+                        setSnackAlertData({
+                            open:true,
+                            message:response?.message,
+                            severity:"error",
+                        })
+                    }
+                }
+               
+    
+            }catch(error){
+                console.log(error)
+                setLoading(false);
+                setSnackAlertData({
+                    open:true,
+                    message:error.toString(),
+                    severity:"error",
+                })
+    
+            }
+    
+    }
+
+
+useEffect(()=>{
+    fetchCreditsHisotry()
+},[])
+
 
     return (
         <Box
@@ -487,32 +552,8 @@ const Credits = () => {
                                     flexDirection: "column",
                                     gap: "1rem",
                                 }}>
-                                <Box
-                                    sx={{
-                                        height: "50%",
-                                        flexBasis: "218px",
-                                        borderRadius: "10px",
-                                        flexGrow: "1",
-                                        boxShadow: "4px 5px 15px 0px #C8C8C8",
-                                        padding: "24px 23px",
-                                    }}>
-                                    <Typography
-                                        sx={{
-                                            fontWeight: "500",
-                                            fontSize: "20px",
-                                            color: "#A0A4A9",
-                                        }}>
-                                        Total Credits
-                                    </Typography>
-                                    <Typography
-                                        sx={{
-                                            fontWeight: "600",
-                                            fontSize: "56px",
-                                            color: "#190247",
-                                        }}>
-                                        50
-                                    </Typography>
-                                </Box>
+                                            <DetailedCard title='Total Analyze' detailedCardStyles={{justifyContent:"center"}} name="50" action="" />
+
                                 <Box
                                     sx={{
                                         height: "50%",
@@ -609,9 +650,15 @@ const Credits = () => {
                                 background: "#b30000", // Change this for scrollbar thumb color on hover
                             },
                         }}>
-                        {Array.from({ length: 9 }).map((_, index) => (
-                            <CreditsHistory key={index} index={index} />
-                        ))}
+
+                            {
+                                (loading &&creditsHistory?.length<1)? "loading...":   creditsHistory.map((item, index) => (
+                                    <CreditsHistory item={item} key={index} index={index} />
+                                ))
+                            }
+
+
+                   
                     </Box>
                     <Box>
                         <Typography>
@@ -646,12 +693,16 @@ const Credits = () => {
                         </Typography>
                     </Box>
                 </Box>
-                <Typography>
-                    <NavLink to="/card-details">
-                        <Customcard />
-                    </NavLink>
-                </Typography>
+                        <Customcard cardStyle={{cursor:"pointer"}} cb={()=>{navigate("/card-details")}} />
             </Box>
+            <SnackAlert
+                message={snackAlertData.message}
+                severity={snackAlertData.severity}
+                open={snackAlertData.open}
+                handleClose={()=>{setSnackAlertData(prev=>({...prev, open:false}))}}
+
+            
+            />
         </Box>
     );
 };
