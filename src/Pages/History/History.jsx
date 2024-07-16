@@ -75,7 +75,7 @@ const History = () => {
                 method: "get",
 
             });
-            console.log(response)
+            console.log("response from history",response)
             // setLoading(false);
             if (response) {
                 // setAnalyzeHistory()

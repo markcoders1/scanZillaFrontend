@@ -13,19 +13,31 @@ import { useSelector } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { useDispatch } from "react-redux";
 import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
+import SnackAlert from '../../Components/SnackAlert/SnackAlert'
+import React from "react";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Home = () => {
 
-  const [username,setUsername] = useState()
-  const [email,setEmail] = useState()
-  const [credits,setCredits] = useState(0)
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+  const [credits, setCredits] = useState(0)
+  const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null)
   const dispatch = useDispatch()
+  const [loading,setLoading]=useState();
 
 
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
+
+  const [snackAlertData, setSnackAlertData] = React.useState({
+    message: "",
+    severity: "success",
+    open: false,
+  })
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -37,7 +49,7 @@ const Home = () => {
           params: { email: auth.email },
         });
 
-        console.log('API Response:', response);
+        // console.log('API Response:', response);
 
         // Assuming response.data contains the user data you need
         const userData = response.data.user;
@@ -47,7 +59,7 @@ const Home = () => {
         setCredits(userData.credits);
 
         // Dispatch the action to update the Redux store
-        dispatch(handleAuth({credits:userData.credits}));
+        dispatch(handleAuth({ credits: userData.credits }));
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -57,6 +69,56 @@ const Home = () => {
       fetchUser();
     }
   }, []);
+
+  const fetchAnalysed = async () => {
+    setSnackAlertData({
+      open: false,
+      message: "",
+      severity: "success",
+    })
+    try {
+
+      setLoading(true);
+      const response = await axiosInstance({
+        url: appUrl + "/getAnalysedNum",
+        method: "get",
+      });
+      setLoading(false);
+      if (response) {
+        console.log(response)
+        setNumberOfAnalyzed(response?.data?.count)
+        setSnackAlertData({
+          open: true,
+          message: response?.data?.message,
+          severity: "success",
+        })
+        if (response?.code > 200) {
+          setSnackAlertData({
+            open: true,
+            message: response?.message,
+            severity: "error",
+          })
+        }
+      }
+
+
+    } catch (error) {
+      console.log(error)
+      setLoading(false);
+      setSnackAlertData({
+        open: true,
+        message: error.toString(),
+        severity: "error",
+      })
+
+    }
+
+  }
+
+
+  useEffect(() => {
+    fetchAnalysed()
+  }, [])
 
   return (
     <Box sx={{
@@ -80,13 +142,13 @@ const Home = () => {
           display: "flex",
           flexDirection: "column",
           gap: {
-            md:"40px",
-            xs:"40px"
+            md: "40px",
+            xs: "40px"
           },
           flexGrow: 1,
           flexBasis: {
             md: "45%",
-            xs:"100%"
+            xs: "100%"
           },
           flexShrink: 0,
         }}>
@@ -94,8 +156,8 @@ const Home = () => {
             sx={{
               display: "flex",
               gap: {
-                sm:"40px",
-                xs:"10px"
+                sm: "40px",
+                xs: "10px"
               },
               flexBasis: {
                 xl: "45%"
@@ -108,7 +170,7 @@ const Home = () => {
                 xl: "243px"
               },
               flexGrow: 3,
-              flexShrink:"1"
+              flexShrink: "1"
             }}>
               <CardIWithImageBackground
                 text={username}
@@ -120,14 +182,14 @@ const Home = () => {
                 xl: "154px"
               },
               flexGrow: 1,
-              flexShrink:"1"
+              flexShrink: "1"
             }}>
 
               <Box sx={{
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 padding: {
-                  sm:"22px 26px",
-                  xs:"20px 10px"
+                  sm: "22px 26px",
+                  xs: "20px 10px"
                 },
                 borderRadius: "10px",
                 display: "flex",
@@ -167,7 +229,7 @@ const Home = () => {
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
             padding: "20px", borderRadius: "10px"
           }}>
-            <CustomChart  />
+            <CustomChart />
           </Box>
 
         </Box>
@@ -286,7 +348,7 @@ const Home = () => {
             lineHeight: "50px",
             fontWeight: "600"
           }}>
-            50 Analyzed
+            {numberOfAnalyzed} Analyzed
           </Typography>
 
         </Box>

@@ -49,7 +49,7 @@ const Profile = () => {
 })
 const [loading, setLoading] = useState(false)
 
-const fetchCredits = async()=>{
+const fetchAnalysed = async()=>{
     setSnackAlertData({
         open:false,
         message:"",
@@ -96,7 +96,7 @@ const fetchCredits = async()=>{
 
 
 useEffect(()=>{
-fetchCredits()
+  fetchAnalysed()
 },[])
 
 
