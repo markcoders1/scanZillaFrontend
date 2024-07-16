@@ -1,13 +1,10 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
-import { useNavigate } from 'react-router-dom';
 
-const GiftCard = ({ id, index }) => {
-    const navigate = useNavigate();
-
+const GiftCard = ({ id, title, description, bullets, openModal }) => {
     const handleClick = () => {
-        navigate(`/details/${id}`);
+        openModal({ id, title, description, bullets });
     };
 
     return (

@@ -4,6 +4,7 @@ import GiftCard from '../../Components/GiftCard/GiftCard';
 import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+import { ViewDetailModal } from '../../Components/ViewDetailModal/ViewDetailModal';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -16,8 +17,10 @@ const History = () => {
     const [loading, setLoading] = useState(false);
     const [creditsHistory, setCreditsHistory] = useState([]);
     const [analyzeHistory, setAnalyzeHistory] = useState([]);
+    const [open, setOpen] = useState(false);
+    const [modalData, setModalData] = useState({});
 
-    const fetchCreditsHistory = async () => {
+    const fetchCreditsHistory = async () => {   
         setSnackAlertData({
             open: false,
             message: "",
@@ -96,6 +99,16 @@ const History = () => {
         fetchAnalyzeHistory();
     }, []);
 
+    const openModal = (data) => {
+        setModalData(data);
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        setModalData({});
+    };
+
     return (
         <Box
             sx={{
@@ -147,8 +160,16 @@ const History = () => {
                     Analyze History
                 </Typography>
 
-                {loading? "loading...." :analyzeHistory.map((item, index) => (
-                    <GiftCard key={item._id} id={item._id} index={index} />
+                {loading ? "loading...." : analyzeHistory.map((item, index) => (
+                    <GiftCard 
+                        key={item._id} 
+                        id={item._id} 
+                        title={item.title} 
+                        description={item.description} 
+                        bullets={item.bullets} 
+                        index={index} 
+                        openModal={openModal} 
+                    />
                 ))}
             </Box>
             <Box
@@ -192,6 +213,15 @@ const History = () => {
                     <CreditsHistory item={item} key={index} index={index} />
                 ))}
             </Box>
+
+            <ViewDetailModal
+                open={open}
+                handleClose={handleClose}
+                title={modalData.title}
+                bullets={modalData.bullets}
+                description={modalData.description}
+            />
+
             <SnackAlert
                 message={snackAlertData.message}
                 severity={snackAlertData.severity}
