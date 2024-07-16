@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
+import { forwardRef } from 'react';
 
 const GiftCard = ({ index }) => {
     const handleClick = () => {
