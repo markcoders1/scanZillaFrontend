@@ -1,9 +1,23 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState } from 'react';
 import bg from "./../../assets/images/bg.png";
 import visa from "./../../assets/images/visa circles.png";
 import { Box, Typography } from '@mui/material';
+import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const CustomCard = ({ name ,cardStyle, cb}) => {
+    const [num,setNum] = useState('')
+
+    useEffect(()=>{
+        const fetchCard =async ()=>{
+            const response=await axiosInstance({method:'get',url:`${appUrl}/getcardinfo`})
+            setNum(response.data.cards[0].last4)
+        }
+        fetchCard()
+    },[])
+
+
     return (
         <Box
         onClick={cb}
@@ -47,7 +61,7 @@ const CustomCard = ({ name ,cardStyle, cb}) => {
                         fontWeight: "400"
                     }}
                 >
-                    **** **** **** 9369
+                    {num?`**** **** **** ${num}`:'no card found'}
                 </Typography>
 
                 <Typography

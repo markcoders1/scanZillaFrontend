@@ -64,6 +64,7 @@ const fetchCredits = async()=>{
             });
             setLoading(false);
             if(response){
+              console.log(response)
               setNumberOfAnalyzed(response?.data?.count)
                 setSnackAlertData({
                     open:true,
@@ -223,20 +224,6 @@ fetchCredits()
               onClick={handleNavigate}
             >
               <Customcard name={username} />
-              <Typography
-                sx={{
-                  color: "#333333",
-                  fontWeight: "500",
-                  fontSize: "15px",
-                  letterSpacing: "0.34px",
-                  marginTop: "11px",
-                  // border:"2px solid blue",
-                  textAlign: "end",
-                  cursor: "pointer"
-                }}
-              >
-                Add new Card+
-              </Typography>
             </Box>
             <Box sx={{
               flexGrow: 1,
