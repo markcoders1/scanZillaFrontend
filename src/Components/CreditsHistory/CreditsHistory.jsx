@@ -2,8 +2,19 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
 
-const CreditsHistory = ({ index }) => {
+const CreditsHistory = ({ index, item }) => {
+    function getCurrencySymbol(currencyCode) {
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: currencyCode,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        });
     
+        // This uses a hacky way to extract the currency symbol
+        // We format a zero value and remove all digits and minus sign to leave only the currency symbol
+        return formatter.format(0).replace(/\d/g, '').replace(/\u2212/g, '').trim();
+    }
     return (
         <Box
             sx={{
@@ -19,7 +30,7 @@ const CreditsHistory = ({ index }) => {
                 color:"#A0A4A9",
             }}
             >
-                90 Credits 
+                {item.credits} Credits 
             </Typography>
             <Typography
              sx={{
@@ -28,7 +39,7 @@ const CreditsHistory = ({ index }) => {
                 color: "#333333",
             }}
             >
-                Price: 180$
+                Price:{item.val/100}{getCurrencySymbol(item.currency)}
             </Typography>
         </Box>
     );

@@ -1,9 +1,68 @@
 import { Box, Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import GiftCard from '../../Components/GiftCard/GiftCard';
 import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
+import SnackAlert from '../../Components/SnackAlert/SnackAlert';
+import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const History = () => {
+    const [snackAlertData, setSnackAlertData]= React.useState({
+        message:"",
+        severity:"success",
+        open:false,
+    })
+    const [loading, setLoading] = useState(false)
+    const [creditsHistory, setCreditsHistory] = useState([])
+
+    const fetchCreditsHisotry = async()=>{
+        setSnackAlertData({
+            open:false,
+            message:"",
+            severity:"success",
+        })
+            try{
+    
+                setLoading(true);
+                const response = await axiosInstance({
+                  url: appUrl + "/getpurchasehistory",
+                  method: "get",
+                });
+                setLoading(false);
+                if(response){
+                    setCreditsHistory(response?.data?.payments)
+                    setSnackAlertData({
+                        open:true,
+                        message:response?.data?.message,
+                        severity:"success",
+                    })
+                    if (response?.code>200){
+                        setSnackAlertData({
+                            open:true,
+                            message:response?.message,
+                            severity:"error",
+                        })
+                    }
+                }
+               
+    
+            }catch(error){
+                setLoading(false);
+                setSnackAlertData({
+                    open:true,
+                    message:error.toString(),
+                    severity:"error",
+                })
+    
+            }
+    
+    }
+
+
+useEffect(()=>{
+    fetchCreditsHisotry()
+},[])
+
     return (
         <Box
             sx={{
@@ -99,12 +158,20 @@ const History = () => {
                     
                     Credits History
                 </Typography>
-                {Array.from({ length: 60 }).map((_, index) => (
-                    <CreditsHistory key={index} index={index} />
+                {creditsHistory.map((item, index) => (
+                    <CreditsHistory item={item} key={index} index={index} />
                 ))}
               
 
             </Box>
+            <SnackAlert
+                message={snackAlertData.message}
+                severity={snackAlertData.severity}
+                open={snackAlertData.open}
+                handleClose={()=>{setSnackAlertData(prev=>({...prev, open:false}))}}
+
+            
+            />
         </Box>
     );
 };

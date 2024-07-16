@@ -18,7 +18,8 @@ const CustomButton = ({
     hoverBg="",
     hovercolor="",
     type,
-    width
+    width,
+    loading=false
 
 
 
@@ -36,17 +37,18 @@ const CustomButton = ({
             color,
             ButtonText,
             background,
-            ...buttonStyle,
             fontWeight,
             type,
             width,
+            ...buttonStyle,
+
             '&:hover':{
                 background:hoverBg,
                 color:hovercolor
             }
             
 
-        }} type={`${type}`}>{ButtonText}</Button>
+        }} type={`${type}`}>{loading?"Loading...":ButtonText}</Button>
     )
 }
 

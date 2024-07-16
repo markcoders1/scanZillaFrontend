@@ -6,11 +6,13 @@ import DetailedCard from '../../Components/DetailedCard/DetailedCard'
 import Customcard from '../../Components/Customcard/Customcard'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import ChangePasswordModal from '../../Components/ChangePasswordModal/ChangePasswordModal'
 
 const Profile = () => {
 
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
+  const [open,setOpen] = useState(false)
 
 
   const auth = useSelector((state) => state.auth);
@@ -112,7 +114,7 @@ const Profile = () => {
               ))}
             </Box>
             <Box><Typography
-              onClick={() => alert("change password")}
+              onClick={() =>setOpen(true)}
               sx={{
                 color: "#190247",
                 cursor: "pointer",
@@ -199,6 +201,12 @@ const Profile = () => {
       }}>
 
       </Box>
+      <ChangePasswordModal 
+      
+      open={open}
+      handleClose={()=>{setOpen(false)}}
+      
+      />
     </Box>
   )
 }
