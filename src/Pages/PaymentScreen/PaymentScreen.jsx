@@ -8,16 +8,19 @@ import { loadStripe } from '@stripe/stripe-js';
 
 const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
 
+import { useLocation } from 'react-router-dom';
+
 const StripeCardForm = () => {
     const [clientSecret, setClientSecret] = useState('');
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const price = queryParams.get('price');
+    const plan = queryParams.get('plan');
 
     useEffect(() => {
-        // Simulate fetching clientSecret from localStorage or an API
         const clientSecret = localStorage.getItem("clientSecret");
         setClientSecret(clientSecret);
     }, []);
-
-    
 
     return (
         <Box
@@ -62,7 +65,7 @@ const StripeCardForm = () => {
                         <CustomInputShadow
                             placeholder="Enter Name"
                             name="name"
-                            value={"Pro"}
+                            value={plan}
                         />
                     </Box>
                 </Box>
@@ -87,9 +90,10 @@ const StripeCardForm = () => {
                     </Typography>
                     <Box>
                         <CustomInputShadow
-                            placeholder="Enter Name"
-                            name="name"
-                            value={"30$"}
+                            placeholder="Enter Amount"
+                            name="amount"
+                            value={`${price}$`}
+                            
                         />
                     </Box>
                 </Box>

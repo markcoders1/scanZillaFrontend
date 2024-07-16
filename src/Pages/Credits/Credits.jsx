@@ -31,7 +31,7 @@ const Credits = () => {
         setEmail(auth.email);
     }, []);
 
-    const handleNavigate = async (variant) => {
+    const handleNavigate = async (variant, price, planName) => {
         console.log("hello", variant);
         const response = await axiosInstance({
             url: appUrl + "/buycredits",
@@ -42,11 +42,12 @@ const Credits = () => {
             },
         });
         console.log("hello", variant);
-        navigate("/payments");
+        navigate(`/payments?price=${price}&plan=${planName}`);
 
         console.log(response.data.clientSecret);
         localStorage.setItem("clientSecret", response.data.clientSecret);
     };
+
 
 
 
@@ -332,7 +333,7 @@ const Credits = () => {
                                         color={"#333333"}
                                         margin={"auto"}
                                         onClick={() => {
-                                            handleNavigate(1);
+                                            handleNavigate(1, 10, 'Basic');
                                         }}
                                     />
                                 </Box>
@@ -461,7 +462,7 @@ const Credits = () => {
                                         color={"#333333"}
                                         margin={"auto"}
                                         onClick={() => {
-                                            handleNavigate(2);
+                                            handleNavigate(2, 30, 'Pro');
                                         }}
                                     />
                                 </Box>
@@ -593,7 +594,7 @@ const Credits = () => {
                                         color={"#333333"}
                                         margin={"auto"}
                                         onClick={() => {
-                                            handleNavigate(3);
+                                            handleNavigate(3, 60, 'Enterprise');
                                         }}
                                     />
                                 </Box>
