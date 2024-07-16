@@ -219,6 +219,7 @@ useEffect(()=>{
             }}>
             <Box sx={{
               flexGrow: 3,
+              cursor:"pointer"
               // border: "2px solid red"
             }}
               onClick={handleNavigate}
