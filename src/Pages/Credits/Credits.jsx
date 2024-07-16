@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import dashboardImg1 from "../../assets/images/dashboard.png";
 import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
@@ -53,115 +53,122 @@ const Credits = () => {
 
 
 
-    const [snackAlertData, setSnackAlertData]= React.useState({
-        message:"",
-        severity:"success",
-        open:false,
+    const [snackAlertData, setSnackAlertData] = React.useState({
+        message: "",
+        severity: "success",
+        open: false,
     })
     const [loading, setLoading] = useState(false)
     const [creditsHistory, setCreditsHistory] = useState([])
-    const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null)
+    const [credits, setCredits] = useState(null)
 
-    const fetchCreditsHisotry = async()=>{
+    const fetchCreditsHisotry = async () => {
         setSnackAlertData({
-            open:false,
-            message:"",
-            severity:"success",
+            open: false,
+            message: "",
+            severity: "success",
         })
-            try{
-    
-                setLoading(true);
-                const response = await axiosInstance({
-                  url: appUrl + "/getpurchasehistory",
-                  method: "get",
-                });
-                setLoading(false);
-                if(response){
-                    setCreditsHistory(response?.data?.payments)
-                    setSnackAlertData({
-                        open:true,
-                        message:response?.data?.message,
-                        severity:"success",
-                    })
-                    if (response?.code>200){
-                        setSnackAlertData({
-                            open:true,
-                            message:response?.message,
-                            severity:"error",
-                        })
-                    }
-                }
-               
-    
-            }catch(error){
-                console.log(error)
-                setLoading(false);
-                setSnackAlertData({
-                    open:true,
-                    message:error.toString(),
-                    severity:"error",
-                })
-    
-            }
-    
-    }
-
-
-useEffect(()=>{
-    fetchCreditsHisotry()
-},[])
-
-
-
-
-const fetchCredits = async()=>{
-    setSnackAlertData({
-        open:false,
-        message:"",
-        severity:"success",
-    })
-        try{
+        try {
 
             setLoading(true);
             const response = await axiosInstance({
-              url: appUrl + "/getAnalysedNum",
-              method: "get",
+                url: appUrl + "/getpurchasehistory",
+                method: "get",
             });
             setLoading(false);
-            if(response){
-              setNumberOfAnalyzed(response?.data?.count)
+            if (response) {
+                setCreditsHistory(response?.data?.payments)
                 setSnackAlertData({
-                    open:true,
-                    message:response?.data?.message,
-                    severity:"success",
+                    open: true,
+                    message: response?.data?.message,
+                    severity: "success",
                 })
-                if (response?.code>200){
+                if (response?.code > 200) {
                     setSnackAlertData({
-                        open:true,
-                        message:response?.message,
-                        severity:"error",
+                        open: true,
+                        message: response?.message,
+                        severity: "error",
                     })
                 }
             }
-           
 
-        }catch(error){
+
+        } catch (error) {
             console.log(error)
             setLoading(false);
             setSnackAlertData({
-                open:true,
-                message:error.toString(),
-                severity:"error",
+                open: true,
+                message: error.toString(),
+                severity: "error",
             })
 
         }
 
-}
+    }
 
 
-useEffect(()=>{
-fetchCredits()
-},[])
+    useEffect(() => {
+        fetchCreditsHisotry()
+    }, [])
+
+
+
+
+    const fetchCredits = async () => {
+        setSnackAlertData({
+            open: false,
+            message: "",
+            severity: "success",
+        })
+        try {
+
+            setLoading(true);
+            const response = await axiosInstance({
+                url: appUrl + "/getuser",
+                method: "get",
+                params: { email: auth.email },
+            });
+            setLoading(false);
+            if (response) {
+                // Assuming response.data contains the user data you need
+                const userData = response.data.user;
+
+                setCredits(userData.credits);
+
+
+
+                setSnackAlertData({
+                    open: true,
+                    message: response?.data?.message,
+                    severity: "success",
+                })
+                if (response?.code > 200) {
+                    setSnackAlertData({
+                        open: true,
+                        message: response?.message,
+                        severity: "error",
+                    })
+                }
+            }
+
+
+        } catch (error) {
+            console.log(error)
+            setLoading(false);
+            setSnackAlertData({
+                open: true,
+                message: error.toString(),
+                severity: "error",
+            })
+
+        }
+
+    }
+
+
+    useEffect(() => {
+        fetchCredits()
+    }, [])
 
 
     return (
@@ -605,7 +612,7 @@ fetchCredits()
                                     flexDirection: "column",
                                     gap: "1rem",
                                 }}>
-                                            <DetailedCard title='Total Analyze' detailedCardStyles={{justifyContent:"center"}} name={numberOfAnalyzed} action="" />
+                                <DetailedCard title='Total Credits' detailedCardStyles={{ justifyContent: "center" }} name={credits} action="" />
 
                                 <Box
                                     sx={{
@@ -704,14 +711,14 @@ fetchCredits()
                             },
                         }}>
 
-                            {
-                                (loading &&creditsHistory?.length<1)? "loading...":   creditsHistory.map((item, index) => (
-                                    <CreditsHistory item={item} key={index} index={index} />
-                                ))
-                            }
+                        {
+                            (loading && creditsHistory?.length < 1) ? "loading..." : creditsHistory.map((item, index) => (
+                                <CreditsHistory item={item} key={index} index={index} />
+                            ))
+                        }
 
 
-                   
+
                     </Box>
                     <Box>
                         <Typography>
@@ -746,15 +753,15 @@ fetchCredits()
                         </Typography>
                     </Box>
                 </Box>
-                        <Customcard cardStyle={{cursor:"pointer"}} cb={()=>{navigate("/card-details")}} />
+                <Customcard cardStyle={{ cursor: "pointer" }} cb={() => { navigate("/card-details") }} />
             </Box>
             <SnackAlert
                 message={snackAlertData.message}
                 severity={snackAlertData.severity}
                 open={snackAlertData.open}
-                handleClose={()=>{setSnackAlertData(prev=>({...prev, open:false}))}}
+                handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
 
-            
+
             />
         </Box>
     );
