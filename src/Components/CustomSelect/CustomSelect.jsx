@@ -1,7 +1,7 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
-const CustomSelect = ({ data = [], handleChange }) => {
+const CustomSelect = ({ data = [], handleChange, categoryError="" }) => {
   const [selectedCategory, setSelectedCategory] = useState("")
 
   const handleSelectionChange = (e) => {
@@ -10,6 +10,10 @@ const CustomSelect = ({ data = [], handleChange }) => {
   }
 
   return (
+    <Box sx={{
+      mb: 2,
+
+    }}>
     <FormControl
       sx={{
         display: "flex",
@@ -19,7 +23,6 @@ const CustomSelect = ({ data = [], handleChange }) => {
         justifyContent: "space-between",
         borderRadius: "10px",
         boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-        mb: 2,
         width: '100%',
         "& fieldset": { border: 'none' },
         '& .MuiInputLabel-outlined.Mui-focused': {
@@ -84,6 +87,17 @@ const CustomSelect = ({ data = [], handleChange }) => {
         {data?.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)}
       </Select>
     </FormControl>
+    {
+      categoryError&& <Typography  sx={{
+        background: "whitesmoke",
+        p: "10px",
+        color: "red",
+        mt: "8px",
+        wordBreak: "break-word"
+      }}>{categoryError}</Typography>
+    }
+    </Box>
+    
   )
 }
 

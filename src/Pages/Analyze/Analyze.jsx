@@ -34,7 +34,17 @@ const Analyze = () => {
   const dispatch = useDispatch();
 
   const handleData = (errorsData) => {
-    const errors = errorsData.message.map(error => (setErrors(prev => ({ ...prev, [error.path[0]]: error.message }))));
+    // const errors = errorsData.message.map(error => (setErrors(prev => ({ ...prev, [error.path[0]]: error.message }))));]
+    const generatedErrors = errorsData?.error
+    // console.log(generatedErrors)
+    // console.log(errorsData)
+    setErrors(prev=>({...prev,
+      title: generatedErrors.TE,
+      bulletpoints:generatedErrors.BE ,
+      description: generatedErrors.DE,
+      keywords: generatedErrors.KE,
+      category: generatedErrors.CE
+    }))
   };
 
   const hanldeInput = (e) => {
@@ -444,7 +454,7 @@ const Analyze = () => {
           gap:".7rem"
         }}
       >
-        <CustomSelect data={category} handleChange={handleCategoryChange} />
+        <CustomSelect categoryError={errors?.category} data={category} handleChange={handleCategoryChange} />
         <Box sx={{
           display: "flex",
           flexDirection: "column",
@@ -576,6 +586,16 @@ const Analyze = () => {
               setData(prev => ({ ...prev, description: plainText }));
             }}
           />
+
+{
+      errors.description&& <Typography  sx={{
+        background: "whitesmoke",
+        p: "10px",
+        color: "red",
+        mt: "8px",
+        wordBreak: "break-word"
+      }}>{ errors.description}</Typography>
+    }
         </Box>
         <Box
           sx={{
