@@ -60,6 +60,7 @@ const Credits = () => {
     })
     const [loading, setLoading] = useState(false)
     const [creditsHistory, setCreditsHistory] = useState([])
+    const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null)
 
     const fetchCreditsHisotry = async()=>{
         setSnackAlertData({
@@ -108,6 +109,58 @@ const Credits = () => {
 
 useEffect(()=>{
     fetchCreditsHisotry()
+},[])
+
+
+
+
+const fetchCredits = async()=>{
+    setSnackAlertData({
+        open:false,
+        message:"",
+        severity:"success",
+    })
+        try{
+
+            setLoading(true);
+            const response = await axiosInstance({
+              url: appUrl + "/getAnalysedNum",
+              method: "get",
+            });
+            setLoading(false);
+            if(response){
+              setNumberOfAnalyzed(response?.data?.count)
+                setSnackAlertData({
+                    open:true,
+                    message:response?.data?.message,
+                    severity:"success",
+                })
+                if (response?.code>200){
+                    setSnackAlertData({
+                        open:true,
+                        message:response?.message,
+                        severity:"error",
+                    })
+                }
+            }
+           
+
+        }catch(error){
+            console.log(error)
+            setLoading(false);
+            setSnackAlertData({
+                open:true,
+                message:error.toString(),
+                severity:"error",
+            })
+
+        }
+
+}
+
+
+useEffect(()=>{
+fetchCredits()
 },[])
 
 
@@ -552,7 +605,7 @@ useEffect(()=>{
                                     flexDirection: "column",
                                     gap: "1rem",
                                 }}>
-                                            <DetailedCard title='Total Analyze' detailedCardStyles={{justifyContent:"center"}} name="50" action="" />
+                                            <DetailedCard title='Total Analyze' detailedCardStyles={{justifyContent:"center"}} name={numberOfAnalyzed} action="" />
 
                                 <Box
                                     sx={{

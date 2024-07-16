@@ -49,7 +49,7 @@ const Profile = () => {
 })
 const [loading, setLoading] = useState(false)
 
-const fetchCreditsHisotry = async()=>{
+const fetchCredits = async()=>{
     setSnackAlertData({
         open:false,
         message:"",
@@ -95,7 +95,7 @@ const fetchCreditsHisotry = async()=>{
 
 
 useEffect(()=>{
-fetchCreditsHisotry()
+fetchCredits()
 },[])
 
 
