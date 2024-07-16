@@ -14,21 +14,21 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
 
 const Analyze = () => {
-  const [categories, setCategories] = useState(["Food", "Gadgets", "OutFits"]);
+  const [category, setCategory] = useState(["Food", "Gadgets", "OutFits"]);
   const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
     bulletpoints: [{ index: 0, value: "" }],
     description: "",
     keywords: "",
-    categories: ""
+    category: ""
   });
   const [errors, setErrors] = useState({
     title: "",
     bulletpoints: "",
     description: "",
     keywords: "",
-    categories: ""
+    category: ""
   });
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -108,7 +108,7 @@ const Analyze = () => {
   };
 
   const handleCategoryChange = (category) => {
-    setData(prev => ({ ...prev, categories: category }));
+    setData(prev => ({ ...prev, category }));
   };
 
   useEffect(() => { console.log(data) }, [data]);
@@ -444,7 +444,7 @@ const Analyze = () => {
           gap:".7rem"
         }}
       >
-        <CustomSelect data={categories} handleChange={handleCategoryChange} />
+        <CustomSelect data={category} handleChange={handleCategoryChange} />
         <Box sx={{
           display: "flex",
           flexDirection: "column",
@@ -571,7 +571,10 @@ const Analyze = () => {
               ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
             }}
             initialValue=""
-            onEditorChange={(e) => setData(prev => ({ ...prev, description: e?.replace(/^\<p\>/, "").replace(/\<\/p\>$/, "") }))}
+            onEditorChange={(content, editor) => {
+              const plainText = editor.getContent({ format: 'text' });
+              setData(prev => ({ ...prev, description: plainText }));
+            }}
           />
         </Box>
         <Box
