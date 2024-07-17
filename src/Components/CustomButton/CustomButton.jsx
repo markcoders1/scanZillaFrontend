@@ -41,6 +41,7 @@ const CustomButton = ({
             type,
             width,
             ...buttonStyle,
+            textTransform:"lowercase",
 
             '&:hover':{
                 background:hoverBg,
