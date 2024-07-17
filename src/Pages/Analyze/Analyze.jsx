@@ -62,6 +62,7 @@ const Analyze = () => {
         method: "post",
         data: data,
       });
+      console.log(response)
       setIsLoading(false);
      
       handleData(response.data);

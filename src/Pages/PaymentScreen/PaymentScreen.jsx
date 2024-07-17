@@ -59,13 +59,13 @@ const StripeCardForm = () => {
                             color: "#333333"
                         }}
                     >
-                        Name
+                        Plan
                     </Typography>
                     <Box>
                         <CustomInputShadow
-                            placeholder="Enter Name"
+                            placeholder={plan}
                             name="name"
-                            value={plan}
+                            
                         />
                     </Box>
                 </Box>
@@ -90,9 +90,9 @@ const StripeCardForm = () => {
                     </Typography>
                     <Box>
                         <CustomInputShadow
-                            placeholder="Enter Amount"
+                            placeholder={`${price}$`}
                             name="amount"
-                            value={`${price}$`}
+                            
                             
                         />
                     </Box>
