@@ -72,13 +72,13 @@ function App() {
 
 
               <Route path="history" element={<Protected children={<History />} />} />
-              <Route path="details/:id" element={<Protected children={<Details />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
               <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
               <Route path="payments" element={<Protected children={<PaymentScreen />} />} />
 
               <Route path="tool-management" element={<Protected children={<ToolManagement />} />} />
               <Route path="user-management" element={<Protected children={<UserManagement />} />} />
+              <Route path="user-management/userdetails" element={<Protected children={<Details />} />} />
               <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
 
             </Route>

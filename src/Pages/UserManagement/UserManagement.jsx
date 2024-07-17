@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, TableSortLabel } from '@mui/material';
 import './Usermanagement.css'; // Make sure to create this CSS file for custom styles
 import CustomButton from '../../Components/CustomButton/CustomButton';
+import { useNavigate } from 'react-router-dom';
 
 const UserTable = () => {
     const [users, setUsers] = useState([
@@ -17,7 +18,7 @@ const UserTable = () => {
 
     const [order, setOrder] = useState('asc');
     const [orderBy, setOrderBy] = useState('signupDate');
-
+    const navigate = useNavigate();
     const handleRequestSort = (property) => {
         const isAsc = orderBy === property && order === 'asc';
         setOrder(isAsc ? 'desc' : 'asc');
@@ -53,6 +54,7 @@ const UserTable = () => {
                     fontWeight='500'
                     width='134px'
                     ButtonText='View Details'
+                    onClick={()=>navigate("userdetails")}
                 />
             </Box>
         );
@@ -86,13 +88,13 @@ const UserTable = () => {
                         <TableCell sx={{ backgroundColor: '#1A0049', color: '#FDFDFD', fontWeight: '500', padding: '15px 20px', fontSize: "22px", textAlign: "center", borderRadius: "0px 8px 8px 0px" }}>Action</TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody sx={{ mt: "20px", paddingTop: "40px" }}>
+                <TableBody sx={{ mt: "20px", paddingTop: "40px", backgroundColor: "red", }}>
                     {users.map((user) => (
-                        <TableRow key={user.name} sx={{ '&:last-child td, &:last-child th': { border: 0 }, boxShadow: '4px 45x 15px 0px rgba(0, 0, 0, 0.1)', marginTop: '12px' }}>
-                            <TableCell component="th" scope="row" sx={{ fontSize:"22px",textAlign: 'center', padding: '12px', color: '#333333', fontWeight: '500' }}>{user.name}</TableCell>
-                            <TableCell sx={{ fontSize:"20px",textAlign: 'center', padding: '10px', color: '#333333', fontWeight: '500' }}>{user.package}</TableCell>
-                            <TableCell sx={{ fontSize:"20px",textAlign: 'center', padding: '10px', color: '#A0A4A9', fontWeight: '500' }}>{user.signupDate.toLocaleDateString('en-US')}</TableCell>
-                            <TableCell sx={{ textAlign: 'center', padding: '10px' }}>{renderActionButtons(user)}</TableCell>
+                        <TableRow key={user.name} sx={{ marginTop: '12px' }}>
+                            <TableCell component="th" scope="row" sx={{ fontSize: "22px", textAlign: 'center', padding: '12px', color: '#333333', fontWeight: '500', border: "none" }}>{user.name}</TableCell>
+                            <TableCell sx={{ fontSize: "20px", textAlign: 'center', padding: '10px', color: '#333333', fontWeight: '500', border: "none" }}>{user.package}</TableCell>
+                            <TableCell sx={{ fontSize: "20px", textAlign: 'center', padding: '10px', color: '#A0A4A9', fontWeight: '500', border: "none" }}>{user.signupDate.toLocaleDateString('en-US')}</TableCell>
+                            <TableCell sx={{ textAlign: 'center', padding: '10px', border: "none" }}>{renderActionButtons(user)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

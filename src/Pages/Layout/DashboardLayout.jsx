@@ -31,10 +31,10 @@ const DashboardLayout = () => {
         return 'User Management';
       case '/credits-management':
         return 'Credits Management';
-
+      
       // Add more cases as needed for other routes
       default:
-        return 'Welcome';
+        return '';
     }
   }
 
