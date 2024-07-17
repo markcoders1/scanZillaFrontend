@@ -1,24 +1,16 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React from "react";
+import React, { Suspense } from "react";
 import Layout from "./Pages/Layout/Layout";
-// import LayoutSinglePage from "./Pages/Layout/LayoutSinglePage";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Protected from "./Pages/Protected/Protected";
 import { PageLoader } from "./Components/Loader/PageLoader";
-import { Suspense } from 'react';
 
 const LayoutForOnePageScreens = React.lazy(() => import('./Pages/Layout/LayoutSinglePage'));
 const Signup = React.lazy(() => import('./Pages/Signup/Signup'));
 const OTP = React.lazy(() => import('./Pages/OTP/OTP'));
 const SetPassword = React.lazy(() => import('./Pages/SetPassword/SetPassword'));
 const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'));
-
-// const Analyzed = React.lazy(() => import('./Pages/Analyze/Analyze'));
-// const History = React.lazy(() => import('./Pages/History/History'));
-// const Profile = React.lazy(() => import('./Pages/Profile/Profile'));
-// const Credits = React.lazy(() => import('./Pages/Credits/Credits'));
-// const Dashboard = React.lazy(() => import('./Pages/Dashboard/Dashboard'));
 
 import Analyzed from './Pages/Analyze/Analyze';
 import History from './Pages/History/History';
@@ -40,20 +32,9 @@ import PackageSetting from "./Pages/PackageSetting/PackageSetting";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
-
-
 function App() {
-
-  // const options = {
-  //   // passing the client secret obtained in step 3
-  //   clientSecret: '{{CLIENT_SECRET}}',
-  //   // Fully customizable with appearance API.
-  //   appearance: {/*...*/ },
-  // };
-
   return (
-    <Elements stripe={stripePromise} >
-
+    <Elements stripe={stripePromise}>
       <BrowserRouter>
         <Suspense fallback={<PageLoader />}>
           <Routes>
@@ -62,7 +43,6 @@ function App() {
               <Route path='signup' element={<Signup />} />
               <Route path='otp' element={<OTP />} />
               <Route path='setpassword' element={<SetPassword />} />
-
             </Route>
 
             <Route path='/' element={<DashboardLayout />}>
@@ -70,26 +50,20 @@ function App() {
               <Route path="analyze" element={<Protected children={<Analyzed />} />} />
               <Route path="credits" element={<Protected children={<Credits />} />} />
               <Route path="card-details" element={<Protected children={<Debit />} />} />
-
-
               <Route path="history" element={<Protected children={<History />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
               <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
               <Route path="payments" element={<Protected children={<PaymentScreen />} />} />
-
               <Route path="tool-management" element={<Protected children={<ToolManagement />} />} />
               <Route path="user-management" element={<Protected children={<UserManagement />} />} />
               <Route path="user-management/userdetails" element={<Protected children={<Details />} />} />
               <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
-              {/* below is the routing for package setting */}
-              <Route path="credits-management/package-setting" element={<Protected children={<PackageSetting />} />} />  
+              <Route path="credits-management/package-setting" element={<Protected children={<PackageSetting />} />} />
             </Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
-
     </Elements>
-
   );
 }
 
