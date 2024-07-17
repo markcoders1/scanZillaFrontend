@@ -36,6 +36,7 @@ import CreditsManagement from "./Pages/CreditsManagement/CreditsManagement";
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from "./Components/CheckoutForm/CheckoutForm";
+import PackageSetting from "./Pages/PackageSetting/PackageSetting";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -80,7 +81,8 @@ function App() {
               <Route path="user-management" element={<Protected children={<UserManagement />} />} />
               <Route path="user-management/userdetails" element={<Protected children={<Details />} />} />
               <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
-
+              {/* below is the routing for package setting */}
+              <Route path="credits-management/package-setting" element={<Protected children={<PackageSetting />} />} />  
             </Route>
           </Routes>
         </Suspense>
