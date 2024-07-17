@@ -198,16 +198,16 @@ const ToolManagement = () => {
             <Typography
               sx={{
                 position: "absolute",
-                top: "5px",
+                top: "7px",
                 right: "20px"
               }}
             >
               <CustomButton
                 borderRadius='44px'
-                padding='1px 0px'
+                padding='3px 0px'
                 fontSize='14px'
-                ButtonText='Save'
-                width={"50px"}
+                ButtonText='Add +'
+                width={"90px"}
                 color='white'
                 background="linear-gradient(to right, #1A0049, #3F016A)"
                 // onClick={handleSave}
