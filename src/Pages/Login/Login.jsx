@@ -37,11 +37,12 @@ const Login = () => {
     try {
       const responseData = await signInWithGooglePopup();
       const data = {
-        accessToken: responseData?.accessToken,
-        refreshToken: responseData?.refreshToken,
+        accessToken: responseData?.data.accessToken,
+        refreshToken: responseData?.data.refreshToken,
         authenticated: true,
 
       }
+      console.log(responseData.data.accessToken)
       
       dispatch(handleAuth(data))
 
@@ -70,7 +71,7 @@ const Login = () => {
     console.log(auth)
   }, [])
 
-  if (auth?.authenticated) {
+  if (auth?.authenticated && auth.accessToken) {
     // dispatch(handleSnackAlert({open:true, message:"Logout first.", severity:"error"}))
     return <Navigate to="/dashboard" replace={true} />;
   }

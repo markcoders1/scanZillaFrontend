@@ -36,6 +36,7 @@ const Home = () => {
     open: false,
   });
 
+
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
