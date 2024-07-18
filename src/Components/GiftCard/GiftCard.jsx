@@ -23,7 +23,7 @@ const GiftCard = ({ id, title, description, bullets, openModal }) => {
                     color: "#A0A4A9",
                 }}
             >
-                Gift Card Amazon
+                Analyzation # {id.substring(16)}
             </Typography>
             <Typography>
                 <CustomButton
