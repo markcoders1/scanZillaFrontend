@@ -16,7 +16,7 @@ const PaymentComponent =()=>{
         const result = await stripe.confirmPayment({
             elements,
             confirmParams: {
-                return_url: "https://example.com",
+                return_url: "https://scan-zilla-frontend.vercel.app",
             },
         });
 
