@@ -40,9 +40,11 @@ const Login = () => {
         accessToken: responseData?.data.accessToken,
         refreshToken: responseData?.data.refreshToken,
         authenticated: true,
+        username : responseData?.data?.username,
+        email : responseData?.data?.email
 
       }
-      console.log(responseData.data.accessToken)
+      console.log(responseData)
       
       dispatch(handleAuth(data))
 
