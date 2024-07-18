@@ -14,6 +14,7 @@ const CustomInputShadow = forwardRef(({
   placeholder = "",
   border = false,
   boxShadow,
+  height = "56px", // Set default height here
 }, ref) => {
   return (
     <Box sx={{ mb: mb }}>
@@ -28,12 +29,11 @@ const CustomInputShadow = forwardRef(({
           padding: "0px 10px",
           justifyContent: "space-between",
           borderRadius: "10px",
-          // boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-          mb: 2, width: '100%',
+          mb: 2,
+          width: '100%',
           position: "relative",
           boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
         }}
-
       >
         <TextField
           placeholder={placeholder}
@@ -53,11 +53,11 @@ const CustomInputShadow = forwardRef(({
               color: "#2a2b2d",
               fontFamily: "poppins"
             },
-            borderRadius: "12px", // Setting borderRadius to 12px
-            height: "56px", // Setting height to 56px
-            '& .MuiOutlinedInput-root': { // Override styles for MuiOutlinedInput
+            borderRadius: "12px",
+            height: height, // Use the height prop here
+            '& .MuiOutlinedInput-root': {
               borderRadius: "12px",
-              border: "1px solid rgba(102, 102, 102, 0)", // Default border color and style
+              border: "1px solid rgba(102, 102, 102, 0)",
             },
             fontSize: {
               lg: "20px"
@@ -68,14 +68,15 @@ const CustomInputShadow = forwardRef(({
             fontWeight: {
               lg: "500"
             },
-            color: "black"
+            color: "black",
+            // backgroundColor: "red"
           }}
           onKeyDown={handleKeyDown}
           name={name}
           onChange={onChange}
           value={value}
           InputLabelProps={{
-            shrink: true, // This will keep the label on top
+            shrink: true,
           }}
           multiline={multiline}
           rows={rows}

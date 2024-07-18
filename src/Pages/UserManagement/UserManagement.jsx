@@ -54,7 +54,7 @@ const UserTable = () => {
                     fontWeight='500'
                     width='134px'
                     ButtonText='View Details'
-                    onClick={()=>navigate("userdetails")}
+                    onClick={() => navigate("userdetails")}
                 />
             </Box>
         );
@@ -62,8 +62,8 @@ const UserTable = () => {
 
     return (
         <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="user table">
-                <TableHead sx={{ borderRadius: "100px" }}>
+            <Table sx={{ minWidth: 650 , padding:"0px 15px"}} aria-label="user table">
+                <TableHead >
                     <TableRow>
                         <TableCell sx={{ backgroundColor: '#1A0049', color: '#FDFDFD', fontWeight: '500', padding: '15px 20px', fontSize: "22px", textAlign: "center", borderRadius: "8px 0px 0px 8px" }}>All Users</TableCell>
                         <TableCell sx={{ backgroundColor: '#1A0049', color: '#FDFDFD', fontWeight: '500', padding: '15px 20px', fontSize: "22px", textAlign: "center" }}>Package</TableCell>
@@ -91,15 +91,15 @@ const UserTable = () => {
                 <TableBody sx={{ mt: "20px", paddingTop: "40px", backgroundColor: "red", }}>
                     {users.map((user) => (
                         <TableRow key={user.name} sx={{ marginTop: '12px' }}>
-                            <TableCell component="th" scope="row" sx={{ fontSize: "22px", textAlign: 'center', padding: '12px', color: '#333333', fontWeight: '500', border: "none" }}>{user.name}</TableCell>
+                            <TableCell component="th" scope="row" sx={{ fontSize: "22px", textAlign: 'center', padding: '12px', color: '#333333', fontWeight: '500', border: "none", borderRadius: "10px 0px 0px 10px"}}>{user.name}</TableCell>
                             <TableCell sx={{ fontSize: "20px", textAlign: 'center', padding: '10px', color: '#333333', fontWeight: '500', border: "none" }}>{user.package}</TableCell>
                             <TableCell sx={{ fontSize: "20px", textAlign: 'center', padding: '10px', color: '#A0A4A9', fontWeight: '500', border: "none" }}>{user.signupDate.toLocaleDateString('en-US')}</TableCell>
-                            <TableCell sx={{ textAlign: 'center', padding: '10px', border: "none" }}>{renderActionButtons(user)}</TableCell>
+                            <TableCell sx={{ textAlign: 'center', padding: '10px', border: "none" , borderRadius: "0px 10px 10px 0px"}}>{renderActionButtons(user)}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer >
     );
 };
 

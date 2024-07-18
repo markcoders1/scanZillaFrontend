@@ -2,6 +2,14 @@
     border: none;
 }
 
+.MuiTable-root {
+    border-collapse: separate !important;
+    border-spacing: 0px 30px !important;
+}
+.MuiTableContainer-root{
+    background-color: rgb(255, 255, 255) !important;
+    box-shadow: none !important;
+}
 .MuiTableHead-root {
     color: #FDFDFD;
     font-weight: 500 !important;
@@ -22,8 +30,9 @@
 }
 
 .MuiTableBody-root {
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
+  
 }
 
 .MuiTableBody-root .MuiTableCell-root {
@@ -31,19 +40,19 @@ flex-direction: column;
     padding: 10px;
     color: #333333;
     font-weight: 500;
-    
+
 
 }
 
 .MuiTableRow-root {
     background: white;
-    margin-top: 13px;
+    /* margin-top: 13px; */
     /* Add margin between rows */
-    /* box-shadow: 4px 5px 15px 0px #C8C8C8; */
+    box-shadow: 4px 5px 15px 0px #dbdada ;
     /* Add shadow instead of border */
-    margin-top: 15px;
-    /* border: 2px solid red; */
-    
+    /* margin-top: 15px; */
+    /* border: 2px solid red !important; */
+    border-radius: 10px !important;
 }
 
 .MuiTableRow-root:hover {
