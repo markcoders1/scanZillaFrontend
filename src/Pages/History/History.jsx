@@ -5,6 +5,7 @@ import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
 import { ViewDetailModal } from '../../Components/ViewDetailModal/ViewDetailModal';
+import LoaderMain from '../../Components/Loader/LoaderMain';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -20,7 +21,7 @@ const History = () => {
     const [open, setOpen] = useState(false);
     const [modalData, setModalData] = useState({});
 
-    const fetchCreditsHistory = async () => {   
+    const fetchCreditsHistory = async () => {
         setSnackAlertData({
             open: false,
             message: "",
@@ -110,125 +111,147 @@ const History = () => {
     };
 
     return (
-        <Box
-            sx={{
-                marginTop: "15px",
-                display: "flex",
-                gap: "2.2rem",
-                flexDirection: {
-                    lg: "row",
-                    xs: 'column',
-                },
-            }}
-        >
+        <>
+            {
+                loading ? (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            height: "70vh",
+                            width: "100%",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <LoaderMain />
 
-            <Box
-                sx={{
-                    marginTop: "15px",
-                    display: "flex",
-                    gap: "1.8rem",
-                    flexBasis: "50%",
-                    padding: "24px 30px",
-                    borderRadius: "10px",
-                    flexDirection: "column",
-                    maxHeight: "680px",
-                    overflow: "auto",
-                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-                    "&::-webkit-scrollbar": {
-                        width: "8px"
-                    },
-                    "&::-webkit-scrollbar-track": {
-                        background: "#DFDFDF",
-                        borderRadius: "10px"
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                        background: "black",
-                        borderRadius: "10px"
-                    },
-                    "&::-webkit-scrollbar-thumb:hover": {
-                        background: "#b30000"
-                    }
-                }}
-            >
-                <Typography
-                    sx={{
-                        fontSize: "27px",
-                        fontWeight: "600",
-                        color: "#333333"
-                    }}
-                >
-                    Analyze History
-                </Typography>
+                    </Box>
+                ) :
+                    <Box
+                        sx={{
+                            marginTop: "15px",
+                            display: "flex",
+                            gap: "2.2rem",
+                            flexDirection: {
+                                lg: "row",
+                                xs: 'column',
+                            },
+                        }}
+                    >
 
-                {loading ? "loading...." : analyzeHistory.map((item, index) => (
-                    <GiftCard 
-                        key={item._id} 
-                        id={item._id} 
-                        title={item.title} 
-                        description={item.description} 
-                        bullets={item.bullets} 
-                        index={index} 
-                        openModal={openModal} 
-                    />
-                ))}
-            </Box>
-            <Box
-                sx={{
-                    marginTop: "15px",
-                    display: "flex",
-                    gap: "1.8rem",
-                    flexBasis: "50%",
-                    padding: "24px 30px",
-                    borderRadius: "10px",
-                    flexDirection: "column",
-                    maxHeight: "680px",
-                    overflow: "auto",
-                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-                    "&::-webkit-scrollbar": {
-                        width: "8px"
-                    },
-                    "&::-webkit-scrollbar-track": {
-                        background: "#DFDFDF",
-                        borderRadius: "10px"
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                        background: "black",
-                        borderRadius: "10px"
-                    },
-                    "&::-webkit-scrollbar-thumb:hover": {
-                        background: "#b30000"
-                    }
-                }}
-            >
-                <Typography
-                    sx={{
-                        fontSize: "27px",
-                        fontWeight: "600",
-                        color: "#333333",
-                    }}
-                >
-                    Credits History
-                </Typography>
-                {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
-                    <CreditsHistory item={item} key={index} index={index} />
-                ))}
-            </Box>
+                        <Box
+                            sx={{
+                                marginTop: "15px",
+                                display: "flex",
+                                gap: "1.8rem",
+                                flexBasis: "50%",
+                                padding: "24px 30px",
+                                borderRadius: "10px",
+                                flexDirection: "column",
+                                maxHeight: "680px",
+                                overflow: "auto",
+                                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                                "&::-webkit-scrollbar": {
+                                    width: "8px"
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                    background: "#DFDFDF",
+                                    borderRadius: "10px"
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                    background: "black",
+                                    borderRadius: "10px"
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                    background: "#b30000"
+                                }
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontSize: "27px",
+                                    fontWeight: "600",
+                                    color: "#333333"
+                                }}
+                            >
+                                Analyze History
+                            </Typography>
 
-            <ViewDetailModal
-                open={open}
-                handleClose={handleClose}
-                title={modalData.title}
-                bullets={modalData.bullets}
-                description={modalData.description}
-            />
+                            {loading ? "loading...." : analyzeHistory.map((item, index) => (
+                                <GiftCard
+                                    key={item._id}
+                                    id={item._id}
+                                    title={item.title}
+                                    description={item.description}
+                                    bullets={item.bullets}
+                                    index={index}
+                                    openModal={openModal}
+                                />
+                            ))}
+                        </Box>
+                        <Box
+                            sx={{
+                                marginTop: "15px",
+                                display: "flex",
+                                gap: "1.8rem",
+                                flexBasis: "50%",
+                                padding: "24px 30px",
+                                borderRadius: "10px",
+                                flexDirection: "column",
+                                maxHeight: "680px",
+                                overflow: "auto",
+                                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                                "&::-webkit-scrollbar": {
+                                    width: "8px"
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                    background: "#DFDFDF",
+                                    borderRadius: "10px"
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                    background: "black",
+                                    borderRadius: "10px"
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                    background: "#b30000"
+                                }
+                            }}
+                        >
+                            <Typography
+                                sx={{
+                                    fontSize: "27px",
+                                    fontWeight: "600",
+                                    color: "#333333",
+                                }}
+                            >
+                                Credits History
+                            </Typography>
+                            {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
+                                <CreditsHistory item={item} key={index} index={index} />
+                            ))}
+                        </Box>
 
-            <SnackAlert
-                message={snackAlertData.message}
-                severity={snackAlertData.severity}
-                open={snackAlertData.open}
-                handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
-            />
-        </Box>
+                        <ViewDetailModal
+                            open={open}
+                            handleClose={handleClose}
+                            title={modalData.title}
+                            bullets={modalData.bullets}
+                            description={modalData.description}
+                        />
+
+                        <SnackAlert
+                            message={snackAlertData.message}
+                            severity={snackAlertData.severity}
+                            open={snackAlertData.open}
+                            handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+                        />
+                    </Box>
+
+
+            }
+
+        </>
+
     );
 };
 

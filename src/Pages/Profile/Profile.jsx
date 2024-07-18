@@ -10,12 +10,13 @@ import ChangePasswordModal from '../../Components/ChangePasswordModal/ChangePass
 import SnackAlert from '../../Components/SnackAlert/SnackAlert'
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook'
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+import LoaderMain from '../../Components/Loader/LoaderMain'
 
 const Profile = () => {
 
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
-  const [open,setOpen] = useState(false)
+  const [open, setOpen] = useState(false)
   const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null)
 
   const auth = useSelector((state) => state.auth);
@@ -42,234 +43,258 @@ const Profile = () => {
 
 
 
-  const [snackAlertData, setSnackAlertData]= React.useState({
-    message:"",
-    severity:"success",
-    open:false,
-})
-const [loading, setLoading] = useState(false)
+  const [snackAlertData, setSnackAlertData] = React.useState({
+    message: "",
+    severity: "success",
+    open: false,
+  })
+  const [loading, setLoading] = useState(false)
 
-const fetchAnalysed = async()=>{
+  const fetchAnalysed = async () => {
     setSnackAlertData({
-        open:false,
-        message:"",
-        severity:"success",
+      open: false,
+      message: "",
+      severity: "success",
     })
-        try{
+    try {
 
-            setLoading(true);
-            const response = await axiosInstance({
-              url: appUrl + "/getAnalysedNum",
-              method: "get",
-            });
-            setLoading(false);
-            if(response){
-              console.log(response)
-              setNumberOfAnalyzed(response?.data?.count)
-                setSnackAlertData({
-                    open:true,
-                    message:response?.data?.message,
-                    severity:"success",
-                })
-                if (response?.code>200){
-                    setSnackAlertData({
-                        open:true,
-                        message:response?.message,
-                        severity:"error",
-                    })
-                }
-            }
-           
-
-        }catch(error){
-            console.log(error)
-            setLoading(false);
-            setSnackAlertData({
-                open:true,
-                message:error.toString(),
-                severity:"error",
-            })
-
+      setLoading(true);
+      const response = await axiosInstance({
+        url: appUrl + "/getAnalysedNum",
+        method: "get",
+      });
+      setLoading(false);
+      if (response) {
+        console.log(response)
+        setNumberOfAnalyzed(response?.data?.count)
+        setSnackAlertData({
+          open: true,
+          message: response?.data?.message,
+          severity: "success",
+        })
+        if (response?.code > 200) {
+          setSnackAlertData({
+            open: true,
+            message: response?.message,
+            severity: "error",
+          })
         }
+      }
 
-}
+
+    } catch (error) {
+      console.log(error)
+      setLoading(false);
+      setSnackAlertData({
+        open: true,
+        message: error.toString(),
+        severity: "error",
+      })
+
+    }
+
+  }
 
 
-useEffect(()=>{
-  fetchAnalysed()
-},[])
+  useEffect(() => {
+    fetchAnalysed()
+  }, [])
 
 
   return (
-    <Box sx={{
-      display: "flex",
-      gap: "50px"
-    }}>
 
-      <Box sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "30px",
-        flexBasis: {
-          md: "606px",
-          xs: "100%"
-        },
-        flexGrow: 1,
-      }}>
-        <Box sx={{
-          display: "flex",
-          gap: "40px",
-          flexDirection: {
-            md: "row",
-            xs: "column"
-          }
-
-
-        }}>
-          <Box sx={{
-            flexBasis: {
-              md: "250px",
-              xs: "100%"
-            }
-          }}>
-            <ProfileCard title=' Name' name={username} action="Edit Name" />
-          </Box>
-          <Box sx={{
-            flexBasis: {
-              md: "390px",
-              xs: "100%"
-            }, flexGrow: 1
-          }}>
-            <ProfileCard title='Email' name={email}/>
-          </Box>
-        </Box>
-
-        <Box sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}>
-          <Heading Heading="Password" />
-          <Box sx={{
-            display: "flex",
-            gap: "20px",
-            boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-            padding: "22px 26px",
-            alignItems: "center",
-            justifyContent: "space-between"
-          }}>
-            <Box sx={{
-              display: "flex",
-              gap: "8px",
-            }}>
-              {Array.from({ length: 8 }).map((_, index) => (
-                <Box
-                  key={index}
-
-                  sx={{
-                    width: {
-                      sm: "10px",
-                      xs: "10px"
-                    },
-                    height: {
-                      sm: "10px",
-                      xs: "10px"
-                    },
-                    background: "#333333",
-                    borderRadius: "50%"
-                  }}></Box>
-              ))}
-            </Box>
-            <Box><Typography
-              onClick={() =>setOpen(true)}
-              sx={{
-                color: "#190247",
-                cursor: "pointer",
-                fontWeight: "500",
-                fontSize: {
-                  sm: "15px",
-                  xs: "12px"
-                },
-                lineHeight: "22.5px",
-                textDecoration: "underline"
-              }}>Change password</Typography></Box>
-
-          </Box>
-        </Box>
-
-        <Box sx={{
-          display: "flex",
-          flexDirection: "column",
-          flexBasis: "190px",
-          flexGrow: 1,
-          gap: "10px",
-          // border: "2px solid red"
-        }}>
-          <Heading Heading="Debit Card Detail" />
+    <>
+      {
+        loading ? (
           <Box
-
             sx={{
               display: "flex",
-              gap: "33px",
-              flexDirection: {
-                md: "row",
-                xs: "column",
+              height: "70vh",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <LoaderMain />
 
-              }
+          </Box>)
+          :
+
+          (
+
+
+            <Box sx={{
+              display: "flex",
+              gap: "50px"
             }}>
-            <Box sx={{
-              flexGrow: 3,
-              cursor:"pointer"
-              // border: "2px solid red"
-            }}
-              onClick={handleNavigate}
-            >
-              <Customcard name={username} />
-            </Box>
-            <Box sx={{
-              flexGrow: 1,
 
-            }}
-
-            >
-              <DetailedCard title='Total Analyze' detailedCardStyles={{justifyContent:"center"}} name={numberOfAnalyzed} action="" />
-            </Box>
-
-          </Box>
-        </Box>
-      </Box>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "30px",
+                flexBasis: {
+                  md: "606px",
+                  xs: "100%"
+                },
+                flexGrow: 1,
+              }}>
+                <Box sx={{
+                  display: "flex",
+                  gap: "40px",
+                  flexDirection: {
+                    md: "row",
+                    xs: "column"
+                  }
 
 
+                }}>
+                  <Box sx={{
+                    flexBasis: {
+                      md: "250px",
+                      xs: "100%"
+                    }
+                  }}>
+                    <ProfileCard title=' Name' name={username} action="Edit Name" />
+                  </Box>
+                  <Box sx={{
+                    flexBasis: {
+                      md: "390px",
+                      xs: "100%"
+                    }, flexGrow: 1
+                  }}>
+                    <ProfileCard title='Email' name={email} />
+                  </Box>
+                </Box>
 
-      <Box sx={{
-        display: {
-          xs: "none",
-          xl: "unset"
-        },
-        background: "#D99DFD",
-        borderRadius: "10px",
-        flexBasis: "190px",
-        flexShrink: 0,
-        boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                <Box sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                }}>
+                  <Heading Heading="Password" />
+                  <Box sx={{
+                    display: "flex",
+                    gap: "20px",
+                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                    padding: "22px 26px",
+                    alignItems: "center",
+                    justifyContent: "space-between"
+                  }}>
+                    <Box sx={{
+                      display: "flex",
+                      gap: "8px",
+                    }}>
+                      {Array.from({ length: 8 }).map((_, index) => (
+                        <Box
+                          key={index}
 
-      }}>
+                          sx={{
+                            width: {
+                              sm: "10px",
+                              xs: "10px"
+                            },
+                            height: {
+                              sm: "10px",
+                              xs: "10px"
+                            },
+                            background: "#333333",
+                            borderRadius: "50%"
+                          }}></Box>
+                      ))}
+                    </Box>
+                    <Box><Typography
+                      onClick={() => setOpen(true)}
+                      sx={{
+                        color: "#190247",
+                        cursor: "pointer",
+                        fontWeight: "500",
+                        fontSize: {
+                          sm: "15px",
+                          xs: "12px"
+                        },
+                        lineHeight: "22.5px",
+                        textDecoration: "underline"
+                      }}>Change password</Typography></Box>
 
-      </Box>
-      <ChangePasswordModal 
-      
-      open={open}
-      handleClose={()=>{setOpen(false)}}
-      
-      />
-        <SnackAlert
+                  </Box>
+                </Box>
+
+                <Box sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  flexBasis: "190px",
+                  flexGrow: 1,
+                  gap: "10px",
+                  // border: "2px solid red"
+                }}>
+                  <Heading Heading="Debit Card Detail" />
+                  <Box
+
+                    sx={{
+                      display: "flex",
+                      gap: "33px",
+                      flexDirection: {
+                        md: "row",
+                        xs: "column",
+
+                      }
+                    }}>
+                    <Box sx={{
+                      flexGrow: 3,
+                      cursor: "pointer"
+                      // border: "2px solid red"
+                    }}
+                      onClick={handleNavigate}
+                    >
+                      <Customcard name={username} />
+                    </Box>
+                    <Box sx={{
+                      flexGrow: 1,
+
+                    }}
+
+                    >
+                      <DetailedCard title='Total Analyze' detailedCardStyles={{ justifyContent: "center" }} name={numberOfAnalyzed} action="" />
+                    </Box>
+
+                  </Box>
+                </Box>
+              </Box>
+
+
+
+              <Box sx={{
+                display: {
+                  xs: "none",
+                  xl: "unset"
+                },
+                background: "#D99DFD",
+                borderRadius: "10px",
+                flexBasis: "190px",
+                flexShrink: 0,
+                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+
+              }}>
+
+              </Box>
+              <ChangePasswordModal
+
+                open={open}
+                handleClose={() => { setOpen(false) }}
+
+              />
+              <SnackAlert
                 message={snackAlertData.message}
                 severity={snackAlertData.severity}
                 open={snackAlertData.open}
-                handleClose={()=>{setSnackAlertData(prev=>({...prev, open:false}))}}
+                handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
 
-            
-            />
-    </Box>
+
+              />
+            </Box>
+          )
+      }
+    </>
   )
 }
 

@@ -122,6 +122,8 @@ const Analyze = () => {
     setData(prev => ({ ...prev, category }));
   };
 
+
+
   useEffect(() => { console.log(data) }, [data]);
   // <Box
   //   sx={{
