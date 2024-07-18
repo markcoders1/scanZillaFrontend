@@ -24,6 +24,7 @@ import Details from "./Pages/Details/Details";
 import ToolManagement from "./Pages/ToolMangement/ToolManagement";
 import UserManagement from "./Pages/UserManagement/UserManagement";
 import CreditsManagement from "./Pages/CreditsManagement/CreditsManagement";
+import AdminDashboard from "./Pages/AdminDashboard/AdminDashboard";
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -59,6 +60,7 @@ function App() {
               <Route path="user-management/userdetails" element={<Protected children={<Details />} />} />
               <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
               <Route path="credits-management/package-setting" element={<Protected children={<PackageSetting />} />} />
+              <Route path="dashboard-admin" element={<Protected children={<AdminDashboard />} />} />
             </Route>
           </Routes>
         </Suspense>

@@ -31,9 +31,12 @@ const DashboardLayout = () => {
         return 'User Management';
       case '/credits-management':
         return 'Credits Management';
-        case '/credits-management/package-setting':
-          return 'Package Setting';
-      
+      case '/credits-management/package-setting':
+        return 'Package Setting';
+      case '/dashboard-admin':
+        return 'Dashboard';
+
+
       // Add more cases as needed for other routes
       default:
         return '';

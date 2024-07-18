@@ -2,6 +2,9 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 
 const ProfileCard = ({
+
+ 
+
     title="",
     name="",
     action="",
@@ -22,7 +25,7 @@ const ProfileCard = ({
           sm:"20px",
           xs:"16px"
          },
-         lineHeight:"30px"
+         lineHeight:"40px"
        }}>
       {title}
        </Typography>

@@ -71,7 +71,7 @@ const AppSidebar = () => {
             >
               <Typography>
                 <NavLink
-                  to="/dashboard"
+                  to="/dashboard-admin"
                   className={({ isActive }) =>
                     isActive ? 'anchortag anchorActive' : 'anchortag'
                   }
