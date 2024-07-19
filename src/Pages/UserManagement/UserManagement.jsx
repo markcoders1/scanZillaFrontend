@@ -25,6 +25,21 @@ const UserTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+  const toggleBlock = async (userId) => {
+    try {
+      const response = await axiosInstance({
+        url: appUrl + "/toggleuseraccount",
+        method: "get",
+        params: {
+          userId,
+        },
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const fetchUsers = async () => {
     try {
       const response = await axiosInstance({
@@ -39,7 +54,7 @@ const UserTable = () => {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [toggleBlock]);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -67,17 +82,19 @@ const UserTable = () => {
 
   const renderActionButtons = (userId) => {
     const user = users.find((u) => u._id === userId);
-    const isBlock = user && user.action === "Block";
+    const active = user && user.active === true;
+    // console.log("active", active);
     return (
       <Box sx={{ display: "flex", gap: "2rem" }}>
         <CustomButton
-          border={isBlock ? "2px solid #EE1D52" : "2px solid #31BA96"}
+          border={active ? "2px solid #EE1D52" : "2px solid #31BA96"}
           borderRadius="10px"
           fontSize="14px"
-          color={isBlock ? "#EE1D52" : "#31BA96"}
+          color={active ? "#EE1D52" : "#31BA96"}
           fontWeight="600"
           width="100px"
-          ButtonText={isBlock ? "Block" : "Unblock"}
+          ButtonText={active ? "Block" : "Unblock"}
+          onClick={() => toggleBlock(userId)}
         />
         <CustomButton
           border="2px solid #333333"
