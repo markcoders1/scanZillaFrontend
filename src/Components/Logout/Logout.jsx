@@ -21,7 +21,23 @@ const Logout = () => {
         })
       );
       navigate("/", {replace:true})
-      dispatch(handleAuth({ user: null, token: null, authenticated: false }))
+      dispatch(handleAuth({
+        message: null,
+        accessToken: null,
+        refreshToken: null,
+        _id: null,
+        username: null,
+        email: null,
+        credits: null,
+        autocharge: null,
+        active: null,
+        createdAt: null,
+        updatedAt: null,
+        __v: null,
+        customerId: null,
+        success: null,
+        authenticated: false,
+      }))
   }
   return (
     <>
