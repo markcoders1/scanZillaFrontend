@@ -499,7 +499,7 @@ const Analyze = () => {
                 onChange={(e) => handleBulletPointChange(index, e.target.value)}
                 name={""}
                 value={item.value}
-                error={errors?.title}
+                error={errors?.bulletpoints}
                 placeholder="Bullet Text"
                 border=""
                 boxShadow={true}
