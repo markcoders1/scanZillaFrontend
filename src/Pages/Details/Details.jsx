@@ -27,7 +27,7 @@ const Details = () => {
     const fetchDetails = async () => {
       try {
         const response = await axiosInstance({
-          url: `${appUrl}/getspecificuser`,
+          url: `${appUrl}/getspecificUser`,
           method: "get",
           params: {
             id: id,
