@@ -772,7 +772,9 @@ const Credits = () => {
                                     </Typography>
                                 </Box>
                             </Box>
-                            <Customcard cardStyle={{ cursor: "pointer" }} cb={() => { navigate("/card-details") }} />
+                            {/* <Customcard cardStyle={{ cursor: "pointer" }} cb={() => { navigate("/card-details") }} /> */}
+                            <Customcard />
+
                         </Box>
                         <SnackAlert
                             message={snackAlertData.message}

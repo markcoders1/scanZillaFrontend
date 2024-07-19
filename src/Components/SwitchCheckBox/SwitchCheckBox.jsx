@@ -37,13 +37,11 @@ const handleToggleAutoCredits= async()=>{
            message: response?.message,
            severity: "success",
          })
-       setIsLoading(false)
 
      }
    }).catch(error=>{
      if(error && error?.response && error?.response?.data && error?.response?.data.message){
        console.log("error.data.message", error?.response?.data?.message)
-       setIsLoading(false)
          setSnackAlertData({
            open: true,
            message: error?.response?.data?.message,
@@ -53,7 +51,7 @@ const handleToggleAutoCredits= async()=>{
      }
    })
  } catch (error) {
-   setIsLoading(false)
+  console.log(error)
  }
 
 }
@@ -70,8 +68,6 @@ const handleToggleAutoCredits= async()=>{
        message ={snackAlertData.message}
        open = {snackAlertData.open}
        handleClose = {() => {setSnackAlertData(prev=>({...prev, open:false}))}}
-      
-      
       />
     </Box>
   );

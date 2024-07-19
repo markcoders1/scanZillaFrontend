@@ -15,6 +15,7 @@ import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
 import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+
 const Login = () => {
  
   const [data, setData] = useState({
@@ -73,11 +74,6 @@ const Login = () => {
   useEffect(() => {
     console.log(auth)
   }, [])
-
-  if (auth?.authenticated && auth.accessToken) {
-    // dispatch(handleSnackAlert({open:true, message:"Logout first.", severity:"error"}))
-    return <Navigate to="/dashboard" replace={true} />;
-  }
 
   const handleInput = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
@@ -278,7 +274,10 @@ const Login = () => {
                   color: blue[900], // set the color when checked
                 },
               }}
+              onChange={(e)=>{console.log(e)}}
             />
+
+
             <Typography
               sx={{
                 color: "#333333",
@@ -291,6 +290,7 @@ const Login = () => {
             >
               Remember Me
             </Typography>
+
           </Box>
           <Typography
             sx={{

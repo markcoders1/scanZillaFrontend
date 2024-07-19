@@ -8,7 +8,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import { useDispatch } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../Components/Loader/Loader";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
@@ -31,7 +33,11 @@ const Analyze = () => {
     category: ""
   });
   const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+  const [snackAlertData, setSnackAlertData] = useState({
+    message: "",
+    severity: "success",
+    open: false,
+  });
 
   const handleData = (errorsData) => {
     // const errors = errorsData.message.map(error => (setErrors(prev => ({ ...prev, [error.path[0]]: error.message }))));]
@@ -52,7 +58,6 @@ const Analyze = () => {
   };
 
   const handleAnalyze = async () => {
-    // setIsLoading(true);
     setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
 
     try {
@@ -64,25 +69,24 @@ const Analyze = () => {
       });
       console.log(response)
       setIsLoading(false);
-     
-      handleData(response.data);
-      dispatch(
-        handleSnackAlert({
-          open: true,
-          message: response?.message,
-          severity: "success",
-        })
-      );
+      if(response.data.error){
+        handleData(response.data);
+      }
+      console.log("yodlee ee hooooooooo",response)
+      setSnackAlertData({
+        open: true,
+        message: response.data.message,
+        severity: "success",
+      })
     } catch (error) {
       const errorData = error?.response?.data;
       setIsLoading(false);
-      return dispatch(
-        handleSnackAlert({
-          open: true,
-          message: errorData?.message,
-          severity: "error",
-        })
-      );
+
+      setSnackAlertData({
+        open: true,
+        message: errorData.message,
+        severity: "error",
+      })
     }
     setIsLoading(false);
   };
@@ -122,307 +126,6 @@ const Analyze = () => {
     setData(prev => ({ ...prev, category }));
   };
 
-
-
-  useEffect(() => { console.log(data) }, [data]);
-  // <Box
-  //   sx={{
-  //     boxSizing: "border-box",
-  //     m: {
-  //       md: "auto",
-  //     },
-  //     width: {
-  //       xs: "90vw",
-  //       sm: "60vw",
-  //       md: "80vw",
-  //     },
-  //     height: {
-  //       xs: "auto",
-  //       md: "auto",
-  //     },
-  //     // p: {
-  //     //   sm: "80px 30px 30px 30px",
-  //     //   md: "60px",
-  //     //   xs: "80px 20px 20px 20px",
-  //     // },,
-
-  //     maxWidth: "1200px",
-  //     margin: "0 auto",
-  //     background: "white",
-  //     borderRadius: {
-  //       sm: "30px",
-  //       md: "50px",
-  //       xs: "20px",
-  //     },
-  //     gap: "50px",
-  //     display: "flex",
-  //     flexDirection: {
-  //       md: "row",
-  //       xs: "column",
-  //     },
-  //     position: "relative",
-  //   }}
-  // >
-  //   <Box sx={{ position: "absolute", top: "30px", right: "30px" }}>
-  //     <Logout />
-  //   </Box>
-  //   <Box
-  //     sx={{
-  //       flexBasis: {
-  //         md: "50%",
-  //         xs: "100%",
-  //       },
-  //       flexGrow: "0",
-  //       flexShrink: "1",
-  //     }}
-  //   >
-  //     <Box
-  //       sx={{
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         justifyContent: "center",
-  //         gap: {
-  //           md: "20px",
-  //           xs: "5px",
-  //         },
-  //       }}
-  //     >
-  //       <CustomTextField
-  //       handleKeyDown={handleKeyDown}
-  //         mb="20px"
-  //         error={errors?.title}
-  //         onChange={hanldeInput}
-  //         name={"title"}
-  //         value={data.title}
-  //         rows={1}
-  //         label="Add Title"
-  //       />
-  //       <CustomTextField
-  //       handleKeyDown={handleKeyDown}
-  //         mb="20px"
-  //     multiline={true}
-
-  //         error={errors?.bulletpoints}
-  //         onChange={hanldeInput}
-  //         name={"bulletpoints"}
-  //         value={data?.bulletpoints}
-  //         label="Add Bullet Points"
-  //       />
-  //       <CustomTextField
-  //     multiline={true}
-
-  //       handleKeyDown={handleKeyDown}
-  //         mb="20px"
-  //         error={errors?.description}
-  //         onChange={hanldeInput}
-  //         name={"description"}
-  //         value={data?.description}
-  //         rows={8}
-  //         label="Add Description"
-  //       />
-  //       <Box sx={{
-  //         position:"relative"
-  //       }}>
-
-  //      { isLoading?<Box sx={{
-  //         position:"absolute",
-  //         background:"black",
-
-  //         height:"100%",
-  //         width:"100%",
-  //         display:"grid",
-  //         placeContent:"center",
-  //         borderRadius: "10px",
-  //         zIndex:2
-  //       }}>
-  //       <Loader/>
-  //       </Box>:null}
-
-  //       <Button
-  //         sx={{
-  //           p: "15px 20px",
-  //           borderRadius: "10px",
-  //           background: "#010115",
-  //           fontSize: "18px",
-  //           fontWeight: "500",
-  //           width:"100%",
-  //           "&:hover": {
-  //             background: "#1e1e20",
-  //           },
-  //         }}
-  //         variant="contained"
-  //         onClick={handleAnalyze}
-  //       >
-  //         Analyze{" "}
-  //       </Button>
-  //       </Box>
-  //     </Box>
-  //   </Box>
-  //   <Box
-  //     sx={{
-  //       flexBasis: {
-  //         xs: "50%",
-  //       },
-  //       flexShrink: "1",
-  //       display: {
-  //         xs: "none",
-  //         md: "flex",
-  //       },
-  //       flexDirection: "column",
-  //       justifyContent: "center",
-  //       alignItems: "center",
-  //       gap: "30px",
-  //     }}
-  //   >
-  //     <Box
-  //       sx={{
-  //         background: `url(${backgrund})`,
-  //         backgroundSize: "cover",
-  //         backgroundPosition: "center",
-  //         backgroundRepeat: "no-repeat",
-  //         width: "300px",
-  //         height: "200px",
-  //       }}
-  //     ></Box>
-  //     <Typography
-  //       sx={{
-  //         fontFamily: "clashdisplay",
-  //         color: "#010115",
-  //         lineHeight: "30.75px",
-  //         fontSize: "25px",
-  //         fontWeight: "600",
-  //         textAlign: "center",
-  //       }}
-  //     >
-  //       ScanZilla AI
-  //     </Typography>
-  //     <Typography
-  //       sx={{
-  //         fontFamily: "Segoe",
-  //         color: "#808285",
-  //         textAlign: "center",
-  //         lineHeight: "30.75px",
-  //         fontSize: "20px",
-  //         fontWeight: "400",
-  //       }}
-  //     >
-  //       EBC A+ brakes deliver exceptional durability, reliable performance, and superior safety for confident driving in all conditions.
-  //     </Typography>
-  //   </Box>
-  // </Box>
-  // <Box 
-  //sx={{
-  //   maxHeight: "680px",
-  //   display: "flex",
-  //   gap: "20px",
-  //   flexDirection: "column",
-  //   overflow: "auto",
-  //   padding: "20px 0", // Add padding to prevent shadow clipping
-  //   "&::-webkit-scrollbar": {
-  //     width: "8px"
-  //   },
-  //   "&::-webkit-scrollbar-track": {
-  //     background: "#DFDFDF",
-  //     borderRadius: "10px"
-  //   },
-  //   "&::-webkit-scrollbar-thumb": {
-  //     background: "black",
-  //     borderRadius: "10px"
-  //   },
-  //   "&::-webkit-scrollbar-thumb:hover": {
-  //     background: "#b30000"
-  //   }
-  // }}>
-  //   <Box
-  // sx={{
-  //     display: "flex",
-  //     padding: "22px 26px",
-  //     alignItems: "center",
-  //     justifyContent: "space-between",
-  //     borderRadius: "10px",
-  //     boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-  //     margin: "10px" // Add margin to inner box
-  //   }}
-  //>
-  //     hello
-  //   </Box>
-
-  // </Box>
-
-  // <Box    
-  //  sx={{
-  //     maxHeight: "680px",
-  //     display: "flex",
-  //     gap: "20px",
-  //     flexDirection: "column",
-  //     overflow: "auto",
-  //     padding: "20px 0", // Add padding to prevent shadow clipping
-  //     "&::-webkit-scrollbar": {
-  //       width: "8px"
-  //     },
-  //     "&::-webkit-scrollbar-track": {
-  //       background: "#DFDFDF",
-  //       borderRadius: "10px"
-  //     },
-  //     "&::-webkit-scrollbar-thumb": {
-  //       background: "black",
-  //       borderRadius: "10px"
-  //     },
-  //     "&::-webkit-scrollbar-thumb:hover": {
-  //       background: "#b30000"
-  //     }
-  //   }}
-
-  //   >
-  //   <FormControl
-  //   sx={{
-  //     display: "flex",
-  //     padding: "22px 26px",
-  //     alignItems: "center",
-  //     justifyContent: "space-between",
-  //     borderRadius: "10px",
-  //     boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-  //     margin: "10px",
-  //      mb: 2, width: '100%'
-  //   }}
-  //   variant="outlined" >
-  //     <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
-  //     <Select
-  //       labelId="demo-simple-select-label"
-  //       id="demo-simple-select"
-  //       value=""
-  //       label="Select Category"
-  //     >
-  //       <MenuItem value={10}>Category 1</MenuItem>
-  //       <MenuItem value={20}>Category 2</MenuItem>
-  //       <MenuItem value={30}>Category 3</MenuItem>
-  //     </Select>
-  //   </FormControl>
-  //   <FormControl
-  //   sx={{
-  //     display: "flex",
-  //     padding: "22px 26px",
-  //     alignItems: "center",
-  //     justifyContent: "space-between",
-  //     borderRadius: "10px",
-  //     boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-  //     margin: "10px",
-  //      mb: 2, width: '100%'
-  //   }}
-  //   variant="outlined" >
-  //     <InputLabel id="demo-simple-select-label">Select Category</InputLabel>
-  //     <Select
-  //       labelId="demo-simple-select-label"
-  //       id="demo-simple-select"
-  //       value=""
-  //       label="Select Category"
-  //     >
-  //       <MenuItem value={10}>Category 1</MenuItem>
-  //       <MenuItem value={20}>Category 2</MenuItem>
-  //       <MenuItem value={30}>Category 3</MenuItem>
-  //     </Select>
-  //   </FormControl>
-  // </Box>
   return (
     <Box
       sx={{
@@ -633,7 +336,7 @@ const Analyze = () => {
             marginTop: "40px"
           }}
         >
-          <CustomButton
+          {!isLoading?<CustomButton
             border="2px solid #1A0049"
             borderRadius="10px"
             background="#1A0049"
@@ -653,9 +356,27 @@ const Analyze = () => {
             variant="contained"
             padding
             onClick={handleAnalyze}
-          />
+          />:<div style={{border:"2px solid #1A0049",
+            borderRadius:"10px",
+            background:"#1A0049",
+            hoverBg:"white",
+            hovercolor:"#1A0049",
+            color:"white",
+            width:"100%",
+            padding:"19px 20px",
+            display:"flex",
+            justifyContent:"center"
+            }}><div className="loader"/></div>}
         </Box>
 
+        
+
+      <SnackAlert
+            message={snackAlertData.message}
+            severity={snackAlertData.severity}
+            open={snackAlertData.open}
+            handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+          />
       </Box>
     </Box>
   )

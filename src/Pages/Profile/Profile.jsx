@@ -29,7 +29,7 @@ const Profile = () => {
     console.log(auth.email)
     console.log(auth.username)
 
-    setUsername(auth.username)
+    setUsername(auth.userName)
     setEmail(auth.email)
 
   }, [])
@@ -154,7 +154,7 @@ const Profile = () => {
                       xs: "100%"
                     }
                   }}>
-                    <ProfileCard title=' Name' name={username} action="Edit Name" />
+                    <ProfileCard title=' Name' name={username} />
                   </Box>
                   <Box sx={{
                     flexBasis: {
@@ -241,10 +241,10 @@ const Profile = () => {
                     }}>
                     <Box sx={{
                       flexGrow: 3,
-                      cursor: "pointer"
+                      // cursor: "pointer"
                       // border: "2px solid red"
                     }}
-                      onClick={handleNavigate}
+                      // onClick={handleNavigate}
                     >
                       <Customcard name={username} />
                     </Box>
@@ -258,6 +258,7 @@ const Profile = () => {
                     </Box>
 
                   </Box>
+
                 </Box>
               </Box>
 
