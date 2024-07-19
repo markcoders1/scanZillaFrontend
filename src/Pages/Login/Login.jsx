@@ -16,6 +16,7 @@ import { NavLink } from "react-router-dom";
 import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const Login = () => {
+ 
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -99,8 +100,9 @@ const Login = () => {
       return setErrors({ password: "Password can not be empty", email: "" })
     }
 
-
+    console.log("appUrl", appUrl)
     try {
+      
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
       console.log(response)
       response = response?.data
@@ -142,6 +144,8 @@ const Login = () => {
       );
 
     }
+
+    console.log("hi")
   };
 
 

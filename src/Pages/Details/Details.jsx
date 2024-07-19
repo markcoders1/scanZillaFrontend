@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
-import { Box, Typography, CircularProgress } from '@mui/material';
-import ProfileCard from '../../Components/ProfileCard/ProfileCard';
-import GiftCard from '../../Components/GiftCard/GiftCard';
-import CreditsHistory from '../../Components/CreditsHistory/CreditsHistory';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
+import { Box, Typography, CircularProgress } from "@mui/material";
+import ProfileCard from "../../Components/ProfileCard/ProfileCard";
+import GiftCard from "../../Components/GiftCard/GiftCard";
+import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -15,6 +15,7 @@ const Details = () => {
   const [loading, setLoading] = useState(false);
   const [creditsHistory, setCreditsHistory] = useState([]);
   const [analyzeHistory, setAnalyzeHistory] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
@@ -22,23 +23,29 @@ const Details = () => {
     open: false,
   });
 
-  //   useEffect(() => {
-  //     const fetchDetails = async () => {
-  //       try {
-  //         const response = await axiosInstance({
-  //           url: `${appUrl}/getdetails/${id}`,
-  //           method: 'get',
-  //         });
-  //         setDetails(response.data);
-  //       } catch (error) {
-  //         setError(error.toString());
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
+  useEffect(() => {
+    const fetchDetails = async () => {
+      try {
+        const response = await axiosInstance({
+          url: `${appUrl}/getUser`,
+          method: "get",
+          params: {
+            id: id,
+          },
+        });
+        console.log(response.data);
+        setUserData(response.data);
+      } catch (error) {
+        setError(error.toString());
+        console.log("error,", error);
+        console.log(`${appUrl}/getUser/${id}`);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //     fetchDetails();
-  //   }, [id]);
+    fetchDetails();
+  }, [id]);
 
   //   if (loading) {
   //     return (
@@ -72,104 +79,102 @@ const Details = () => {
   //     );
   //   }
 
-  const fetchCreditsHistory = async () => {
-    setSnackAlertData({
-      open: false,
-      message: "",
-      severity: "success",
-    });
-    try {
-      setLoading(true);
-      const response = await axiosInstance({
-        url: appUrl + "/getpurchasehistory",
-        method: "get",
-      });
-      setLoading(false);
-      if (response) {
-        setCreditsHistory(response?.data?.payments);
-        setSnackAlertData({
-          open: true,
-          message: response?.data?.message,
-          severity: "success",
-        });
-        if (response?.code > 200) {
-          setSnackAlertData({
-            open: true,
-            message: response?.message,
-            severity: "error",
-          });
-        }
-      }
-    } catch (error) {
-      setLoading(false);
-      setSnackAlertData({
-        open: true,
-        message: error.toString(),
-        severity: "error",
-      });
-    }
-  };
-  const fetchAnalyzeHistory = async () => {
-    setSnackAlertData({
-      open: false,
-      message: "",
-      severity: "success",
-    });
-    try {
-      const response = await axiosInstance({
-        url: appUrl + "/getuserhistory",
-        method: "get",
-      });
-      if (response) {
-        setAnalyzeHistory(response.data.Histories);
-        setSnackAlertData({
-          open: true,
-          message: response?.data?.message,
-          severity: "success",
-        });
-        if (response?.code > 200) {
-          setSnackAlertData({
-            open: true,
-            message: response?.message,
-            severity: "error",
-          });
-        }
-      }
-    } catch (error) {
-      setLoading(false);
-      setSnackAlertData({
-        open: true,
-        message: error.toString(),
-        severity: "error",
-      });
-    }
-  };
+  // const fetchCreditsHistory = async () => {
+  //   setSnackAlertData({
+  //     open: false,
+  //     message: "",
+  //     severity: "success",
+  //   });
+  //   try {
+  //     setLoading(true);
+  //     const response = await axiosInstance({
+  //       url: appUrl + "/getpurchasehistory",
+  //       method: "get",
+  //     });
+  //     setLoading(false);
+  //     if (response) {
+  //       setCreditsHistory(response?.data?.payments);
+  //       setSnackAlertData({
+  //         open: true,
+  //         message: response?.data?.message,
+  //         severity: "success",
+  //       });
+  //       if (response?.code > 200) {
+  //         setSnackAlertData({
+  //           open: true,
+  //           message: response?.message,
+  //           severity: "error",
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setLoading(false);
+  //     setSnackAlertData({
+  //       open: true,
+  //       message: error.toString(),
+  //       severity: "error",
+  //     });
+  //   }
+  // };
+  // const fetchAnalyzeHistory = async () => {
+  //   setSnackAlertData({
+  //     open: false,
+  //     message: "",
+  //     severity: "success",
+  //   });
+  //   try {
+  //     const response = await axiosInstance({
+  //       url: appUrl + "/getuserhistory",
+  //       method: "get",
+  //     });
+  //     if (response) {
+  //       setAnalyzeHistory(response.data.Histories);
+  //       setSnackAlertData({
+  //         open: true,
+  //         message: response?.data?.message,
+  //         severity: "success",
+  //       });
+  //       if (response?.code > 200) {
+  //         setSnackAlertData({
+  //           open: true,
+  //           message: response?.message,
+  //           severity: "error",
+  //         });
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setLoading(false);
+  //     setSnackAlertData({
+  //       open: true,
+  //       message: error.toString(),
+  //       severity: "error",
+  //     });
+  //   }
+  // };
   useEffect(() => {
-    fetchCreditsHistory();
-    fetchAnalyzeHistory()
+    // fetchCreditsHistory();
+    // fetchAnalyzeHistory()
   }, []);
 
   return (
-
     <Box>
       <Box
         sx={{
-
-          position: "relative"
+          position: "relative",
         }}
       >
         <Typography
           sx={{
             fontSize: {
               sm: "40px",
-              xs: "28px"
+              xs: "28px",
             },
             fontWeight: "600",
             position: "absolute",
             top: "-70px",
           }}
         >
-          Samantha Profile
+          {userData.userName} Profile
         </Typography>
 
         <Box
@@ -183,37 +188,35 @@ const Details = () => {
             },
             flexDirection: {
               lg: "row",
-              xs: "column"
+              xs: "column",
             },
             // border: "2px solid red"
-
           }}
         >
           <Box
             sx={{
               flexBasis: "28%",
-              flexGrow: "1"
+              flexGrow: "1",
             }}
           >
-            <ProfileCard title='Name' name='Samantha' />
+            <ProfileCard title="Name" name={userData.userName} />
           </Box>
           <Box
             sx={{
               flexBasis: "44%",
-              flexGrow: "1"
+              flexGrow: "1",
             }}
           >
-            <ProfileCard title='Email' name='Samantha@email.com' />
+            <ProfileCard title="Email" name={userData.email} />
           </Box>
           <Box
             sx={{
               flexBasis: "28%",
-              flexGrow: "1"
+              flexGrow: "1",
             }}
           >
-            <ProfileCard title='Package' name='Pro' />
+            <ProfileCard title="Credits" name={userData.credits} />
           </Box>
-
         </Box>
       </Box>
 
@@ -225,8 +228,7 @@ const Details = () => {
           flexDirection: {
             xs: "column",
             md: "row",
-          }
-
+          },
         }}
       >
         <Box
@@ -242,32 +244,32 @@ const Details = () => {
             overflow: "auto",
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
             "&::-webkit-scrollbar": {
-              width: "8px"
+              width: "8px",
             },
             "&::-webkit-scrollbar-track": {
               background: "#DFDFDF",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb": {
               background: "black",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb:hover": {
-              background: "#b30000"
+              background: "#b30000",
             },
-            height: "500px"
+            height: "500px",
           }}
         >
           <Typography
             sx={{
               fontSize: "27px",
               fontWeight: "600",
-              color: "#333333"
+              color: "#333333",
             }}
           >
             Analyze History
           </Typography>
-
+          {/* 
           {loading ? "loading...." : analyzeHistory.map((item, index) => (
             <GiftCard
               key={item._id}
@@ -278,7 +280,9 @@ const Details = () => {
               index={index}
             // openModal={openModal}
             />
-          ))}
+          ))} */}
+          {/* <GiftCard /> */}
+         
         </Box>
         <Box
           sx={{
@@ -293,20 +297,20 @@ const Details = () => {
             overflow: "auto",
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
             "&::-webkit-scrollbar": {
-              width: "8px"
+              width: "8px",
             },
             "&::-webkit-scrollbar-track": {
               background: "#DFDFDF",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb": {
               background: "black",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb:hover": {
-              background: "#b30000"
+              background: "#b30000",
             },
-            height: "500px"
+            height: "500px",
           }}
         >
           <Typography
@@ -318,12 +322,11 @@ const Details = () => {
           >
             Credits History
           </Typography>
-          {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
+          {/* {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
             <CreditsHistory item={item} key={index} index={index} />
-          ))}
+          ))} */}
+           {/* <CreditsHistory  /> */}
         </Box>
-
-
       </Box>
     </Box>
   );

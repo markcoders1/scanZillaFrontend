@@ -19,10 +19,10 @@ const MobileSidebar = () => {
   const isOpen = useSelector((state) => state.sidebarToggle.isOpen);
 
   useEffect(() => {
-    console.log(auth)
+    // console.log(auth)
 
-    console.log(auth.email)
-    console.log(auth.username)
+    // console.log(auth.email)
+    // console.log(auth.username)
 
     setUsername(auth.username)
     setEmail(auth.email)
