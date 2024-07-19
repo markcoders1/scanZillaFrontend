@@ -66,6 +66,7 @@ const Credits = () => {
     const [credits, setCredits] = useState(null)
 
     const fetchCreditsHisotry = async () => {
+        if(!auth?.customerId){return}
         setSnackAlertData({
             open: false,
             message: "",

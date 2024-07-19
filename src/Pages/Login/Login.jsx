@@ -104,16 +104,8 @@ const Login = () => {
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
       console.log(response)
       response = response?.data
-      const responseData = {
-        user: response?.user,
-        accessToken: response?.accessToken,
-        refreshToken: response?.refreshToken,
-        authenticated: true,
-        email: response?.email,
-        username: response?.username,
-        credits:response?.credits
-      };
-      dispatch(handleAuth(responseData));
+      const responseData = response
+      dispatch(handleAuth({...responseData, authenticated: true}));
       dispatch(
         handleSnackAlert({
           open: true,
@@ -123,13 +115,13 @@ const Login = () => {
       );
       setIsLoading(false)
 
-      navigate("/dashboard");
       sessionStorage.setItem("accessToken", response?.accessToken);
       sessionStorage.setItem("refreshToken", response?.refreshToken);
       setData({
         email: "",
         password: "",
       });
+      navigate("/dashboard");
 
     } catch (error) {
       const errorData = error.response.data

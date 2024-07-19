@@ -11,6 +11,8 @@ import LoaderW from "../../Components/Loader/LoaderW";
 import GoogleIcon from '../../assets/images/googleIcon.png';
 import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -24,6 +26,11 @@ const Signup = () => {
   const inputRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [snackAlertData, setSnackAlertData] = useState({
+    open:false,
+    message:"",
+    severity:"success"
+  })
 
   const [errors, setErrors] = useState({
     fullName: "",
@@ -56,55 +63,45 @@ const Signup = () => {
       return setErrors({ password: "Password can not be empty", email: "", fullName: "" });
     }
 
-    console.log("full name", data.fullName);
-    console.log("email", data.email);
-    console.log("Password", data.password);
     try {
-      //   let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
-      //   response = response?.data
-      //   const responseData = {
-      //     user: response?.user,
-      //     accessToken: response?.accessToken,
-      //     refreshToken: response?.refreshToken,
-      //     authenticated: true,
-      //   };
-      //   dispatch(handleAuth(responseData));
-      //   dispatch(
-      //     handleSnackAlert({
-      //       open: true,
-      //       message: response.message,
-      //       severity: "success",
-      //     })
-      //   );
-      setIsLoading(false);
-      setData({
-        fullName: "",
-        email: "",
-        password: "",
-      });
-
-      // navigate("/text-analyze");
-      // sessionStorage.setItem("accessToken", response?.accessToken);
-      // sessionStorage.setItem("refreshToken", response?.refreshToken);
-
+       await axiosInstance({ url: appUrl + "/createUser", method: "post", data: {email:data?.email, password:data?.password, userName:data?.fullName} }).then(response=>{
+        if(response){
+          response = response?.data
+          const responseData = response
+          dispatch(handleAuth({...responseData, authenticated: true}));
+            setSnackAlertData({
+              open: true,
+              message: response.message,
+              severity: "success",
+            })
+          setIsLoading(false)
+          console.log("hanhan")
+    
+          sessionStorage.setItem("accessToken", response?.accessToken);
+          sessionStorage.setItem("refreshToken", response?.refreshToken);
+          setData({
+            email: "",
+            password: "",
+            fullName:""
+          });
+          console.log("agya")
+          navigate("/dashboard");
+          console.log("hmm")
+        }
+      }).catch(error=>{
+        if(error && error?.response && error?.response?.data && error?.response?.data.message){
+          console.log("error.data.message", error.response.data.message)
+          setIsLoading(false)
+            setSnackAlertData({
+              open: true,
+              message: error?.response?.data?.message,
+              severity: "error",
+            })
+          
+        }
+      })
     } catch (error) {
-      // const errorData = error.response.data
-      // if (error.response.data.errorType.includes("email")) {
-      //     setErrors({ password: "", email: error.response.data.message })
-      // }
-      // if (error.response.data.errorType.includes("password")) {
-      //     setErrors({ email: "", password: error.response.data.message })
-      // }
-      // setIsLoading(false)
-
-      // return dispatch(
-      //     handleSnackAlert({
-      //         open: true,
-      //         message: errorData?.message,
-      // severity: "error",
-      //     })
-      // );
-
+      setIsLoading(false)
     }
   };
 
@@ -233,6 +230,14 @@ const Signup = () => {
           </Typography>
         </Box>
       </Box>
+      <SnackAlert 
+       severity = {snackAlertData.severity}
+       message ={snackAlertData.message}
+       open = {snackAlertData.open}
+       handleClose = {() => {setSnackAlertData(prev=>({...prev, open:false}))}}
+      
+      
+      />
     </Box>
   );
 }
