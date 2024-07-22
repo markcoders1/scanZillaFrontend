@@ -160,7 +160,7 @@ const Analyze = () => {
     >
       <Box
         sx={{
-          padding: "0px 10px",
+          padding: "0px 0px",
           display:"flex",
           flexDirection:"column",
           gap:".7rem"

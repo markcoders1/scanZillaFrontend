@@ -1,5 +1,5 @@
 import { Box, FormControl, TextField, Typography } from "@mui/material";
-import { forwardRef } from "react";
+import React, { forwardRef } from "react";
 
 const CustomInputShadow = forwardRef(({
   type = "text",
@@ -69,7 +69,6 @@ const CustomInputShadow = forwardRef(({
               lg: "500"
             },
             color: "black",
-            // backgroundColor: "red"
           }}
           onKeyDown={handleKeyDown}
           name={name}
