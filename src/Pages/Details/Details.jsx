@@ -5,6 +5,7 @@ import { Box, Typography, CircularProgress } from "@mui/material";
 import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import GiftCard from "../../Components/GiftCard/GiftCard";
 import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
+import { ViewDetailModal } from "../../Components/ViewDetailModal/ViewDetailModal";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -33,7 +34,7 @@ const Details = () => {
             id: id,
           },
         });
-        console.log(response.data);
+        // console.log(response.data);
         setUserData(response.data);
       } catch (error) {
         setError(error.toString());
@@ -46,8 +47,6 @@ const Details = () => {
 
     fetchDetails();
   }, [id]);
-
-
 
   //   if (loading) {
   //     return (
@@ -81,81 +80,99 @@ const Details = () => {
   //     );
   //   }
 
-  // const fetchCreditsHistory = async () => {
-  //   setSnackAlertData({
-  //     open: false,
-  //     message: "",
-  //     severity: "success",
-  //   });
-  //   try {
-  //     setLoading(true);
-  //     const response = await axiosInstance({
-  //       url: appUrl + "/getpurchasehistory",
-  //       method: "get",
-  //     });
-  //     setLoading(false);
-  //     if (response) {
-  //       setCreditsHistory(response?.data?.payments);
-  //       setSnackAlertData({
-  //         open: true,
-  //         message: response?.data?.message,
-  //         severity: "success",
-  //       });
-  //       if (response?.code > 200) {
-  //         setSnackAlertData({
-  //           open: true,
-  //           message: response?.message,
-  //           severity: "error",
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setLoading(false);
-  //     setSnackAlertData({
-  //       open: true,
-  //       message: error.toString(),
-  //       severity: "error",
-  //     });
-  //   }
-  // };
-  // const fetchAnalyzeHistory = async () => {
-  //   setSnackAlertData({
-  //     open: false,
-  //     message: "",
-  //     severity: "success",
-  //   });
-  //   try {
-  //     const response = await axiosInstance({
-  //       url: appUrl + "/getuserhistory",
-  //       method: "get",
-  //     });
-  //     if (response) {
-  //       setAnalyzeHistory(response.data.Histories);
-  //       setSnackAlertData({
-  //         open: true,
-  //         message: response?.data?.message,
-  //         severity: "success",
-  //       });
-  //       if (response?.code > 200) {
-  //         setSnackAlertData({
-  //           open: true,
-  //           message: response?.message,
-  //           severity: "error",
-  //         });
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setLoading(false);
-  //     setSnackAlertData({
-  //       open: true,
-  //       message: error.toString(),
-  //       severity: "error",
-  //     });
-  //   }
-  // };
+  const openModal = (data) => {
+    setModalData(data);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setModalData({});
+  };
+
+  const fetchCreditsHistory = async () => {
+    setSnackAlertData({
+      open: false,
+      message: "",
+      severity: "success",
+    });
+    try {
+      setLoading(true);
+      const response = await axiosInstance({
+        url: appUrl + "/gethistory",
+        method: "get",
+        params: {
+          userId: id,
+        },
+      });
+      setLoading(false);
+      if (response) {
+        setCreditsHistory(response?.data);
+        console.log(response.data);
+        setSnackAlertData({
+          open: true,
+          message: response?.data?.message,
+          severity: "success",
+        });
+        if (response?.code > 200) {
+          setSnackAlertData({
+            open: true,
+            message: response?.message,
+            severity: "error",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      setSnackAlertData({
+        open: true,
+        message: error.toString(),
+        severity: "error",
+      });
+    }
+  };
+  const fetchAnalyzeHistory = async () => {
+    setSnackAlertData({
+      open: false,
+      message: "",
+      severity: "success",
+    });
+    try {
+      const response = await axiosInstance({
+        url: appUrl + "/getuserpurchases",
+        method: "get",
+        params: {
+          userId: id,
+        },
+      });
+      if (response) {
+        setAnalyzeHistory(response.data.payments);
+        console.log(response.data.payments);
+        setSnackAlertData({
+          open: true,
+          message: response?.data?.message,
+          severity: "success",
+        });
+        if (response?.code > 200) {
+          setSnackAlertData({
+            open: true,
+            message: response?.message,
+            severity: "error",
+          });
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      setSnackAlertData({
+        open: true,
+        message: error.toString(),
+        severity: "error",
+      });
+    }
+  };
   useEffect(() => {
-    // fetchCreditsHistory();
-    // fetchAnalyzeHistory()
+    fetchCreditsHistory();
+    fetchAnalyzeHistory();
   }, []);
 
   return (
@@ -271,20 +288,20 @@ const Details = () => {
           >
             Analyze History
           </Typography>
-          {/* 
-          {loading ? "loading...." : analyzeHistory.map((item, index) => (
-            <GiftCard
-              key={item._id}
-              id={item._id}
-              title={item.title}
-              description={item.description}
-              bullets={item.bullets}
-              index={index}
-            // openModal={openModal}
-            />
-          ))} */}
-          {/* <GiftCard /> */}
-         
+
+          {loading
+            ? "loading...."
+            : creditsHistory.map((item, index) => (
+                <GiftCard
+                  key={item._id}
+                  id={item._id}
+                  title={item.title}
+                  description={item.description}
+                  bullets={item.bullets}
+                  index={index}
+                  // openModal={openModal}
+                />
+              ))}
         </Box>
         <Box
           sx={{
@@ -324,12 +341,20 @@ const Details = () => {
           >
             Credits History
           </Typography>
-          {/* {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
-            <CreditsHistory item={item} key={index} index={index} />
-          ))} */}
-           {/* <CreditsHistory  /> */}
+          {loading && analyzeHistory.length < 1
+            ? "loading..."
+            : analyzeHistory.map((item, index) => (
+                <CreditsHistory item={item} key={index} index={index} />
+              ))}
         </Box>
       </Box>
+      {/* <ViewDetailModal
+        open={open}
+        handleClose={handleClose}
+        title={modalData.title}
+        bullets={modalData.bullets}
+        description={modalData.description}
+      /> */}
     </Box>
   );
 };

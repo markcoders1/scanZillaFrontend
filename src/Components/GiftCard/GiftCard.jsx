@@ -43,5 +43,5 @@ const GiftCard = ({ id, title, description, bullets, openModal }) => {
         </Box>
     );
 };
-// "1px solid #333333"
+
 export default GiftCard;

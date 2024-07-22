@@ -176,21 +176,21 @@ const Credits = () => {
     return (
 
         <>
-            {
-                loading ? (
-                    <Box
-                        sx={{
-                            display: "flex",
-                            height: "70vh",
-                            width: "100%",
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
-                    >
-                        <LoaderMain />
+                {
+                    loading ? (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                height: "70vh",
+                                width: "100%",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}
+                        >
+                            <LoaderMain />
 
-                    </Box>
-                ) : (
+                        </Box>
+                    ) : (
                     <Box
                         sx={{
                             display: "flex",

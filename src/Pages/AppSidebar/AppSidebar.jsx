@@ -18,10 +18,10 @@ const AppSidebar = () => {
   const [admin, setAdmin] = useState(true)
 
   useEffect(() => {
-    console.log(auth)
+    // console.log(auth)
 
     // console.log(auth.email)
-    console.log(auth.userName)
+    // console.log(auth.userName)
 
     setUsername(auth.userName)
     setEmail(auth.email)
