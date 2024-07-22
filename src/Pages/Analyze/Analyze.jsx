@@ -10,7 +10,8 @@ import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import { useNavigate } from "react-router-dom";
-import Loader from "../../Components/Loader/Loader";
+// this is the loader here 
+import LoaderMain from "../../Components/Loader/LoaderMain";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
@@ -38,12 +39,18 @@ const Analyze = () => {
     severity: "success",
     open: false,
   });
+  const [editorLoading, setEditorLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setEditorLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleData = (errorsData) => {
-    // const errors = errorsData.message.map(error => (setErrors(prev => ({ ...prev, [error.path[0]]: error.message }))));]
     const generatedErrors = errorsData?.error
-    // console.log(generatedErrors)
-    // console.log(errorsData)
     setErrors(prev=>({...prev,
       title: generatedErrors.TE,
       bulletpoints:generatedErrors.BE ,
@@ -72,7 +79,6 @@ const Analyze = () => {
       if(response.data.error){
         handleData(response.data);
       }
-      console.log("yodlee ee hooooooooo",response)
       setSnackAlertData({
         open: true,
         message: response.data.message,
@@ -273,35 +279,54 @@ const Analyze = () => {
         </Box>
         <Box>
           <Heading Heading="Product Description" />
-          <Editor
-            apiKey={tinyMCEAPIKey}
-            init={{
-              plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-              toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-              tinycomments_mode: 'embedded',
-              tinycomments_author: 'Author name',
-              mergetags_list: [
-                { value: 'First.Name', title: 'First Name' },
-                { value: 'Email', title: 'Email' },
-              ],
-              ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-            }}
-            initialValue=""
-            onEditorChange={(content, editor) => {
-              const plainText = editor.getContent({ format: 'text' });
-              setData(prev => ({ ...prev, description: plainText }));
-            }}
-          />
 
-{
-      errors.description&& <Typography  sx={{
-        background: "whitesmoke",
-        p: "10px",
-        color: "red",
-        mt: "8px",
-        wordBreak: "break-word"
-      }}>{ errors.description}</Typography>
-    }
+          {editorLoading ? (
+            <Box
+            sx={{
+                // border:"2px solid red",
+                height:"300px",
+                boxShadow:"4px 5px 15px 0px #C8C8C8",
+                borderRadius:"10px",
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center"
+            }}
+            >
+
+              <LoaderMain />
+
+            </Box>
+          ) : (
+            <Editor
+              apiKey={tinyMCEAPIKey}
+              init={{
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                  { value: 'First.Name', title: 'First Name' },
+                  { value: 'Email', title: 'Email' },
+                ],
+                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+              }}
+              initialValue=""
+              onEditorChange={(content, editor) => {
+                const plainText = editor.getContent({ format: 'text' });
+                setData(prev => ({ ...prev, description: plainText }));
+              }}
+            />
+          )}
+
+          {
+            errors.description && <Typography sx={{
+              background: "whitesmoke",
+              p: "10px",
+              color: "red",
+              mt: "8px",
+              wordBreak: "break-word"
+            }}>{errors.description}</Typography>
+          }
         </Box>
         <Box
           sx={{
