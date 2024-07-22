@@ -17,7 +17,7 @@ import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Login = () => {
- 
+
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -42,12 +42,12 @@ const Login = () => {
         accessToken: responseData?.data.accessToken,
         refreshToken: responseData?.data.refreshToken,
         authenticated: true,
-        username : responseData?.data?.username,
-        email : responseData?.data?.email
+        username: responseData?.data?.username,
+        email: responseData?.data?.email
 
       }
       console.log(responseData)
-      
+
       dispatch(handleAuth(data))
 
       dispatch(
@@ -98,12 +98,12 @@ const Login = () => {
 
     console.log("appUrl", appUrl)
     try {
-      
+
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
       console.log(response)
       response = response?.data
       const responseData = response
-      dispatch(handleAuth({...responseData, authenticated: true}));
+      dispatch(handleAuth({ ...responseData, authenticated: true }));
       dispatch(
         handleSnackAlert({
           open: true,
@@ -274,7 +274,7 @@ const Login = () => {
                   color: blue[900], // set the color when checked
                 },
               }}
-              onChange={(e)=>{console.log(e)}}
+              onChange={(e) => { console.log(e) }}
             />
 
 
