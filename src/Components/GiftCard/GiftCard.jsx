@@ -24,6 +24,7 @@ const GiftCard = ({ id, title, description, bullets, openModal }) => {
                 }}
             >
                 Analyzation # {id.substring(16)}
+          
             </Typography>
             <Typography>
                 <CustomButton

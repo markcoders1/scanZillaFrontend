@@ -20,6 +20,8 @@ const Logout = () => {
           severity: "success",
         })
       );
+      sessionStorage.clear()
+      localStorage.clear()
       navigate("/", {replace:true})
       dispatch(handleAuth({
         message: null,

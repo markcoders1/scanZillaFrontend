@@ -1,17 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
-const CustomChart = ({
-    data = [
-        { name: 'jan', credits: 0 },
-        { name: 'feb', credits: 3000 },
-        { name: 'mar', credits: 2000 },
-        { name: 'april', credits: 2780 },
-        { name: 'may', credits: 1890 },
-        { name: 'june', credits: 2390 },
-        { name: 'july', credits: 3490 },
-    ],
-}) => {
+const CustomChart = ({data}) => {
     const [dynamicWidth, setDynamicWidth] = useState("100%");
     const [dynamicHeight, setDynamicHeight] = useState(400); // Default height
 

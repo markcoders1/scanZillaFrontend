@@ -15,7 +15,9 @@ import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
 import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+
 const Login = () => {
+ 
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -73,11 +75,6 @@ const Login = () => {
     console.log(auth)
   }, [])
 
-  if (auth?.authenticated && auth.accessToken) {
-    // dispatch(handleSnackAlert({open:true, message:"Logout first.", severity:"error"}))
-    return <Navigate to="/dashboard" replace={true} />;
-  }
-
   const handleInput = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
   };
@@ -99,8 +96,9 @@ const Login = () => {
       return setErrors({ password: "Password can not be empty", email: "" })
     }
 
-
+    console.log("appUrl", appUrl)
     try {
+      
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
       console.log(response)
       response = response?.data
@@ -142,6 +140,8 @@ const Login = () => {
       );
 
     }
+
+    console.log("hi")
   };
 
 
@@ -274,7 +274,10 @@ const Login = () => {
                   color: blue[900], // set the color when checked
                 },
               }}
+              onChange={(e)=>{console.log(e)}}
             />
+
+
             <Typography
               sx={{
                 color: "#333333",
@@ -287,6 +290,7 @@ const Login = () => {
             >
               Remember Me
             </Typography>
+
           </Box>
           <Typography
             sx={{
