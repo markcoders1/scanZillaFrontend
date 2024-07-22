@@ -25,7 +25,7 @@ const Home = () => {
   const [credits, setCredits] = useState(0);
   const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null);
   const [analyzeHistory, setAnalyzeHistory] = useState([]);
-  const [graphdata,setGraphdata] = useState([])
+  const [graphdata, setGraphdata] = useState([])
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const auth = useSelector((state) => state.auth);
@@ -144,7 +144,7 @@ const Home = () => {
     }
   };
 
-  const fetchGraphData = async ()=>{
+  const fetchGraphData = async () => {
     const response = await axiosInstance({
       url: `${appUrl}/getgraphdata`,
       method: "get",
@@ -172,13 +172,13 @@ const Home = () => {
     <>
       {loading ? (
         <Box
-        sx={{
-          display:"flex",
-          height:"70vh",
-          width:"100%",
-          justifyContent:"center",
-          alignItems:"center"
-        }}
+          sx={{
+            display: "flex",
+            height: "70vh",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center"
+          }}
         >
           <LoaderMain />
 
@@ -210,6 +210,7 @@ const Home = () => {
                 md: "45%",
                 xs: "100%"
               },
+
               flexShrink: 0,
             }}>
               <Box
@@ -217,13 +218,18 @@ const Home = () => {
                   display: "flex",
                   gap: {
                     sm: "40px",
-                    xs: "10px"
+                    xs: "35px"
                   },
                   flexBasis: {
                     xl: "45%"
                   },
                   flexGrow: 1,
                   justifyContent: "space-between",
+                  flexDirection:{
+                    xs:"column",
+                    sm:"row"
+                  },
+                  // border: "2px solid red",  
                 }}>
                 <Box sx={{
                   flexBasis: {
@@ -288,7 +294,7 @@ const Home = () => {
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 padding: "20px", borderRadius: "10px"
               }}>
-                <CustomChart data={graphdata}/>
+                <CustomChart data={graphdata} />
               </Box>
 
             </Box>

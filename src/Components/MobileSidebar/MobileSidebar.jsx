@@ -24,7 +24,7 @@ const MobileSidebar = () => {
     // console.log(auth.email)
     // console.log(auth.username)
 
-    setUsername(auth.username)
+    setUsername(auth.userName)
     setEmail(auth.email)
 
   }, [])

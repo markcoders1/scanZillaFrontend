@@ -13,13 +13,16 @@ const GiftCard = ({ id, title, description, bullets, openModal }) => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: 'center',
-                gap: "50px"
+                gap: "20px"
             }}
         >
             <Typography
                 sx={{
                     fontWeight: "400",
-                    fontSize: "20px",
+                    fontSize: {
+                        xs:"16px",
+                        sm:"20px"
+                    },
                     color: "#A0A4A9",
                 }}
             >
@@ -40,5 +43,5 @@ const GiftCard = ({ id, title, description, bullets, openModal }) => {
         </Box>
     );
 };
-
+// "1px solid #333333"
 export default GiftCard;

@@ -16,7 +16,7 @@ const CardIWithImageBackground = ({
             color: "white",
             padding: {
                 sm: "26px 32px",
-                xs: "5px 18px"
+                xs: "26px 32px"
             },
             display: "flex",
             flexDirection: "column",
