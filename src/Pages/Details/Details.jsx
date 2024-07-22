@@ -6,6 +6,7 @@ import ProfileCard from "../../Components/ProfileCard/ProfileCard";
 import GiftCard from "../../Components/GiftCard/GiftCard";
 import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
 import { ViewDetailModal } from "../../Components/ViewDetailModal/ViewDetailModal";
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -17,6 +18,8 @@ const Details = () => {
   const [creditsHistory, setCreditsHistory] = useState([]);
   const [analyzeHistory, setAnalyzeHistory] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [modalData, setModalData] = useState({});
 
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
@@ -27,6 +30,7 @@ const Details = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
+        setLoading(true);
         const response = await axiosInstance({
           url: `${appUrl}/getspecificUser`,
           method: "get",
@@ -34,12 +38,9 @@ const Details = () => {
             id: id,
           },
         });
-        // console.log(response.data);
         setUserData(response.data);
       } catch (error) {
         setError(error.toString());
-        console.log("error,", error);
-        console.log(`${appUrl}/getUser/${id}`);
       } finally {
         setLoading(false);
       }
@@ -47,38 +48,6 @@ const Details = () => {
 
     fetchDetails();
   }, [id]);
-
-  //   if (loading) {
-  //     return (
-  //       <Box
-  //         sx={{
-  //           display: 'flex',
-  //           justifyContent: 'center',
-  //           alignItems: 'center',
-  //           height: '100vh',
-  //         }}
-  //       >
-  //         <CircularProgress />
-  //       </Box>
-  //     );
-  //   }
-
-  //   if (error) {
-  //     return (
-  //       <Box
-  //         sx={{
-  //           display: 'flex',
-  //           justifyContent: 'center',
-  //           alignItems: 'center',
-  //           height: '100vh',
-  //         }}
-  //       >
-  //         <Typography variant="h6" color="error">
-  //           {error}
-  //         </Typography>
-  //       </Box>
-  //     );
-  //   }
 
   const openModal = (data) => {
     setModalData(data);
@@ -108,7 +77,6 @@ const Details = () => {
       setLoading(false);
       if (response) {
         setCreditsHistory(response?.data);
-        console.log(response.data);
         setSnackAlertData({
           open: true,
           message: response?.data?.message,
@@ -131,6 +99,7 @@ const Details = () => {
       });
     }
   };
+
   const fetchAnalyzeHistory = async () => {
     setSnackAlertData({
       open: false,
@@ -147,7 +116,6 @@ const Details = () => {
       });
       if (response) {
         setAnalyzeHistory(response.data.payments);
-        console.log(response.data.payments);
         setSnackAlertData({
           open: true,
           message: response?.data?.message,
@@ -170,6 +138,7 @@ const Details = () => {
       });
     }
   };
+
   useEffect(() => {
     fetchCreditsHistory();
     fetchAnalyzeHistory();
@@ -200,7 +169,6 @@ const Details = () => {
           sx={{
             display: "flex",
             gap: "2rem",
-
             marginTop: {
               sm: "70px",
               xs: "65px",
@@ -209,7 +177,6 @@ const Details = () => {
               lg: "row",
               xs: "column",
             },
-            // border: "2px solid red"
           }}
         >
           <Box
@@ -299,7 +266,7 @@ const Details = () => {
                   description={item.description}
                   bullets={item.bullets}
                   index={index}
-                  // openModal={openModal}
+                  openModal={openModal}
                 />
               ))}
         </Box>
@@ -348,13 +315,23 @@ const Details = () => {
               ))}
         </Box>
       </Box>
-      {/* <ViewDetailModal
+
+      <ViewDetailModal
         open={open}
         handleClose={handleClose}
         title={modalData.title}
         bullets={modalData.bullets}
         description={modalData.description}
-      /> */}
+      />
+
+      <SnackAlert
+        message={snackAlertData.message}
+        severity={snackAlertData.severity}
+        open={snackAlertData.open}
+        handleClose={() => {
+          setSnackAlertData((prev) => ({ ...prev, open: false }));
+        }}
+      />
     </Box>
   );
 };
