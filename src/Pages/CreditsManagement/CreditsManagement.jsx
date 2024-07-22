@@ -89,7 +89,22 @@ const CreditsManagement = () => {
         </Box>
 
         <Box>
-          <Box sx={{ flexBasis: { md: "218px" }, padding: "12px 16px 15px 16px", borderRadius: "10px", height: "322px", overflowY: "scroll", boxShadow: "4px 5px 15px 0px #C8C8C8" }}>
+          <Box sx={{
+            flexBasis: { md: "218px" }, padding: "12px 16px 15px 16px", borderRadius: "10px", height: "322px", overflowY: "scroll", boxShadow: "4px 5px 15px 0px #C8C8C8", "&::-webkit-scrollbar": {
+              width: "8px"
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "#DFDFDF",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "black",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#b30000"
+            },
+          }}>
             <Typography sx={{ fontSize: "23px", color: "#333333", fontWeight: "600", margin: "auto", textAlign: "center" }}>
               Enterprise
             </Typography>

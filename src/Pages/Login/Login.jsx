@@ -155,8 +155,7 @@ const Login = () => {
   }, [])
   return (
 
-    <Box
-    >
+    <Box>
       <Box
         sx={{
           display: "flex",
