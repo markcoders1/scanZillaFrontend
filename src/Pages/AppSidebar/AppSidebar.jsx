@@ -15,13 +15,15 @@ const AppSidebar = () => {
 
   const auth = useSelector((state) => state.auth);
 
-  const [admin, setAdmin] = useState(true)
+  const [admin, setAdmin] = useState(false)
 
   useEffect(() => {
     // console.log(auth)
 
     // console.log(auth.email)
     // console.log(auth.userName)
+
+    auth.role=="admin"?setAdmin(true):setAdmin(false)
 
     setUsername(auth.userName)
     setEmail(auth.email)

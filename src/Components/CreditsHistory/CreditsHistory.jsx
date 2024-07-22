@@ -20,11 +20,11 @@ const CreditsHistory = ({ index, item }) => {
     }
     return (
         <Box
-            sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: 'center'
-            }}
+        sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: 'center'
+        }}
         >
             <Typography
             sx={{

@@ -81,6 +81,7 @@ const Credits = () => {
             });
             setLoading(false);
             if (response) {
+                console.log("bro...",response?.data?.payments)
                 setCreditsHistory(response?.data?.payments)
                 setSnackAlertData({
                     open: true,
