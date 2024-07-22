@@ -61,7 +61,7 @@ const PackageSetting = () => {
             display: "flex",
             gap: ".5rem",
             flexDirection: "column",
-            flexBasis: "25%",
+            flexBasis: "50%",
           }}
         >
           <Heading Heading='Total Amount' />
@@ -69,19 +69,7 @@ const PackageSetting = () => {
             placeholder={price}
           />
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: ".5rem",
-            flexDirection: "column",
-            flexBasis: "25%",
-          }}
-        >
-          <Heading Heading='Button Text' />
-          <CustomInputShadow
-            placeholder={buttonText}
-          />
-        </Box>
+        
       </Box>
       <Box
         sx={{
