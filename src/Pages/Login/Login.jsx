@@ -43,12 +43,14 @@ const Login = () => {
         refreshToken: responseData?.data.refreshToken,
         authenticated: true,
         username: responseData?.data?.username,
-        email: responseData?.data?.email
+        email: responseData?.data?.email,
+
 
       }
-      console.log(responseData)
+      // console.log(responseData)
 
       dispatch(handleAuth(data))
+
 
       dispatch(
         handleSnackAlert({

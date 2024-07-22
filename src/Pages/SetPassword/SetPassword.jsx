@@ -89,7 +89,7 @@ const SetPassword = () => {
       });
       response = response?.data;
       console.log(response)
-
+      navigate("/login")
       setIsLoading(false);
       setData({
         password: "",
