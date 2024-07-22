@@ -25,7 +25,8 @@ const UserTable = () => {
   const [orderBy, setOrderBy] = useState("createdAt");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const [Loading, setLoading] = useState()
+  const [loading, setLoading] = useState(false);
+
   const toggleBlock = async (userId) => {
     try {
       const response = await axiosInstance({
@@ -43,15 +44,16 @@ const UserTable = () => {
 
   const fetchUsers = async () => {
     try {
-      setLoading(false)
+      setLoading(true);
       const response = await axiosInstance({
         url: appUrl + "/getallusers",
         method: "get",
       });
       setUsers(response.data);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -64,10 +66,18 @@ const UserTable = () => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
     const sortedUsers = [...users].sort((a, b) => {
-      if (isAsc) {
-        return new Date(a[property]) - new Date(b[property]);
+      if (property === "createdAt") {
+        const dateA = new Date(a[property]);
+        const dateB = new Date(b[property]);
+        return isAsc ? dateA - dateB : dateB - dateA;
       } else {
-        return new Date(b[property]) - new Date(a[property]);
+        if (a[property] < b[property]) {
+          return isAsc ? -1 : 1;
+        }
+        if (a[property] > b[property]) {
+          return isAsc ? 1 : -1;
+        }
+        return 0;
       }
     });
     setUsers(sortedUsers);
@@ -123,20 +133,7 @@ const UserTable = () => {
 
   return (
     <>
-      {Loading ? (
-        <Box
-          sx={{
-            display: "flex",
-            height: "70vh",
-            width: "100%",
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <LoaderMain />
-
-        </Box>
-      ) : (
+    
         <Box
           sx={{
             position: "relative",
@@ -325,7 +322,7 @@ const UserTable = () => {
             </Table>
           </TableContainer>
         </Box>
-      )}
+      
     </>
   );
 };

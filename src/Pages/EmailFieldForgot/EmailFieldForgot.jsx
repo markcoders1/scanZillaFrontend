@@ -51,27 +51,21 @@ const SetPassword = () => {
 
 
         try {
-              let response = await axiosInstance({ url: appUrl + "/genOTP", method: "post"});
-              response = response?.data
-            //   const responseData = {
-            //     user: response?.user,
-            //     accessToken: response?.accessToken,
-            //     refreshToken: response?.refreshToken,
-            //     authenticated: true,
-            //   };
-            //   dispatch(handleAuth(responseData));
-            //   dispatch(
-            //     handleSnackAlert({
-            //       open: true,
-            //       message: response.message,
-            //       severity: "success",
-            //     })
-            //   );
+              let response = await axiosInstance({ url: appUrl + "/genOTP", method: "post", data: {
+                email : data.email
+
+              }});
+            //   response = response?.data
+              console.log(response)
+              dispatch(handleAuth({ email: data.email }));
+              
+           
             setIsLoading(false)
             setData({
                 password: "",
-                confirmPassword: "",
+                
             });
+            navigate("/otp")
             //   navigate("/text-analyze");
             //   sessionStorage.setItem("accessToken", response?.accessToken);
             //   sessionStorage.setItem("refreshToken", response?.refreshToken);
