@@ -329,7 +329,7 @@ const CreditsManagement = () => {
       <Box>
         <Box
           sx={{
-            height: "171px",
+            height: "181px",
             display: "flex",
             flexDirection: "column",
             paddingLeft: "26px",
@@ -384,6 +384,14 @@ const CreditsManagement = () => {
             sx={{ fontSize: "20px", fontWeight: "500", color: "#A0A4A9" }}
           >
             Per Analysis
+          </Typography>
+          <Typography sx={{
+            mt:"10px",
+            display:"flex",
+            justifyContent:"end",
+            mr:"30px "
+          }}>
+            <CustomButton border={"1px solid #333333"} borderRadius={"10px"} ButtonText={"Save"} fontSize={"15px"} fontWeight={"500"} color={"#ffff"} margin={"auto"} background={"linear-gradient(to right, #1A0049, #3F016A)"} padding="5px 25px" />
           </Typography>
         </Box>
       </Box>
