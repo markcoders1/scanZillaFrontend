@@ -2,11 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
 
-const RestrictedKeyword = ({content}) => {
-    const handleClick = () => {
-       alert("remove button clicked at restricted keyword")
-    };
-
+const RestrictedKeyword = ({ content, onRemove }) => {
     return (
         <Box
             sx={{
@@ -33,7 +29,7 @@ const RestrictedKeyword = ({content}) => {
                     fontSize={"12px"}
                     variant={"outlined"}
                     fontWeight={"500"}
-                    onClick={handleClick}
+                    onClick={onRemove}
                 />
             </Typography>
         </Box>

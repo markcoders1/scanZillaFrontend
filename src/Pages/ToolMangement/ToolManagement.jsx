@@ -1,10 +1,13 @@
 import { Box, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from '../../Components/Heading/Heading';
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import SearchIcon from '../../assets/images/searchIcon.png';
 import RestrictedKeyword from '../../Components/RestrictedKeyword/RestrictedKeyword';
+import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ToolManagement = () => {
   const [inputs, setInputs] = useState({
@@ -13,6 +16,8 @@ const ToolManagement = () => {
     descriptionCharacters: '',
     searchTerms: '',
   });
+  const [restrictedKeywords, setRestrictedKeywords] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,11 +31,47 @@ const ToolManagement = () => {
     console.log('Input Data:', inputs);
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const fetchRestrictedKeywords = async () => {
+    try {
+      let response = await axiosInstance({ url: appUrl + "/words", method: "get" });
+      console.log(response.data);
+      setRestrictedKeywords(response.data);
+    } catch (error) {
+      console.error('Error fetching restricted keywords:', error);
+    }
+  }
+
+  const handleRemoveKeyword = async (keyword) => {
+    try {
+      const response = await axiosInstance({ url: appUrl + "/words", method: "delete", body: { word: keyword } });
+      console.log(response)
+      setRestrictedKeywords(prevKeywords => prevKeywords.filter(kw => kw !== keyword));
+    } catch (error) {
+      console.error('Error removing keyword:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRestrictedKeywords();
+  }, []);
+
+  const filteredKeywords = restrictedKeywords.filter(keyword =>
+    keyword.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <Box
       sx={{
         display: 'flex',
         gap: '3rem',
+        flexDirection: {
+          md: "row",
+          xs: "column"
+        }
       }}
     >
       <Box
@@ -115,11 +156,16 @@ const ToolManagement = () => {
               position: "relative"
             }}
           >
-            <input type="search" name="search" id="search"
+            <input
+              type="search"
+              name="search"
+              id="search"
+              value={searchTerm}
+              onChange={handleSearchChange}
               style={{
                 color: "#A0A4A9",
                 fontSize: "18px",
-                padding: "9px 27px",
+                padding: "9px 45px 9px 27px",
                 borderRadius: "44px",
                 boxShadow: "4px 5px 15px 0px #C8C8C8 inset",
                 border: "none",
@@ -168,8 +214,8 @@ const ToolManagement = () => {
                 gap: "35px",
               }}
             >
-              {Array.from({ length: 10 }).map((_, index) => (
-                <RestrictedKeyword key={index} content={`Keyword ${index + 1}`} />
+              {filteredKeywords.map((keyword, index) => (
+                <RestrictedKeyword key={index} content={keyword} onRemove={() => handleRemoveKeyword(keyword)} />
               ))}
             </Box>
           </Box>
@@ -178,7 +224,6 @@ const ToolManagement = () => {
             sx={{
               position: "relative",
               marginTop: "30px"
-
             }}
           >
             <input type="search" name="search" id="search"
@@ -210,9 +255,8 @@ const ToolManagement = () => {
                 width={"90px"}
                 color='white'
                 background="linear-gradient(to right, #1A0049, #3F016A)"
-                // onClick={handleSave}
+              // onClick={handleSave}
               />
-
             </Typography>
           </Box>
         </Box>

@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, TextField, Typography, Checkbox } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
-import background from "../../assets/images/LoginImg.png";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
@@ -16,13 +16,13 @@ import LoaderW from "../../Components/Loader/LoaderW";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const SetPassword = () => {
     const [data, setData] = useState({
-        password: "",
-        confirmPassword: "",
+        email: "",
+
     });
 
     const [errors, setErrors] = useState({
-        password: "",
-        confirmPassword: "",
+        email: "",
+
     });
 
     const [isLoading, setIsLoading] = useState(false)
@@ -35,30 +35,24 @@ const SetPassword = () => {
         setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
     };
 
-    const handleSetPassword = async () => {
+    const handleEmailSubmit = async () => {
         setIsLoading(true)
 
-        setErrors({ password: "", confirmPassword: "" })
-        if (data?.password === "" && data?.confirmPassword === "") {
+        setErrors({ email: "" })
+        if (data?.email === "") {
             setIsLoading(false)
-            return setErrors({ password: "Password can not be empty", confirmPassword: "Confirm Password can not be empty" })
+            return setErrors({ email: "Email can not be empty" })
 
         }
-        if (data?.password === "") {
-            setIsLoading(false)
-            return setErrors({ confirmPassword: "", password: "Password can not be empty" })
-        }
-        if (data?.confirmPassword === "") {
-            setIsLoading(false)
-            return setErrors({ confirmPassword: "Confirm Password can not be empty", password: "" })
-        }
-        console.log("password", data.password)
-        console.log("confirmPassword", data.confirmPassword)
+
+
+        console.log("email", data.email)
+
 
 
         try {
-            //   let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
-            //   response = response?.data
+              let response = await axiosInstance({ url: appUrl + "/genOTP", method: "post"});
+              response = response?.data
             //   const responseData = {
             //     user: response?.user,
             //     accessToken: response?.accessToken,
@@ -83,6 +77,7 @@ const SetPassword = () => {
             //   sessionStorage.setItem("refreshToken", response?.refreshToken);
 
         } catch (error) {
+            console.log(error)
             //   const errorData = error.response.data
             //   if (error.response.data.errorType.includes("email")) {
             //     setErrors({ password: "", email: error.response.data.message })
@@ -90,7 +85,7 @@ const SetPassword = () => {
             //   if (error.response.data.errorType.includes("password")) {
             //     setErrors({ email: "", password: error.response.data.message })
             //   }
-            //   setIsLoading(false)
+              setIsLoading(false)
 
             //   return dispatch(
             //     handleSnackAlert({
@@ -135,11 +130,14 @@ const SetPassword = () => {
 
                         color: "#1B004D",
                         lineHeight: "36.9px",
-                        fontSize: "40px",
+                        fontSize:{
+                            sm:"40px",
+                            xs:"30px"
+                        },
                         fontWeight: "600",
                     }}
                 >
-                    Set Password
+                    Submit Email For OTP
                 </Typography>
                 <Typography
                     sx={{
@@ -148,7 +146,7 @@ const SetPassword = () => {
                         fontWeight: "400",
                     }}
                 >
-                    Please enter your new password
+                    Enter Your Email for Send OTP
                 </Typography>
             </Typography>
 
@@ -173,43 +171,20 @@ const SetPassword = () => {
                             color: "#666666",
                             fontWeight: "400"
                         }}
-                    >Password</label>
+                    >Email</label>
                     <CustomTextField
                         ref={inputRef}
                         handlekeydown={handlekeydown}
-                        error={errors?.password}
+                        error={errors?.email}
                         onChange={handleInput}
-                        name={"password"}
-                        value={data.password}
+                        name={"email"}
+                        value={data.email}
                         rows={1}
-                        type="password"
-                        showPasswordToggle={true} // Add this prop
+                        type="email"
+                        showPasswordToggle={false} // Add this prop
                     />
                 </Typography>
-                <Typography
-                    sx={{
-                        display: "flex",
-                        gap: "5px",
-                        flexDirection: "column",
-                    }}
-                >
-                    <label
-                        style={{
-                            color: "#666666",
-                            fontWeight: "400"
-                        }}
-                    >Confirm Password</label>
-                    <CustomTextField
-                        handlekeydown={handlekeydown}
-                        error={errors?.confirmPassword}
-                        onChange={handleInput}
-                        name={"confirmPassword"}
-                        type="password"
-                        value={data.confirmPassword}
-                        rows={1}
-                        showPasswordToggle={true} // Add this prop
-                    />
-                </Typography>
+
             </Box>
             <Box>
                 <Button
@@ -234,9 +209,9 @@ const SetPassword = () => {
                         marginTop: "80px"
                     }}
                     variant="contained"
-                    onClick={handleSetPassword}
+                    onClick={handleEmailSubmit}
                 >
-                    {isLoading ? <LoaderW /> : "Confirm Password"}
+                    {isLoading ? <LoaderW /> : "Submit"}
                 </Button>
             </Box>
 

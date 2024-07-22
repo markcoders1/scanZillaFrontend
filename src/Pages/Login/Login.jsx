@@ -295,7 +295,7 @@ const Login = () => {
               cursor: "pointer",
 
             }}
-          ><NavLink to="otp" >Forgot Password</NavLink></Typography>
+          ><NavLink to="submit-email-for-otp" >Forgot Password</NavLink></Typography>
         </Box>
         <Box sx={{
           position: "relative",

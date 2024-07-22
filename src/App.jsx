@@ -11,6 +11,7 @@ const Signup = React.lazy(() => import('./Pages/Signup/Signup'));
 const OTP = React.lazy(() => import('./Pages/OTP/OTP'));
 const SetPassword = React.lazy(() => import('./Pages/SetPassword/SetPassword'));
 const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'));
+import EmailFieldForgot from './Pages/EmailFieldForgot/EmailFieldForgot'
 
 import Analyzed from './Pages/Analyze/Analyze';
 import History from './Pages/History/History';
@@ -44,6 +45,7 @@ function App() {
               <Route path='signup' element={<Signup />} />
               <Route path='otp' element={<OTP />} />
               <Route path='setpassword' element={<SetPassword />} />
+              <Route path='submit-email-for-otp' element={<EmailFieldForgot />} />
             </Route>
 
             <Route path='/' element={<DashboardLayout />}>
