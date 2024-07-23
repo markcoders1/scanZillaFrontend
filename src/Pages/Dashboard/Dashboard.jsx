@@ -187,123 +187,95 @@ const Home = () => {
       ) : (
         <Box sx={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: {
+            xs: "column",
+            md: "row"
+          },
           gap: "40px",
-          border: "2px solid red"
+          // border: "2px solid red",
+
         }}>
+
           <Box sx={{
             display: "flex",
-            justifyContent: "space-between",
-            flexDirection: {
-              xs: "column",
-              md: "column",
-
-            }, border: "2px solid blue",
-            gap: "30px",
-            border: "2px solid red",
+            flexDirection: "column",
+            gap: {
+              md: "40px",
+              xs: "40px"
+            },
+            flexGrow: 1,
             flexBasis: {
               md: "50%",
               xs: "100%"
             },
+            // border: "2px solid black",
+
+
+            flexShrink: 1,
           }}>
+
             <Box sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: {
-                md: "40px",
-                xs: "40px"
-              },
-              // flexGrow: 1,
-              flexBasis: {
-                md: "45%",
-                xs: "100%"
-              },
-              // border: "2px solid black",
 
-
-              flexShrink: 0,
+              flexGrow: 2,
+              flexShrink: "1",
+              height: "150px",
             }}>
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: {
-                    sm: "30px",
-                    xs: "30px"
-                  },
-                  // flexBasis: {
-                  //   xl: "45%"
-                  // },
-                  // flexGrow: 1,
-                  // // justifyContent: "space-between",
-                  flexDirection: {
-                    xs: "column",
-                    sm: "column"
-                  },
-                  // border: "2px solid yellow", 
+              <CardIWithImageBackground
+                text={username}
+                title="Hello,"
+              />
+            </Box>
+            <Box sx={{
+              flexBasis: {
+                xl: "154px"
+              },
+              flexGrow: 1,
+              flexShrink: "1",
 
+
+            }}
+              onClick={() => navigate("/credits")}>
+
+              <Box sx={{
+                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                padding: {
+                  sm: "34px 26px",
+                  xs: "20px 10px"
+                },
+                borderRadius: "10px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "start",
+                height: "212px",
+                // justifyContent: "center",
+                gap: "20px"
+              }}>
+
+                <Typography sx={{
+                  color: "#333333",
+                  fontWeight: "600",
+                  fontSize: "27px",
+                  lineHeight: "30px",
+                  letterSpacing: "0.34px"
                 }}>
-                <Box sx={{
+                  Total Credits
+                </Typography>
 
-                  flexGrow: 2,
-                  flexShrink: "1",
-                  height: "150px",
+                <Typography sx={{
+                  fontWeight: "600",
+                  fontSize: "80px",
+                  lineHeight: "65px",
+                  color: "#190247",
+                  letterSpacing: "0.67px"
                 }}>
-                  <CardIWithImageBackground
-                    text={username}
-                    title="Hello,"
-                  />
-                </Box>
-                <Box sx={{
-                  flexBasis: {
-                    xl: "154px"
-                  },
-                  flexGrow: 1,
-                  flexShrink: "1",
-
-
-                }}
-                  onClick={() => navigate("/credits")}>
-
-                  <Box sx={{
-                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-                    padding: {
-                      sm: "34px 26px",
-                      xs: "20px 10px"
-                    },
-                    borderRadius: "10px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "start",
-                    height: "212px",
-                    // justifyContent: "center",
-                    gap: "20px"
-                  }}>
-
-                    <Typography sx={{
-                      color: "#333333",
-                      fontWeight: "600",
-                      fontSize: "27px",
-                      lineHeight: "30px",
-                      letterSpacing: "0.34px"
-                    }}>
-                      Total Credits
-                    </Typography>
-
-                    <Typography sx={{
-                      fontWeight: "600",
-                      fontSize: "80px",
-                      lineHeight: "65px",
-                      color: "#190247",
-                      letterSpacing: "0.67px"
-                    }}>
-                      {credits}
-                    </Typography>
-
-                  </Box>
-                </Box>
+                  {credits}
+                </Typography>
 
               </Box>
-              {/* <Box sx={{
+            </Box>
+
+
+            {/* <Box sx={{
                 maxHeight: "400px",
                 minHeight: "350px",
                 boxSizing: "border-box",
@@ -312,13 +284,20 @@ const Home = () => {
               }}>
                 <CustomChart data={graphdata} />
               </Box> */}
-              <Box sx={{
-                flexBasis: "100%", height: "300px", flexGrow: 1, display: "flex", gap: "20px", flexDirection: "column", boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px"
-                , height: "312px",
+            <Box sx={{
+              flexBasis: "254px",
+              flexGrow: 1,
+              display: "flex",
+              gap: "20px",
+              flexDirection: "column",
+              boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+              padding: "20px",
+              borderRadius: "10px",
+              justifyContent:"center",
+              paddingLeft:"26px"
+            }}>
 
-              }}>
-
-                {/* <Typography sx={{
+              {/* <Typography sx={{
                   fontSize: "20px",
                   fontWeight: "500",
                   lineHeight: "30px",
@@ -326,21 +305,21 @@ const Home = () => {
                 }}>
                   Total Analyzed
                 </Typography> */}
-                <Typography sx={{
-                  color: "#190247",
-                  fontSize: "40px",
-                  lineHeight: "50px",
-                  fontWeight: "600"
-                }}>
-                  {numberOfAnalyzed} Analyzed <br />
-                  So far
-                </Typography>
+              <Typography sx={{
+                color: "#190247",
+                fontSize: "40px",
+                lineHeight: "50px",
+                fontWeight: "600"
+              }}>
+                {numberOfAnalyzed} Analyzed <br />
+                So far
+              </Typography>
 
-              </Box>
             </Box>
-
-
           </Box>
+
+
+
 
           <Box sx={{
             display: "flex",
@@ -353,6 +332,7 @@ const Home = () => {
               md: "50%",
               xs: "100%"
             },
+            // border: "2px solid red"
           }}>
 
             <Box
@@ -362,7 +342,7 @@ const Home = () => {
                 },
                 flexShrink: 0,
                 flexGrow: 1,
-                height: "550px",
+                height: "500px",
                 p: "30px 30px 30px 30px",
                 display: "flex",
                 flexDirection: "column",
@@ -370,7 +350,7 @@ const Home = () => {
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 borderRadius: "10px",
                 position: "relative",
-                border: "2px solid red"
+                // border: "2px solid red"
 
               }}
             >
@@ -434,7 +414,10 @@ const Home = () => {
                 sx={{
                   position: "absolute",
                   bottom: "30px",
-                  width: "90%"
+                  width: "90%",
+                  left:"0px",
+                  right:"0px",
+                  margin:"auto"
                 }}
               >
                 <CustomButton

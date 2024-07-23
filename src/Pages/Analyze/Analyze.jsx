@@ -225,12 +225,17 @@ const Analyze = () => {
           <Box sx={{
             display: 'flex',
             gap: "20px",
-            justifyContent: "space-between",
+            justifyContent: {
+              md:"space-between",
+              
+            },
             flexDirection: {
               sm: "row",
               xs: "column-reverse"
             },
-            mt: "20px"
+            mt: "20px",
+            // border:"1px solid red",
+            alignItems:"end"
           }}>
             <Typography
               sx={{
