@@ -12,6 +12,7 @@ import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import { useNavigate } from "react-router-dom";
 // this is the loader here 
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import CustomInputShadow from "../../Components/CustomInputShadow/CustomInputShadow";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
@@ -40,20 +41,24 @@ const Analyze = () => {
     open: false,
   });
   const [editorLoading, setEditorLoading] = useState(true);
+  const handleInputChange = (e) => {
+    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+  };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setEditorLoading(false);
-    }, 2000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setEditorLoading(false);
+  //   }, 2000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   const handleData = (errorsData) => {
     const generatedErrors = errorsData?.error
-    setErrors(prev=>({...prev,
+    setErrors(prev => ({
+      ...prev,
       title: generatedErrors.TE,
-      bulletpoints:generatedErrors.BE ,
+      bulletpoints: generatedErrors.BE,
       description: generatedErrors.DE,
       keywords: generatedErrors.KE,
       category: generatedErrors.CE
@@ -69,6 +74,7 @@ const Analyze = () => {
 
     try {
       setIsLoading(true);
+      console.log(data)
       const response = await axiosInstance({
         url: appUrl + "/verifyText",
         method: "post",
@@ -76,7 +82,7 @@ const Analyze = () => {
       });
       console.log(response)
       setIsLoading(false);
-      if(response.data.error){
+      if (response.data.error) {
         handleData(response.data);
       }
       setSnackAlertData({
@@ -161,9 +167,9 @@ const Analyze = () => {
       <Box
         sx={{
           padding: "0px 0px",
-          display:"flex",
-          flexDirection:"column",
-          gap:".7rem"
+          display: "flex",
+          flexDirection: "column",
+          gap: ".7rem"
         }}
       >
         <CustomSelect categoryError={errors?.category} data={category} handleChange={handleCategoryChange} />
@@ -186,7 +192,7 @@ const Analyze = () => {
               name="title"
               value={data?.title}
               error={errors?.title}
-              placeholder="Add Title"
+              placeholder="Insert Title Here"
               border=""
               boxShadow={true}
             />
@@ -200,7 +206,8 @@ const Analyze = () => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "15px"
+                gap: "15px",
+                mt: "10px"
               }}
             >
               <CustomTextField
@@ -218,14 +225,23 @@ const Analyze = () => {
           <Box sx={{
             display: 'flex',
             gap: "20px",
-            justifyContent: "end",
+            justifyContent: "space-between",
             flexDirection: {
               sm: "row",
               xs: "column-reverse"
             },
             mt: "20px"
           }}>
-            
+            <Typography
+              sx={{
+                fontWeight: "500",
+                fontSize: "16px",
+                color: "#A0A4A9"
+              }}
+            >
+              Add More (up to 10 in total)
+            </Typography>
+
             <Box sx={{
               display: "flex",
               gap: "20px"
@@ -240,7 +256,7 @@ const Analyze = () => {
                       lg: "12px 20px"
                     }
                   }}
-                  ButtonText="Remove Bullet"
+                  ButtonText="Remove Last Bullet"
                   fontSize
                   color="#1A0049"
                   fontWeight
@@ -250,6 +266,7 @@ const Analyze = () => {
                   onClick={removeBullet}
                   hoverBg="#1A0049"
                   hovercolor="white"
+                  width={"189px"}
                 />
               )}
 
@@ -265,7 +282,7 @@ const Analyze = () => {
                     lg: "12px 20px"
                   },
                 }}
-                ButtonText="Add Bullet"
+                ButtonText="Add A Bullet +"
                 fontSize
                 color="white"
                 fontWeight
@@ -273,49 +290,43 @@ const Analyze = () => {
                 variant="contained"
                 padding
                 onClick={addBullet}
+              // width={"143px"}
+
               />
             </Box>
           </Box>
         </Box>
         <Box>
           <Heading Heading="Product Description" />
-
-          {editorLoading ? (
-            <Box
-            sx={{
-                // border:"2px solid red",
-                height:"300px",
-                boxShadow:"4px 5px 15px 0px #C8C8C8",
-                borderRadius:"10px",
-                display:"flex",
-                justifyContent:"center",
-                alignItems:"center"
-            }}
-            >
-
-              <LoaderMain />
-
-            </Box>
-          ) : (
-            <Editor
-              apiKey={tinyMCEAPIKey}
-              init={{
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                  { value: 'First.Name', title: 'First Name' },
-                  { value: 'Email', title: 'Email' },
-                ],
-                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-              }}
-              initialValue=""
-              onEditorChange={(content, editor) => {
-                const plainText = editor.getContent({ format: 'text' });
-                setData(prev => ({ ...prev, description: plainText }));
-              }}
+          <Box
+          sx={{
+            mt:"10px"
+          }}
+          >
+            <CustomInputShadow
+              type="text"
+              multiline={true}
+              rows={10}  // Adjust the number of rows to match the desired height
+              onChange={handleInputChange}
+              value={data.description}
+              height={"360px"}
+              error={errors.description}
+              name={"description"}
             />
+          </Box>
+
+          {errors.description && (
+            <Typography
+              sx={{
+                background: "whitesmoke",
+                p: "10px",
+                color: "red",
+                mt: "8px",
+                wordBreak: "break-word"
+              }}
+            >
+              {errors.description}
+            </Typography>
           )}
 
           {
@@ -361,7 +372,7 @@ const Analyze = () => {
             marginTop: "40px"
           }}
         >
-          {!isLoading?<CustomButton
+          {!isLoading ? <CustomButton
             border="2px solid #1A0049"
             borderRadius="10px"
             background="#1A0049"
@@ -381,27 +392,28 @@ const Analyze = () => {
             variant="contained"
             padding
             onClick={handleAnalyze}
-          />:<div style={{border:"2px solid #1A0049",
-            borderRadius:"10px",
-            background:"#1A0049",
-            hoverBg:"white",
-            hovercolor:"#1A0049",
-            color:"white",
-            width:"100%",
-            padding:"19px 20px",
-            display:"flex",
-            justifyContent:"center"
-            }}><div className="loader"/></div>}
+          /> : <div style={{
+            border: "2px solid #1A0049",
+            borderRadius: "10px",
+            background: "#1A0049",
+            hoverBg: "white",
+            hovercolor: "#1A0049",
+            color: "white",
+            width: "100%",
+            padding: "19px 20px",
+            display: "flex",
+            justifyContent: "center"
+          }}><div className="loader" /></div>}
         </Box>
 
-        
 
-      <SnackAlert
-            message={snackAlertData.message}
-            severity={snackAlertData.severity}
-            open={snackAlertData.open}
-            handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
-          />
+
+        <SnackAlert
+          message={snackAlertData.message}
+          severity={snackAlertData.severity}
+          open={snackAlertData.open}
+          handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+        />
       </Box>
     </Box>
   )

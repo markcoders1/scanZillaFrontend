@@ -1,58 +1,49 @@
-import { Box, Button, Typography } from '@mui/material'
-import React from 'react'
+import { Box, Button, Typography } from '@mui/material';
+import React from 'react';
 
 const CustomButton = ({
     border = "",
-    borderRadius="",
+    borderRadius = "",
     buttonTextStyle = {},
     buttonStyle = {},
-    ButtonText="",
-    fontSize="",
-    color="",
-    fontWeight="",
+    ButtonText = "",
+    fontSize = "",
+    color = "",
+    fontWeight = "",
     fullWidth = false,
     variant = "outlined",
-    padding="",
-    onClick=()=>{},
-    background="",
-    hoverBg="",
-    hovercolor="",
+    padding = "",
+    onClick = () => {},
+    background = "",
+    hoverBg = "",
+    hovercolor = "",
     type,
     width,
-    loading=false
-
-
-
-
-
+    loading = false
 }) => {
     return (
         <Button variant={variant} fullWidth={fullWidth}
-        onClick={onClick}
-        sx={{
-            border: border,
-            borderRadius,
-            padding,
-            fontSize,
-            color,
-            ButtonText,
-            background,
-            fontWeight,
-            type,
-            width,
-            ...buttonStyle,
-            textTransform:"lowercase",
-
-            '&:hover':{
-                background:hoverBg,
-                color:hovercolor
-            }
-            
-
-        }} type={`${type}`}>{loading?"Loading...":ButtonText}</Button>
+            onClick={onClick}
+            sx={{
+                border: border,
+                borderRadius,
+                padding,
+                fontSize,
+                color,
+                background,
+                fontWeight,
+                type,
+                width,
+                textTransform: "none",  // Ensures the text is displayed as provided
+                ...buttonStyle,
+                '&:hover': {
+                    background: hoverBg,
+                    color: hovercolor
+                }
+            }} type={`${type}`}>
+            {loading ? "Loading..." : ButtonText}
+        </Button>
     )
 }
 
-export default CustomButton
-
-
+export default CustomButton;

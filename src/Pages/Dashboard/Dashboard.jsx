@@ -177,7 +177,8 @@ const Home = () => {
             height: "70vh",
             width: "100%",
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            flexDirection: "column"
           }}
         >
           <LoaderMain />
@@ -186,17 +187,24 @@ const Home = () => {
       ) : (
         <Box sx={{
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           gap: "40px",
+          border: "2px solid red"
         }}>
           <Box sx={{
             display: "flex",
             justifyContent: "space-between",
             flexDirection: {
               xs: "column",
-              md: "row"
+              md: "column",
+
+            }, border: "2px solid blue",
+            gap: "30px",
+            border: "2px solid red",
+            flexBasis: {
+              md: "50%",
+              xs: "100%"
             },
-            gap: "40px",
           }}>
             <Box sx={{
               display: "flex",
@@ -205,11 +213,13 @@ const Home = () => {
                 md: "40px",
                 xs: "40px"
               },
-              flexGrow: 1,
+              // flexGrow: 1,
               flexBasis: {
                 md: "45%",
                 xs: "100%"
               },
+              // border: "2px solid black",
+
 
               flexShrink: 0,
             }}>
@@ -217,26 +227,26 @@ const Home = () => {
                 sx={{
                   display: "flex",
                   gap: {
-                    sm: "40px",
-                    xs: "35px"
+                    sm: "30px",
+                    xs: "30px"
                   },
-                  flexBasis: {
-                    xl: "45%"
+                  // flexBasis: {
+                  //   xl: "45%"
+                  // },
+                  // flexGrow: 1,
+                  // // justifyContent: "space-between",
+                  flexDirection: {
+                    xs: "column",
+                    sm: "column"
                   },
-                  flexGrow: 1,
-                  justifyContent: "space-between",
-                  flexDirection:{
-                    xs:"column",
-                    sm:"row"
-                  },
-                  // border: "2px solid red",  
+                  // border: "2px solid yellow", 
+
                 }}>
                 <Box sx={{
-                  flexBasis: {
-                    xl: "243px"
-                  },
-                  flexGrow: 3,
-                  flexShrink: "1"
+
+                  flexGrow: 2,
+                  flexShrink: "1",
+                  height: "150px",
                 }}>
                   <CardIWithImageBackground
                     text={username}
@@ -248,37 +258,43 @@ const Home = () => {
                     xl: "154px"
                   },
                   flexGrow: 1,
-                  flexShrink: "1"
-                }}>
+                  flexShrink: "1",
+
+
+                }}
+                  onClick={() => navigate("/credits")}>
 
                   <Box sx={{
                     boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                     padding: {
-                      sm: "22px 26px",
+                      sm: "34px 26px",
                       xs: "20px 10px"
                     },
                     borderRadius: "10px",
                     display: "flex",
                     flexDirection: "column",
-                    alignItems: "center",
-                    height: "100%",
-                    justifyContent: "center",
+                    alignItems: "start",
+                    height: "212px",
+                    // justifyContent: "center",
+                    gap: "20px"
                   }}>
 
                     <Typography sx={{
-                      color: "#A0A4A9",
-                      fontWeight: "500",
-                      fontSize: "20px",
-                      lineHeight: "30px"
+                      color: "#333333",
+                      fontWeight: "600",
+                      fontSize: "27px",
+                      lineHeight: "30px",
+                      letterSpacing: "0.34px"
                     }}>
-                      Credits
+                      Total Credits
                     </Typography>
 
                     <Typography sx={{
                       fontWeight: "600",
-                      fontSize: "50px",
+                      fontSize: "80px",
                       lineHeight: "65px",
-                      color: "#190247"
+                      color: "#190247",
+                      letterSpacing: "0.67px"
                     }}>
                       {credits}
                     </Typography>
@@ -287,7 +303,7 @@ const Home = () => {
                 </Box>
 
               </Box>
-              <Box sx={{
+              {/* <Box sx={{
                 maxHeight: "400px",
                 minHeight: "350px",
                 boxSizing: "border-box",
@@ -295,25 +311,66 @@ const Home = () => {
                 padding: "20px", borderRadius: "10px"
               }}>
                 <CustomChart data={graphdata} />
-              </Box>
+              </Box> */}
+              <Box sx={{
+                flexBasis: "100%", height: "300px", flexGrow: 1, display: "flex", gap: "20px", flexDirection: "column", boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px"
+                , height: "312px",
 
+              }}>
+
+                {/* <Typography sx={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  lineHeight: "30px",
+                  color: "#A0A4A9"
+                }}>
+                  Total Analyzed
+                </Typography> */}
+                <Typography sx={{
+                  color: "#190247",
+                  fontSize: "40px",
+                  lineHeight: "50px",
+                  fontWeight: "600"
+                }}>
+                  {numberOfAnalyzed} Analyzed <br />
+                  So far
+                </Typography>
+
+              </Box>
             </Box>
+
+
+          </Box>
+
+          <Box sx={{
+            display: "flex",
+            gap: "40px",
+            flexDirection: {
+              xs: "column",
+              md: "column"
+            },
+            flexBasis: {
+              md: "50%",
+              xs: "100%"
+            },
+          }}>
 
             <Box
               sx={{
                 flexBasis: {
-                  md: "45%",
+                  md: "80%",
                 },
                 flexShrink: 0,
                 flexGrow: 1,
-                maxHeight: "550px",
+                height: "550px",
                 p: "30px 30px 30px 30px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "40px",
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 borderRadius: "10px",
-                position: "relative"
+                position: "relative",
+                border: "2px solid red"
 
               }}
             >
@@ -350,19 +407,36 @@ const Home = () => {
                 paddingRight: "10px"
               }}>
 
-                {analyzeHistory.map((item, index) => (
-                  <GiftCard
-                    key={item._id}
-                    id={item._id}
-                    title={item.title}
-                    description={item.description}
-                    bullets={item.bullets}
-                    index={index}
-                    openModal={openModal}
-                  />
-                ))}
+                {
+                  analyzeHistory.length < 1 ? (
+                    <Box>
+                      You Have Not Analyzed Yet
+                    </Box>
+                  ) : (
+                    analyzeHistory.map((item, index) => (
+                      <GiftCard
+                        key={item._id}
+                        id={item._id}
+                        title={item.title}
+                        description={item.description}
+                        bullets={item.bullets}
+                        index={index}
+                        openModal={openModal}
+                      />
+                    ))
+                  )
+                }
+
+
+
               </Box>
-              <Box>
+              <Box
+                sx={{
+                  position: "absolute",
+                  bottom: "30px",
+                  width: "90%"
+                }}
+              >
                 <CustomButton
                   fullWidth={true}
                   border="2px solid #333333"
@@ -385,37 +459,6 @@ const Home = () => {
                   background="#1A0049"
                 />
               </Box>
-            </Box>
-          </Box>
-
-          <Box sx={{
-            display: "flex",
-            gap: "40px",
-            flexDirection: {
-              xs: "column",
-              md: "row"
-            }
-          }}>
-
-            <Box sx={{ flexBasis: "45%", flexGrow: 1, display: "flex", gap: "20px", flexDirection: "column", boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px" }}>
-
-              <Typography sx={{
-                fontSize: "20px",
-                fontWeight: "500",
-                lineHeight: "30px",
-                color: "#A0A4A9"
-              }}>
-                Total Analyzed
-              </Typography>
-              <Typography sx={{
-                color: "#190247",
-                fontSize: "40px",
-                lineHeight: "50px",
-                fontWeight: "600"
-              }}>
-                {numberOfAnalyzed} Analyzed
-              </Typography>
-
             </Box>
 
             <Box
