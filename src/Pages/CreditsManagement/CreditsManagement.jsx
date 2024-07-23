@@ -1,16 +1,70 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import checkImg from "../../assets/images/check.png";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
+import { useForm } from "react-hook-form";
+
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreditsManagement = () => {
   const navigate = useNavigate();
+  const [characterCost, setCharacterCost] = useState();
+  const [creditCost, setCreditCost] = useState();
+  const { register, handleSubmit } = useForm();
+
+
 
   const handleEditPackage = (planName, price, buttonText) => {
     navigate(
       `/credits-management/package-setting?planName=${planName}&price=${price}&buttonText=${buttonText}`
     );
+  };
+
+  const fetchRules = async () => {
+    try {
+      const response = await axiosInstance({
+        url: `${appUrl}/rules`,
+        method: "get",
+      });
+
+      console.log(response);
+      setCharacterCost(response.data.characterCost);
+      setCreditCost(response.data.creditCost)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRules();
+  }, [])
+
+
+
+  const onSubmit = (data) => {
+
+    console.log(data);
+    const submitCharacterRules = async () => {
+      try {
+        const response = await axiosInstance({
+          url: `${appUrl}/rules`,
+          method: "post",
+          data: {
+            characterCost: data.characters,
+            creditCost: data.credits
+          }
+        });
+
+        console.log(response);
+
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    submitCharacterRules()
   };
 
   return (
@@ -329,7 +383,10 @@ const CreditsManagement = () => {
       <Box>
         <Box
           sx={{
-            height: "181px",
+            height: {
+              md: "181px",
+              xs: "260px"
+            },
             display: "flex",
             flexDirection: "column",
             paddingLeft: "26px",
@@ -341,61 +398,84 @@ const CreditsManagement = () => {
             borderRadius: "10px",
           }}
         >
-          <Typography
-            sx={{
-              fontSize: "45px",
-              fontWeight: "600",
-              color: "#333333",
-              display: "flex",
-            }}
-          >
-            <input
-              type="text"
-              style={{
-                width: "70px",
-                fontSize: "45px",
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Box
+              sx={{
+                fontSize: { sm: "45px", xs: "30px" },
                 fontWeight: "600",
                 color: "#333333",
-                textAlign: "center",
-                border: "none",
-                outline: "none",
-                borderBottom: "1px solid #333333",
+                display: "flex",
+                flexDirection: { md: "row", xs: "column" },
               }}
-              placeholder="05"
-            />{" "}
-            Credits{" "}
-            <input
-              type="text"
-              style={{
-                width: "70px",
-                fontSize: "45px",
-                fontWeight: "600",
-                color: "#333333",
-                textAlign: "center",
-                border: "none",
-                outline: "none",
-                borderBottom: "1px solid #333333",
+            >
+              <Box>
+                <input
+                  type="text"
+                  {...register("credits")}
+                  style={{
+                    width: "70px",
+                    fontSize: "45px",
+                    fontWeight: "600",
+                    color: "#333333",
+                    textAlign: "center",
+                    border: "none",
+                    outline: "none",
+                    borderBottom: "1px solid #333333",
+                  }}
+                  placeholder={creditCost}
+                />{" "}
+                Credits{" "}
+              </Box>
+              <Box>
+                <input
+                  type="text"
+                  {...register("characters")}
+                  style={{
+                    width: "70px",
+                    fontSize: "45px",
+                    fontWeight: "600",
+                    color: "#333333",
+                    textAlign: "center",
+                    border: "none",
+                    outline: "none",
+                    borderBottom: "1px solid #333333",
+                  }}
+                  placeholder={characterCost}
+                />{" "}
+                Characters
+              </Box>
+            </Box>
+            <Typography sx={{ fontSize: "20px", fontWeight: "500", color: "#A0A4A9" }}>
+              Per Analysis
+            </Typography>
+            <Typography
+              sx={{
+                mt: "10px",
+                display: "flex",
+                justifyContent: "end",
+                mr: "30px ",
               }}
-              placeholder="05"
-            />{" "}
-            Characters
-          </Typography>
-          <Typography
-            sx={{ fontSize: "20px", fontWeight: "500", color: "#A0A4A9" }}
-          >
-            Per Analysis
-          </Typography>
-          <Typography sx={{
-            mt:"10px",
-            display:"flex",
-            justifyContent:"end",
-            mr:"30px "
-          }}>
-            <CustomButton border={"1px solid #333333"} borderRadius={"10px"} ButtonText={"Save"} fontSize={"15px"} fontWeight={"500"} color={"#ffff"} margin={"auto"} background={"linear-gradient(to right, #1A0049, #3F016A)"} padding="5px 25px" />
-          </Typography>
+            >
+              <CustomButton
+                type="submit"
+                border={"1px solid #333333"}
+                borderRadius={"10px"}
+                ButtonText={"Save"}
+                fontSize={"15px"}
+                fontWeight={"500"}
+                color={"#ffff"}
+                margin={"auto"}
+                background={"linear-gradient(to right, #1A0049, #3F016A)"}
+                padding="5px 25px"
+              />
+            </Typography>
+          </form>
+
+
+
         </Box>
       </Box>
-    </Box>
+    </Box >
   );
 };
 
