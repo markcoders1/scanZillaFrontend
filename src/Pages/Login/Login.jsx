@@ -128,7 +128,7 @@ const Login = () => {
       });
       if (auth.role == "admin") {
         navigate("/dashboard-admin")
-      } else {
+      } else if (auth.role == "user") {
         navigate("/dashboard");
 
       }
