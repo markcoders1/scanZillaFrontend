@@ -60,7 +60,12 @@ const Login = () => {
         })
       );
 
-      navigate("/dashboard");
+      if (auth.role == "admin") {
+        navigate("/dashboard-admin")
+      } else {
+        navigate("/dashboard");
+
+      }
       sessionStorage.setItem("accessToken", data?.accessToken);
       sessionStorage.setItem("refreshToken", data?.refreshToken);
 
@@ -121,8 +126,12 @@ const Login = () => {
         email: "",
         password: "",
       });
-      navigate("/dashboard");
+      if (auth.role == "admin") {
+        navigate("/dashboard-admin")
+      } else {
+        navigate("/dashboard");
 
+      }
     } catch (error) {
       const errorData = error.response.data
       if (error?.response?.data?.errorType?.includes("email")) {
@@ -357,7 +366,7 @@ const Login = () => {
               boxShadow: "none",
               border: "1px solid grey",
               color: "black",
-              mt:"100px"
+              mt: "100px"
             }}
             variant="contained"
             onClick={handleSignIn}
