@@ -673,6 +673,32 @@ const Credits = () => {
                                                     }}>
                                                     Credits
                                                 </Typography>
+                                                <Typography
+                                                sx={{
+                                                    position:"absolute",
+                                                    bottom:"10px",
+                                                    right:"20px"
+                                                }}
+                                                >
+                                                    <input type="number"
+                                                    style={{
+                                                        width:"50px",
+                                                        height:"32px",
+                                                        border:"none",
+                                                        outline:"none",
+                                                        borderRadius:"5px",
+                                                        fontWeight:"600",
+                                                        color:"#190247",
+                                                        textAlign:"center",
+                                                        paddingLeft:"8px",
+                                                        fontSize:"18px",
+                                                        
+                                                    
+                                                        
+                                                    }}
+                                                    placeholder="30"
+                                                    />
+                                                </Typography>
                                             </Box>
                                         </Box>
                                     </Box>

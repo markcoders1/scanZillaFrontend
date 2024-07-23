@@ -72,6 +72,7 @@ const SwitchCheckBox = ({ theme }) => {
         <p style={{ color: "white", paddingLeft: "10px", paddingTop: "5px" }}>
           {auth.autocharge ? "on" : "Off"}
         </p>
+        
       </label>
       <SnackAlert
         severity={snackAlertData.severity}

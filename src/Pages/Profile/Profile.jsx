@@ -179,7 +179,8 @@ const Profile = () => {
                     boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                     padding: "22px 26px",
                     alignItems: "center",
-                    justifyContent: "space-between"
+                    justifyContent: "space-between",
+                    borderRadius:"10px"
                   }}>
                     <Box sx={{
                       display: "flex",
