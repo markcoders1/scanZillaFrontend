@@ -12,6 +12,14 @@ const AdminDashboard = () => {
     const [totalUsers, setTotalUsers] = useState();
     const [loading, setLoading] = useState();
     const [totalIncome, setTotalIncome] = useState();
+    const [username, setUsername] = useState();
+
+    const [bullets, setBullets] = useState([]);
+    const [title, setTitle] = useState();
+    const [description, setDescription] = useState();
+    const [credits, setCredits] = useState();
+
+
     const bulletPoints = [
         " Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, ipsa?",
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, ipsa?",
@@ -25,8 +33,28 @@ const AdminDashboard = () => {
                 url: appUrl + "/gettotalusers",
                 method: "get",
             });
-            console.log(response);
+            // console.log(response);
             setTotalUsers(response.data.users);
+            setLoading(false);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    const getRecentAnalysis = async () => {
+        try {
+            setLoading(true);
+            const response = await axiosInstance({
+                url: appUrl + "/getrecenthistory",
+                method: "get",
+            });
+            console.log(response.data.history);
+            setBullets(response.data.history.bullets)
+            setTitle(response.data.history.title)
+            setDescription(response.data.history.description)
+            setCredits(response.data.history.credits)
+            setUsername(response.data.userName)
+
+            // setRecentAnalysis(response.data.users);
             setLoading(false);
         } catch (error) {
             console.log(error);
@@ -40,7 +68,7 @@ const AdminDashboard = () => {
                 url: appUrl + "/gettotalincome",
                 method: "get",
             });
-            console.log(response.data.value);
+            // console.log(response.data.value);
             setTotalIncome(response.data.value);
             setLoading(false);
         } catch (error) {
@@ -51,6 +79,7 @@ const AdminDashboard = () => {
     useEffect(() => {
         getAllUser();
         getTotalIncome();
+        getRecentAnalysis();
     }, []);
 
     return (
@@ -163,7 +192,7 @@ const AdminDashboard = () => {
                                         fontSize: "22px",
                                     }}
                                 >
-                                    LoremImsum
+                                    {title == "" ? "No Title Found !" : title}
                                 </Typography>
                                 <Typography
                                     sx={{
@@ -172,7 +201,7 @@ const AdminDashboard = () => {
                                         fontSize: "22px",
                                     }}
                                 >
-                                    Samantha
+                                    {username}
                                 </Typography>
                             </Box>
 
@@ -194,7 +223,15 @@ const AdminDashboard = () => {
                                     Bullets Points
                                 </Typography>
 
-                                {bulletPoints.map((bullet, index) => (
+                                {bullets.length < 1 ? <Typography
+                                    sx={{
+                                        color: "#333333",
+                                        fontWeight: "400",
+                                        fontSize: "22px",
+                                    }}
+                                >
+                                    No bullet Points found in that Analysis
+                                </Typography> : bullets.map((bullet, index) => (
                                     <Typography
                                         key={index}
                                         sx={{
@@ -232,11 +269,7 @@ const AdminDashboard = () => {
                                         fontSize: "20px",
                                     }}
                                 >
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Cumque iste animi voluptatem, autem aliquid minima maxime
-                                    omnis. Esse sed tenetur perferendis corporis distinctio
-                                    expedita? A temporibus minima cupiditate impedit mollitia
-                                    error magnam?
+                                    {description === "" ? "No Dscription Found in That Analysis": description}
                                 </Typography>
                             </Box>
                         </Box>
