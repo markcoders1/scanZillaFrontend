@@ -28,7 +28,7 @@ const Credits = () => {
 
         console.log(auth.email);
         console.log(auth.username);
-
+        console.log(auth.autocharge);
         setUsername(auth.username);
         setEmail(auth.email);
     }, []);
@@ -66,7 +66,7 @@ const Credits = () => {
     const [credits, setCredits] = useState(null)
 
     const fetchCreditsHisotry = async () => {
-        if(!auth?.customerId){return}
+        if (!auth?.customerId) { return }
         setSnackAlertData({
             open: false,
             message: "",
@@ -81,7 +81,7 @@ const Credits = () => {
             });
             setLoading(false);
             if (response) {
-                console.log("bro...",response?.data?.payments)
+                console.log("bro...", response?.data?.payments)
                 setCreditsHistory(response?.data?.payments)
                 setSnackAlertData({
                     open: true,
@@ -177,21 +177,21 @@ const Credits = () => {
     return (
 
         <>
-                {
-                    loading ? (
-                        <Box
-                            sx={{
-                                display: "flex",
-                                height: "70vh",
-                                width: "100%",
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }}
-                        >
-                            <LoaderMain />
+            {
+                loading ? (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            height: "70vh",
+                            width: "100%",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <LoaderMain />
 
-                        </Box>
-                    ) : (
+                    </Box>
+                ) : (
                     <Box
                         sx={{
                             display: "flex",

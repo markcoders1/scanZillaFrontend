@@ -136,6 +136,7 @@ const Profile = () => {
                   md: "606px",
                   xs: "100%"
                 },
+                // backgroundColor:"red",
                 flexGrow: 1,
               }}>
                 <Box sx={{
@@ -271,7 +272,7 @@ const Profile = () => {
                 },
                 background: "#D99DFD",
                 borderRadius: "10px",
-                flexBasis: "190px",
+                flexBasis: "130px",
                 flexShrink: 0,
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
 

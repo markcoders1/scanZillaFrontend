@@ -35,7 +35,7 @@ const ProfileCard = ({
          fontWeight:"600",
          fontSize:{
           sm:"27px",
-          xs:"19px"
+          xs:"16px"
          },
          lineHeight:"40.5px",
        }}>
