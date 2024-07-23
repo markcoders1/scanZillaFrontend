@@ -25,7 +25,7 @@ const UserTable = () => {
   const [orderBy, setOrderBy] = useState("createdAt");
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const toggleBlock = async (userId) => {
     try {
@@ -36,7 +36,12 @@ const UserTable = () => {
           userId,
         },
       });
-      console.log(response);
+      console.log(response)
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, active: !user.active } : user
+        )
+      );
     } catch (error) {
       console.log(error);
     }
@@ -44,22 +49,22 @@ const UserTable = () => {
 
   const fetchUsers = async () => {
     try {
-      setLoading(true);
       const response = await axiosInstance({
         url: appUrl + "/getallusers",
         method: "get",
       });
       setUsers(response.data);
-      setLoading(false);
+      console.log(response)
     } catch (error) {
       console.log(error);
+    } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchUsers();
-  }, [toggleBlock]);
+  }, []);
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
@@ -96,7 +101,6 @@ const UserTable = () => {
   const renderActionButtons = (userId) => {
     const user = users.find((u) => u._id === userId);
     const active = user && user.active === true;
-    // console.log("active", active);
     return (
       <Box sx={{ display: "flex", gap: "2rem" }}>
         <CustomButton
@@ -133,7 +137,19 @@ const UserTable = () => {
 
   return (
     <>
-    
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            height: "70vh",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <LoaderMain />
+        </Box>
+      ) : (
         <Box
           sx={{
             position: "relative",
@@ -322,7 +338,7 @@ const UserTable = () => {
             </Table>
           </TableContainer>
         </Box>
-      
+      )}
     </>
   );
 };

@@ -74,6 +74,7 @@ const Details = () => {
           userId: id,
         },
       });
+      console.log(response)
       setLoading(false);
       if (response) {
         setCreditsHistory(response?.data);
@@ -114,6 +115,7 @@ const Details = () => {
           userId: id,
         },
       });
+      console.log(response)
       if (response) {
         setAnalyzeHistory(response.data.payments);
         setSnackAlertData({
@@ -259,16 +261,16 @@ const Details = () => {
           {loading
             ? "loading...."
             : creditsHistory.map((item, index) => (
-                <GiftCard
-                  key={item._id}
-                  id={item._id}
-                  title={item.title}
-                  description={item.description}
-                  bullets={item.bullets}
-                  index={index}
-                  openModal={openModal}
-                />
-              ))}
+              <GiftCard
+                key={item._id}
+                id={item._id}
+                title={item.title}
+                description={item.description}
+                bullets={item.bullets}
+                index={index}
+                openModal={openModal}
+              />
+            ))}
         </Box>
         <Box
           sx={{
@@ -311,8 +313,8 @@ const Details = () => {
           {loading && analyzeHistory.length < 1
             ? "loading..."
             : analyzeHistory.map((item, index) => (
-                <CreditsHistory item={item} key={index} index={index} />
-              ))}
+              <CreditsHistory item={item} key={index} index={index} />
+            ))}
         </Box>
       </Box>
 
