@@ -27,9 +27,9 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [snackAlertData, setSnackAlertData] = useState({
-    open:false,
-    message:"",
-    severity:"success"
+    open: false,
+    message: "",
+    severity: "success"
   })
 
   const [errors, setErrors] = useState({
@@ -64,40 +64,40 @@ const Signup = () => {
     }
 
     try {
-       await axiosInstance({ url: appUrl + "/createUser", method: "post", data: {email:data?.email, password:data?.password, userName:data?.fullName} }).then(response=>{
-        if(response){
+      await axiosInstance({ url: appUrl + "/createUser", method: "post", data: { email: data?.email, password: data?.password, userName: data?.fullName } }).then(response => {
+        if (response) {
           response = response?.data
           const responseData = response
-          dispatch(handleAuth({...responseData, authenticated: true}));
-            setSnackAlertData({
-              open: true,
-              message: response.message,
-              severity: "success",
-            })
+          dispatch(handleAuth({ ...responseData, authenticated: true }));
+          setSnackAlertData({
+            open: true,
+            message: response.message,
+            severity: "success",
+          })
           setIsLoading(false)
           console.log("hanhan")
-    
+
           sessionStorage.setItem("accessToken", response?.accessToken);
           sessionStorage.setItem("refreshToken", response?.refreshToken);
           setData({
             email: "",
             password: "",
-            fullName:""
+            fullName: ""
           });
           console.log("agya")
           navigate("/dashboard");
           console.log("hmm")
         }
-      }).catch(error=>{
-        if(error && error?.response && error?.response?.data && error?.response?.data.message){
+      }).catch(error => {
+        if (error && error?.response && error?.response?.data && error?.response?.data.message) {
           console.log("error.data.message", error.response.data.message)
           setIsLoading(false)
-            setSnackAlertData({
-              open: true,
-              message: error?.response?.data?.message,
-              severity: "error",
-            })
-          
+          setSnackAlertData({
+            open: true,
+            message: error?.response?.data?.message,
+            severity: "error",
+          })
+
         }
       })
     } catch (error) {
@@ -126,7 +126,7 @@ const Signup = () => {
             Sign up now to unlock exclusive benefits!
           </Typography>
         </Typography>
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+        {/* <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Typography sx={{ display: "flex", gap: "5px", flexDirection: "column", marginTop: "50px" }}>
             <label style={{ color: "#666666", fontWeight: "400" }}>Full Name</label>
             <CustomTextField
@@ -167,9 +167,9 @@ const Signup = () => {
               showPasswordToggle={true} // Add this prop
             />
           </Typography>
-        </Box>
+        </Box> */}
         <Box sx={{ position: "relative", marginTop: "65px", display: "flex", flexDirection: "column", gap: "1.56rem" }}>
-          <Button
+          {/* <Button
             sx={{
               p: "15px 20px",
               background: "linear-gradient(to right, #1A0049, #41016C)",
@@ -190,7 +190,7 @@ const Signup = () => {
             onClick={handleSignup}
           >
             {isLoading ? <LoaderW /> : "Sign up"}
-          </Button>
+          </Button> */}
           <Button
             sx={{
               p: "15px 20px",
@@ -208,7 +208,8 @@ const Signup = () => {
               },
               boxShadow: "none",
               border: "1px solid grey",
-              color: "black"
+              color: "black",
+              mt: "100px"
             }}
             variant="contained"
             onClick={handleSignup}
@@ -219,9 +220,9 @@ const Signup = () => {
             </span>
           </Button>
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "4px", justifyContent: "center", marginTop: "40px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "4px", justifyContent: "center", marginTop: "40px", marginTop: "260px" }}>
           <Typography sx={{ fontSize: { xs: "12px", sm: "18px" }, color: "#A0A4A9" }}>
-            Don’t have an account? 
+            Don’t have an account?
           </Typography>
           <Typography sx={{ color: "#1E004D", textDecoration: "underline" }}>
             <NavLink to='/' style={{ color: "#1E004D", fontWeight: "600" }}>
@@ -230,13 +231,13 @@ const Signup = () => {
           </Typography>
         </Box>
       </Box>
-      <SnackAlert 
-       severity = {snackAlertData.severity}
-       message ={snackAlertData.message}
-       open = {snackAlertData.open}
-       handleClose = {() => {setSnackAlertData(prev=>({...prev, open:false}))}}
-      
-      
+      <SnackAlert
+        severity={snackAlertData.severity}
+        message={snackAlertData.message}
+        open={snackAlertData.open}
+        handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+
+
       />
     </Box>
   );

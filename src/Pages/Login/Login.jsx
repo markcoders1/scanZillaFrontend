@@ -194,7 +194,7 @@ const Login = () => {
             Welcome back! Please enter your details.
           </Typography>
         </Typography>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -252,8 +252,8 @@ const Login = () => {
               showPasswordToggle={true} // Add this prop
             />
           </Typography>
-        </Box>
-        <Box
+        </Box> */}
+        {/* <Box
           sx={{
             // display: "flex",
             display: "flex  ",
@@ -301,7 +301,7 @@ const Login = () => {
 
             }}
           ><NavLink to="submit-email-for-otp" >Forgot Password</NavLink></Typography>
-        </Box>
+        </Box> */}
         <Box sx={{
           position: "relative",
           marginTop: "80px",
@@ -310,7 +310,7 @@ const Login = () => {
           gap: "1.56rem",
           // border:"2px solid red"
         }}>
-          <Button
+          {/* <Button
             sx={{
               p: "15px 20px",
               background: "linear-gradient(to right, #1A0049, #41016C)",
@@ -334,7 +334,7 @@ const Login = () => {
             onClick={handleLogin}
           >
             {isLoading ? <LoaderW /> : "Sign in"}
-          </Button>
+          </Button> */}
 
           <Button
             sx={{
@@ -356,7 +356,8 @@ const Login = () => {
               },
               boxShadow: "none",
               border: "1px solid grey",
-              color: "black"
+              color: "black",
+              mt:"100px"
             }}
             variant="contained"
             onClick={handleSignIn}
@@ -376,7 +377,7 @@ const Login = () => {
             alignItems: "center",
             gap: "4px",
             justifyContent: "center",
-            marginTop: "40px"
+            marginTop: "250px"
           }}>
           <Typography
             sx={{
