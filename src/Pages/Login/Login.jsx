@@ -26,14 +26,12 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.auth);
 
-  const inputRef = useRef(null)
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-
 
   const handleSignIn = async () => {
     try {
@@ -44,116 +42,114 @@ const Login = () => {
         authenticated: true,
         username: responseData?.data?.username,
         email: responseData?.data?.email,
+        role: responseData?.data?.role, // Ensure role is included
+      };
 
+      dispatch(handleAuth(data));
+      dispatch(handleSnackAlert({
+        open: true,
+        message: "Signed in successfully",
+        severity: "success",
+      }));
 
-      }
-      // console.log(responseData)
-
-      dispatch(handleAuth(data))
-
-
-      dispatch(
-        handleSnackAlert({
-          open: true,
-          message: data.message,
-          severity: "success",
-        })
-      );
-
-      if (auth.role == "admin") {
-        navigate("/dashboard-admin")
-      } else {
-        navigate("/dashboard");
-
-      }
       sessionStorage.setItem("accessToken", data?.accessToken);
       sessionStorage.setItem("refreshToken", data?.refreshToken);
 
-      const sessionAccess = sessionStorage.getItem("accessToken")
-      const sessionRefresh = sessionStorage.getItem("refreshToken")
-      console.log("sessionAccess", sessionAccess)
-      console.log("sessionRefresh", sessionRefresh)
+      if (data.role === "admin") {
+        navigate("/dashboard-admin");
+      } else if (data.role === "user") {
+        navigate("/dashboard");
+      }
+
     } catch (error) {
       console.error("Sign-in failed:", error);
     }
   };
 
-  useEffect(() => {
-    console.log(auth)
-  }, [])
-
-  const handleInput = (e) => {
-    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
-  };
   const handleLogin = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
+    setErrors({ password: "", email: "" });
 
-    setErrors({ password: "", email: "" })
     if (data?.email === "" && data?.password === "") {
-      setIsLoading(false)
-      return setErrors({ password: "Password can not be empty", email: "Email can not be empty" })
-
+      setIsLoading(false);
+      return setErrors({ password: "Password can not be empty", email: "Email can not be empty" });
     }
     if (data?.email === "") {
-      setIsLoading(false)
-      return setErrors({ password: "", email: "Email can not be empty" })
+      setIsLoading(false);
+      return setErrors({ password: "", email: "Email can not be empty" });
     }
     if (data?.password === "") {
-      setIsLoading(false)
-      return setErrors({ password: "Password can not be empty", email: "" })
+      setIsLoading(false);
+      return setErrors({ password: "Password can not be empty", email: "" });
     }
 
-    console.log("appUrl", appUrl)
     try {
-
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
-      console.log(response)
-      response = response?.data
-      const responseData = response
+      response = response?.data;
+      const responseData = response;
       dispatch(handleAuth({ ...responseData, authenticated: true }));
-      dispatch(
-        handleSnackAlert({
-          open: true,
-          message: response.message,
-          severity: "success",
-        })
-      );
-      setIsLoading(false)
 
+      dispatch(handleSnackAlert({
+        open: true,
+        message: response.message,
+        severity: "success",
+      }));
+
+      setIsLoading(false);
       sessionStorage.setItem("accessToken", response?.accessToken);
       sessionStorage.setItem("refreshToken", response?.refreshToken);
       setData({
         email: "",
         password: "",
       });
-      if (auth.role == "admin") {
-        navigate("/dashboard-admin")
-      } else if (auth.role == "user") {
-        navigate("/dashboard");
 
+      if (responseData.role === "admin") {
+        navigate("/dashboard-admin");
+      } else if (responseData.role === "user") {
+        navigate("/dashboard");
       }
+
     } catch (error) {
-      const errorData = error.response.data
+      const errorData = error.response.data;
       if (error?.response?.data?.errorType?.includes("email")) {
-        setErrors({ password: "", email: error.response.data.message })
+        setErrors({ password: "", email: error.response.data.message });
       }
       if (error?.response?.data?.errorType?.includes("password")) {
-        setErrors({ email: "", password: error.response.data.message })
+        setErrors({ email: "", password: error.response.data.message });
       }
-      setIsLoading(false)
+      setIsLoading(false);
 
-      return dispatch(
-        handleSnackAlert({
-          open: true,
-          message: errorData?.message,
-          severity: "error",
-        })
-      );
-
+      dispatch(handleSnackAlert({
+        open: true,
+        message: errorData?.message,
+        severity: "error",
+      }));
     }
-
-    console.log("hi")
   };
+
+  const handleInput = (e) => {
+    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+  };
+
+  const handleKeydown = (e) => {
+    if (e.key === "Enter") {
+      handleLogin();
+    }
+  };
+
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (auth.authenticated) {
+      if (auth.role === "admin") {
+        navigate("/dashboard-admin");
+      } else if (auth.role === "user") {
+        navigate("/dashboard");
+      }
+    }
+  }, [auth, navigate]);
 
 
   const handlekeydown = (e) => {
