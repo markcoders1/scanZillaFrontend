@@ -6,34 +6,50 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { useForm } from "react-hook-form";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { useDispatch } from "react-redux";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreditsManagement = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [characterCost, setCharacterCost] = useState();
   const [creditCost, setCreditCost] = useState();
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
+  const [offers, setOffers] = useState([]);
 
-
-  const handleEditPackage = (planName, price, buttonText) => {
+  const handleEditPackage = () => {
     navigate(
-      `/credits-management/package-setting?planName=${planName}&price=${price}&buttonText=${buttonText}`
+      `/credits-management/package-setting`
     );
   };
 
   const fetchRules = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axiosInstance({
         url: `${appUrl}/rules`,
         method: "get",
       });
-      setLoading(false)
-      console.log(response);
+      setLoading(false);
       setCharacterCost(response.data.characterCost);
-      setCreditCost(response.data.creditCost)
+      setCreditCost(response.data.creditCost);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchOffers = async () => {
+    try {
+      setLoading(true);
+      const response = await axiosInstance({
+        url: `${appUrl}/offers`,
+        method: "get",
+      });
+      setLoading(false);
+      setOffers(response.data.offers);
     } catch (error) {
       console.error(error);
     }
@@ -41,13 +57,10 @@ const CreditsManagement = () => {
 
   useEffect(() => {
     fetchRules();
-  }, [])
-
-
+    fetchOffers();
+  }, []);
 
   const onSubmit = (data) => {
-
-    console.log(data);
     const submitCharacterRules = async () => {
       try {
         const response = await axiosInstance({
@@ -55,17 +68,17 @@ const CreditsManagement = () => {
           method: "post",
           data: {
             characterCost: data.characters,
-            creditCost: data.credits
-          }
+            creditCost: data.credits,
+          },
         });
+        dispatch(handleSnackAlert({open:true,message:"Rules Updated Successfully",severity :"success"}))
 
         console.log(response);
-
       } catch (error) {
         console.error(error);
       }
     };
-    submitCharacterRules()
+    submitCharacterRules();
   };
 
   return (
@@ -90,323 +103,120 @@ const CreditsManagement = () => {
               gap: "2rem",
               flexWrap: "wrap",
               flexDirection: { xs: "column", sm: "row" },
+              // border:"2px solid red"
             }}
           >
-            <Box>
-              <Box
-                sx={{
-                  flexBasis: { md: "218px" },
-                  padding: "15px 16px 0px 16px",
-                  boxShadow: "4px 5px 15px 0px #C8C8C8",
-                  borderRadius: "10px",
-                  height: "262px",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "23px",
-                    color: "#333333",
-                    fontWeight: "600",
-                    width: "63px",
-                    margin: "auto",
-                  }}
-                >
-                  Basic
-                </Typography>
+            {offers.map((e, i) => (
+              <Box key={i}>
                 <Box
                   sx={{
-                    marginTop: "15px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  {[...Array(3)].map((_, index) => (
-                    <Box
-                      key={index}
-                      sx={{ display: "flex", alignItems: "center", gap: "10px" }}
-                    >
-                      <Typography>
-                        <img src={checkImg} alt="" />
-                      </Typography>
-                      <Typography sx={{ fontSize: "11px" }}>
-                        Lorem ipsum dolor sit
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-                <Box
-                  sx={{
-                    marginTop: "30px",
-                    width: "100%",
-                    textAlign: "center",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "45px",
-                      fontWeight: "600",
-                      color: "#333333",
-                      lineHeight: "40px",
-                    }}
-                  >
-                    $10
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: "10px", fontWeight: "500", color: "#333333" }}
-                  >
-                    per Month
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    margin: "auto",
-                    marginTop: "20px",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  {/* <CustomButton border={"1px solid #333333"} borderRadius={"10px"} ButtonText={"Get Credits"} fontSize={"12px"} fontWeight={"500"} color={"#333333"} margin={"auto"} /> */}
-                </Box>
-              </Box>
-              <Typography
-                sx={{
-                  marginTop: "10px",
-                  fontSize: "13px",
-                  fontWeight: "500",
-                  textAlign: "center",
-                  textDecoration: "underline",
-                  color: "#333333",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleEditPackage("Basic", 10, "Get Credits")}
-              >
-                Edit Package
-              </Typography>
-            </Box>
-
-            <Box>
-              <Box
-                sx={{
-                  flexBasis: { md: "218px" },
-                  padding: "15px 16px 0px 16px",
-                  boxShadow: "4px 5px 15px 0px #C8C8C8",
-                  borderRadius: "10px",
-                  height: "262px",
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "23px",
-                    color: "#333333",
-                    fontWeight: "600",
-                    width: "63px",
-                    margin: "auto",
-                  }}
-                >
-                  Pro
-                </Typography>
-                <Box
-                  sx={{
-                    marginTop: "15px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  {[...Array(3)].map((_, index) => (
-                    <Box
-                      key={index}
-                      sx={{ display: "flex", alignItems: "center", gap: "10px" }}
-                    >
-                      <Typography>
-                        <img src={checkImg} alt="" />
-                      </Typography>
-                      <Typography sx={{ fontSize: "11px" }}>
-                        Lorem ipsum dolor sit
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-                <Box
-                  sx={{
-                    marginTop: "30px",
-                    width: "100%",
-                    textAlign: "center",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: "45px",
-                      fontWeight: "600",
-                      color: "#333333",
-                      lineHeight: "40px",
-                    }}
-                  >
-                    $30
-                  </Typography>
-                  <Typography
-                    sx={{ fontSize: "10px", fontWeight: "500", color: "#333333" }}
-                  >
-                    per Month
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    margin: "auto",
-                    marginTop: "20px",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
-                >
-                  {/* <CustomButton border={"1px solid #333333"} borderRadius={"10px"} ButtonText={"Get Credits"} fontSize={"12px"} fontWeight={"500"} color={"#333333"} margin={"auto"} /> */}
-                </Box>
-              </Box>
-              <Typography
-                sx={{
-                  marginTop: "10px",
-                  fontSize: "13px",
-                  fontWeight: "500",
-                  textAlign: "center",
-                  textDecoration: "underline",
-                  color: "#333333",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleEditPackage("Pro", 30, "Get Credits")}
-              >
-                Edit Package
-              </Typography>
-            </Box>
-
-            <Box>
-              <Box
-                sx={{
-                  flexBasis: { md: "218px" },
-                  padding: "12px 16px 15px 16px",
-                  borderRadius: "10px",
-                  height: "262px",
-                  overflowY: "scroll",
-                  boxShadow: "4px 5px 15px 0px #C8C8C8",
-                  "&::-webkit-scrollbar": {
-                    width: "8px",
-                  },
-                  "&::-webkit-scrollbar-track": {
-                    background: "#DFDFDF",
+                    // border:"2px solid red",
+                    padding: "15px 16px 0px 16px",
+                    boxShadow: "4px 5px 15px 0px #C8C8C8",
                     borderRadius: "10px",
-                  },
-                  "&::-webkit-scrollbar-thumb": {
-                    background: "black",
-                    borderRadius: "10px",
-                  },
-                  "&::-webkit-scrollbar-thumb:hover": {
-                    background: "#b30000",
-                  },
-                }}
-              >
-                <Typography
-                  sx={{
-                    fontSize: "23px",
-                    color: "#333333",
-                    fontWeight: "600",
-                    margin: "auto",
-                    textAlign: "center",
-                  }}
-                >
-                  Enterprise
-                </Typography>
-                <Box
-                  sx={{
-                    marginTop: "15px",
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  {[...Array(9)].map((_, index) => (
-                    <Box
-                      key={index}
-                      sx={{ display: "flex", alignItems: "center", gap: "10px" }}
-                    >
-                      <Typography>
-                        <img src={checkImg} alt="" />
-                      </Typography>
-                      <Typography sx={{ fontSize: "11px" }}>
-                        Lorem ipsum dolor sit
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-                <Box
-                  sx={{
-                    marginTop: "30px",
-                    width: "100%",
-                    textAlign: "center",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "2px",
+                    height: "262px",
+                    width:{
+                      sm:"210px",
+                      xs:"100%"
+                    },
+                    flexBasis: { md: "258px" },
                   }}
                 >
                   <Typography
                     sx={{
-                      fontSize: "45px",
-                      fontWeight: "600",
+                      fontSize: "23px",
                       color: "#333333",
-                      lineHeight: "40px",
+                      fontWeight: "600",
+                      // width: "63px",
+                      margin: "auto",
+                      textAlign:"center"
                     }}
                   >
-                    $60
+                    {e.name}
                   </Typography>
-                  <Typography
-                    sx={{ fontSize: "10px", fontWeight: "500", color: "#333333" }}
+                  <Box
+                    sx={{
+                      marginTop: "15px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
                   >
-                    per Month
-                  </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                      <Typography>
+                        <img src={checkImg} alt="" />
+                      </Typography>
+                      <Typography sx={{ fontSize: "11px" }}>
+                        {e.description}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      marginTop: "30px",
+                      width: "100%",
+                      textAlign: "center",
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "2px",
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: "45px",
+                        fontWeight: "600",
+                        color: "#333333",
+                        lineHeight: "40px",
+                      }}
+                    >
+                      ${e.amount/100}
+                    </Typography>
+                    <Typography
+                      sx={{ fontSize: "10px", fontWeight: "500", color: "#333333" }}
+                    >
+                      per Month
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      margin: "auto",
+                      marginTop: "20px",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                   
+                  </Box>
                 </Box>
-                <Box
+                <Typography
                   sx={{
-                    margin: "auto",
-                    marginTop: "20px",
-                    display: "flex",
-                    justifyContent: "center",
+                    marginTop: "10px",
+                    fontSize: "13px",
+                    fontWeight: "500",
+                    textAlign: "center",
+                    textDecoration: "underline",
+                    color: "#333333",
+                    cursor: "pointer",
                   }}
+                  onClick={() => handleEditPackage()}
                 >
-                  {/* <CustomButton border={"1px solid #333333"} borderRadius={"10px"} ButtonText={"Get Credits"} fontSize={"12px"} fontWeight={"500"} color={"#333333"} margin={"auto"} /> */}
-                </Box>
+                  Edit Package
+                </Typography>
               </Box>
-              <Typography
-                sx={{
-                  marginTop: "10px",
-                  fontSize: "13px",
-                  fontWeight: "500",
-                  textAlign: "center",
-                  textDecoration: "underline",
-                  color: "#333333",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleEditPackage("Enterprise", 60, "Get Credits")}
-              >
-                Edit Package
-              </Typography>
-            </Box>
+            ))}
           </Box>
           <Box>
             <Box
               sx={{
                 height: {
                   md: "181px",
-                  xs: "260px"
+                  xs: "260px",
                 },
                 display: "flex",
                 flexDirection: "column",
                 paddingLeft: "26px",
                 gap: "-10px",
-                marginTop: "30px",
+                marginTop: "50px",
                 boxShadow: "4px 5px 15px 0px #C8C8C8",
                 justifyContent: "center",
                 width: { xs: "100%", md: "630px" },
@@ -482,15 +292,13 @@ const CreditsManagement = () => {
                     margin={"auto"}
                     background={"linear-gradient(to right, #1A0049, #3F016A)"}
                     padding="5px 25px"
+                    loading = {loading}
                   />
                 </Typography>
               </form>
-
-
-
             </Box>
           </Box>
-        </Box >
+        </Box>
       )}
     </>
   );

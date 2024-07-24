@@ -5,9 +5,12 @@ import AppSidebar from '../AppSidebar/AppSidebar';
 import dashboardImg1 from '../../assets/images/dashboard.png';
 import Header from '../../Components/Header/Header';
 import MobileSidebar from '../../Components/MobileSidebar/MobileSidebar';
+import SnackAlert from '../../Components/SnackAlert/SnackAlert';
+import { useSelector } from 'react-redux';
 
 const DashboardLayout = () => {
   const location = useLocation();
+  const snackAlert = useSelector(state => state.snackAlert)
 
   const getHeaderTitle = (pathname) => {
     switch (pathname) {
@@ -121,7 +124,8 @@ const DashboardLayout = () => {
           </Box>
         </Box>
       </Box>
-    </Box>
+      <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
+    </Box> 
   );
 };
 
