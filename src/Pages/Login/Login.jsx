@@ -36,21 +36,20 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const responseData = await signInWithGooglePopup();
-      const data = {
-        accessToken: responseData?.data.accessToken,
-        refreshToken: responseData?.data.refreshToken,
-        authenticated: true,
-        username: responseData?.data?.username,
-        email: responseData?.data?.email,
-        role: responseData?.data?.role, // Ensure role is included
-      };
+      console.log("response data",responseData)
+      const data = responseData.data
+      data.authenticated=true
 
-      dispatch(handleAuth(data));
-      dispatch(handleSnackAlert({
-        open: true,
-        message: "Signed in successfully",
-        severity: "success",
-      }));
+      dispatch(handleAuth(data))
+
+
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: data.message,
+          severity: "success",
+        })
+      );
 
       sessionStorage.setItem("accessToken", data?.accessToken);
       sessionStorage.setItem("refreshToken", data?.refreshToken);
@@ -66,6 +65,18 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(auth)
+    const refreshToken = localStorage.getItem('refreshToken')
+    if (refreshToken){
+      sessionStorage.setItem('refreshToken',refreshToken)
+      navigate('/dashboard')
+    }
+  }, [])
+
+  const handleInput = (e) => {
+    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+  };
   const handleLogin = async () => {
     setIsLoading(true);
     setErrors({ password: "", email: "" });
@@ -103,12 +114,7 @@ const Login = () => {
         password: "",
       });
 
-      if (responseData.role === "admin") {
-        navigate("/dashboard-admin");
-      } else if (responseData.role === "user") {
         navigate("/dashboard");
-      }
-
     } catch (error) {
       const errorData = error.response.data;
       if (error?.response?.data?.errorType?.includes("email")) {

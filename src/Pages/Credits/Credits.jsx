@@ -50,12 +50,6 @@ const Credits = () => {
         localStorage.setItem("clientSecret", response.data.clientSecret);
     };
 
-
-
-
-
-
-
     const [snackAlertData, setSnackAlertData] = React.useState({
         message: "",
         severity: "success",
@@ -66,7 +60,6 @@ const Credits = () => {
     const [credits, setCredits] = useState(null)
 
     const fetchCreditsHisotry = async () => {
-        if (!auth?.customerId) { return }
         setSnackAlertData({
             open: false,
             message: "",
@@ -81,7 +74,6 @@ const Credits = () => {
             });
             setLoading(false);
             if (response) {
-                console.log("bro...", response?.data?.payments)
                 setCreditsHistory(response?.data?.payments)
                 setSnackAlertData({
                     open: true,

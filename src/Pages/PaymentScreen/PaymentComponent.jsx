@@ -13,10 +13,14 @@ const PaymentComponent =()=>{
             return;
         }
 
+        const refreshToken = sessionStorage.getItem('refreshToken')
+        localStorage.setItem('refreshToken',refreshToken)
+
         const result = await stripe.confirmPayment({
             elements,
             confirmParams: {
                 return_url: "https://scan-zilla-frontend.vercel.app",
+                // return_url: "http://localhost:5173",
             },
         });
 
