@@ -11,6 +11,8 @@ import Heading from "../../Components/Heading/Heading";
 import CustomInputShadow from "../../Components/CustomInputShadow/CustomInputShadow";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { useDispatch } from "react-redux";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -25,6 +27,7 @@ const Details = () => {
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
   const inputRef = useRef(null);
+  const dispatch = useDispatch();
 
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
@@ -44,13 +47,31 @@ const Details = () => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (data.sendCredits === "") {
       setErrors({ sendCredits: "You have not entered credits" });
     } else {
       setData("")
       console.log(data.sendCredits);
-      // Additional logic for sending credits can go here
+
+      try {
+        setLoading(true);
+        const response = await axiosInstance({
+          url: `${appUrl}/givecredits`,
+          method: "post",
+          body: {
+            userId: id,
+            credits: data.sendCredits,
+          },
+        });
+        console.log(response)
+       tUserData(response.data);
+      } catch (error) {
+        // setError(error.toString());
+    
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -426,7 +447,7 @@ const Details = () => {
             }}
           />
         </Box>
-  )}
+      )}
     </>
   );
 };

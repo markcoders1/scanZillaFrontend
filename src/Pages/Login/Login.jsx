@@ -133,9 +133,9 @@ const Login = () => {
     }
   };
 
-  const handleInput = (e) => {
-    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
-  };
+  // const handleInput = (e) => {
+  //   setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+  // };
 
   const handleKeydown = (e) => {
     if (e.key === "Enter") {
