@@ -1,4 +1,4 @@
-import React, {useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
@@ -17,12 +17,21 @@ const MobileSidebar = () => {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.sidebarToggle.isOpen);
+  const [admin, setAdmin] = useState();
 
   useEffect(() => {
     // console.log(auth)
 
     // console.log(auth.email)
     // console.log(auth.username)
+    setAdmin(auth.role)
+    console.log(auth.role)
+    if (auth.role == "admin") {
+      setAdmin(true)
+    } else {
+      setAdmin(false)
+
+    }
 
     setUsername(auth.userName)
     setEmail(auth.email)
@@ -35,6 +44,7 @@ const MobileSidebar = () => {
 
   const handleNavLinkClick = () => {
     dispatch(toggleSidebar());
+
   };
 
   return (
@@ -52,12 +62,12 @@ const MobileSidebar = () => {
         top: 0,
         right: -30,
         width: {
-          sm: "330px",
-          xs: "250px",
+          sm: "370px",
+          xs: "280px",
         },
         height: '100%',
         backgroundColor: '#060413',
-        transform: isOpen ? 'translateX(0)' : 'translateX(330px)',
+        transform: isOpen ? 'translateX(0)' : 'translateX(400px)',
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
         paddingLeft: "20px",
@@ -101,70 +111,124 @@ const MobileSidebar = () => {
             ScanZilla
           </Typography>
         </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.5rem"
-          }}
-        >
-          <Typography>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-              onClick={handleNavLinkClick}
+        {
+          admin ? <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+            }}
+          >
+            <Typography>
+              <NavLink
+                to="/dashboard-admin"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+                onClick={handleNavLinkClick}
+              >
+                DashBoard
+              </NavLink>
+            </Typography>
+            <Typography>
+              <NavLink
+                to="/tool-management"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+                onClick={handleNavLinkClick}
+              >
+                Tool Management
+              </NavLink>
+            </Typography>
+            <Typography>
+              <NavLink
+                to="/user-management"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+                onClick={handleNavLinkClick}
+              >
+                User Management
+              </NavLink>
+            </Typography>
+            <Typography>
+              <NavLink
+                to="/credits-management"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+                onClick={handleNavLinkClick}
+              >
+                Credits Management
+              </NavLink>
+            </Typography>
+          </Box> :
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem"
+              }}
             >
-              DashBoard
-            </NavLink>
-          </Typography>
+              <Typography>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                  onClick={handleNavLinkClick}
+                >
+                  DashBoard
+                </NavLink>
+              </Typography>
 
-          <Typography>
-            <NavLink
-              to="/analyze"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-              onClick={handleNavLinkClick}
-            >
-              Analyze
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/credits"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-              onClick={handleNavLinkClick}
-            >
-              Credits
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/history"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-              onClick={handleNavLinkClick}
-            >
-              History
-            </NavLink>
-          </Typography>
-          <Typography>
-            <NavLink
-              to="/profile"
-              className={({ isActive }) =>
-                isActive ? 'anchortag anchorActive' : 'anchortag'
-              }
-              onClick={handleNavLinkClick}
-            >
-              Profile
-            </NavLink>
-          </Typography>
-        </Box>
+              <Typography>
+                <NavLink
+                  to="/analyze"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                  onClick={handleNavLinkClick}
+                >
+                  Analyze
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/credits"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                  onClick={handleNavLinkClick}
+                >
+                  Credits
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/history"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                  onClick={handleNavLinkClick}
+                >
+                  History
+                </NavLink>
+              </Typography>
+              <Typography>
+                <NavLink
+                  to="/profile"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                  }
+                  onClick={handleNavLinkClick}
+                >
+                  Profile
+                </NavLink>
+              </Typography>
+            </Box>
+        }
       </Box>
       <Box
         sx={{
@@ -181,7 +245,7 @@ const MobileSidebar = () => {
             color: "white"
           }}
         >
-         {username}
+          {username}
         </Typography>
         <Typography
           sx={{
