@@ -15,6 +15,7 @@ const CustomInputShadow = forwardRef(({
   border = false,
   boxShadow,
   height = "56px", // Set default height here
+  color = "#2a2b2d"
 }, ref) => {
   return (
     <Box sx={{ mb: mb }}>
@@ -32,7 +33,7 @@ const CustomInputShadow = forwardRef(({
           mb: 2,
           width: '100%',
           position: "relative",
-          boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+          boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
         }}
       >
         <TextField
@@ -50,7 +51,7 @@ const CustomInputShadow = forwardRef(({
               fontWeight: {
                 lg: "600"
               },
-              color: "#2a2b2d",
+              color: color,
               fontFamily: "poppins"
             },
             borderRadius: "12px",
@@ -68,7 +69,7 @@ const CustomInputShadow = forwardRef(({
             fontWeight: {
               lg: "500"
             },
-            color: "black",
+            color: "color",
           }}
           onKeyDown={handleKeyDown}
           name={name}
