@@ -22,6 +22,7 @@ const Credits = () => {
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const [loading, setLoading] = useState();
+    const [autoCreditsAmount, setAutoCreditsAmount] = useState();
 
     useEffect(() => {
         console.log(auth);
@@ -103,9 +104,27 @@ const Credits = () => {
 
     }
 
-
+    const fetchOffers = async () => {
+        try {
+          setLoading(true);
+          const response = await axiosInstance({
+            url: `${appUrl}/offers`,
+            method: "get",
+            params: {
+                
+            }
+          });
+          setLoading(false);
+          console.log(response.data.offers)
+          setAutoCreditsAmount(response.data.offers);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
     useEffect(() => {
         fetchCreditsHisotry()
+        fetchOffers()
     }, [])
 
 
@@ -666,29 +685,29 @@ const Credits = () => {
                                                     Credits
                                                 </Typography>
                                                 <Typography
-                                                sx={{
-                                                    position:"absolute",
-                                                    bottom:"10px",
-                                                    right:"20px"
-                                                }}
+                                                    sx={{
+                                                        position: "absolute",
+                                                        bottom: "10px",
+                                                        right: "20px"
+                                                    }}
                                                 >
                                                     <input type="number"
-                                                    style={{
-                                                        width:"50px",
-                                                        height:"32px",
-                                                        border:"none",
-                                                        outline:"none",
-                                                        borderRadius:"5px",
-                                                        fontWeight:"600",
-                                                        color:"#190247",
-                                                        textAlign:"center",
-                                                        paddingLeft:"8px",
-                                                        fontSize:"18px",
-                                                        
-                                                    
-                                                        
-                                                    }}
-                                                    placeholder="30"
+                                                        style={{
+                                                            width: "50px",
+                                                            height: "32px",
+                                                            border: "none",
+                                                            outline: "none",
+                                                            borderRadius: "5px",
+                                                            fontWeight: "600",
+                                                            color: "#190247",
+                                                            textAlign: "center",
+                                                            paddingLeft: "8px",
+                                                            fontSize: "18px",
+
+
+
+                                                        }}
+                                                        placeholder="30"
                                                     />
                                                 </Typography>
                                             </Box>

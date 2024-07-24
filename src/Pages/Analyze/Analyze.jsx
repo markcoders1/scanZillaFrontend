@@ -85,11 +85,11 @@ const Analyze = () => {
       if (response.data.error) {
         handleData(response.data);
       }
-      setSnackAlertData({
-        open: true,
-        message: response.data.message,
-        severity: "success",
-      })
+      // setSnackAlertData({
+      //   open: true,
+      //   message: response.data.message,
+      //   severity: "success",
+      // })
     } catch (error) {
       const errorData = error?.response?.data;
       setIsLoading(false);
