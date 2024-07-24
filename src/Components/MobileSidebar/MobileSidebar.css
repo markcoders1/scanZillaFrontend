@@ -11,7 +11,7 @@
     color:  rgb(73, 70, 70);
 }
 .sidebar {
-    transform: translateX(300px);
+    transform: translateX(400px);
     transition: transform 0.3s ease-in-out;
   }
   

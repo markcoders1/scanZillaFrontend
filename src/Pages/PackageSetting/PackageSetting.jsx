@@ -4,6 +4,9 @@ import { useLocation } from 'react-router-dom';
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow';
 import Heading from '../../Components/Heading/Heading';
 import CustomButton from '../../Components/CustomButton/CustomButton';
+import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const PackageSetting = () => {
   const location = useLocation();
@@ -11,10 +14,17 @@ const PackageSetting = () => {
 
   const planName = queryParams.get('planName');
   const price = queryParams.get('price');
-  const buttonText = queryParams.get('buttonText');
+  let variant = queryParams.get('variant');
+
+  variant = Number(variant)
+  
+
+  const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState({
     description: "",
+    name: "",
+    amount: null
   });
 
   const inputRef = useRef(null);
@@ -23,13 +33,51 @@ const PackageSetting = () => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
   };
 
-  const handleSave = () => {
-    console.log(data.description);
+  const handleSave = async () => {
+
+    if (!variant || !planName) {
+      console.error("Variant or Plan Name is missing.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const response = await axiosInstance({
+        url: `${appUrl}/offers`,
+        method: "post",
+        data: {
+          variant: variant,
+          name: data.name,
+          description: data.description,
+          amount:Number(data.amount)
+
+        },
+      });
+      setLoading(false);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     inputRef?.current?.focus();
   }, []);
+
+  useEffect(() => {
+    // console.log("Query Params:", queryParams.toString());
+    // console.log("Plan Name:", planName);
+    // console.log("Price:",typeof price);
+    console.log(typeof data.name, 'name')
+    // console.log(data.amount)
+    console.log(typeof Number(data.amount), "amount")
+    console.log(variant)
+
+
+
+    console.log("Variant:",typeof variant);
+  }, [queryParams, planName, price, variant]);
 
   return (
     <Box>
@@ -54,6 +102,10 @@ const PackageSetting = () => {
           <Heading Heading='Package' />
           <CustomInputShadow
             placeholder={planName}
+            onChange={handleInput}
+            name={"name"}
+            type="text"
+            value={data.name}
           />
         </Box>
         <Box
@@ -66,10 +118,13 @@ const PackageSetting = () => {
         >
           <Heading Heading='Total Amount' />
           <CustomInputShadow
-            placeholder={price}
+            placeholder={price / 100}
+            onChange={handleInput}
+            name={"amount"}
+            type="number"
+            value={data.amount}
           />
         </Box>
-        
       </Box>
       <Box
         sx={{

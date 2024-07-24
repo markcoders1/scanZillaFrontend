@@ -19,12 +19,12 @@ const CreditsManagement = () => {
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
-
-  const handleEditPackage = () => {
+  const handleEditPackage = (planName, price, variant) => {
     navigate(
-      `/credits-management/package-setting`
+      `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}`
     );
   };
+  
 
   const fetchRules = async () => {
     try {
@@ -49,6 +49,7 @@ const CreditsManagement = () => {
         method: "get",
       });
       setLoading(false);
+      console.log(response.data.offers)
       setOffers(response.data.offers);
     } catch (error) {
       console.error(error);
@@ -198,7 +199,7 @@ const CreditsManagement = () => {
                     color: "#333333",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleEditPackage()}
+                  onClick={() => handleEditPackage(e.name, e.amount,e.variant)}
                 >
                   Edit Package
                 </Typography>

@@ -16,7 +16,7 @@ const AppSidebar = () => {
   useEffect(() => {
     if (auth.role == 'admin') {
       setAdmin(true);
-      console.log(auth.role)
+      // console.log(auth.role)
     } else {
       setAdmin(false);
     }

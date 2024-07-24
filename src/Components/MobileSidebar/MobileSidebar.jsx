@@ -25,7 +25,7 @@ const MobileSidebar = () => {
     // console.log(auth.email)
     // console.log(auth.username)
     setAdmin(auth.role)
-    console.log(auth.role)
+    // console.log(auth.role)
     if (auth.role == "admin") {
       setAdmin(true)
     } else {
@@ -67,7 +67,7 @@ const MobileSidebar = () => {
         },
         height: '100%',
         backgroundColor: '#060413',
-        transform: isOpen ? 'translateX(0)' : 'translateX(370px)',
+        transform: isOpen ? 'translateX(0)' : 'translateX(470px)',
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
         paddingLeft: "20px",
