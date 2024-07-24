@@ -23,11 +23,16 @@ const Details = () => {
   const [loading, setLoading] = useState(false);
   const [creditsHistory, setCreditsHistory] = useState([]);
   const [analyzeHistory, setAnalyzeHistory] = useState([]);
-  const [userData, setUserData] = useState([]);
+
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
   const inputRef = useRef(null);
   const dispatch = useDispatch();
+  const [credits, setCredits] = useState([]);
+  const [username, setUsername] = useState([]);
+
+  const [email, setEmail] = useState([]);
+ 
 
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
@@ -59,13 +64,14 @@ const Details = () => {
         const response = await axiosInstance({
           url: `${appUrl}/givecredits`,
           method: "post",
-          body: {
+          data: {
             userId: id,
             credits: data.sendCredits,
           },
         });
         console.log(response)
-       tUserData(response.data);
+      //  setUserData.credits((response.data.userCredits));
+      setCredits(response.data.userCredits)
       } catch (error) {
         // setError(error.toString());
     
@@ -96,7 +102,11 @@ const Details = () => {
             id: id,
           },
         });
-        setUserData(response.data);
+        // setUserData(response.data);
+        console.log(response.data)
+        setCredits(response.data.credits)
+        setUsername(response.data.userName)
+        setEmail(response.data.email)
       } catch (error) {
         setError(error.toString());
       } finally {
@@ -132,7 +142,7 @@ const Details = () => {
           userId: id,
         },
       });
-      console.log(response);
+      // console.log(response);
       setLoading(false);
       if (response) {
         setCreditsHistory(response.data);
@@ -173,7 +183,7 @@ const Details = () => {
           userId: id,
         },
       });
-      console.log(response);
+      // console.log(response);
       if (response) {
         setAnalyzeHistory(response.data.payments);
         setSnackAlertData({
@@ -236,7 +246,7 @@ const Details = () => {
                 top: "-70px",
               }}
             >
-              {userData.userName} Profile
+              {username} Profile
             </Typography>
 
             <Box
@@ -259,7 +269,7 @@ const Details = () => {
                   flexGrow: "1",
                 }}
               >
-                <ProfileCard title="Name" name={userData.userName} />
+                <ProfileCard title="Name" name={username} />
               </Box>
               <Box
                 sx={{
@@ -267,7 +277,7 @@ const Details = () => {
                   flexGrow: "1",
                 }}
               >
-                <ProfileCard title="Email" name={userData.email} />
+                <ProfileCard title="Email" name={email} />
               </Box>
               <Box
                 sx={{
@@ -275,7 +285,7 @@ const Details = () => {
                   flexGrow: "1",
                 }}
               >
-                <ProfileCard title="No of Credits" name={userData.credits} />
+                <ProfileCard title="No of Credits" name={credits} />
               </Box>
             </Box>
           </Box>
@@ -303,6 +313,7 @@ const Details = () => {
                 value={data.sendCredits}
                 rows={1}
                 color={"blue"}
+                type={"number"}
               />
               <Typography sx={{ position: "absolute", top: "10px", right: "20px" }} >
                 <CustomButton

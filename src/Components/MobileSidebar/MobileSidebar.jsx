@@ -67,7 +67,7 @@ const MobileSidebar = () => {
         },
         height: '100%',
         backgroundColor: '#060413',
-        transform: isOpen ? 'translateX(0)' : 'translateX(400px)',
+        transform: isOpen ? 'translateX(0)' : 'translateX(370px)',
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
         paddingLeft: "20px",
