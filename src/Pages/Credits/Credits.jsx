@@ -106,22 +106,22 @@ const Credits = () => {
 
     const fetchOffers = async () => {
         try {
-          setLoading(true);
-          const response = await axiosInstance({
-            url: `${appUrl}/offers`,
-            method: "get",
-            params: {
-                
-            }
-          });
-          setLoading(false);
-          console.log(response.data.offers)
-          setAutoCreditsAmount(response.data.offers);
+            setLoading(true);
+            const response = await axiosInstance({
+                url: `${appUrl}/offers`,
+                method: "get",
+                params: {
+
+                }
+            });
+            setLoading(false);
+            console.log(response.data.offers)
+            setAutoCreditsAmount(response.data.offers);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
-    
+    };
+
     useEffect(() => {
         fetchCreditsHisotry()
         fetchOffers()
@@ -260,34 +260,19 @@ const Credits = () => {
                                                     fontWeight: "600",
                                                     width: "63px",
                                                     margin: "auto",
+                                                    mt: "5px"
                                                 }}>
                                                 Basic
                                             </Typography>
-                                            <Box
+                                            {/* <Box
                                                 sx={{
                                                     marginTop: "15px",
                                                     display: "flex",
                                                     flexDirection: "column",
                                                     alignItems: "center",
-                                                }}>
-                                                <Box
-                                                    sx={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        // justifyContent:"center",
-                                                        gap: "10px",
-                                                    }}>
-                                                    <Typography>
-                                                        <img src={checkImg} alt="" />
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "11px",
-                                                        }}>
-                                                        Lorem ipsum dolor sit
-                                                    </Typography>
-                                                </Box>
-                                                <Box
+                                                }}> */}
+
+                                            {/* <Box
                                                     sx={{
                                                         display: "flex",
                                                         alignItems: "center",
@@ -302,27 +287,11 @@ const Credits = () => {
                                                         }}>
                                                         Lorem ipsum dolor sit
                                                     </Typography>
-                                                </Box>
-                                                <Box
-                                                    sx={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        gap: "10px",
-                                                    }}>
-                                                    <Typography>
-                                                        <img src={checkImg} alt="" />
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "11px",
-                                                        }}>
-                                                        Lorem ipsum dolor sit
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
+                                                </Box> */}
+                                            {/* </Box> */}
                                             <Box
                                                 sx={{
-                                                    marginTop: "30px",
+                                                    marginTop: "50px",
                                                     width: "100%",
                                                     textAlign: "center",
                                                     display: "flex",
@@ -331,26 +300,27 @@ const Credits = () => {
                                                 }}>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "45px",
+                                                        fontSize: "60px",
                                                         fontWeight: "600",
-                                                        color: "#333333",
+                                                        color: "#1E004D",
                                                         lineHeight: "40px",
                                                     }}>
                                                     $10
                                                 </Typography>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "10px",
+                                                        fontSize: "22.46px",
                                                         fontWeight: "500",
                                                         color: "#333333",
+                                                        mt: "13px"
                                                     }}>
-                                                    per Month
+                                                    15 Credits
                                                 </Typography>
                                             </Box>
                                             <Box
                                                 sx={{
                                                     margin: "auto",
-                                                    marginTop: "20PX",
+                                                    marginTop: "50PX",
                                                     display: "flex",
                                                     justifyContent: "center",
                                                 }}>
@@ -381,7 +351,7 @@ const Credits = () => {
                                                 borderRadius: "10px  ",
                                                 height: "322px",
                                                 flexGrow: "1",
-                                                // , flexShrink: "1"
+
                                             }}>
                                             <Typography
                                                 sx={{
@@ -390,68 +360,14 @@ const Credits = () => {
                                                     fontWeight: "600",
                                                     width: "63px",
                                                     margin: "auto",
+                                                    mt: "5px"
                                                 }}>
                                                 Pro
                                             </Typography>
+
                                             <Box
                                                 sx={{
-                                                    marginTop: "15px",
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    alignItems: "center",
-                                                }}>
-                                                <Box
-                                                    sx={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        gap: "10px",
-                                                    }}>
-                                                    <Typography>
-                                                        <img src={checkImg} alt="" />
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "11px",
-                                                        }}>
-                                                        Lorem ipsum dolor sit
-                                                    </Typography>
-                                                </Box>
-                                                <Box
-                                                    sx={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        gap: "10px",
-                                                    }}>
-                                                    <Typography>
-                                                        <img src={checkImg} alt="" />
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "11px",
-                                                        }}>
-                                                        Lorem ipsum dolor sit
-                                                    </Typography>
-                                                </Box>
-                                                <Box
-                                                    sx={{
-                                                        display: "flex",
-                                                        alignItems: "center",
-                                                        gap: "10px",
-                                                    }}>
-                                                    <Typography>
-                                                        <img src={checkImg} alt="" />
-                                                    </Typography>
-                                                    <Typography
-                                                        sx={{
-                                                            fontSize: "11px",
-                                                        }}>
-                                                        Lorem ipsum dolor sit
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                            <Box
-                                                sx={{
-                                                    marginTop: "30px",
+                                                    marginTop: "50px",
                                                     width: "100%",
                                                     textAlign: "center",
                                                     display: "flex",
@@ -460,26 +376,27 @@ const Credits = () => {
                                                 }}>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "45px",
+                                                        fontSize: "60px",
                                                         fontWeight: "600",
-                                                        color: "#333333",
+                                                        color: "#1E004D",
                                                         lineHeight: "40px",
                                                     }}>
                                                     $30
                                                 </Typography>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "10px",
+                                                        fontSize: "22.46px",
                                                         fontWeight: "500",
                                                         color: "#333333",
+                                                        mt: "13px"
                                                     }}>
-                                                    per Month
+                                                    50 Credits
                                                 </Typography>
                                             </Box>
                                             <Box
                                                 sx={{
                                                     margin: "auto",
-                                                    marginTop: "20PX",
+                                                    marginTop: "50PX",
                                                     display: "flex",
                                                     justifyContent: "center",
                                                 }}>
@@ -517,73 +434,28 @@ const Credits = () => {
                                                 flexBasis: {
                                                     md: "218px",
                                                 },
-                                                padding: "12px 16px 15px 16px ",
+                                                padding: "15px 16px 0px 16px ",
                                                 boxShadow: "4px 5px 15px 0px #C8C8C8",
                                                 borderRadius: "10px  ",
                                                 height: "322px",
                                                 flexGrow: "1",
-                                                flexShrink: "1",
-                                                overflowY: "scroll",
-                                                "&::-webkit-scrollbar": {
-                                                    width: "8px", // Adjust the width of the scrollbar here
-                                                },
-                                                "&::-webkit-scrollbar-track": {
-                                                    background: "#DFDFDF",
-                                                    borderRadius: "10px",
-                                                },
-                                                "&::-webkit-scrollbar-thumb": {
-                                                    background: "black", // Change this for different scrollbar thumb color
-                                                    borderRadius: "10px",
-                                                },
-                                                "&::-webkit-scrollbar-thumb:hover": {
-                                                    background: "#b30000", // Change this for scrollbar thumb color on hover
-                                                },
+                                                mt: "5px"
+
                                             }}>
                                             <Typography
                                                 sx={{
                                                     fontSize: "23px",
                                                     color: "#333333",
                                                     fontWeight: "600",
-                                                    width: "100%",
-                                                    textAlign: "center",
+                                                    width: "63px",
+                                                    margin: "auto",
                                                 }}>
-                                                Enterprise
+                                                Pro
                                             </Typography>
+
                                             <Box
                                                 sx={{
-                                                    marginTop: "15px",
-                                                    display: "flex",
-                                                    flexDirection: "column",
-                                                    alignItems: "center",
-                                                }}>
-                                                {Array.from({ length: 9 }).map(
-                                                    (_, index) => (
-                                                        <Box
-                                                            key={index}
-                                                            sx={{
-                                                                display: "flex",
-                                                                alignItems: "center",
-                                                                gap: "10px",
-                                                            }}>
-                                                            <Typography>
-                                                                <img
-                                                                    src={checkImg}
-                                                                    alt=""
-                                                                />
-                                                            </Typography>
-                                                            <Typography
-                                                                sx={{
-                                                                    fontSize: "11px",
-                                                                }}>
-                                                                Lorem ipsum dolor sit
-                                                            </Typography>
-                                                        </Box>
-                                                    )
-                                                )}
-                                            </Box>
-                                            <Box
-                                                sx={{
-                                                    marginTop: "30px",
+                                                    marginTop: "50px",
                                                     width: "100%",
                                                     textAlign: "center",
                                                     display: "flex",
@@ -592,26 +464,27 @@ const Credits = () => {
                                                 }}>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "45px",
+                                                        fontSize: "60px",
                                                         fontWeight: "600",
-                                                        color: "#333333",
+                                                        color: "#1E004D",
                                                         lineHeight: "40px",
                                                     }}>
-                                                    $60
+                                                    $50
                                                 </Typography>
                                                 <Typography
                                                     sx={{
-                                                        fontSize: "10px",
+                                                        fontSize: "22.46px",
                                                         fontWeight: "500",
                                                         color: "#333333",
+                                                        mt: "13px"
                                                     }}>
-                                                    per Month
+                                                    100 Credits
                                                 </Typography>
                                             </Box>
                                             <Box
                                                 sx={{
                                                     margin: "auto",
-                                                    marginTop: "20PX",
+                                                    marginTop: "50PX",
                                                     display: "flex",
                                                     justifyContent: "center",
                                                 }}>
@@ -624,7 +497,7 @@ const Credits = () => {
                                                     color={"#333333"}
                                                     margin={"auto"}
                                                     onClick={() => {
-                                                        handleNavigate(3, 60, 'Enterprise');
+                                                        handleNavigate(3, 100, 'Enterprise');
                                                     }}
                                                 />
                                             </Box>
@@ -642,8 +515,13 @@ const Credits = () => {
                                                 display: "flex",
                                                 flexDirection: "column",
                                                 gap: "1rem",
+                                                // border: "2px solid red"
                                             }}>
-                                            <DetailedCard title='Total Credits' detailedCardStyles={{ justifyContent: "center" }} name={credits} action="" />
+                                            <Box>
+                                                <DetailedCard title='Total Credits' detailedCardStyles={{ justifyContent: "start", alignItems: "start", fontSize: "65px" }} name={credits} action=""
+                                                    nameStyles={{ fontSize: "65px", marginTop: "10px" }}
+                                                />
+                                            </Box>
 
                                             <Box
                                                 sx={{
@@ -703,9 +581,6 @@ const Credits = () => {
                                                             textAlign: "center",
                                                             paddingLeft: "8px",
                                                             fontSize: "18px",
-
-
-
                                                         }}
                                                         placeholder="30"
                                                     />
