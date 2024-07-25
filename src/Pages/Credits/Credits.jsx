@@ -592,6 +592,7 @@ const Credits = () => {
                                                             textAlign: "center",
                                                             paddingLeft: "8px",
                                                             fontSize: "18px",
+                                                            border:auth.autocharge ? "" : "1px solid #190247"
                                                         }}
                                                         placeholder="30"
                                                         value={inputValue}

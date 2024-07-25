@@ -5,10 +5,12 @@ import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputSha
 import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
 import PaymentComponent from './PaymentComponent';
 import { loadStripe } from '@stripe/stripe-js';
+import dashboardImg1 from "../../assets/images/dashboard.png";
 
 const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
 
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const StripeCardForm = () => {
     const [clientSecret, setClientSecret] = useState('');
@@ -16,6 +18,8 @@ const StripeCardForm = () => {
     const queryParams = new URLSearchParams(location.search);
     const price = queryParams.get('price');
     const plan = queryParams.get('plan');
+    const auth = useSelector(state => state.auth)
+    const [inputValue, setInputValue ] = useState()
 
     useEffect(() => {
         const clientSecret = localStorage.getItem("clientSecret");
@@ -65,7 +69,7 @@ const StripeCardForm = () => {
                         <CustomInputShadow
                             placeholder={plan}
                             name="name"
-                            
+
                         />
                     </Box>
                 </Box>
@@ -92,48 +96,113 @@ const StripeCardForm = () => {
                         <CustomInputShadow
                             placeholder={`${price}$`}
                             name="amount"
-                            
-                            
+
+
                         />
                     </Box>
                 </Box>
 
                 <Box
                     sx={{
-                        flexBasis: "20%",
+                        flexBasis: "200px",
                         display: "flex",
                         flexDirection: "column",
                         gap: "0.5rem",
                         alignItems: "end",
+                        // border:"2px solid red"
+                        flexShrink:"0"
                     }}
                 >
-                    <Typography
-                        sx={{
-                            fontWeight: "600",
-                            fontSize: "22px",
-                            letterSpacing: "0.34px",
-                            color: "#333333"
-                        }}
-                    >
-                        Auto Credits
-                    </Typography>
+                    
                     <Box
                         sx={{
-                            display: "flex",
-                            justifyContent: "end",
-                            padding: "12px"
+                           width:"100%",
+                           
                         }}
                     >
-                        <SwitchCheckBox theme="default" />
+                        <Box
+                            sx={{
+                                // height: "50%",
+                                // flexBasis: "218px",
+                                borderRadius: "10px",
+                                flexGrow: "1",
+                                backgroundImage: auth.autocharge ? `linear-gradient(rgba(53, 1, 88, .8), rgba(53, 1, 88, .8)), url(${dashboardImg1})` : "",
+                                backgroundSize: "cover",
+                                backgroundRepeat: "no-repeat",
+                                backgroundPosition: "center",
+                                padding: "24px 15px",
+                                position: "relative",
+                                // flexBasis: "50%",
+                                boxShadow: auth.autocharge ? " " : "4px 5px 15px 0px #C8C8C8"
+
+                            }}>
+                            <Box
+                                sx={{
+                                    position: "absolute",
+                                    right: "10px",
+                                    top: "15px",
+                                    // padding:"1rem",
+                                    // backgroundColor:"red"
+                                }}>
+                                <SwitchCheckBox theme="alternate" inputValue={inputValue} />
+                            </Box>
+                            <Typography
+                                sx={{
+                                    fontWeight: "600",
+                                    fontSize: "27px",
+                                    color: auth.autocharge ? "#fff " : "#190247",
+                                }}>
+                                Auto
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    fontWeight: "600",
+                                    fontSize: "27px",
+                                    color: auth.autocharge ? "#fff " : "#190247",
+                                }}>
+                                Credits
+                            </Typography>
+                            <Typography
+                                sx={{
+                                    position: "absolute",
+                                    bottom: "10px",
+                                    right: "20px"
+                                }}
+                            >
+                                <input type="number"
+                                    style={{
+                                        width: "50px",
+                                        height: "32px",
+                                        border: "none",
+                                        outline: "none",
+                                        borderRadius: "5px",
+                                        fontWeight: "600",
+                                        color: "#190247",
+                                        textAlign: "center",
+                                        paddingLeft: "8px",
+                                        fontSize: "18px",
+                                        border: auth.autocharge ? "" : "1px solid #190247"
+                                    }}
+                                    placeholder="30"
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                />
+                            </Typography>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
+            <Box
+            sx={{mt:"50px"}}
+            >
 
+           
             {clientSecret && (
                 <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
                     <PaymentComponent />
                 </Elements>
             )}
+             </Box>
         </Box>
     );
 };
