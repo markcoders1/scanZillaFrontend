@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import DetailedCard from "../../Components/DetailedCard/DetailedCard";
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import bg from "./../../assets/images/bg.png";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -517,7 +518,11 @@ const Credits = () => {
                                                 gap: "1rem",
                                                 // border: "2px solid red"
                                             }}>
-                                            <Box>
+                                            <Box
+                                            sx={{
+                                                flexBasis: "50%",
+                                            }}
+                                            >
                                                 <DetailedCard title='Total Credits' detailedCardStyles={{ justifyContent: "start", alignItems: "start", fontSize: "65px" }} name={credits} action=""
                                                     nameStyles={{ fontSize: "65px", marginTop: "10px" }}
                                                 />
@@ -535,6 +540,7 @@ const Credits = () => {
                                                     backgroundPosition: "center",
                                                     padding: "24px 23px",
                                                     position: "relative",
+                                                    flexBasis: "50%",
                                                 }}>
                                                 <Box
                                                     sx={{
@@ -686,7 +692,31 @@ const Credits = () => {
                                 </Box>
                             </Box>
                             {/* <Customcard cardStyle={{ cursor: "pointer" }} cb={() => { navigate("/card-details") }} /> */}
-                            <Customcard />
+                            {/* <Customcard /> */}
+                            <Box
+                                sx={{
+                                    background: `linear-gradient(rgba(27, 2, 75, .1), rgba(27, 2, 75, .1)), url(${bg})`,
+                                    backgroundSize: "cover",
+                                    backgroundRepeat: "no-repeat",
+                                    borderRadius: "10px",
+                                    position: "relative",
+                                    color: "white",
+                                    padding: "26px 32px",
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems:"center",
+                                    justifyContent: "center",
+                                    flexGrow: 1,
+                                    boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                                    color:"#FFFFFF",
+                                    fontSize:"28px",
+                                    fontWeight:"600",
+                                    backgroundPosition:"center"
+                                }}
+                                onClick={() => navigate("/card-details")}
+                            >
+                                        Add Your Card +
+                            </Box>
 
                         </Box>
                         <SnackAlert
