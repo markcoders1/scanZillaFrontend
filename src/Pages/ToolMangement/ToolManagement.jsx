@@ -31,6 +31,7 @@ const ToolManagement = () => {
       descriptionCharacters: "",
       bulletcharacters: "",
       newKeyword: "",
+      instructions:","
     },
   });
   const [restrictedKeywords, setRestrictedKeywords] = useState([]);
@@ -89,6 +90,7 @@ const ToolManagement = () => {
           bulletNum: data.totalBullets,
           bulletcharacters: data.bulletcharacters,
           descriptionCharacters: data.descriptionCharacters,
+          instructions: data.instructions,
         },
       });
       reset({ newKeyword: "" });
@@ -267,23 +269,24 @@ const ToolManagement = () => {
                 )}
               />
             </Box>
-            {/* <Box
+            <Box
               sx={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}
             >
-              <Heading Heading="Description Characters" />
+              <Heading Heading="Assistant Instructions" />
               <Controller
-                name="descriptionCharacters"
+                name="instructions"
                 control={control}
                 render={({ field }) => (
                   <CustomInputShadow
                     {...field}
-                    placeholder={descriptionCharacters}
+                    height="180px"
+                    multiline= {true}
                     onChange={(e) => field.onChange(e.target.value)}
-                    type={"number"}
+                    type={"text"}
                   />
                 )}
               />
-            </Box> */}
+            </Box>
 
             <Box>
               <CustomButton
