@@ -130,10 +130,15 @@ const UserTable = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const month = date.toLocaleString('default', { month: 'short' });
     const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
+    return `${month}-${day}-${year}`;
   };
+  
+  // Example usage:
+  const formattedDate = formatDate("2023-07-22T00:00:00Z");
+  console.log(formattedDate); // Output: Jul-22-2023
+  
 
   return (
     <>
@@ -337,11 +342,12 @@ const UserTable = () => {
                       {user.email}
                     </TableCell>
                     <TableCell
+                    className="colorsGivingSpecific"
                       sx={{
                         fontSize: "14px",
                         textAlign: "center",
                         padding: "10px",
-                        color: "#A0A4A9",
+                        // color: "#A0A4A9",
                         fontWeight: "500",
                         border: "none",
                       }}

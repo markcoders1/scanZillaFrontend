@@ -43,7 +43,9 @@
 
 
 }
-
+.colorsGivingSpecific{
+    color: #A0A4A9 !important;
+}
 .MuiTableRow-root {
     background: white;
     /* margin-top: 13px; */
