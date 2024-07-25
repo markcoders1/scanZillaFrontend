@@ -7,7 +7,7 @@ import SnackAlert from '../SnackAlert/SnackAlert';
 import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
-const SwitchCheckBox = ({ theme }) => {
+const SwitchCheckBox = ({ theme, inputValue }) => {
   const auth = useSelector(state => state.auth);
   const dispatch = useDispatch();
   const [isChecked, setIsChecked] = useState(auth?.autocharge);
@@ -28,10 +28,13 @@ const SwitchCheckBox = ({ theme }) => {
       })
     );
   };
+  useEffect(() => {
+   const valueFromInput = inputValue
+  }, [inputValue]);
 
   const handleToggleAutoCredits = async () => {
     try {
-      await axiosInstance({ url: appUrl + "/toggleautocredit", method: "GET" })
+      await axiosInstance({ url: appUrl + "/toggleautocredit", method: "GET", data: {preferredCredits : inputValue} })
         .then(response => {
           if (response) {
             response = response?.data;
@@ -69,10 +72,10 @@ const SwitchCheckBox = ({ theme }) => {
       <label className={`switch-checkbox ${theme}`}>
         <input value={isChecked} checked={isChecked} onChange={handleChange} type="checkbox" />
         <span className="slider round"></span>
-        <p style={{  color: auth.autocharge ? "#fff " : "#190247", paddingLeft: "10px", paddingTop: "5px" }}>
+        <p style={{ color: auth.autocharge ? "#fff " : "#190247", paddingLeft: "10px", paddingTop: "5px" }}>
           {auth.autocharge ? "on" : "Off"}
         </p>
-        
+
       </label>
       <SnackAlert
         severity={snackAlertData.severity}

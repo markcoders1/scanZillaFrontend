@@ -24,6 +24,7 @@ const Credits = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState();
     const [autoCreditsAmount, setAutoCreditsAmount] = useState();
+    const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
         console.log(auth);
@@ -554,7 +555,7 @@ const Credits = () => {
                                                         // padding:"1rem",
                                                         // backgroundColor:"red"
                                                     }}>
-                                                    <SwitchCheckBox theme="alternate" />
+                                                    <SwitchCheckBox theme="alternate" inputValue={inputValue} />
                                                 </Box>
                                                 <Typography
                                                     sx={{
@@ -593,6 +594,8 @@ const Credits = () => {
                                                             fontSize: "18px",
                                                         }}
                                                         placeholder="30"
+                                                        value={inputValue}
+                                                        onChange={(e) => setInputValue(e.target.value)}
                                                     />
                                                 </Typography>
                                             </Box>
