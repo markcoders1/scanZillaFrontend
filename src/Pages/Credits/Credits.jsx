@@ -461,6 +461,7 @@ const Credits = () => {
                                 fontSize: "28px",
                                 fontWeight: "600",
                                 backgroundPosition: "center",
+                                cursor:"pointer"
                             }}
                             onClick={() => navigate("/card-details")}
                         >

@@ -26,9 +26,11 @@ const UserTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [loadingButton, setLoadingButton] = useState({});
 
   const toggleBlock = async (userId) => {
     try {
+      setLoadingButton((prev) => ({ ...prev, [userId]: true }));
       const response = await axiosInstance({
         url: appUrl + "/toggleuseraccount",
         method: "get",
@@ -36,7 +38,7 @@ const UserTable = () => {
           userId,
         },
       });
-      console.log(response)
+      console.log(response);
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === userId ? { ...user, active: !user.active } : user
@@ -44,6 +46,8 @@ const UserTable = () => {
       );
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoadingButton((prev) => ({ ...prev, [userId]: false }));
     }
   };
 
@@ -54,7 +58,7 @@ const UserTable = () => {
         method: "get",
       });
       setUsers(response.data);
-      console.log(response)
+      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
@@ -112,6 +116,7 @@ const UserTable = () => {
           width="100px"
           ButtonText={active ? "Block" : "Unblock"}
           onClick={() => toggleBlock(userId)}
+          loading={loadingButton[userId] || false}
         />
         <CustomButton
           border="2px solid #333333"
@@ -134,12 +139,6 @@ const UserTable = () => {
     const year = date.getFullYear();
     return `${month}-${day}-${year}`;
   };
-  
-  // Example usage:
-  const formattedDate = formatDate("2023-07-22T00:00:00Z");
-  console.log(formattedDate); // Output: Jul-22-2023
-  
-
   return (
     <>
       {loading ? (
@@ -227,7 +226,7 @@ const UserTable = () => {
                       fontSize: "14px",
                       textAlign: "center",
                       borderRadius: "8px 0px 0px 8px",
-                      width:"160px",
+                      width: "160px",
                       // border:"2px solid red"
                     }}
                   >
@@ -342,7 +341,7 @@ const UserTable = () => {
                       {user.email}
                     </TableCell>
                     <TableCell
-                    className="colorsGivingSpecific"
+                      className="colorsGivingSpecific"
                       sx={{
                         fontSize: "14px",
                         textAlign: "center",

@@ -97,7 +97,9 @@ const AdminDashboard = () => {
                     <LoaderMain />
                 </Box>
             ) : (
-                <Box sx={{}}>
+                <Box sx={{
+                    height:"70vh"
+                }}>
                     <Box
                         sx={{
                             display: "flex",
@@ -106,6 +108,7 @@ const AdminDashboard = () => {
                                 md: "row",
                                 xs: "column",
                             },
+                            // height:"70v"
                         }}
                     >
                         <Box

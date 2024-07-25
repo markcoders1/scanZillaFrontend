@@ -22,8 +22,11 @@ const CustomButton = ({
     loading = false
 }) => {
     return (
-        <Button variant={variant} fullWidth={fullWidth}
+        <Button 
+            variant={variant} 
+            fullWidth={fullWidth}
             onClick={onClick}
+            disabled={loading}
             sx={{
                 border: border,
                 borderRadius,
@@ -40,10 +43,12 @@ const CustomButton = ({
                     background: hoverBg,
                     color: hovercolor
                 }
-            }} type={`${type}`}>
+            }} 
+            type={`${type}`}
+        >
             {loading ? "Loading..." : ButtonText}
         </Button>
-    )
+    );
 }
 
 export default CustomButton;
