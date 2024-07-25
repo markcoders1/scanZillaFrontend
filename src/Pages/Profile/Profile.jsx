@@ -248,7 +248,7 @@ const Profile = () => {
                     }}
                       // onClick={handleNavigate}
                     >
-                      <Customcard name={username} />
+                      <Customcard name={username} cardStyle={{height:"180px"}} />
                     </Box>
                     <Box sx={{
                       flexGrow: 1,

@@ -51,7 +51,7 @@ const CustomCard = ({ name ,cardStyle, cb}) => {
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    gap: "20px"
+                    gap: "10px"
                 }}
             >
                 <Typography
