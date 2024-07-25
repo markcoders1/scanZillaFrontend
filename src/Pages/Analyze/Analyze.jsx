@@ -85,11 +85,11 @@ const Analyze = () => {
       if (response.data.error) {
         handleData(response.data);
       }
-      // setSnackAlertData({
-      //   open: true,
-      //   message: response.data.message,
-      //   severity: "success",
-      // })
+      setSnackAlertData({
+        open: true,
+        message: response.data.message,
+        severity: "success",
+      })
     } catch (error) {
       const errorData = error?.response?.data;
       setIsLoading(false);
@@ -139,188 +139,227 @@ const Analyze = () => {
   };
 
   return (
-    <Box
-      sx={{
-        maxHeight: "680px",
-        display: "flex",
-        gap: "20px",
-        flexDirection: "column",
-        overflowY: "auto",
-        overflowX: "hidden",
-        padding: "20px 5px",
-        "&::-webkit-scrollbar": {
-          width: "8px"
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "#DFDFDF",
-          borderRadius: "10px"
-        },
-        "&::-webkit-scrollbar-thumb": {
-          background: "black",
-          borderRadius: "10px"
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-          background: "#b30000"
-        },
-      }}
-    >
-      <Box
-        sx={{
-          padding: "0px 0px",
-          display: "flex",
-          flexDirection: "column",
-          gap: ".7rem"
-        }}
-      >
-        <CustomSelect categoryError={errors?.category} data={category} handleChange={handleCategoryChange} />
-        <Box sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "20px",
-        }}>
+
+    <>
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            height: "70vh",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column"
+          }}
+        >
+          <LoaderMain />
+
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            maxHeight: "680px",
+            display: "flex",
+            gap: "20px",
+            flexDirection: "column",
+            overflowY: "auto",
+            overflowX: "hidden",
+            padding: "20px 15px",
+            "&::-webkit-scrollbar": {
+              width: "8px"
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "#DFDFDF",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "black",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#b30000"
+            },
+            // zIndex:"-1"
+            backgroundColor:"transparent"
+          }}
+        >
           <Box
             sx={{
+              padding: "0px 0px",
               display: "flex",
               flexDirection: "column",
-              gap: "15px"
+              gap: ".7rem"
             }}
           >
-            <Heading Heading="Title" />
-            <CustomTextField
-              handleKeyDown={() => { }}
-              onChange={hanldeInput}
-              name="title"
-              value={data?.title}
-              error={errors?.title}
-              placeholder="Insert Title Here"
-              border=""
-              boxShadow={true}
-            />
-          </Box>
-        </Box>
-        <Box>
-          <Heading Heading="Bullet Points" />
-          {data.bulletpoints.map((item, index) => (
-            <Box
-              key={index}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "15px",
-                mt: "10px"
-              }}
-            >
-              <CustomTextField
-                handleKeyDown={() => { }}
-                onChange={(e) => handleBulletPointChange(index, e.target.value)}
-                name={""}
-                value={item.value}
-                error={errors?.bulletpoints}
-                placeholder="Bullet Text"
-                border=""
-                boxShadow={true}
-              />
-            </Box>
-          ))}
-          <Box sx={{
-            display: 'flex',
-            gap: "20px",
-            justifyContent: {
-              md:"space-between",
-              
-            },
-            flexDirection: {
-              sm: "row",
-              xs: "column-reverse"
-            },
-            mt: "20px",
-            // border:"1px solid red",
-            alignItems:"end"
-          }}>
-            <Typography
-              sx={{
-                fontWeight: "500",
-                fontSize: "16px",
-                color: "#A0A4A9"
-              }}
-            >
-              Add More (up to 10 in total)
-            </Typography>
-
+            <CustomSelect categoryError={errors?.category} data={category} handleChange={handleCategoryChange} />
             <Box sx={{
               display: "flex",
-              gap: "20px"
+              flexDirection: "column",
+              gap: "20px",
             }}>
-              {data.bulletpoints.length > 1 && (
-                <CustomButton
-                  border="2px solid #1A0049"
-                  borderRadius="10px"
-                  buttonTextStyle={{}}
-                  buttonStyle={{
-                    padding: {
-                      lg: "12px 20px"
-                    }
-                  }}
-                  ButtonText="Remove Last Bullet"
-                  fontSize
-                  color="#1A0049"
-                  fontWeight
-                  fullWidth={false}
-                  variant="outlined"
-                  padding
-                  onClick={removeBullet}
-                  hoverBg="#1A0049"
-                  hovercolor="white"
-                  width={"189px"}
-                />
-              )}
-
-              <CustomButton
-                border="2px solid #1A0049"
-                borderRadius="10px"
-                background="#1A0049"
-                hoverBg="white"
-                hovercolor="#1A0049"
-                buttonTextStyle={{}}
-                buttonStyle={{
-                  padding: {
-                    lg: "12px 20px"
-                  },
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "15px"
                 }}
-                ButtonText="Add A Bullet +"
-                fontSize
-                color="white"
-                fontWeight
-                fullWidth={false}
-                variant="contained"
-                padding
-                onClick={addBullet}
-              // width={"143px"}
-
-              />
+              >
+                <Heading Heading="Title" />
+                <CustomTextField
+                  handleKeyDown={() => { }}
+                  onChange={hanldeInput}
+                  name="title"
+                  value={data?.title}
+                  error={errors?.title}
+                  placeholder="Insert Title Here"
+                  border=""
+                  boxShadow={true}
+                />
+              </Box>
             </Box>
-          </Box>
-        </Box>
-        <Box>
-          <Heading Heading="Product Description" />
-          <Box
-          sx={{
-            mt:"10px"
-          }}
-          >
-            <CustomInputShadow
-              type="text"
-              multiline={true}
-              rows={10}  // Adjust the number of rows to match the desired height
-              onChange={handleInputChange}
-              value={data.description}
-              height={"360px"}
-              error={errors.description}
-              name={"description"}
-            />
-          </Box>
+            <Box
+            sx={{
+              display:"flex",
+              flexDirection:"column",
+              gap:"15px"
+            }}
+            >
+              <Heading Heading="Bullet Points" />
+              {data.bulletpoints.map((item, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0px",
+                    // mt: "10px"
+                  }}
+                >
+                  <CustomTextField
+                    handleKeyDown={() => { }}
+                    onChange={(e) => handleBulletPointChange(index, e.target.value)}
+                    name={""}
+                    value={item.value}
+                    // error={errors?.bulletpoints}
+                    placeholder="Bullet Text"
+                    border=""
+                    boxShadow={true}
+                  />
+                  
 
-          {errors.description && (
+                </Box>
+              ))}
+              {errors && (
+                <Typography sx={{
+                  display: errors.bulletpoints ? "flex" : "none",
+                  background: "whitesmoke",
+                  p: "10px",
+                  color: "red",
+                  mt: "8px",
+                  wordBreak: "break-word"
+                }}>
+                  {errors.bulletpoints}
+                </Typography>
+              )}
+              <Box sx={{
+                display: 'flex',
+                gap: "20px",
+                justifyContent: {
+                  md: "space-between",
+
+                },
+                flexDirection: {
+                  sm: "row",
+                  xs: "column-reverse"
+                },
+                mt: "20px",
+                // border:"1px solid red",
+                alignItems: "end"
+              }}>
+                <Typography
+                  sx={{
+                    fontWeight: "500",
+                    fontSize: "16px",
+                    color: "#A0A4A9"
+                  }}
+                >
+                  Add More (up to 10 in total)
+                </Typography>
+
+                <Box sx={{
+                  display: "flex",
+                  gap: "20px"
+                }}>
+                  {data.bulletpoints.length > 1 && (
+                    <CustomButton
+                      border="2px solid #1A0049"
+                      borderRadius="10px"
+                      buttonTextStyle={{}}
+                      buttonStyle={{
+                        padding: {
+                          lg: "12px 20px"
+                        }
+                      }}
+                      ButtonText="Remove Last Bullet"
+                      fontSize
+                      color="#1A0049"
+                      fontWeight
+                      fullWidth={false}
+                      variant="outlined"
+                      padding
+                      onClick={removeBullet}
+                      hoverBg="#1A0049"
+                      hovercolor="white"
+                      width={"189px"}
+                    />
+                  )}
+
+                  <CustomButton
+                    border="2px solid #1A0049"
+                    borderRadius="10px"
+                    background="#1A0049"
+                    hoverBg="white"
+                    hovercolor="#1A0049"
+                    buttonTextStyle={{}}
+                    buttonStyle={{
+                      padding: {
+                        lg: "12px 20px"
+                      },
+                    }}
+                    ButtonText="Add A Bullet +"
+                    fontSize
+                    color="white"
+                    fontWeight
+                    fullWidth={false}
+                    variant="contained"
+                    padding
+                    onClick={addBullet}
+                  // width={"143px"}
+
+                  />
+                </Box>
+              </Box>
+            </Box>
+            <Box>
+              <Heading Heading="Product Description" />
+              <Box
+                sx={{
+                  mt: "10px"
+                }}
+              >
+                <CustomInputShadow
+                  type="text"
+                  multiline={true}
+                  rows={10}  // Adjust the number of rows to match the desired height
+                  onChange={handleInputChange}
+                  value={data.description}
+                  height={"360px"}
+                  error={errors.description}
+                  name={"description"}
+                />
+              </Box>
+
+              {/* {errors.description && (
             <Typography
               sx={{
                 background: "whitesmoke",
@@ -332,9 +371,9 @@ const Analyze = () => {
             >
               {errors.description}
             </Typography>
-          )}
+          )} */}
 
-          {
+              {/* {
             errors.description && <Typography sx={{
               background: "whitesmoke",
               p: "10px",
@@ -342,85 +381,87 @@ const Analyze = () => {
               mt: "8px",
               wordBreak: "break-word"
             }}>{errors.description}</Typography>
-          }
-        </Box>
-        <Box
-          sx={{
-            mt: "20px"
-          }}
-        >
-          <Typography
-            sx={{
-              fontSize: "20px",
-              fontWeight: "500",
-              lineHeight: "33px"
-            }}
-          >
-            Search Terms (Backend keywords)
-          </Typography>
-          <Box>
-            <CustomTextField
-              handleKeyDown={() => { }}
-              onChange={hanldeInput}
-              name="keywords"
-              value={data?.keywords}
-              error={errors?.keywords}
-              placeholder=""
-              border=""
-              boxShadow={true}
+          } */}
+            </Box>
+            <Box
+              sx={{
+                mt: "20px"
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "20px",
+                  fontWeight: "500",
+                  lineHeight: "33px"
+                }}
+              >
+                Search Terms (Backend keywords)
+              </Typography>
+              <Box>
+                <CustomTextField
+                  handleKeyDown={() => { }}
+                  onChange={hanldeInput}
+                  name="keywords"
+                  value={data?.keywords}
+                  error={errors?.keywords}
+                  placeholder=""
+                  border=""
+                  boxShadow={true}
+                />
+              </Box>
+            </Box>
+
+            <Box
+              sx={{
+                marginTop: "40px"
+              }}
+            >
+              {!isLoading ? <CustomButton
+                border="2px solid #1A0049"
+                borderRadius="10px"
+                background="#1A0049"
+                hoverBg="white"
+                hovercolor="#1A0049"
+                buttonTextStyle={{}}
+                buttonStyle={{
+                  padding: {
+                    lg: "12px 20px"
+                  },
+                }}
+                ButtonText="Analyze"
+                fontSize
+                color="white"
+                fontWeight
+                fullWidth={true}
+                variant="contained"
+                padding
+                onClick={handleAnalyze}
+              /> : <div style={{
+                border: "2px solid #1A0049",
+                borderRadius: "10px",
+                background: "#1A0049",
+                hoverBg: "white",
+                hovercolor: "#1A0049",
+                color: "white",
+                width: "100%",
+                padding: "19px 20px",
+                display: "flex",
+                justifyContent: "center"
+              }}><div className="loader" /></div>}
+            </Box>
+
+
+
+            <SnackAlert
+              message={snackAlertData.message}
+              severity={snackAlertData.severity}
+              open={snackAlertData.open}
+              handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
             />
           </Box>
         </Box>
-
-        <Box
-          sx={{
-            marginTop: "40px"
-          }}
-        >
-          {!isLoading ? <CustomButton
-            border="2px solid #1A0049"
-            borderRadius="10px"
-            background="#1A0049"
-            hoverBg="white"
-            hovercolor="#1A0049"
-            buttonTextStyle={{}}
-            buttonStyle={{
-              padding: {
-                lg: "12px 20px"
-              },
-            }}
-            ButtonText="Analyze"
-            fontSize
-            color="white"
-            fontWeight
-            fullWidth={true}
-            variant="contained"
-            padding
-            onClick={handleAnalyze}
-          /> : <div style={{
-            border: "2px solid #1A0049",
-            borderRadius: "10px",
-            background: "#1A0049",
-            hoverBg: "white",
-            hovercolor: "#1A0049",
-            color: "white",
-            width: "100%",
-            padding: "19px 20px",
-            display: "flex",
-            justifyContent: "center"
-          }}><div className="loader" /></div>}
-        </Box>
-
-
-
-        <SnackAlert
-          message={snackAlertData.message}
-          severity={snackAlertData.severity}
-          open={snackAlertData.open}
-          handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
-        />
-      </Box>
-    </Box>
+      )}
+    </>
   )
 }
 
