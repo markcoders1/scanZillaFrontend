@@ -97,7 +97,11 @@ const CreditsManagement = () => {
           <LoaderMain />
         </Box>
       ) : (
-        <Box>
+        <Box
+        sx={{
+          height:"70vh"
+        }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -115,7 +119,7 @@ const CreditsManagement = () => {
                     padding: "15px 16px 0px 16px",
                     boxShadow: "4px 5px 15px 0px #C8C8C8",
                     borderRadius: "10px",
-                    height: "262px",
+                    height: "202px",
                     width:{
                       sm:"210px",
                       xs:"100%"
@@ -135,7 +139,7 @@ const CreditsManagement = () => {
                   >
                     {e.name}
                   </Typography>
-                  <Box
+                  {/* <Box
                     sx={{
                       marginTop: "15px",
                       display: "flex",
@@ -151,7 +155,7 @@ const CreditsManagement = () => {
                         {e.description}
                       </Typography>
                     </Box>
-                  </Box>
+                  </Box> */}
                   <Box
                     sx={{
                       marginTop: "30px",
@@ -166,7 +170,7 @@ const CreditsManagement = () => {
                       sx={{
                         fontSize: "45px",
                         fontWeight: "600",
-                        color: "#333333",
+                        color: "#1E004D",
                         lineHeight: "40px",
                       }}
                     >
@@ -175,7 +179,7 @@ const CreditsManagement = () => {
                     <Typography
                       sx={{ fontSize: "10px", fontWeight: "500", color: "#333333" }}
                     >
-                      per Month
+                     
                     </Typography>
                   </Box>
                   <Box
@@ -211,7 +215,7 @@ const CreditsManagement = () => {
               sx={{
                 height: {
                   md: "181px",
-                  xs: "260px",
+                  xs: "300px",
                 },
                 display: "flex",
                 flexDirection: "column",
@@ -220,14 +224,14 @@ const CreditsManagement = () => {
                 marginTop: "50px",
                 boxShadow: "4px 5px 15px 0px #C8C8C8",
                 justifyContent: "center",
-                width: { xs: "100%", md: "630px" },
+                width: { xs: "100%" },
                 borderRadius: "10px",
               }}
             >
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Box
                   sx={{
-                    fontSize: { sm: "45px", xs: "30px" },
+                    fontSize: { sm: "45px", xs: "25px" },
                     fontWeight: "600",
                     color: "#333333",
                     display: "flex",
@@ -250,7 +254,7 @@ const CreditsManagement = () => {
                       }}
                       placeholder={creditCost}
                     />{" "}
-                    Credits{" "}
+                    Credits{" "} Every
                   </Box>
                   <Box>
                     <input
