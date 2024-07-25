@@ -34,10 +34,12 @@ const SwitchCheckBox = ({ theme, inputValue }) => {
 
   const handleToggleAutoCredits = async () => {
     try {
-      await axiosInstance({ url: appUrl + "/toggleautocredit", method: "GET", data: {preferredCredits : inputValue} })
+      console.log(inputValue)
+      await axiosInstance({ url: appUrl + "/toggleautocredit", method: "GET", params: {preferredCredits : inputValue} })
         .then(response => {
           if (response) {
             response = response?.data;
+            console.log(response)
 
             setSnackAlertData({
               open: true,
