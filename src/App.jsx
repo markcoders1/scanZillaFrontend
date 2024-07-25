@@ -21,8 +21,9 @@ const Debit = React.lazy(() => import('./Pages/Debit&CreditCard/Debit&CreditCard
 const PaymentScreen = React.lazy(() => import('./Pages/PaymentScreen/PaymentScreen'));
 const Details = React.lazy(() => import('./Pages/Details/Details'));
 const ToolManagement = React.lazy(() => import('./Pages/ToolMangement/ToolManagement'));
-const UserManagement = React.lazy(() => import('./Pages/UserManagement/UserManagement'));
+// const UserManagement = React.lazy(() => import('./Pages/UserManagement/UserManagement'));
 const CreditsManagement = React.lazy(() => import('./Pages/CreditsManagement/CreditsManagement'));
+import UserManagement from './Pages/UserManagement/UserManagement'
 const AdminDashboard = React.lazy(() => import('./Pages/AdminDashboard/AdminDashboard'));
 const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm/CheckoutForm'));
 const PackageSetting = React.lazy(() => import('./Pages/PackageSetting/PackageSetting'));
@@ -45,7 +46,7 @@ function App() {
               <Route path='setpassword' element={<SetPassword />} />
               <Route path='submit-email-for-otp' element={<EmailFieldForgot />} />
             </Route>
-
+ 
             <Route path='/' element={<DashboardLayout />}>
               <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
               <Route path="analyze" element={<Protected children={<Analyzed />} />} />
