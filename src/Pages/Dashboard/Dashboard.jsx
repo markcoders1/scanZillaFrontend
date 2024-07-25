@@ -120,7 +120,8 @@ const Home = () => {
         method: "get",
       });
       if (response) {
-        setAnalyzeHistory(response.data.Histories);
+        const histories = response.data.Histories.slice(0, 4);
+        setAnalyzeHistory(histories);
         setSnackAlertData({
           open: true,
           message: response?.data?.message,
@@ -155,7 +156,7 @@ const Home = () => {
   useEffect(() => {
     fetchAnalysed();
     fetchAnalyzeHistory();
-    fetchGraphData()
+    // fetchGraphData()
   }, []);
 
   const openModal = (data) => {
@@ -191,7 +192,7 @@ const Home = () => {
             xs: "column",
             md: "row"
           },
-          gap: "40px",
+          gap: "30px",
           // border: "2px solid red",
 
         }}>
@@ -200,8 +201,8 @@ const Home = () => {
             display: "flex",
             flexDirection: "column",
             gap: {
-              md: "40px",
-              xs: "40px"
+              md: "30px",
+              xs: "30px"
             },
             flexGrow: 1,
             flexBasis: {
@@ -293,8 +294,8 @@ const Home = () => {
               boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
               padding: "20px",
               borderRadius: "10px",
-              justifyContent:"center",
-              paddingLeft:"26px"
+              justifyContent: "center",
+              paddingLeft: "26px"
             }}>
 
               {/* <Typography sx={{
@@ -338,11 +339,11 @@ const Home = () => {
             <Box
               sx={{
                 flexBasis: {
-                  md: "80%",
+                  md: "70%",
                 },
                 flexShrink: 0,
                 flexGrow: 1,
-                height: "500px",
+                height: "450px",
                 p: "30px 30px 30px 30px",
                 display: "flex",
                 flexDirection: "column",
@@ -351,7 +352,6 @@ const Home = () => {
                 borderRadius: "10px",
                 position: "relative",
                 // border: "2px solid red"
-
               }}
             >
 
@@ -382,7 +382,7 @@ const Home = () => {
                 },
                 display: "flex",
                 flexDirection: "column",
-                gap: "50px",
+                gap: "40px",
                 borderRadius: "10px",
                 paddingRight: "10px"
               }}>
@@ -406,18 +406,15 @@ const Home = () => {
                     ))
                   )
                 }
-
-
-
               </Box>
               <Box
                 sx={{
                   position: "absolute",
                   bottom: "30px",
                   width: "90%",
-                  left:"0px",
-                  right:"0px",
-                  margin:"auto"
+                  left: "0px",
+                  right: "0px",
+                  margin: "auto"
                 }}
               >
                 <CustomButton
