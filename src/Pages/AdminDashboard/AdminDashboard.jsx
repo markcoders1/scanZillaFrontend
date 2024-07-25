@@ -5,6 +5,7 @@ import Heading from "../../Components/Heading/Heading";
 import CustomChart from "../../Components/CustomChart/CustomChart";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import Chart from "../../Components/Chart/Chart";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -65,7 +66,7 @@ const AdminDashboard = () => {
         try {
             setLoading(true);
             const response = await axiosInstance({
-                url: appUrl + "/gettotalincome",
+                url: appUrl + "/getincome",
                 method: "get",
             });
             // console.log(response.data.value);
@@ -155,6 +156,18 @@ const AdminDashboard = () => {
                         </Box>
                     </Box>
 
+                            <br />
+                            <Box
+                            sx={{
+                                display:"flex",
+                                gap:"2rem"
+                            }}
+                            >
+                            {/* <Chart />
+                            <Chart /> */}
+
+
+                            </Box>
                     {/* <Box
                         sx={{
                             mt: "30px",

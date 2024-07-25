@@ -19,12 +19,13 @@ const CreditsManagement = () => {
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
+  const [loadingButton, setLoadingButton] = useState(false);
   const handleEditPackage = (planName, price, variant) => {
     navigate(
       `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}`
     );
   };
-  
+
 
   const fetchRules = async () => {
     try {
@@ -64,6 +65,7 @@ const CreditsManagement = () => {
   const onSubmit = (data) => {
     const submitCharacterRules = async () => {
       try {
+        setLoadingButton(true)
         const response = await axiosInstance({
           url: `${appUrl}/rules`,
           method: "post",
@@ -72,11 +74,14 @@ const CreditsManagement = () => {
             creditCost: data.credits,
           },
         });
-        dispatch(handleSnackAlert({open:true,message:"Rules Updated Successfully",severity :"success"}))
+        setLoadingButton(false)
+        dispatch(handleSnackAlert({ open: true, message: "Rules Updated Successfully", severity: "success" }))
 
         console.log(response);
       } catch (error) {
         console.error(error);
+        dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
+        setLoadingButton(false)
       }
     };
     submitCharacterRules();
@@ -98,9 +103,9 @@ const CreditsManagement = () => {
         </Box>
       ) : (
         <Box
-        sx={{
-          height:"70vh"
-        }}
+          sx={{
+
+          }}
         >
           <Box
             sx={{
@@ -119,10 +124,10 @@ const CreditsManagement = () => {
                     padding: "15px 16px 0px 16px",
                     boxShadow: "4px 5px 15px 0px #C8C8C8",
                     borderRadius: "10px",
-                    height: "202px",
-                    width:{
-                      sm:"210px",
-                      xs:"100%"
+                    height: "222px",
+                    width: {
+                      sm: "210px",
+                      xs: "100%"
                     },
                     flexBasis: { md: "258px" },
                   }}
@@ -134,31 +139,15 @@ const CreditsManagement = () => {
                       fontWeight: "600",
                       // width: "63px",
                       margin: "auto",
-                      textAlign:"center"
+                      textAlign: "center"
                     }}
                   >
                     {e.name}
                   </Typography>
-                  {/* <Box
-                    sx={{
-                      marginTop: "15px",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                      <Typography>
-                        <img src={checkImg} alt="" />
-                      </Typography>
-                      <Typography sx={{ fontSize: "11px" }}>
-                        {e.description}
-                      </Typography>
-                    </Box>
-                  </Box> */}
+
                   <Box
                     sx={{
-                      marginTop: "30px",
+                      marginTop: "40px",
                       width: "100%",
                       textAlign: "center",
                       display: "flex",
@@ -174,12 +163,17 @@ const CreditsManagement = () => {
                         lineHeight: "40px",
                       }}
                     >
-                      ${e.amount/100}
+                      ${e.amount / 100}
                     </Typography>
                     <Typography
-                      sx={{ fontSize: "10px", fontWeight: "500", color: "#333333" }}
+                      sx={{
+                        fontSize: '22.46px',
+                        fontWeight: '500',
+                        color: '#333333',
+                        mt: '13px',
+                      }}
                     >
-                     
+                      {e.variant == -1 ? "per " : e.credits } Credit
                     </Typography>
                   </Box>
                   <Box
@@ -190,7 +184,7 @@ const CreditsManagement = () => {
                       justifyContent: "center",
                     }}
                   >
-                   
+
                   </Box>
                 </Box>
                 <Typography
@@ -203,7 +197,7 @@ const CreditsManagement = () => {
                     color: "#333333",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleEditPackage(e.name, e.amount,e.variant)}
+                  onClick={() => handleEditPackage(e.name, e.amount, e.variant, e.credit)}
                 >
                   Edit Package
                 </Typography>
@@ -297,7 +291,7 @@ const CreditsManagement = () => {
                     margin={"auto"}
                     background={"linear-gradient(to right, #1A0049, #3F016A)"}
                     padding="5px 25px"
-                    loading = {loading}
+                    loading={loadingButton ? true : false}
                   />
                 </Typography>
               </form>
