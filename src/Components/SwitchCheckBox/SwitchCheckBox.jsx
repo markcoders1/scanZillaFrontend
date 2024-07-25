@@ -69,7 +69,7 @@ const SwitchCheckBox = ({ theme }) => {
       <label className={`switch-checkbox ${theme}`}>
         <input value={isChecked} checked={isChecked} onChange={handleChange} type="checkbox" />
         <span className="slider round"></span>
-        <p style={{ color: "white", paddingLeft: "10px", paddingTop: "5px" }}>
+        <p style={{  color: auth.autocharge ? "#fff " : "#190247", paddingLeft: "10px", paddingTop: "5px" }}>
           {auth.autocharge ? "on" : "Off"}
         </p>
         

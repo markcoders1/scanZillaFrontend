@@ -25,10 +25,10 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 22px;
-  width: 22px;
-  left: 3px;
-  bottom: 3px;
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3.5px;
   transition: 0.4s;
   border-radius: 50%;
 }
@@ -53,11 +53,11 @@
 
 /* Alternate theme: White background, navy knob */
 .switch-checkbox.alternate .slider {
-  background-color: #ffffff;
+  background-color:  #1B004A;
 }
 
 .switch-checkbox.alternate .slider:before {
-  background-color: #1B004A;
+  background-color: white;
 }
 
 .switch-checkbox.alternate input:checked + .slider {

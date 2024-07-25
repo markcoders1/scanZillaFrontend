@@ -29,11 +29,13 @@ const Credits = () => {
         console.log(auth);
 
         console.log(auth.email);
-        console.log(auth.username);
+        console.log(auth);
         console.log(auth.autocharge);
         setUsername(auth.username);
         setEmail(auth.email);
     }, []);
+
+    const [inputToggle, setInputToggle] = useState(null);
 
     const handleNavigate = async (variant, price, planName) => {
         console.log("hello", variant);
@@ -519,9 +521,9 @@ const Credits = () => {
                                                 // border: "2px solid red"
                                             }}>
                                             <Box
-                                            sx={{
-                                                flexBasis: "50%",
-                                            }}
+                                                sx={{
+                                                    flexBasis: "50%",
+                                                }}
                                             >
                                                 <DetailedCard title='Total Credits' detailedCardStyles={{ justifyContent: "start", alignItems: "start", fontSize: "65px" }} name={credits} action=""
                                                     nameStyles={{ fontSize: "65px", marginTop: "10px" }}
@@ -534,13 +536,15 @@ const Credits = () => {
                                                     flexBasis: "218px",
                                                     borderRadius: "10px",
                                                     flexGrow: "1",
-                                                    backgroundImage: `linear-gradient(rgba(53, 1, 88, .8), rgba(53, 1, 88, .8)), url(${dashboardImg1})`,
+                                                    backgroundImage: auth.autocharge ? `linear-gradient(rgba(53, 1, 88, .8), rgba(53, 1, 88, .8)), url(${dashboardImg1})` : "",
                                                     backgroundSize: "cover",
                                                     backgroundRepeat: "no-repeat",
                                                     backgroundPosition: "center",
                                                     padding: "24px 23px",
                                                     position: "relative",
                                                     flexBasis: "50%",
+                                                    boxShadow: auth.autocharge ? " " : "4px 5px 15px 0px #C8C8C8"
+
                                                 }}>
                                                 <Box
                                                     sx={{
@@ -556,7 +560,7 @@ const Credits = () => {
                                                     sx={{
                                                         fontWeight: "600",
                                                         fontSize: "27px",
-                                                        color: "#fff ",
+                                                        color: auth.autocharge ? "#fff " : "#190247",
                                                     }}>
                                                     Auto
                                                 </Typography>
@@ -564,7 +568,7 @@ const Credits = () => {
                                                     sx={{
                                                         fontWeight: "600",
                                                         fontSize: "27px",
-                                                        color: "#fff ",
+                                                        color: auth.autocharge ? "#fff " : "#190247",
                                                     }}>
                                                     Credits
                                                 </Typography>
@@ -704,18 +708,18 @@ const Credits = () => {
                                     padding: "26px 32px",
                                     display: "flex",
                                     flexDirection: "column",
-                                    alignItems:"center",
+                                    alignItems: "center",
                                     justifyContent: "center",
                                     flexGrow: 1,
                                     boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-                                    color:"#FFFFFF",
-                                    fontSize:"28px",
-                                    fontWeight:"600",
-                                    backgroundPosition:"center"
+                                    color: "#FFFFFF",
+                                    fontSize: "28px",
+                                    fontWeight: "600",
+                                    backgroundPosition: "center"
                                 }}
                                 onClick={() => navigate("/card-details")}
                             >
-                                        Add Your Card +
+                                Add Your Card +
                             </Box>
 
                         </Box>
