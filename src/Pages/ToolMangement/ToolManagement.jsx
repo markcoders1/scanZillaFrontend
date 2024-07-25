@@ -267,6 +267,23 @@ const ToolManagement = () => {
                 )}
               />
             </Box>
+            {/* <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}
+            >
+              <Heading Heading="Description Characters" />
+              <Controller
+                name="descriptionCharacters"
+                control={control}
+                render={({ field }) => (
+                  <CustomInputShadow
+                    {...field}
+                    placeholder={descriptionCharacters}
+                    onChange={(e) => field.onChange(e.target.value)}
+                    type={"number"}
+                  />
+                )}
+              />
+            </Box> */}
 
             <Box>
               <CustomButton

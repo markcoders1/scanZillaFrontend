@@ -152,7 +152,7 @@ const AdminDashboard = () => {
                         </Box>
                     </Box>
 
-                    <Box
+                    {/* <Box
                         sx={{
                             mt: "30px",
                         }}
@@ -273,7 +273,7 @@ const AdminDashboard = () => {
                                 </Typography>
                             </Box>
                         </Box>
-                    </Box>
+                    </Box> */}
                 </Box>
             )}
         </>
