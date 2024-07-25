@@ -9,7 +9,7 @@ const RestrictedKeyword = ({ content, onRemove }) => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: 'center',
-                gap: "4rem"
+                gap: "1rem"
             }}
         >
             <Typography

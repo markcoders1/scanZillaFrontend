@@ -31,7 +31,7 @@ const ToolManagement = () => {
       descriptionCharacters: "",
       bulletcharacters: "",
       newKeyword: "",
-      instructions:","
+      instructions: ","
     },
   });
   const [restrictedKeywords, setRestrictedKeywords] = useState([]);
@@ -191,6 +191,8 @@ const ToolManagement = () => {
               md: "row",
               xs: "column",
             },
+
+            paddingBottom: "100px"
           }}
         >
           <Box
@@ -199,6 +201,7 @@ const ToolManagement = () => {
               flexDirection: "column",
               gap: "0.5rem",
               flexBasis: "50%",
+              position: "relative",
             }}
           >
             <Box
@@ -280,7 +283,7 @@ const ToolManagement = () => {
                   <CustomInputShadow
                     {...field}
                     height="180px"
-                    multiline= {true}
+                    multiline={true}
                     onChange={(e) => field.onChange(e.target.value)}
                     type={"text"}
                   />
@@ -288,7 +291,20 @@ const ToolManagement = () => {
               />
             </Box>
 
-            <Box>
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: "-60px",
+                right: {
+                  xs:"0px",
+                  md:""
+                },
+                left:{
+                  xs:"0px",
+                  md:""
+                }
+              }}
+            >
               <CustomButton
                 borderRadius="12px"
                 padding="12px 0px"
@@ -310,6 +326,10 @@ const ToolManagement = () => {
               padding: "24px 30px",
               boxShadow: "4px 5px 15px 0px #C8C8C8 ",
               borderRadius: "10px",
+              mt:{
+                xs:"50px",
+                md:"0px"
+              }
             }}
           >
             <Heading Heading="Restricted Keywords" />
@@ -375,7 +395,8 @@ const ToolManagement = () => {
                   },
                   borderRadius: "10px",
                   marginTop: "10px",
-                  height: "300px",
+                  height: "420px",
+                  // border:"2px solid red"
                 }}
               >
                 <Box
@@ -430,7 +451,11 @@ const ToolManagement = () => {
                   sx={{
                     position: "absolute",
                     top: "7px",
-                    right: "20px",
+                    right: {
+                      xs:"05px",
+                      sm:"20px"
+                    },
+
                   }}
                 >
                   <CustomButton
