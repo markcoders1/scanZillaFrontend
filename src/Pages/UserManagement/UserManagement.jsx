@@ -102,11 +102,11 @@ const UserTable = () => {
     const user = users.find((u) => u._id === userId);
     const active = user && user.active === true;
     return (
-      <Box sx={{ display: "flex", gap: "2rem" }}>
+      <Box sx={{ display: "flex", gap: "1rem" }}>
         <CustomButton
           border={active ? "2px solid #EE1D52" : "2px solid #31BA96"}
           borderRadius="10px"
-          fontSize="14px"
+          fontSize="12px"
           color={active ? "#EE1D52" : "#31BA96"}
           fontWeight="600"
           width="100px"
@@ -116,7 +116,7 @@ const UserTable = () => {
         <CustomButton
           border="2px solid #333333"
           borderRadius="10px"
-          fontSize="14px"
+          fontSize="12px"
           color="#333333"
           fontWeight="500"
           width="134px"
@@ -219,9 +219,11 @@ const UserTable = () => {
                       color: "#FDFDFD",
                       fontWeight: "500",
                       padding: "20px 0px",
-                      fontSize: "22px",
+                      fontSize: "14px",
                       textAlign: "center",
                       borderRadius: "8px 0px 0px 8px",
+                      width:"160px",
+                      // border:"2px solid red"
                     }}
                   >
                     All Users
@@ -232,11 +234,23 @@ const UserTable = () => {
                       color: "#FDFDFD",
                       fontWeight: "500",
                       padding: "15px 10px",
-                      fontSize: "22px",
+                      fontSize: "14px",
                       textAlign: "center",
                     }}
                   >
-                    Credits
+                    No of Credits
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      backgroundColor: "#1A0049",
+                      color: "#FDFDFD",
+                      fontWeight: "500",
+                      // padding: "15px 10px",
+                      fontSize: "16px",
+                      textAlign: "center",
+                    }}
+                  >
+                    Email
                   </TableCell>
                   <TableCell
                     sx={{
@@ -244,7 +258,7 @@ const UserTable = () => {
                       color: "#FDFDFD",
                       fontWeight: "500",
                       padding: "15px 10px",
-                      fontSize: "22px",
+                      fontSize: "16px",
                       textAlign: "center",
                     }}
                   >
@@ -271,7 +285,7 @@ const UserTable = () => {
                       color: "#FDFDFD",
                       fontWeight: "500",
                       padding: "15px 10px",
-                      fontSize: "22px",
+                      fontSize: "16px",
                       textAlign: "center",
                       borderRadius: "0px 8px 8px 0px",
                     }}
@@ -287,8 +301,8 @@ const UserTable = () => {
                       component="th"
                       scope="row"
                       sx={{
-                        fontSize: "22px",
-                        textAlign: "center",
+                        fontSize: "14px",
+                        textAlign: "start",
                         padding: "12px",
                         color: "#333333",
                         fontWeight: "500",
@@ -300,7 +314,7 @@ const UserTable = () => {
                     </TableCell>
                     <TableCell
                       sx={{
-                        fontSize: "20px",
+                        fontSize: "14px",
                         textAlign: "center",
                         padding: "10px",
                         color: "#333333",
@@ -312,7 +326,19 @@ const UserTable = () => {
                     </TableCell>
                     <TableCell
                       sx={{
-                        fontSize: "20px",
+                        fontSize: "14px",
+                        textAlign: "center",
+                        padding: "10px",
+                        color: "#333333",
+                        fontWeight: "500",
+                        border: "none",
+                      }}
+                    >
+                      {user.email}
+                    </TableCell>
+                    <TableCell
+                      sx={{
+                        fontSize: "14px",
                         textAlign: "center",
                         padding: "10px",
                         color: "#A0A4A9",

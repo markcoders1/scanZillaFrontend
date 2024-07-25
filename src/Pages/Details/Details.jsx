@@ -346,12 +346,12 @@ const Details = () => {
               sx={{
                 marginTop: "15px",
                 display: "flex",
-                gap: "1.8rem",
+                gap: "2rem",
                 flexBasis: "50%",
                 padding: "24px 30px",
                 borderRadius: "10px",
                 flexDirection: "column",
-                maxHeight: "680px",
+                maxHeight: "350px",
                 overflow: "auto",
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 "&::-webkit-scrollbar": {
@@ -399,12 +399,12 @@ const Details = () => {
               sx={{
                 marginTop: "15px",
                 display: "flex",
-                gap: "1.8rem",
+                gap: "2rem",
                 flexBasis: "50%",
                 padding: "24px 30px",
                 borderRadius: "10px",
                 flexDirection: "column",
-                maxHeight: "680px",
+                maxHeight: "350px",
                 overflow: "auto",
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 "&::-webkit-scrollbar": {

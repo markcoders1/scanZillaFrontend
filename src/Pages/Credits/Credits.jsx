@@ -119,8 +119,8 @@ const Credits = () => {
                 }
             });
             setLoading(false);
-            console.log(response.data.offers)
-            setAutoCreditsAmount(response.data.offers);
+            console.log(response.data.offers.slice(1))
+            setAutoCreditsAmount(response.data.offers.slice(1));
         } catch (error) {
             console.error(error);
         }
