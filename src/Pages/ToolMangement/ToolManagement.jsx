@@ -219,7 +219,7 @@ const ToolManagement = () => {
               flexDirection: "column",
               gap: "0.5rem",
               flexBasis: "50%",
-              position: "relative",
+              // position: "relative",
             }}
           >
             <Box
@@ -294,7 +294,12 @@ const ToolManagement = () => {
 
             <Box
               sx={{
+               display:"flex",
                
+               justifyContent:{
+                md:"start",
+                xs:"end"
+               }
               }}
             >
               <CustomButton
@@ -319,7 +324,7 @@ const ToolManagement = () => {
               boxShadow: "4px 5px 15px 0px #C8C8C8 ",
               borderRadius: "10px",
               mt:{
-                xs:"50px",
+                xs:"40px",
                 md:"0px"
               }
             }}
@@ -387,8 +392,8 @@ const ToolManagement = () => {
                   },
                   borderRadius: "10px",
                   marginTop: "10px",
-                  height: "420px",
-                  // border:"2px solid red"
+                  height: "255px",
+                  // border:"2px solid red" 
                 }}
               >
                 <Box
