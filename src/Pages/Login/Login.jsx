@@ -90,6 +90,7 @@ const Login = () => {
   const handleInput = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
   };
+
   // const handleLogin = async () => {
   //   setIsLoading(true);
   //   setErrors({ password: "", email: "" });
@@ -156,15 +157,15 @@ const Login = () => {
     inputRef?.current?.focus();
   }, []);
 
-  useEffect(() => {
-    if (auth.authenticated) {
-      if (auth.role === "admin") {
-        navigate("/dashboard-admin");
-      } else if (auth.role === "user") {
-        navigate("/dashboard");
-      }
-    }
-  }, [auth, navigate]);
+  // useEffect(() => {
+  //   if (auth.authenticated) {
+  //     if (auth.role === "admin") {
+  //       navigate("/dashboard-admin");
+  //     } else if (auth.role === "user") {
+  //       navigate("/dashboard");
+  //     }
+  //   }
+  // }, [auth, navigate]);
 
 
   const handlekeydown = (e) => {
