@@ -398,7 +398,7 @@ const Login = () => {
         <Box
 
           sx={{
-            display: "flex",
+            display: "none",
             // border:"2px solid red",
             alignItems: "center",
             gap: "4px",
