@@ -20,19 +20,23 @@ const CustomCard = ({ cardStyle, cb }) => {
         const fetchCard = async () => {
             setLoading(true);
             try {
+                console.log("hi")
                 const response = await axiosInstance({ method: 'get', url: `${appUrl}/getcardinfo` });
                 if (response.data.cards.length > 0) {
                     setNum(response.data.cards[0].last4);
                 }
+                console.log(response.data.cards)
+                console.log(response)
                 setUsername(auth.username);
                 console.log(auth.username);
             } catch (error) {
                 console.error("Failed to fetch card info:", error);
+                console.log(response.data.cards)
             }
             setLoading(false);
         }
         fetchCard();
-    }, [auth.username]);
+    }, []);
 
     return (
         <>
