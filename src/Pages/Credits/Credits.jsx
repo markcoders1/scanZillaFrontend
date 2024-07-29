@@ -12,6 +12,7 @@ import LoaderMain from "../../Components/Loader/LoaderMain";
 import bg from "./../../assets/images/bg.png";
 import dashboardImg1 from "../../assets/images/dashboard.png";
 import CreditCard from "../../Components/CustomCreditCard/CustomCreditCard";
+import CustomCard from "../../Components/Customcard/Customcard";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -442,30 +443,9 @@ const Credits = () => {
                                 </Typography>
                             </Box>
                         </Box>
-                        <Box
-                            sx={{
-                                background: `linear-gradient(rgba(27, 2, 75, .1), rgba(27, 2, 75, .1)), url(${bg})`,
-                                backgroundSize: "cover",
-                                backgroundRepeat: "no-repeat",
-                                borderRadius: "10px",
-                                position: "relative",
-                                color: "white",
-                                padding: "26px 32px",
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                flexGrow: 1,
-                                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-                                color: "#FFFFFF",
-                                fontSize: "28px",
-                                fontWeight: "600",
-                                backgroundPosition: "center",
-                                cursor:"pointer"
-                            }}
-                            onClick={() => navigate("/card-details")}
-                        >
-                            Add Your Card +
+                        <Box>
+                        <CustomCard  cardStyle={{ height: "153px" }} />
+
                         </Box>
                     </Box>
                     <SnackAlert
