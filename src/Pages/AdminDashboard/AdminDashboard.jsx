@@ -9,7 +9,7 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const AdminDashboard = () => {
   const [totalUsers, setTotalUsers] = useState();
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [totalIncome, setTotalIncome] = useState();
   const [username, setUsername] = useState();
 
@@ -21,6 +21,7 @@ const AdminDashboard = () => {
   const [totalIncomeGraph, setTotalIncomeGraph] = useState([]);
   const [hoveredIncomeValue, setHoveredIncomeValue] = useState(null);
   const [hoveredAnalysisValue, setHoveredAnalysisValue] = useState(null);
+  const [loadingIncomeGraph, setLoadingIncomeGraph] = useState(false);
 
   const getAllUser = async () => {
     try {
@@ -38,7 +39,7 @@ const AdminDashboard = () => {
 
   const getTotalIncome = async () => {
     try {
-      setLoading(true);
+      setLoadingIncomeGraph(true);
       const response = await axiosInstance({
         url: appUrl + "/getincome",
         method: "get",
@@ -46,9 +47,10 @@ const AdminDashboard = () => {
       setTotalIncome(response.data.value);
       setTotalIncomeGraph(response.data.result);
       console.log(response.data.result);
-      setLoading(false);
+      setLoadingIncomeGraph(false);
     } catch (error) {
       console.log(error);
+      setLoadingIncomeGraph(false);
     }
   };
 
@@ -64,6 +66,7 @@ const AdminDashboard = () => {
       setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -111,6 +114,7 @@ const AdminDashboard = () => {
               <DashboardCard
                 title="Total Payment this Month"
                 text={totalIncome}
+                funcLoading={loadingIncomeGraph}
               />
             </Box>
             <Box
@@ -148,15 +152,29 @@ const AdminDashboard = () => {
                   position: "absolute",
                   top: "20px",
                   left: "20px",
-                  color:"",
-                  fontWeight:"500",
-                  fontSize:"18px"
+                  color: "",
+                  fontWeight: "500",
+                  fontSize: "18px"
                 }}
               >
-                {hoveredIncomeValue !== null ? `$${hoveredIncomeValue} Dollars` : "$400 Dollars"}
+                {hoveredIncomeValue !== null ? `$${hoveredIncomeValue} Dollars` : "$ Dollars"}
               </Typography>
               <Box>
-                <Chart data={totalIncomeGraph} xKey="createdAt" yKey="amount" yFormatter={convertCentsToDollars} setHoveredValue={setHoveredIncomeValue} />
+                {
+                  loadingIncomeGraph ? <Box
+                    sx={{
+                      display: "flex",
+                      height: "100%",
+                      width: "100%",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginTop: "140px"
+                    }}
+                  >
+                    <LoaderMain />
+                  </Box> : <Chart data={totalIncomeGraph} xKey="createdAt" yKey="amount" yFormatter={convertCentsToDollars} setHoveredValue={setHoveredIncomeValue} />
+                }
+
               </Box>
             </Box>
             <Box
@@ -173,9 +191,9 @@ const AdminDashboard = () => {
                   position: "absolute",
                   top: "20px",
                   left: "35px",
-                  color:"#171717",
-                  fontWeight:"500",
-                  fontSize:"18px"
+                  color: "#171717",
+                  fontWeight: "500",
+                  fontSize: "18px"
                 }}
               >
                 {hoveredAnalysisValue !== null ? `${hoveredAnalysisValue} Analysis` : "Analysis Data"}

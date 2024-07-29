@@ -2,13 +2,11 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 
 const DashboardCard = ({
-
-
-
     title = "",
     text = "",
     action = "",
-    cb = () => { }
+    cb = () => { },
+    funcLoading = false,
 }) => {
     return (
         <Box sx={{
@@ -16,7 +14,7 @@ const DashboardCard = ({
             padding: "22px 26px",
             borderRadius: "10px",
             minHeight: "160px",
-            maxHeight:"100%"
+            maxHeight: "100%"
         }}>
 
             <Typography sx={{
@@ -40,14 +38,11 @@ const DashboardCard = ({
                 },
                 lineHeight: "40px"
             }}>
-                {text}
+                {funcLoading ? "---" : text}
             </Typography>
 
-
             <Typography
-                onClick={
-                    cb
-                }
+                onClick={cb}
                 sx={{
                     color: "#190247",
                     fontWeight: "500",
