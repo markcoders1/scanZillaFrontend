@@ -21,12 +21,13 @@ const Debit = React.lazy(() => import('./Pages/Debit&CreditCard/Debit&CreditCard
 const PaymentScreen = React.lazy(() => import('./Pages/PaymentScreen/PaymentScreen'));
 const Details = React.lazy(() => import('./Pages/Details/Details'));
 const ToolManagement = React.lazy(() => import('./Pages/ToolMangement/ToolManagement'));
-// const UserManagement = React.lazy(() => import('./Pages/UserManagement/UserManagement'));
 const CreditsManagement = React.lazy(() => import('./Pages/CreditsManagement/CreditsManagement'));
 import UserManagement from './Pages/UserManagement/UserManagement'
 const AdminDashboard = React.lazy(() => import('./Pages/AdminDashboard/AdminDashboard'));
 const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm/CheckoutForm'));
 const PackageSetting = React.lazy(() => import('./Pages/PackageSetting/PackageSetting'));
+const AssistantInstructions = React.lazy(() => import('./Pages/Assistant/Assistant'));
+
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -62,6 +63,7 @@ function App() {
               <Route path="credits-management" element={<Protected children={<CreditsManagement />} />} />
               <Route path="credits-management/package-setting" element={<Protected children={<PackageSetting />} />} />
               <Route path="dashboard-admin" element={<Protected children={<AdminDashboard />} />} />
+              <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
             </Route>
           </Routes>
         </Suspense>

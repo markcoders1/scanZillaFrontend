@@ -38,8 +38,9 @@ const DashboardLayout = () => {
         return 'Package Setting';
       case '/dashboard-admin':
         return 'Dashboard';
-
-
+      case '/assistant-instruction':
+        return 'Assistant Instruction';
+      
       // Add more cases as needed for other routes
       default:
         return '';
@@ -125,7 +126,7 @@ const DashboardLayout = () => {
         </Box>
       </Box>
       <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
-    </Box> 
+    </Box>
   );
 };
 

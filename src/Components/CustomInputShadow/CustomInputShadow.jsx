@@ -72,6 +72,7 @@ const CustomInputShadow = forwardRef(({
               lg: "500"
             },
             color: "color",
+            
           }}
           onKeyDown={handleKeyDown}
           name={name}
