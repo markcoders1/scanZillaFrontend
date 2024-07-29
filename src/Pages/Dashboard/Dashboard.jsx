@@ -233,9 +233,6 @@ const Home = () => {
               flexGrow: 1,
               flexShrink: "1",
               cursor:"pointer"
-            
-
-
             }}
               onClick={() => navigate("/credits")}>
 

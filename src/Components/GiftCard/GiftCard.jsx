@@ -21,7 +21,7 @@ const GiftCard = ({ id, title, description, bullets, openModal }) => {
                     fontWeight: "400",
                     fontSize: {
                         xs:"16px",
-                        sm:"20px"
+                        sm:"16px"
                     },
                     color: "#A0A4A9",
                 }}

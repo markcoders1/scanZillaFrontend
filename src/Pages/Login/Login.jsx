@@ -15,6 +15,8 @@ import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
 import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+// import SnackAlert from '../SnackAlert/SnackAlert';
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 
 const Login = () => {
 
@@ -26,6 +28,11 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [snackAlertData, setSnackAlertData] = useState({
+    open: false,
+    message: "",
+    severity: "success"
+  });
   const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.auth);
 
@@ -36,20 +43,15 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const responseData = await signInWithGooglePopup();
-      console.log("response data",responseData)
+      console.log("response data", responseData)
       const data = responseData.data
-      data.authenticated=true
+      data.authenticated = true
 
       dispatch(handleAuth(data))
 
 
-      dispatch(
-        handleSnackAlert({
-          open: true,
-          message: data.message,
-          severity: "success",
-        })
-      );
+
+
 
       sessionStorage.setItem("accessToken", data?.accessToken);
       sessionStorage.setItem("refreshToken", data?.refreshToken);
@@ -60,16 +62,27 @@ const Login = () => {
         navigate("/dashboard");
       }
 
+      dispatch(handleSnackAlert({ open: true, message: responseData.data.message, severity: "success" }))
+
     } catch (error) {
       console.error("Sign-in failed:", error);
+      setSnackAlertData({
+        open: true,
+        message: error.response.data.message,
+        severity: "success",
+      })
+
+
+      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "success" }))
+
     }
   };
 
   useEffect(() => {
     console.log(auth)
     const refreshToken = localStorage.getItem('refreshToken')
-    if (refreshToken){
-      sessionStorage.setItem('refreshToken',refreshToken)
+    if (refreshToken) {
+      sessionStorage.setItem('refreshToken', refreshToken)
       navigate('/dashboard')
     }
   }, [])
@@ -96,6 +109,7 @@ const Login = () => {
 
     try {
       let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
+      console.log(response)
       response = response?.data;
       const responseData = response;
       dispatch(handleAuth({ ...responseData, authenticated: true }));
@@ -114,8 +128,9 @@ const Login = () => {
         password: "",
       });
 
-        navigate("/dashboard");
+      navigate("/dashboard");
     } catch (error) {
+      console.log(error)
       const errorData = error.response.data;
       if (error?.response?.data?.errorType?.includes("email")) {
         setErrors({ password: "", email: error.response.data.message });
@@ -414,6 +429,12 @@ const Login = () => {
         </Box>
 
       </Box>
+      <SnackAlert
+        severity={snackAlertData.severity}
+        message={snackAlertData.message}
+        open={snackAlertData.open}
+        handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+      />
     </Box>
 
   );
