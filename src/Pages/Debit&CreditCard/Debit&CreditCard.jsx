@@ -3,6 +3,15 @@ import React, { useEffect, useState } from 'react'
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow'
 import visaCircles from '../../assets/images/visa circles.png'
 import CustomButton from '../../Components/CustomButton/CustomButton'
+import DebitComponent from './DebitDetailsComponent'
+import { Elements } from "@stripe/react-stripe-js";
+import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
+import { loadStripe } from '@stripe/stripe-js';
+
+
+const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
+
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const Debit = () => {
     const [month, setMonth] = useState('');
@@ -14,6 +23,23 @@ const Debit = () => {
         name: "",
         cvv: ""
     });
+
+    const [clientSecret, setClientSecret] = useState();
+
+    useEffect(() => {
+        const generateClientSecret = async () => {
+
+            const response = await axiosInstance({
+                url: `${appUrl}/addPaymentMethod`,
+                method: "get",
+            });
+            console.log(response)
+            setClientSecret(response.data.clientSecret)
+            console.log(response.data.clientSecret);
+        }
+
+        generateClientSecret();
+    }, [])
 
     const handleMonthChange = (event) => {
         setMonth(event.target.value);
@@ -51,274 +77,288 @@ const Debit = () => {
     // useEffect(() => { console.log(data) }, [data]);
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.7rem",
-            }}
-        >
+        // <Box
+        //     sx={{
+        //         display: "flex",
+        //         flexDirection: "column",
+        //         gap: "1.7rem",
+        //     }}
+        // >
 
 
+        //     <Box
+        //         sx={{
+        //             display: "flex",
+        //             flexDirection: "column",
+        //             gap: "0.5rem",
+        //             position: "relative"
+        //         }}
+        //     >
+        //         <Typography
+        //             sx={{
+        //                 fontWeight: "600",
+        //                 fontSize: "22px",
+        //                 letterSpacing: "0.34px",
+        //                 color: "#333333"
+        //             }}
+        //         >
+        //             Card Number
+        //         </Typography>
+        //         <Box
+        //             sx={{
+        //                 position: "relative",
+        //             }}
+        //         >
+        //             <CustomInputShadow
+        //                 placeholder="Enter Card Number"
+        //                 onChange={hanldeInput}
+        //                 name="card_number"
+        //                 value={data.card_number}
+        //             />
+        //             <img
+        //                 style={{
+        //                     width: "50px",
+        //                     height: "40px",
+        //                     position: "absolute",
+        //                     top: "10px",
+        //                     right: "20px"
+        //                 }}
+        //                 src={visaCircles} alt="" />
+        //         </Box>
+        //     </Box>
+
+        //     <Box
+        //         sx={{
+        //             display: "flex",
+        //             flexDirection: {
+        //                 xs: "column",
+        //                 lg: "row"
+        //             },
+        //             gap: {
+        //                 lg: "2rem",
+        //                 xs: "2rem"
+        //             },
+        //             position: "relative"
+        //         }}
+        //     >
+        //         <Box
+        //             sx={{
+        //                 flexBasis: "55%",
+        //                 display: "flex",
+        //                 flexDirection: "column",
+        //                 gap: "0.5rem",
+        //             }}
+        //         >
+        //             <Typography
+        //                 sx={{
+        //                     fontWeight: "600",
+        //                     fontSize: "22px",
+        //                     letterSpacing: "0.34px",
+        //                     color: "#333333"
+        //                 }}
+        //             >
+        //                 Name
+        //             </Typography>
+        //             <Box>
+        //                 <CustomInputShadow
+        //                     placeholder="Enter Name"
+        //                     onChange={hanldeInput}
+        //                     name="name"
+        //                     value={data.name}
+        //                 />
+        //             </Box>
+        //         </Box>
+
+        //         <Box
+        //             sx={{
+        //                 flexGrow: "1",
+        //                 flexShrink: "1",
+        //                 flexBasis: "45%",
+        //                 display: "flex",
+        //                 flexDirection: {
+        //                     xs: "column",
+        //                     sm: "row",
+        //                 },
+        //                 gap: "2rem",
+
+        //             }}
+        //         >
+        //             <Box
+        //                 sx={{
+        //                     flexShrink: "2",
+        //                     display: "flex",
+        //                     flexDirection: "column",
+        //                     gap: "0.5rem",
+        //                 }}
+        //             >
+        //                 <Typography
+        //                     sx={{
+        //                         fontWeight: "600",
+        //                         fontSize: "22px",
+        //                         letterSpacing: "0.34px",
+        //                         color: "#333333"
+        //                     }}
+        //                 >
+        //                     Expiry Date
+        //                 </Typography>
+        //                 <Box
+        //                     sx={{
+        //                         display: "flex",
+        //                         gap: "1rem",
+        //                         boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+        //                         borderRadius: "4px",
+        //                         backgroundColor: "#fff",
+        //                         padding: "6px 0px 6px 0px"
+        //                     }}
+        //                 >
+        //                     <FormControl sx={{ minWidth: 120 }}>
+        //                         <Select
+        //                             id="month-select"
+        //                             value={month}
+        //                             onChange={handleMonthChange}
+        //                             displayEmpty
+        //                             sx={{
+        //                                 '& .MuiOutlinedInput-notchedOutline': { border: 0 },
+        //                                 '& .MuiSelect-select': { padding: '10px 14px' }
+        //                             }}
+        //                         >
+        //                             <MenuItem value="" disabled>
+        //                                 Month
+        //                             </MenuItem>
+        //                             {Array.from({ length: 12 }, (_, index) => (
+        //                                 <MenuItem key={index + 1} value={index + 1}>
+        //                                     {new Date(0, index).toLocaleString('default', { month: 'long' })}
+        //                                 </MenuItem>
+        //                             ))}
+        //                         </Select>
+        //                     </FormControl>
+        //                     <FormControl sx={{ minWidth: 120 }}>
+        //                         <Select
+        //                             id="year-select"
+        //                             value={year}
+        //                             onChange={handleYearChange}
+        //                             displayEmpty
+        //                             sx={{
+        //                                 '& .MuiOutlinedInput-notchedOutline': { border: 0 },
+        //                                 '& .MuiSelect-select': { padding: '10px 14px' }
+        //                             }}
+        //                         >
+        //                             <MenuItem value="" disabled>
+        //                                 Year
+        //                             </MenuItem>
+        //                             {Array.from({ length: 20 }, (_, index) => (
+        //                                 <MenuItem key={index + 2023} value={index + 2023}>
+        //                                     {index + 2023}
+        //                                 </MenuItem>
+        //                             ))}
+        //                         </Select>
+        //                     </FormControl>
+        //                 </Box>
+        //             </Box>
+        //             <Box
+        //                 sx={{
+        //                     display: "flex",
+        //                     flexDirection: "column",
+        //                     gap: "0.5rem",
+        //                 }}
+        //             >
+        //                 <Typography
+        //                     sx={{
+        //                         fontWeight: "600",
+        //                         fontSize: "22px",
+        //                         letterSpacing: "0.34px",
+        //                         color: "#333333",
+        //                     }}
+        //                 >
+        //                     CVV
+        //                 </Typography>
+        //                 <Box>
+        //                     <CustomInputShadow
+        //                         onChange={hanldeInput}
+        //                         name="cvv"
+        //                         value={data.cvv}
+        //                         type="password"
+        //                         fontSize="40px"
+        //                         padding="0px 5px"
+        //                     />
+        //                 </Box>
+        //             </Box>
+        //         </Box>
+        //     </Box>
+        //     <Box sx={{
+        //         display: 'flex',
+        //         gap: "20px",
+        //         justifyContent: "end",
+        //         flexDirection: {
+        //             sm: "row",
+        //             xs: "column-reverse"
+        //         },
+        //         mt: "20px"
+        //     }}>
+        //         <Box sx={{
+        //             display: "flex",
+        //             gap: "20px"
+        //         }}>
+        //             <CustomButton
+        //                 border="2px solid #1A0049"
+        //                 borderRadius="10px"
+        //                 buttonTextStyle={{}}
+        //                 buttonStyle={{
+        //                     padding: {
+        //                         lg: "12px 20px"
+        //                     }
+        //                 }}
+        //                 ButtonText="Cancel Payment"
+        //                 fontSize
+        //                 color="#1A0049"
+        //                 fontWeight
+        //                 fullWidth={false}
+        //                 variant="outlined"
+        //                 padding
+        //                 onClick={handleCancelPayment}
+        //                 hoverBg="#1A0049"
+        //                 hovercolor="white"
+
+        //             />
+        //             <CustomButton
+        //                 border="2px solid #1A0049"
+        //                 borderRadius="10px"
+        //                 background="#1A0049"
+        //                 hoverBg="white"
+        //                 hovercolor="#1A0049"
+        //                 buttonTextStyle={{}}
+        //                 buttonStyle={{
+        //                     padding: {
+        //                         lg: "12px 20px"
+        //                     },
+        //                 }}
+        //                 ButtonText="Pay Now"
+        //                 fontSize="14px"
+        //                 color="white"
+        //                 fontWeight
+        //                 // fullWidth={false} 
+        //                 variant="contained"
+        //                 padding
+        //                 onClick={handlePayNow}
+        //                 width={"143px"}
+        //             />
+        //         </Box>
+        //     </Box>
+        // </Box>
+
+        <>
             <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.5rem",
-                    position: "relative"
-                }}
+                sx={{ mt: "50px" }}
             >
-                <Typography
-                    sx={{
-                        fontWeight: "600",
-                        fontSize: "22px",
-                        letterSpacing: "0.34px",
-                        color: "#333333"
-                    }}
-                >
-                    Card Number
-                </Typography>
-                <Box
-                    sx={{
-                        position: "relative",
-                    }}
-                >
-                    <CustomInputShadow
-                        placeholder="Enter Card Number"
-                        onChange={hanldeInput}
-                        name="card_number"
-                        value={data.card_number}
-                    />
-                    <img
-                        style={{
-                            width: "50px",
-                            height: "40px",
-                            position: "absolute",
-                            top: "10px",
-                            right: "20px"
-                        }}
-                        src={visaCircles} alt="" />
-                </Box>
+
+
+                {clientSecret && (
+                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
+                        <DebitComponent />
+                    </Elements>
+                )}
             </Box>
-
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: {
-                        xs: "column",
-                        lg: "row"
-                    },
-                    gap: {
-                        lg: "2rem",
-                        xs: "2rem"
-                    },
-                    position: "relative"
-                }}
-            >
-                <Box
-                    sx={{
-                        flexBasis: "55%",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "0.5rem",
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            fontWeight: "600",
-                            fontSize: "22px",
-                            letterSpacing: "0.34px",
-                            color: "#333333"
-                        }}
-                    >
-                        Name
-                    </Typography>
-                    <Box>
-                        <CustomInputShadow
-                            placeholder="Enter Name"
-                            onChange={hanldeInput}
-                            name="name"
-                            value={data.name}
-                        />
-                    </Box>
-                </Box>
-
-                <Box
-                    sx={{
-                        flexGrow: "1",
-                        flexShrink: "1",
-                        flexBasis: "45%",
-                        display: "flex",
-                        flexDirection: {
-                            xs: "column",
-                            sm: "row",
-                        },
-                        gap: "2rem",
-
-                    }}
-                >
-                    <Box
-                        sx={{
-                            flexShrink: "2",
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "0.5rem",
-                        }}
-                    >
-                        <Typography
-                            sx={{
-                                fontWeight: "600",
-                                fontSize: "22px",
-                                letterSpacing: "0.34px",
-                                color: "#333333"
-                            }}
-                        >
-                            Expiry Date
-                        </Typography>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                gap: "1rem",
-                                boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
-                                borderRadius: "4px",
-                                backgroundColor: "#fff",
-                                padding: "6px 0px 6px 0px"
-                            }}
-                        >
-                            <FormControl sx={{ minWidth: 120 }}>
-                                <Select
-                                    id="month-select"
-                                    value={month}
-                                    onChange={handleMonthChange}
-                                    displayEmpty
-                                    sx={{
-                                        '& .MuiOutlinedInput-notchedOutline': { border: 0 },
-                                        '& .MuiSelect-select': { padding: '10px 14px' }
-                                    }}
-                                >
-                                    <MenuItem value="" disabled>
-                                        Month
-                                    </MenuItem>
-                                    {Array.from({ length: 12 }, (_, index) => (
-                                        <MenuItem key={index + 1} value={index + 1}>
-                                            {new Date(0, index).toLocaleString('default', { month: 'long' })}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            <FormControl sx={{ minWidth: 120 }}>
-                                <Select
-                                    id="year-select"
-                                    value={year}
-                                    onChange={handleYearChange}
-                                    displayEmpty
-                                    sx={{
-                                        '& .MuiOutlinedInput-notchedOutline': { border: 0 },
-                                        '& .MuiSelect-select': { padding: '10px 14px' }
-                                    }}
-                                >
-                                    <MenuItem value="" disabled>
-                                        Year
-                                    </MenuItem>
-                                    {Array.from({ length: 20 }, (_, index) => (
-                                        <MenuItem key={index + 2023} value={index + 2023}>
-                                            {index + 2023}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "0.5rem",
-                        }}
-                    >
-                        <Typography
-                            sx={{
-                                fontWeight: "600",
-                                fontSize: "22px",
-                                letterSpacing: "0.34px",
-                                color: "#333333",
-                            }}
-                        >
-                            CVV
-                        </Typography>
-                        <Box>
-                            <CustomInputShadow
-                                onChange={hanldeInput}
-                                name="cvv"
-                                value={data.cvv}
-                                type="password"
-                                fontSize="40px"
-                                padding="0px 5px"
-                            />
-                        </Box>
-                    </Box>
-                </Box>
-            </Box>
-            <Box sx={{
-                display: 'flex',
-                gap: "20px",
-                justifyContent: "end",
-                flexDirection: {
-                    sm: "row",
-                    xs: "column-reverse"
-                },
-                mt: "20px"
-            }}>
-                <Box sx={{
-                    display: "flex",
-                    gap: "20px"
-                }}>
-                    <CustomButton
-                        border="2px solid #1A0049"
-                        borderRadius="10px"
-                        buttonTextStyle={{}}
-                        buttonStyle={{
-                            padding: {
-                                lg: "12px 20px"
-                            }
-                        }}
-                        ButtonText="Cancel Payment"
-                        fontSize
-                        color="#1A0049"
-                        fontWeight
-                        fullWidth={false}
-                        variant="outlined"
-                        padding
-                        onClick={handleCancelPayment}
-                        hoverBg="#1A0049"
-                        hovercolor="white"
-
-                    />
-                    <CustomButton
-                        border="2px solid #1A0049"
-                        borderRadius="10px"
-                        background="#1A0049"
-                        hoverBg="white"
-                        hovercolor="#1A0049"
-                        buttonTextStyle={{}}
-                        buttonStyle={{
-                            padding: {
-                                lg: "12px 20px"
-                            },
-                        }}
-                        ButtonText="Pay Now"
-                        fontSize="14px"
-                        color="white"
-                        fontWeight
-                        // fullWidth={false} 
-                        variant="contained"
-                        padding
-                        onClick={handlePayNow}
-                        width={"143px"}
-                    />
-                </Box>
-            </Box>
-        </Box>
+        </>
     );
 }
 

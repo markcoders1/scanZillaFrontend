@@ -7,6 +7,7 @@ import PaymentComponent from './PaymentComponent';
 import { loadStripe } from '@stripe/stripe-js';
 import dashboardImg1 from "../../assets/images/dashboard.png";
 
+
 const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
 
 import { useLocation } from 'react-router-dom';
