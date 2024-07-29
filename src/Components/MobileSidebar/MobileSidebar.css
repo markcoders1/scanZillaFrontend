@@ -1,14 +1,14 @@
-.anchortag{
+.anchortag2{
     font-weight: 600;
-    font-size: 1.3rem;
-    color: #000000;
+    font-size: 1.1rem;
+    color: #d3d3d3;
     transition: all ease-in 80ms;
 
 }
-.anchorActive{
+.anchorActive2{
     font-weight: 600;
-    font-size: 1.5rem;
-    color:  rgb(73, 70, 70);
+    font-size: 1rem;
+    color:  rgb(245, 245, 245);
 }
 .sidebar {
     transform: translateX(400px);

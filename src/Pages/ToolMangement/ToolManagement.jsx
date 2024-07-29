@@ -295,7 +295,7 @@ const ToolManagement = () => {
             <Box
               sx={{
                display:"flex",
-               
+               mt:"15px",
                justifyContent:{
                 md:"start",
                 xs:"end"
@@ -324,7 +324,7 @@ const ToolManagement = () => {
               boxShadow: "4px 5px 15px 0px #C8C8C8 ",
               borderRadius: "10px",
               mt:{
-                xs:"40px",
+                xs:"0px",
                 md:"0px"
               }
             }}

@@ -123,7 +123,7 @@ const MobileSidebar = () => {
               <NavLink
                 to="/dashboard-admin"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                 }
                 onClick={handleNavLinkClick}
               >
@@ -134,7 +134,7 @@ const MobileSidebar = () => {
               <NavLink
                 to="/tool-management"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                 }
                 onClick={handleNavLinkClick}
               >
@@ -145,7 +145,7 @@ const MobileSidebar = () => {
               <NavLink
                 to="/user-management"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                 }
                 onClick={handleNavLinkClick}
               >
@@ -156,7 +156,7 @@ const MobileSidebar = () => {
               <NavLink
                 to="/credits-management"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                 }
                 onClick={handleNavLinkClick}
               >
@@ -167,7 +167,7 @@ const MobileSidebar = () => {
               <NavLink
                 to="/assistant-instruction"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                 }
                 onClick={handleNavLinkClick}
               >
@@ -186,7 +186,7 @@ const MobileSidebar = () => {
                 <NavLink
                   to="/dashboard"
                   className={({ isActive }) =>
-                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                    isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                   }
                   onClick={handleNavLinkClick}
                 >
@@ -198,7 +198,7 @@ const MobileSidebar = () => {
                 <NavLink
                   to="/analyze"
                   className={({ isActive }) =>
-                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                    isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                   }
                   onClick={handleNavLinkClick}
                 >
@@ -209,7 +209,7 @@ const MobileSidebar = () => {
                 <NavLink
                   to="/credits"
                   className={({ isActive }) =>
-                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                    isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                   }
                   onClick={handleNavLinkClick}
                 >
@@ -220,7 +220,7 @@ const MobileSidebar = () => {
                 <NavLink
                   to="/history"
                   className={({ isActive }) =>
-                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                    isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                   }
                   onClick={handleNavLinkClick}
                 >
@@ -231,7 +231,7 @@ const MobileSidebar = () => {
                 <NavLink
                   to="/profile"
                   className={({ isActive }) =>
-                    isActive ? 'anchortag anchorActive' : 'anchortag'
+                    isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                   }
                   onClick={handleNavLinkClick}
                 >
