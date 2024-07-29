@@ -159,23 +159,24 @@ const AdminDashboard = () => {
               >
                 {hoveredIncomeValue !== null ? `$${hoveredIncomeValue} Dollars` : "$ Dollars"}
               </Typography>
-              <Box>
-                {
-                  loadingIncomeGraph ? <Box
-                    sx={{
-                      display: "flex",
-                      height: "100%",
-                      width: "100%",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginTop: "140px"
-                    }}
-                  >
-                    <LoaderMain />
-                  </Box> : <Chart data={totalIncomeGraph} xKey="createdAt" yKey="amount" yFormatter={convertCentsToDollars} setHoveredValue={setHoveredIncomeValue} />
-                }
+              {
+                loadingIncomeGraph ? <Box
+                  sx={{
+                    display: "flex",
+                    height: "100%",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                   
+                    height: "300px",
+                  }}
+                >
+                  <LoaderMain />
 
-              </Box>
+                </Box> : <Box> <Chart data={totalIncomeGraph} xKey="createdAt" yKey="amount" yFormatter={convertCentsToDollars} setHoveredValue={setHoveredIncomeValue} />
+                </Box>
+              }
+
             </Box>
             <Box
               sx={{

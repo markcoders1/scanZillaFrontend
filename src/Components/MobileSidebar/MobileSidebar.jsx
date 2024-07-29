@@ -163,6 +163,17 @@ const MobileSidebar = () => {
                 Credits Management
               </NavLink>
             </Typography>
+            <Typography>
+              <NavLink
+                to="/assistant-instruction"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+                onClick={handleNavLinkClick}
+              >
+                Assistant Instruction
+              </NavLink>
+            </Typography>
           </Box> :
             <Box
               sx={{

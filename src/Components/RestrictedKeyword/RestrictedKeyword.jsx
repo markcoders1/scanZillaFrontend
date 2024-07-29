@@ -15,7 +15,10 @@ const RestrictedKeyword = ({ content, onRemove }) => {
             <Typography
                 sx={{
                     fontWeight: "400",
-                    fontSize: "20px",
+                    fontSize: {
+                        sm:"20px",
+                        xs:"16px"
+                    },
                     color: "#A0A4A9",
                 }}
             >

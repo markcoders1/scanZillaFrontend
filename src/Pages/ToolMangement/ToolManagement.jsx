@@ -295,14 +295,14 @@ const ToolManagement = () => {
               sx={{
                 position: "absolute",
                 bottom: "-60px",
-                right: {
-                  xs:"0px",
-                  md:""
+                left: {
+                  xs: "auto",
+                  md: "0px"     
                 },
-                left:{
-                  xs:"0px",
-                  md:""
-                }
+                right: {
+                  xs: "0px",    
+                  md: "auto"   
+                },
               }}
             >
               <CustomButton
@@ -450,7 +450,10 @@ const ToolManagement = () => {
                 <Typography
                   sx={{
                     position: "absolute",
-                    top: "7px",
+                    top: {
+                      sm:"7px",
+                      xs:"6px"
+                    },
                     right: {
                       xs:"05px",
                       sm:"20px"

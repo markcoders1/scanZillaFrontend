@@ -29,12 +29,12 @@ const CreditsManagement = () => {
 
   const fetchRules = async () => {
     try {
-      setLoading(true);
+    
       const response = await axiosInstance({
         url: `${appUrl}/rules`,
         method: "get",
       });
-      setLoading(false);
+      
       setCharacterCost(response.data.characterCost);
       setCreditCost(response.data.creditCost);
     } catch (error) {
@@ -124,9 +124,9 @@ const CreditsManagement = () => {
                     padding: "15px 16px 0px 16px",
                     boxShadow: "4px 5px 15px 0px #C8C8C8",
                     borderRadius: "10px",
-                    height: "222px",
+                    height: "282px",
                     width: {
-                      sm: "210px",
+                      sm: "200px",
                       xs: "100%"
                     },
                     flexBasis: { md: "258px" },
