@@ -24,7 +24,6 @@ const ToolManagement = React.lazy(() => import('./Pages/ToolMangement/ToolManage
 const CreditsManagement = React.lazy(() => import('./Pages/CreditsManagement/CreditsManagement'));
 import UserManagement from './Pages/UserManagement/UserManagement'
 const AdminDashboard = React.lazy(() => import('./Pages/AdminDashboard/AdminDashboard'));
-const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm/CheckoutForm'));
 const PackageSetting = React.lazy(() => import('./Pages/PackageSetting/PackageSetting'));
 const AssistantInstructions = React.lazy(() => import('./Pages/Assistant/Assistant'));
 
@@ -57,7 +56,6 @@ function App() {
               <Route path="card-details" element={<Protected children={<Debit />} />} />
               <Route path="history" element={<Protected children={<History />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
-              <Route path="checkout" element={<Protected children={<CheckoutForm />} />} />
               <Route path="payments" element={<Protected children={<PaymentScreen />} />} />
               <Route path="tool-management" element={<Protected children={<ToolManagement />} />} />
               <Route path="user-management" element={<Protected children={<UserManagement />} />} />
