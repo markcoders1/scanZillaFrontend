@@ -210,7 +210,6 @@ const ToolManagement = () => {
               xs: "column",
             },
 
-            paddingBottom: "100px"
           }}
         >
           <Box
@@ -290,37 +289,11 @@ const ToolManagement = () => {
                 )}
               />
             </Box>
-            <Box
-              sx={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}
-            >
-              <Heading Heading="Assistant Instructions" />
-              <Controller
-                name="instructions"
-                control={control}
-                render={({ field }) => (
-                  <CustomInputShadow
-                    {...field}
-                    height="180px"
-                    multiline={true}
-                    onChange={(e) => field.onChange(e.target.value)}
-                    type={"text"}
-                  />
-                )}
-              />
-            </Box>
+           
 
             <Box
               sx={{
-                position: "absolute",
-                bottom: "-60px",
-                left: {
-                  xs: "auto",
-                  md: "0px"     
-                },
-                right: {
-                  xs: "0px",    
-                  md: "auto"   
-                },
+               
               }}
             >
               <CustomButton
