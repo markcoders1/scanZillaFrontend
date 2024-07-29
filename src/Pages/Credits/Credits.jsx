@@ -215,6 +215,7 @@ const Credits = () => {
                                                     handleNavigate={handleNavigate}
                                                     variant={e.variant}
                                                     planName={e.name}
+                                                    buttonText={e.buttonText}
                                                 />
 
                                            

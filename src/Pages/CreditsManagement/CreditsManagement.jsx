@@ -117,7 +117,9 @@ const CreditsManagement = () => {
             }}
           >
             {offers.map((e, i) => (
+              
               <Box key={i}>
+                {console.log(e)}
                 <Box
                   sx={{
                     // border:"2px solid red",
@@ -186,7 +188,7 @@ const CreditsManagement = () => {
                   >
                     <CustomButton
                   border={"1px solid #333333"}
-                  ButtonText={"Get Credits"}
+                  ButtonText={e.buttonText}
                   color={"#333333"}
                   fontSize={"12px"}
                   variant={"outlined"}
