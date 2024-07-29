@@ -20,9 +20,9 @@ const CreditsManagement = () => {
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
   const [loadingButton, setLoadingButton] = useState(false);
-  const handleEditPackage = (planName, price, variant) => {
+  const handleEditPackage = (planName, price, variant, credits) => {
     navigate(
-      `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}`
+      `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}&credits=${credits}`
     );
   };
 
@@ -197,7 +197,7 @@ const CreditsManagement = () => {
                     color: "#333333",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleEditPackage(e.name, e.amount, e.variant, e.credit)}
+                  onClick={() => handleEditPackage(e.name, e.amount, e.variant, e.credits)}
                 >
                   Edit Package
                 </Typography>

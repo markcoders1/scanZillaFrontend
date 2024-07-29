@@ -11,6 +11,7 @@ import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import { useSelector, useDispatch } from "react-redux";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { isNumber } from "lodash";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -50,49 +51,62 @@ const ToolManagement = () => {
 
   const handleAddKeyword = async (data) => {
     console.log("New Keyword:", data.newKeyword);
-    try {
-      const response = await axiosInstance({
-        url: `${appUrl}/words`,
-        method: "post",
-        data: { word: data.newKeyword },
-      });
-      console.log(response);
-      if (response.status === 200) {
-        const updatedKeywords = [...restrictedKeywords, data.newKeyword];
-        setRestrictedKeywords(updatedKeywords);
-        setFilteredKeywords(
-          updatedKeywords.filter((keyword) =>
-            keyword.toLowerCase().includes(searchTerm.toLowerCase())
-          )
+    if (data.newKeyword == "" || data.newKeyword.trim() == "") {
+      dispatch(handleSnackAlert({ open: true, message: "Keyword can not be empty" , severity: "error" }))
+    } else {
+      try {
+        const response = await axiosInstance({
+          url: `${appUrl}/words`,
+          method: "post",
+          data: { word: data.newKeyword },
+        });
+        reset({newKeyword : ""})
+        console.log(response);
+        if (response.status === 200) {
+          const updatedKeywords = [...restrictedKeywords, data.newKeyword];
+          setRestrictedKeywords(updatedKeywords);
+          setFilteredKeywords(
+            updatedKeywords.filter((keyword) =>
+              keyword.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          );
+          reset({ newKeyword: "" });
+        }
+        dispatch(
+          handleSnackAlert({
+            open: true,
+            message: response.data.message,
+            severity: "success",
+          })
         );
-        reset({ newKeyword: "" });
-      }
-      dispatch(
-        handleSnackAlert({
-          open: true,
-          message: response.data.message,
-          severity: "success",
-        })
-      );
-    } catch (error) {
+      } catch (error) {
+
+    }
       console.error("Error adding keyword:", error);
     }
   };
 
   const onSubmit = async (data) => {
     console.log("Input Data:", data);
+    console.log( isNumber(Number(data.titleCharacters)))
+    console.log( isNumber(data.totalBullets))
+    console.log( isNumber(data.bulletcharacters))
+    console.log( isNumber(data.descriptionCharacters))
     try {
       const response = await axiosInstance({
         url: `${appUrl}/rules`,
         method: "post",
         data: {
-          titleCharacters: data.titleCharacters,
-          bulletNum: data.totalBullets,
-          bulletcharacters: data.bulletcharacters,
-          descriptionCharacters: data.descriptionCharacters,
-          instructions: data.instructions,
+          titleCharacters: Number(data.titleCharacters),
+          bulletNum: Number(data.totalBullets),
+          bulletCharacters: Number(data.bulletcharacters),
+          descriptionCharacters: Number(data.descriptionCharacters),
+          // instructions: data.instructions,
         },
       });
+
+      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "error" }))
+
       reset({ newKeyword: "" });
       console.log(response);
 
@@ -104,6 +118,7 @@ const ToolManagement = () => {
       });
     } catch (error) {
       console.error("Error when changing Rules:", error);
+      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
     }
   };
   const fetchRules = async (data) => {
@@ -136,6 +151,7 @@ const ToolManagement = () => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching restricted keywords:", error);
+      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
     }
   };
 
@@ -147,6 +163,7 @@ const ToolManagement = () => {
         params: { word: keyword },
       });
       console.log(response);
+      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }))
       if (response.status === 200) {
         const updatedKeywords = restrictedKeywords.filter(
           (kw) => kw !== keyword
@@ -160,6 +177,7 @@ const ToolManagement = () => {
       }
     } catch (error) {
       console.error("Error removing keyword:", error);
+      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
     }
   };
 

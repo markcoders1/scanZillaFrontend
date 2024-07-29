@@ -27,7 +27,9 @@ const PackageSetting = () => {
   const [data, setData] = useState({
     description: "",
     name: "",
-    amount: null
+    amount: null,
+    numberOfCredits: "",
+    buttonText: ""
   });
 
   const inputRef = useRef(null);
@@ -149,10 +151,10 @@ const PackageSetting = () => {
             flexBasis: "50%",
           }}
         >
-          <Heading Heading='Package' />
+          <Heading Heading='Number of Credits' />
           <CustomInputShadow
             placeholder={planName}
-            onChange={handleInput}
+            onChange={handleInput}  
             name={"name"}
             type="text"
             value={data.name}
@@ -166,7 +168,7 @@ const PackageSetting = () => {
             flexBasis: "50%",
           }}
         >
-          <Heading Heading='Total Amount' />
+          <Heading Heading='Button Text' />
           <CustomInputShadow
             placeholder={price / 100}
             onChange={handleInput}
