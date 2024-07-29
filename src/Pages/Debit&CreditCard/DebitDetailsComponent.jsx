@@ -47,7 +47,7 @@ const DebitComponent = () => {
                     },
                     marginTop: "10px"
                 }}
-                ButtonText="Pay Now"
+                ButtonText="Save Now"
                 fontSize="14px"
                 color="white"
                 fontWeight
