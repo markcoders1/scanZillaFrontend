@@ -22,7 +22,7 @@ const Credits = () => {
     const auth = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [autoCreditsAmount, setAutoCreditsAmount] = useState();
+    const [autoCreditsAmount, setAutoCreditsAmount] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [inputToggle, setInputToggle] = useState(null);
     const [snackAlertData, setSnackAlertData] = useState({
@@ -82,11 +82,11 @@ const Credits = () => {
         } catch (error) {
             console.log(error);
             setLoading(false);
-            setSnackAlertData({
-                open: true,
-                message: error.toString(),
-                severity: "error",
-            });
+            // setSnackAlertData({
+            //     open: true,
+            //     message: error.toString(),
+            //     severity: "error",
+            // });
         }
     };
 
@@ -98,6 +98,7 @@ const Credits = () => {
                 method: "get",
             });
             setLoading(false);
+            console.log(response)
             setAutoCreditsAmount(response.data.offers.slice(1));
         } catch (error) {
             console.error(error);
@@ -195,6 +196,7 @@ const Credits = () => {
                                 <Box
                                     sx={{
                                         display: "flex",
+                                        flexWrap: "wrap",
                                         gap: "20px",
                                         flexDirection: {
                                             sm: "row",
@@ -202,15 +204,24 @@ const Credits = () => {
                                         },
                                     }}
                                 >
-                                    <CreditCard
-                                        title="Basic"
-                                        price={10}
-                                        credits={15}
-                                        handleNavigate={handleNavigate}
-                                        variant={1}
-                                        planName="Basic"
-                                    />
-                                    <CreditCard
+                                    {
+                                        autoCreditsAmount.map((e, i) => (
+                                        
+                                                <CreditCard
+                                                key={i}
+                                                    title={e.name}
+                                                    price={e.amount / 100}
+                                                    credits={e.credits}
+                                                    handleNavigate={handleNavigate}
+                                                    variant={e.variant}
+                                                    planName={e.name}
+                                                />
+
+                                           
+
+                                        ))
+                                    }
+                                    {/* <CreditCard
                                         title="Pro"
                                         price={30}
                                         credits={50}
@@ -218,17 +229,7 @@ const Credits = () => {
                                         variant={2}
                                         planName="Pro"
                                     />
-                                </Box>
-                                <Box
-                                    sx={{
-                                        display: "flex",
-                                        gap: "20px",
-                                        flexDirection: {
-                                            sm: "row",
-                                            xs: "column",
-                                        },
-                                    }}
-                                >
+                              
                                     <CreditCard
                                         title="Enterprise"
                                         price={50}
@@ -236,7 +237,7 @@ const Credits = () => {
                                         handleNavigate={handleNavigate}
                                         variant={3}
                                         planName="Enterprise"
-                                    />
+                                    /> */}
                                     <Box
                                         sx={{
                                             flexBasis: {
@@ -444,7 +445,7 @@ const Credits = () => {
                             </Box>
                         </Box>
                         <Box>
-                        <CustomCard  cardStyle={{ height: "153px" }} />
+                            <CustomCard cardStyle={{ height: "153px" }} />
 
                         </Box>
                     </Box>

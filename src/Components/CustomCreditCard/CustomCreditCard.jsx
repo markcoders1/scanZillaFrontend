@@ -2,9 +2,10 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 
-const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, planName }) => {
+const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, planName, key }) => {
   return (
     <Box
+    key={key}
       sx={{
         flexBasis: {
           md: '218px',

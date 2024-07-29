@@ -137,6 +137,7 @@ const CustomCard = ({ cardStyle, cb }) => {
                         backgroundPosition: "center",
                         cursor: "pointer",
                         height: "100%",
+                        ...cardStyle
                     }}
                     onClick={() => navigate("/card-details")}
                 >
