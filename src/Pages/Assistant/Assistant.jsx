@@ -14,6 +14,7 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const Assistant = () => {
     const [analysisData, setAnalysisData] = useState(null);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const { control, handleSubmit, reset, getValues } = useForm({
@@ -29,10 +30,12 @@ const Assistant = () => {
 
     const fetchAnalysis = async () => {
         try {
+            setLoading(true)
             const response = await axiosInstance({
                 url: `${appUrl}/assistant`,
                 method: "get",
             });
+            setLoading(false)
             setAnalysisData(response.data);
             reset({
                 titledoes: response.data.title.Dos,
@@ -43,7 +46,7 @@ const Assistant = () => {
                 bulletdont: response.data.bullets.Donts
             });
             console.log(response.data);
-           
+
         } catch (error) {
             console.error("Error fetching analysis data:", error);
         }
@@ -79,134 +82,151 @@ const Assistant = () => {
     }, []);
 
     return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: ".7rem"
-            }}
-        >
-            <Box>
-                <Heading Heading="Title (Dos)" />
-                <Box sx={{ mt: "10px" }}>
-                    <Controller
-                        name="titledoes"
-                        control={control}
-                        render={({ field }) => (
-                            <CustomInputShadow
-                                {...field}
-                                height="272px"
-                                multiline={true}
-                                type="text"
-                                rows="10"
-                            />
-                        )}
-                    />
+        <>
+            {loading ? (
+                <Box
+                    sx={{
+                        display: "flex",
+                        height: "70vh",
+                        width: "100%",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <LoaderMain />
                 </Box>
-            </Box>
-            <Box>
-                <Heading Heading="Title (Dont's)" />
-                <Box sx={{ mt: "10px" }}>
-                    <Controller
-                        name="titledont"
-                        control={control}
-                        render={({ field }) => (
-                            <CustomInputShadow
-                                {...field}
-                                height="272px"
-                                multiline={true}
-                                type="text"
-                                rows="10"
+            ) : (
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: ".7rem"
+                    }}
+                >
+                    <Box>
+                        <Heading Heading="Title (Dos)" />
+                        <Box sx={{ mt: "10px" }}>
+                            <Controller
+                                name="titledoes"
+                                control={control}
+                                render={({ field }) => (
+                                    <CustomInputShadow
+                                        {...field}
+                                        height="272px"
+                                        multiline={true}
+                                        type="text"
+                                        rows="10"
+                                    />
+                                )}
                             />
-                        )}
-                    />
-                </Box>
-            </Box>
-            <Box>
-                <Heading Heading="Description (Dos)" />
-                <Box sx={{ mt: "10px" }}>
-                    <Controller
-                        name="descriptiondoes"
-                        control={control}
-                        render={({ field }) => (
-                            <CustomInputShadow
-                                {...field}
-                                height="180px"
-                                multiline={true}
-                                type="text"
-                                rows="6"
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading Heading="Title (Dont's)" />
+                        <Box sx={{ mt: "10px" }}>
+                            <Controller
+                                name="titledont"
+                                control={control}
+                                render={({ field }) => (
+                                    <CustomInputShadow
+                                        {...field}
+                                        height="272px"
+                                        multiline={true}
+                                        type="text"
+                                        rows="10"
+                                    />
+                                )}
                             />
-                        )}
-                    />
-                </Box>
-            </Box>
-            <Box>
-                <Heading Heading="Description (Dont's)" />
-                <Box sx={{ mt: "10px" }}>
-                    <Controller
-                        name="descriptiondont"
-                        control={control}
-                        render={({ field }) => (
-                            <CustomInputShadow
-                                {...field}
-                                height="180px"
-                                multiline={true}
-                                type="text"
-                                rows="6"
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading Heading="Description (Dos)" />
+                        <Box sx={{ mt: "10px" }}>
+                            <Controller
+                                name="descriptiondoes"
+                                control={control}
+                                render={({ field }) => (
+                                    <CustomInputShadow
+                                        {...field}
+                                        height="180px"
+                                        multiline={true}
+                                        type="text"
+                                        rows="6"
+                                    />
+                                )}
                             />
-                        )}
-                    />
-                </Box>
-            </Box>
-            <Box>
-                <Heading Heading="Bullet (Dos)" />
-                <Box sx={{ mt: "10px" }}>
-                    <Controller
-                        name="bulletdoes"
-                        control={control}
-                        render={({ field }) => (
-                            <CustomInputShadow
-                                {...field}
-                                height="180px"
-                                multiline={true}
-                                type="text"
-                                rows="6"
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading Heading="Description (Dont's)" />
+                        <Box sx={{ mt: "10px" }}>
+                            <Controller
+                                name="descriptiondont"
+                                control={control}
+                                render={({ field }) => (
+                                    <CustomInputShadow
+                                        {...field}
+                                        height="180px"
+                                        multiline={true}
+                                        type="text"
+                                        rows="6"
+                                    />
+                                )}
                             />
-                        )}
-                    />
-                </Box>
-            </Box>
-            <Box>
-                <Heading Heading="Bullet (Dont's)" />
-                <Box sx={{ mt: "10px" }}>
-                    <Controller
-                        name="bulletdont"
-                        control={control}
-                        render={({ field }) => (
-                            <CustomInputShadow
-                                {...field}
-                                height="272px"
-                                multiline={true}
-                                type="text"
-                                rows="10"
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading Heading="Bullet (Dos)" />
+                        <Box sx={{ mt: "10px" }}>
+                            <Controller
+                                name="bulletdoes"
+                                control={control}
+                                render={({ field }) => (
+                                    <CustomInputShadow
+                                        {...field}
+                                        height="180px"
+                                        multiline={true}
+                                        type="text"
+                                        rows="6"
+                                    />
+                                )}
                             />
-                        )}
-                    />
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Heading Heading="Bullet (Dont's)" />
+                        <Box sx={{ mt: "10px" }}>
+                            <Controller
+                                name="bulletdont"
+                                control={control}
+                                render={({ field }) => (
+                                    <CustomInputShadow
+                                        {...field}
+                                        height="272px"
+                                        multiline={true}
+                                        type="text"
+                                        rows="10"
+                                    />
+                                )}
+                            />
+                        </Box>
+                    </Box>
+                    <Box sx={{ display: "flex", justifyContent: "end", mt: "10px" }}>
+                        <CustomButton
+                            borderRadius="12px"
+                            padding="12px 0px"
+                            fontSize="14px"
+                            ButtonText="Save"
+                            width="143px"
+                            color="white"
+                            background="linear-gradient(to right, #1A0049, #3F016A)"
+                            onClick={handleSubmit(onSubmit)}
+                        />
+                    </Box>
                 </Box>
-            </Box>
-            <Box sx={{ display: "flex", justifyContent: "end", mt: "10px" }}>
-                <CustomButton
-                    borderRadius="12px"
-                    padding="12px 0px"
-                    fontSize="14px"
-                    ButtonText="Save"
-                    width="143px"
-                    color="white"
-                    background="linear-gradient(to right, #1A0049, #3F016A)"
-                    onClick={handleSubmit(onSubmit)}
-                />
-            </Box>
-        </Box>
+            )}
+
+        </>
     );
 };
 
