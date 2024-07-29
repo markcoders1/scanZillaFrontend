@@ -51,8 +51,8 @@ const ToolManagement = () => {
 
   const handleAddKeyword = async (data) => {
     console.log("New Keyword:", data.newKeyword);
-    if (data.newKeyword == "" || data.newKeyword.trim() == "") {
-      dispatch(handleSnackAlert({ open: true, message: "Keyword can not be empty" , severity: "error" }))
+    if (data.newKeyword === "" || data.newKeyword.trim() === "") {
+      dispatch(handleSnackAlert({ open: true, message: "Keyword cannot be empty", severity: "error" }));
     } else {
       try {
         const response = await axiosInstance({
@@ -60,7 +60,7 @@ const ToolManagement = () => {
           method: "post",
           data: { word: data.newKeyword },
         });
-        reset({newKeyword : ""})
+        reset({ newKeyword: "" });
         console.log(response);
         if (response.status === 200) {
           const updatedKeywords = [...restrictedKeywords, data.newKeyword];
@@ -80,45 +80,46 @@ const ToolManagement = () => {
           })
         );
       } catch (error) {
-
-    }
-      console.error("Error adding keyword:", error);
+        console.error("Error adding keyword:", error);
+      }
     }
   };
 
   const onSubmit = async (data) => {
     console.log("Input Data:", data);
-    console.log( isNumber(Number(data.titleCharacters)))
-    console.log( isNumber(data.totalBullets))
-    console.log( isNumber(data.bulletcharacters))
-    console.log( isNumber(data.descriptionCharacters))
-    try {
-      const response = await axiosInstance({
-        url: `${appUrl}/rules`,
-        method: "post",
-        data: {
-          titleCharacters: Number(data.titleCharacters),
-          bulletNum: Number(data.totalBullets),
-          bulletCharacters: Number(data.bulletcharacters),
-          descriptionCharacters: Number(data.descriptionCharacters),
-          // instructions: data.instructions,
-        },
-      });
 
-      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "error" }))
+    if (
+      !data.titleCharacters.trim() &&
+      !data.totalBullets.trim() &&
+      !data.bulletcharacters.trim() &&
+      !data.descriptionCharacters.trim()
+    ) {
+      dispatch(handleSnackAlert({ open: true, message: "At least one field must be filled", severity: "error" }));
+    } else {
+      try {
+        const response = await axiosInstance({
+          url: `${appUrl}/rules`,
+          method: "post",
+          data: {
+            titleCharacters: Number(data.titleCharacters),
+            bulletNum: Number(data.totalBullets),
+            bulletCharacters: Number(data.bulletcharacters),
+            descriptionCharacters: Number(data.descriptionCharacters),
+          },
+        });
+        dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
 
-      reset({ newKeyword: "" });
-      console.log(response);
-
-      reset({
-        bulletNum: "",
-        titleCharacters: "",
-        bulletcharacters: "",
-        descriptionCharacters: "",
-      });
-    } catch (error) {
-      console.error("Error when changing Rules:", error);
-      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
+        reset({
+          titleCharacters: "",
+          totalBullets: "",
+          bulletcharacters: "",
+          descriptionCharacters: "",
+        });
+        console.log(response);
+      } catch (error) {
+        console.error("Error when changing Rules:", error);
+        dispatch(handleSnackAlert({ open: true, message: error.response?.data?.message || "An error occurred", severity: "error" }));
+      }
     }
   };
   const fetchRules = async (data) => {

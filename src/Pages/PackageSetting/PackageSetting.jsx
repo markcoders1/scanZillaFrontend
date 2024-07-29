@@ -17,6 +17,7 @@ const PackageSetting = () => {
   const planName = queryParams.get('planName');
   const price = queryParams.get('price');
   let variant = queryParams.get('variant');
+  let credits = queryParams.get('credits');
   const [loadingButton, setLoadingButton] = useState(false);
 
   variant = Number(variant)
@@ -153,10 +154,10 @@ const PackageSetting = () => {
         >
           <Heading Heading='Number of Credits' />
           <CustomInputShadow
-            placeholder={planName}
+            placeholder={credits}
             onChange={handleInput}  
             name={"name"}
-            type="text"
+            type="number"
             value={data.name}
           />
         </Box>
@@ -173,7 +174,7 @@ const PackageSetting = () => {
             placeholder={price / 100}
             onChange={handleInput}
             name={"amount"}
-            type="number"
+            type="text"
             value={data.amount}
           />
         </Box>

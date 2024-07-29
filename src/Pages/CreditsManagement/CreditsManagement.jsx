@@ -29,12 +29,12 @@ const CreditsManagement = () => {
 
   const fetchRules = async () => {
     try {
-    
+
       const response = await axiosInstance({
         url: `${appUrl}/rules`,
         method: "get",
       });
-      
+
       setCharacterCost(response.data.characterCost);
       setCreditCost(response.data.creditCost);
     } catch (error) {
@@ -121,10 +121,10 @@ const CreditsManagement = () => {
                 <Box
                   sx={{
                     // border:"2px solid red",
-                    padding: "15px 16px 0px 16px",
+                    padding: "20px 16px 0px 16px",
                     boxShadow: "4px 5px 15px 0px #C8C8C8",
                     borderRadius: "10px",
-                    height: "282px",
+                    height: "322px",
                     width: {
                       sm: "200px",
                       xs: "100%"
@@ -147,12 +147,12 @@ const CreditsManagement = () => {
 
                   <Box
                     sx={{
-                      marginTop: "40px",
+                      marginTop: "50px",
                       width: "100%",
                       textAlign: "center",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "2px",
+                      gap: "0px",
                     }}
                   >
                     <Typography
@@ -173,18 +173,26 @@ const CreditsManagement = () => {
                         mt: '13px',
                       }}
                     >
-                      {e.variant == -1 ? "per " : e.credits } Credit
+                      {e.variant == -1 ? "per " : e.credits} Credit
                     </Typography>
                   </Box>
                   <Box
                     sx={{
                       margin: "auto",
-                      marginTop: "20px",
+                      marginTop: "50px",
                       display: "flex",
                       justifyContent: "center",
                     }}
                   >
-
+                    <CustomButton
+                  border={"1px solid #333333"}
+                  ButtonText={"Get Credits"}
+                  color={"#333333"}
+                  fontSize={"12px"}
+                  variant={"outlined"}
+                  fontWeight={"500"}
+                 
+                />
                   </Box>
                 </Box>
                 <Typography
@@ -201,6 +209,8 @@ const CreditsManagement = () => {
                 >
                   Edit Package
                 </Typography>
+
+
               </Box>
             ))}
           </Box>

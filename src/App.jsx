@@ -28,6 +28,8 @@ const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm/Checkout
 const PackageSetting = React.lazy(() => import('./Pages/PackageSetting/PackageSetting'));
 const AssistantInstructions = React.lazy(() => import('./Pages/Assistant/Assistant'));
 
+import PageNotFound from "./Pages/404page/PageNotFound";
+
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -65,6 +67,7 @@ function App() {
               <Route path="dashboard-admin" element={<Protected children={<AdminDashboard />} />} />
               <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
             </Route>
+            <Route path="*" element={<PageNotFound/>} />
           </Routes>
         </Suspense>
       </BrowserRouter>
