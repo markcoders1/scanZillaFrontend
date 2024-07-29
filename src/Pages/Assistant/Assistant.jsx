@@ -43,7 +43,7 @@ const Assistant = () => {
                 bulletdont: response.data.bullets.Donts
             });
             console.log(response.data);
-            dispatch(handleSnackAlert({ open: true, message: "Intructions updated Successfully", severity: "success" }))
+           
         } catch (error) {
             console.error("Error fetching analysis data:", error);
         }
