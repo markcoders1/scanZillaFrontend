@@ -7,7 +7,9 @@
 a{
   text-decoration: none;
 }
-
+*{
+  pointer-events: none;
+}
 .loader {
   width: 100px;
   height: 10px;

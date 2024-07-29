@@ -25,13 +25,14 @@ const CustomCard = ({ cardStyle, cb }) => {
                 if (response.data.cards.length > 0) {
                     setNum(response.data.cards[0].last4);
                 }
+                setLoading(false);
                 console.log(response.data.cards)
                 console.log(response)
                 setUsername(auth.username);
                 console.log(auth.username);
             } catch (error) {
                 console.error("Failed to fetch card info:", error);
-                console.log(response.data.cards)
+                
             }
             setLoading(false);
         }

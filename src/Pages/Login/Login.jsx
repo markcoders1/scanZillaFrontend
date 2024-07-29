@@ -220,7 +220,7 @@ const Login = () => {
             Welcome back! Please enter your details.
           </Typography>
         </Typography>
-        <Box
+        {/* <Box
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -278,7 +278,7 @@ const Login = () => {
               showPasswordToggle={true} // Add this prop
             />
           </Typography>
-        </Box>
+        </Box> */}
         {/* <Box
           sx={{
             // display: "flex",
@@ -336,7 +336,7 @@ const Login = () => {
           gap: "1.56rem",
           // border:"2px solid red"
         }}>
-          <Button
+          {/* <Button
             sx={{
               p: "15px 20px",
               background: "linear-gradient(to right, #1A0049, #41016C)",
@@ -360,7 +360,7 @@ const Login = () => {
             onClick={handleLogin}
           >
             {isLoading ? <LoaderW /> : "Sign in"}
-          </Button>
+          </Button> */}
 
           <Button
             sx={{
