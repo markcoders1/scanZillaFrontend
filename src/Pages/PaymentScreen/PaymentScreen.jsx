@@ -6,6 +6,7 @@ import SwitchCheckBox from '../../Components/SwitchCheckBox/SwitchCheckBox';
 import PaymentComponent from './PaymentComponent';
 import { loadStripe } from '@stripe/stripe-js';
 import dashboardImg1 from "../../assets/images/dashboard.png";
+import { useNavigate } from 'react-router-dom';
 
 
 const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i65pS6rgXMTA92KZaQSykMwZSYu1xpjfiL3r1ncGSh5V5ALn4tNU00hhVNyS0h");
@@ -22,6 +23,7 @@ const StripeCardForm = () => {
     const plan = queryParams.get('plan');
     const auth = useSelector(state => state.auth)
     const [inputValue, setInputValue] = useState()
+    const navigate = useNavigate();
 
     useEffect(() => {
         const clientSecret = localStorage.getItem("clientSecret");
@@ -217,7 +219,7 @@ const StripeCardForm = () => {
                     Disclaimer : {" "}
                 </Typography>
                 <Typography sx={{ color: "#333333", fontWeight: "600", fontSize: "18px" }} >  You can also do Payment via ( Wise, Payonner & Bank Transfer) </Typography> 
-                <Typography sx={{ color: "blue", fontWeight: "600", fontSize: "18px", textDecoration:"underline" }}  >
+                <Typography sx={{ color: "blue", fontWeight: "600", fontSize: "18px", textDecoration:"underline", cursor:"pointer" }} onClick={()=>{navigate("/contact-admin")}} >
                    Contact Us
                 </Typography>
             </Box>

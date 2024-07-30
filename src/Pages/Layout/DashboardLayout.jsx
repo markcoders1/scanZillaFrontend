@@ -39,14 +39,15 @@ const DashboardLayout = () => {
       case '/dashboard-admin':
         return 'Dashboard';
       case '/assistant-instruction':
-        return 'Assistant Instruction';
-      
+        return 'Assistant Instructions';
+        case '/contact-admin':
+          return 'Contact Admin';
       // Add more cases as needed for other routes
       default:
         return '';
     }
   }
-
+  // contact-admin
   const headerTitle = getHeaderTitle(location.pathname);
 
   return (
