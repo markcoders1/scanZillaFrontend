@@ -88,7 +88,7 @@ const PackageSetting = () => {
 
   return (
     <Box>
-      <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "row", xs: "column" }, }} >
+      <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "column", xs: "column" }, }} >
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%" }}>
           <Heading Heading='Package' />
           <CustomInputShadow placeholder={planName} onChange={handleInput} name={"name"} type="text" value={data.name} />
@@ -100,14 +100,11 @@ const PackageSetting = () => {
       </Box>
 
       <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "row", xs: "column", }, }} >
-        <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%", }} >
+        <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "100%", }} >
           <Heading Heading='Number of Credits' />
           <CustomInputShadow placeholder={credits} onChange={handleInput}   name={"credits"} type="number" value={data.credits} />
         </Box>
-        <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%", }} >
-          <Heading Heading='Button Text' />
-          <CustomInputShadow placeholder={"10"} onChange={handleInput} name={"buttonText"} type="text" value={data.buttonText} />
-        </Box>
+      
       </Box>
 
       <Box sx={{ display: "flex", width: "100%", justifyContent: "end", mt: "30px", }} >

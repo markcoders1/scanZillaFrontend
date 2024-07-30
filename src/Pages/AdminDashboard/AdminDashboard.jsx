@@ -22,6 +22,7 @@ const AdminDashboard = () => {
   const [hoveredIncomeValue, setHoveredIncomeValue] = useState(null);
   const [hoveredAnalysisValue, setHoveredAnalysisValue] = useState(null);
   const [loadingIncomeGraph, setLoadingIncomeGraph] = useState(false);
+  const [incomeInNum, setIncomeNum] =  useState();
 
   const getAllUser = async () => {
     try {
@@ -44,9 +45,9 @@ const AdminDashboard = () => {
         url: appUrl + "/getincome",
         method: "get",
       });
-      setTotalIncome(response.data.value);
+      setTotalIncome(response.data.value.slice(1));
       setTotalIncomeGraph(response.data.result);
-      console.log(response.data.result);
+      // console.log(response.data.result);
       setLoadingIncomeGraph(false);
     } catch (error) {
       console.log(error);
@@ -62,22 +63,35 @@ const AdminDashboard = () => {
         method: "get",
       });
       setAnalysisGraph(response.data);
-      console.log(response.data);
+      // console.log(response.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
     }
   };
+  // useEffect(()=>{
+  //   console.log(typeof totalIncome)
+  //   console.log(totalIncome.slice(1))
+  //   setIncomeNum(Number(totalIncome))
+
+  // },[totalIncome])
 
   useEffect(() => {
     getAllUser();
     getTotalIncome();
     getAnalysisGraph();
+ 
   }, []);
 
   // Function to convert cents to dollars
   const convertCentsToDollars = (cents) => cents / 100;
+
+  // // Function to format numbers with commas
+  const formatNumberWithCommas = (number) => {
+    return Number(number).toLocaleString();
+
+  };
 
   return (
     <>
@@ -113,7 +127,7 @@ const AdminDashboard = () => {
             >
               <DashboardCard
                 title="Total Payment this Month"
-                text={totalIncome}
+                text={`$${formatNumberWithCommas(totalIncome) || "0"}`}
                 funcLoading={loadingIncomeGraph}
               />
             </Box>
@@ -144,7 +158,7 @@ const AdminDashboard = () => {
                 boxShadow: "4px 5px 15px 0px #C8C8C8",
                 padding: "50px 20px 20px 20px",
                 borderRadius: "10px",
-                position: "relative"
+                position: "relative",
               }}
             >
               <Typography
@@ -154,29 +168,37 @@ const AdminDashboard = () => {
                   left: "20px",
                   color: "",
                   fontWeight: "500",
-                  fontSize: "18px"
+                  fontSize: "18px",
                 }}
               >
-                {hoveredIncomeValue !== null ? `$${hoveredIncomeValue} Dollars` : "$ Dollars"}
+                {hoveredIncomeValue !== null
+                  ? `$${hoveredIncomeValue} Dollars`
+                  : "$ Dollars"}
               </Typography>
-              {
-                loadingIncomeGraph ? <Box
+              {loadingIncomeGraph ? (
+                <Box
                   sx={{
                     display: "flex",
                     height: "100%",
                     width: "100%",
                     justifyContent: "center",
                     alignItems: "center",
-                   
                     height: "300px",
                   }}
                 >
                   <LoaderMain />
-
-                </Box> : <Box> <Chart data={totalIncomeGraph} xKey="createdAt" yKey="amount" yFormatter={convertCentsToDollars} setHoveredValue={setHoveredIncomeValue} />
                 </Box>
-              }
-
+              ) : (
+                <Box>
+                  <Chart
+                    data={totalIncomeGraph}
+                    xKey="createdAt"
+                    yKey="amount"
+                    yFormatter={convertCentsToDollars}
+                    setHoveredValue={setHoveredIncomeValue}
+                  />
+                </Box>
+              )}
             </Box>
             <Box
               sx={{
@@ -184,7 +206,7 @@ const AdminDashboard = () => {
                 boxShadow: "4px 5px 15px 0px #C8C8C8",
                 padding: "50px 20px 20px 0px",
                 borderRadius: "10px",
-                position: "relative"
+                position: "relative",
               }}
             >
               <Typography
@@ -194,13 +216,20 @@ const AdminDashboard = () => {
                   left: "35px",
                   color: "#171717",
                   fontWeight: "500",
-                  fontSize: "18px"
+                  fontSize: "18px",
                 }}
               >
-                {hoveredAnalysisValue !== null ? `${hoveredAnalysisValue} Analysis` : "Analysis Data"}
+                {hoveredAnalysisValue !== null
+                  ? `${hoveredAnalysisValue} Analysis`
+                  : "Analysis Data"}
               </Typography>
               <Box>
-                <Chart data={analysisGraph} xKey="date" yKey="analysis" setHoveredValue={setHoveredAnalysisValue} />
+                <Chart
+                  data={analysisGraph}
+                  xKey="date"
+                  yKey="analysis"
+                  setHoveredValue={setHoveredAnalysisValue}
+                />
               </Box>
             </Box>
           </Box>

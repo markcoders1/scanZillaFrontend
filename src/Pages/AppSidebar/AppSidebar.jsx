@@ -72,7 +72,7 @@ const AppSidebar = () => {
                   isActive ? 'anchortag anchorActive' : 'anchortag'
                 }
               >
-                DashBoard
+                Dashboard
               </NavLink>
             </Typography>
             <Typography>
