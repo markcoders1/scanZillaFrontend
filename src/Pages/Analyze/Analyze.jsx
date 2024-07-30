@@ -18,7 +18,7 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
 
 const Analyze = () => {
-  const [category, setCategory] = useState(["Food", "Gadgets", "OutFits"]);
+  const [category, setCategory] = useState(["Food", "Gadgets", "OutFits", "Arts & Crafts", "Automotive", "Baby", "Beauty & Personal Care", "Books", "Boys' Fashion", "Computers", "Deals", "Digital Music", "Electronics", "Girls' Fashion", "Health & HouseHold", "Home & Kitchen", "Industrail & Scientific", "Kindle Store", "Luggage", "Mens Fashion", "Movies & TV", "Music, Cds & Vinyl", "Pet Supplies", "Prime Video", "Software", "Sports & Outdoor", "Tools & Home Improvement", "Toys & Games", "Video Games", "Women's Fashion"]);
   const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",

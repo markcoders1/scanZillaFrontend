@@ -160,7 +160,7 @@ const Credits = () => {
         fetchCreditsHistory();
         fetchOffers();
         fetchCredits();
-        WarningToBuyCredits();
+        // WarningToBuyCredits();
     }, []);
 
     return (
