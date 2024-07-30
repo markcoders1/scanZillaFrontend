@@ -13,6 +13,8 @@ import bg from "./../../assets/images/bg.png";
 import dashboardImg1 from "../../assets/images/dashboard.png";
 import CreditCard from "../../Components/CustomCreditCard/CustomCreditCard";
 import CustomCard from "../../Components/Customcard/Customcard";
+import { useDispatch } from "react-redux";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -25,6 +27,7 @@ const Credits = () => {
     const [autoCreditsAmount, setAutoCreditsAmount] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [inputToggle, setInputToggle] = useState(null);
+    const dispatch = useDispatch();
     const [snackAlertData, setSnackAlertData] = useState({
         message: "",
         severity: "success",
@@ -146,10 +149,18 @@ const Credits = () => {
         }
     };
 
+    const WarningToBuyCredits = () => {
+        if (credits < 30) {
+            dispatch(handleSnackAlert({ open: true, message: "Your Credits are Low", severity: "error" }));
+            console.log("hi")
+        }
+    }
+
     useEffect(() => {
         fetchCreditsHistory();
         fetchOffers();
         fetchCredits();
+        WarningToBuyCredits();
     }, []);
 
     return (
@@ -416,7 +427,7 @@ const Credits = () => {
                                             : creditsHistory.map((item, index) => (
                                                 <CreditsHistory item={item} key={index} index={index} />
                                             ))
-}
+                                }
                             </Box>
                             <Box>
                                 <Typography>

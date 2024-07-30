@@ -16,6 +16,7 @@ import SnackAlert from '../../Components/SnackAlert/SnackAlert';
 import { ViewDetailModal } from "../../Components/ViewDetailModal/ViewDetailModal";
 import React from "react";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -137,11 +138,7 @@ const Home = () => {
       }
     } catch (error) {
       setLoading(false);
-      setSnackAlertData({
-        open: true,
-        message: error.toString(),
-        severity: "error",
-      });
+     
     }
   };
 
@@ -153,10 +150,18 @@ const Home = () => {
     setGraphdata(response.data)
   }
 
+  const WarningToBuyCredits = () => {
+    if (credits < 30) {
+      dispatch(handleSnackAlert({ open: true, message: "Your Credits are Low", severity: "error" }));
+      console.log("hi")
+    }
+  }
+
   useEffect(() => {
     fetchAnalysed();
     fetchAnalyzeHistory();
     // fetchGraphData()
+    WarningToBuyCredits()
   }, []);
 
   const openModal = (data) => {
@@ -232,7 +237,7 @@ const Home = () => {
               },
               flexGrow: 1,
               flexShrink: "1",
-              cursor:"pointer"
+              cursor: "pointer"
             }}
               onClick={() => navigate("/credits")}>
 
