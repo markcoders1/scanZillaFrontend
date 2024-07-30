@@ -1,10 +1,33 @@
 import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
+import React from 'react';
 import CustomButton from '../../Components/CustomButton/CustomButton';
+import SnackAlert from '../../Components/SnackAlert/SnackAlert'
+import { useNavigate } from 'react-router-dom';
 
 
 const PaymentComponent =()=>{
     const stripe = useStripe();
     const elements = useElements();
+    const [snackAlertData, setSnackAlertData]= React.useState({
+        message:"",
+        severity:"success",
+        open:false,
+    })
+    const [navigateToDashboard, setNavigateToDashboard] = React.useState(false);
+    const navigate = useNavigate()
+    
+
+    React.useEffect(() => {
+        if (navigateToDashboard) {
+          const timer = setTimeout(() => {
+            navigate('/dashboard');
+          }, 1500);
+    
+          // Cleanup timer on component unmount
+          return () => clearTimeout(timer);
+        }
+      }, [navigateToDashboard, navigate]);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -22,16 +45,20 @@ const PaymentComponent =()=>{
                 return_url: "https://scan-zilla-frontend.vercel.app",
                 // return_url: "http://localhost:5173",
             },
-        });
-
-        if (result.error) {
-            console.log("fail",result);
-        } else {
-            console.log("success",result)
-        }
+        }).then(function(result) {
+            if (result.error) {
+              setSnackAlertData({
+                message:result.error.message,
+                severity:'error',
+                open:true
+              })
+                setNavigateToDashboard(true);
+            }
+          });
     };
 
     return(
+        <>
         <form onSubmit={handleSubmit}>
             <PaymentElement />
             <CustomButton
@@ -57,6 +84,8 @@ const PaymentComponent =()=>{
                             type='submit'
                         />
         </form>
+        <SnackAlert message={snackAlertData.message} severity={snackAlertData.severity} open={snackAlertData.open} handleClose={()=>{setSnackAlertData(prev=>({...prev, open:false}))}} />
+        </>
     )
 }
 
