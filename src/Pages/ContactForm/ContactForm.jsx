@@ -1,14 +1,32 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow';
 import CustomButton from '../../Components/CustomButton/CustomButton';
-import { Box } from '@mui/material';
+import Heading from '../../Components/Heading/Heading';
 
 const ContactForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    credits: '',
+    paymentMethod: '',
+  });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const [errors, setErrors] = useState({});
+
+  const handleInput = (e) => {
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
+  const handleSubmit = () => {
+    console.log('Form Data:', data);
   };
 
   return (
@@ -17,43 +35,84 @@ const ContactForm = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: '15px',
-        padding: '20px',
-        maxWidth: '600px',
-        margin: '0 auto'
       }}
     >
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        gap:"8px"
+      }}
+      >
+      <Heading Heading='Name' />
       <CustomInputShadow
-        label="Name"
-        {...register("name", { required: "Name is required" })}
+        handleKeyDown={handleKeyDown}
+        onChange={handleInput}
+        name="name"
+        value={data.name}
         error={errors.name}
-        placeholder="Enter your name"
+        placeholder="Name"
+        border=""
+        boxShadow={true}
       />
+      </Box>
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        gap:"8px"
+      }}
+      >
+      <Heading Heading='Email' />
       <CustomInputShadow
-        label="Email"
-        type="email"
-        {...register("email", { 
-          required: "Email is required", 
-          pattern: {
-            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-            message: "Invalid email address"
-          }
-        })}
+        handleKeyDown={handleKeyDown}
+        onChange={handleInput}
+        name="email"
+        value={data.email}
         error={errors.email}
-        placeholder="Enter your email"
+        placeholder="Email"
+        border=""
+        boxShadow={true}
       />
+      </Box>
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        gap:"8px"
+      }}
+      >
+      <Heading Heading='No. of Credits' />
       <CustomInputShadow
-        label="Credits"
-        type="number"
-        {...register("credits", { required: "Credits are required" })}
+        handleKeyDown={handleKeyDown}
+        onChange={handleInput}
+        name="credits"
+        value={data.credits}
         error={errors.credits}
-        placeholder="Enter credits"
+        placeholder="No. of Credits"
+        border=""
+        boxShadow={true}
       />
+      </Box>
+      <Box
+      sx={{
+        display:"flex",
+        flexDirection:"column",
+        gap:"8px"
+      }}
+      >
+      <Heading Heading='Payment Method' />
       <CustomInputShadow
-        label="Message"
-        {...register("message", { required: "Message is required" })}
-        error={errors.message}
-        placeholder="Enter your message"
+        handleKeyDown={handleKeyDown}
+        onChange={handleInput}
+        name="paymentMethod"
+        value={data.paymentMethod}
+        error={errors.paymentMethod}
+        placeholder="Payment Method"
+        border=""
+        boxShadow={true}
       />
+      </Box>
       <CustomButton
         border="2px solid #1A0049"
         borderRadius="10px"
@@ -61,7 +120,7 @@ const ContactForm = () => {
         hoverBg="white"
         hovercolor="#1A0049"
         buttonTextStyle={{}}
-        buttonStyle={{ padding: { lg: "12px 20px" } }}
+        buttonStyle={{ padding: { lg: '12px 20px' } }}
         ButtonText="Submit"
         fontSize
         color="white"
@@ -69,7 +128,7 @@ const ContactForm = () => {
         fullWidth={true}
         variant="contained"
         padding
-        onClick={handleSubmit(onSubmit)}
+        onClick={handleSubmit}
       />
     </Box>
   );

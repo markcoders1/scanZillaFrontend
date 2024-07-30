@@ -87,6 +87,16 @@ const AppSidebar = () => {
             </Typography>
             <Typography>
               <NavLink
+                to="/assistant-instruction"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+              >
+                Assistant Instructions
+              </NavLink>
+            </Typography>
+            <Typography>
+              <NavLink
                 to="/user-management"
                 className={({ isActive }) =>
                   isActive ? 'anchortag anchorActive' : 'anchortag'
@@ -105,16 +115,7 @@ const AppSidebar = () => {
                 Credits Management
               </NavLink>
             </Typography>
-            <Typography>
-              <NavLink
-                to="/assistant-instruction"
-                className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
-                }
-              >
-                Assistant Instructions
-              </NavLink>
-            </Typography>
+            
           </Box>
         ) : (
           <Box
