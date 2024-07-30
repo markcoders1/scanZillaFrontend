@@ -138,6 +138,11 @@ const Analyze = () => {
     setData(prev => ({ ...prev, category }));
   };
 
+  const isAnyFieldFilled = () => {
+    const { title, bulletpoints, description, keywords } = data;
+    return [title, description, keywords].some(field => field !== "") || bulletpoints.some(bullet => bullet.value !== "");
+  };
+
   return (
 
     <>
@@ -180,7 +185,7 @@ const Analyze = () => {
               background: "#b30000"
             },
             // zIndex:"-1"
-            backgroundColor:"transparent"
+            backgroundColor: "transparent"
           }}
         >
           <Box
@@ -218,11 +223,11 @@ const Analyze = () => {
               </Box>
             </Box>
             <Box
-            sx={{
-              display:"flex",
-              flexDirection:"column",
-              gap:"15px"
-            }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "15px"
+              }}
             >
               <Heading Heading="Bullet Points" />
               {data.bulletpoints.map((item, index) => (
@@ -245,7 +250,7 @@ const Analyze = () => {
                     border=""
                     boxShadow={true}
                   />
-                  
+
 
                 </Box>
               ))}
@@ -411,43 +416,41 @@ const Analyze = () => {
               </Box>
             </Box>
 
-            <Box
-              sx={{
-                marginTop: "40px"
-              }}
-            >
-              {!isLoading ? <CustomButton
-                border="2px solid #1A0049"
-                borderRadius="10px"
-                background="#1A0049"
-                hoverBg="white"
-                hovercolor="#1A0049"
-                buttonTextStyle={{}}
-                buttonStyle={{
-                  padding: {
-                    lg: "12px 20px"
-                  },
-                }}
-                ButtonText="Analyze"
-                fontSize
-                color="white"
-                fontWeight
-                fullWidth={true}
-                variant="contained"
-                padding
-                onClick={handleAnalyze}
-              /> : <div style={{
-                border: "2px solid #1A0049",
-                borderRadius: "10px",
-                background: "#1A0049",
-                hoverBg: "white",
-                hovercolor: "#1A0049",
-                color: "white",
-                width: "100%",
-                padding: "19px 20px",
-                display: "flex",
-                justifyContent: "center"
-              }}><div className="loader" /></div>}
+            <Box sx={{ marginTop: "40px", display: isAnyFieldFilled() ? "block" : "none" }}>
+              {!isLoading ? (
+                <CustomButton
+                  border="2px solid #1A0049"
+                  borderRadius="10px"
+                  background="#1A0049"
+                  hoverBg="white"
+                  hovercolor="#1A0049"
+                  buttonTextStyle={{}}
+                  buttonStyle={{ padding: { lg: "12px 20px" } }}
+                  ButtonText="Analyze"
+                  fontSize
+                  color="white"
+                  fontWeight
+                  fullWidth={true}
+                  variant="contained"
+                  padding
+                  onClick={handleAnalyze}
+                />
+              ) : (
+                <div style={{
+                  border: "2px solid #1A0049",
+                  borderRadius: "10px",
+                  background: "#1A0049",
+                  hoverBg: "white",
+                  hovercolor: "#1A0049",
+                  color: "white",
+                  width: "100%",
+                  padding: "19px 20px",
+                  display: "flex",
+                  justifyContent: "center"
+                }}>
+                  <div className="loader" />
+                </div>
+              )}
             </Box>
 
 
