@@ -138,9 +138,11 @@ const Analyze = () => {
     setData(prev => ({ ...prev, category }));
   };
 
+
   const isAnyFieldFilled = () => {
-    const { title, bulletpoints, description, keywords } = data;
-    return [title, description, keywords].some(field => field !== "") || bulletpoints.some(bullet => bullet.value !== "");
+    const { title, bulletpoints, description, keywords, category } = data;
+    const isTextFieldFilled = [title, description, keywords].some(field => field !== "") || bulletpoints.some(bullet => bullet.value !== "");
+    return category !== "" && isTextFieldFilled;
   };
 
   return (
@@ -209,7 +211,7 @@ const Analyze = () => {
                   gap: "15px"
                 }}
               >
-                <Heading Heading="Title" />
+                <Heading Heading="Title" characterText="Character Count" count={data.title.length} />
                 <CustomTextField
                   handleKeyDown={() => { }}
                   onChange={hanldeInput}
@@ -426,7 +428,7 @@ const Analyze = () => {
                   hovercolor="#1A0049"
                   buttonTextStyle={{}}
                   buttonStyle={{ padding: { lg: "12px 20px" } }}
-                  ButtonText="Analyze"
+                  ButtonText="Analyze (3 Credits)"
                   fontSize
                   color="white"
                   fontWeight
