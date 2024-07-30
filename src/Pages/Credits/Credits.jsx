@@ -173,7 +173,7 @@ const Credits = () => {
                         gap: "2.2rem",
                         marginTop: "10px",
                         flexDirection: {
-                            md: "row",
+                            md: "column",
                             xs: "column",
                         },
                     }}
@@ -206,19 +206,19 @@ const Credits = () => {
                                 >
                                     {
                                         autoCreditsAmount.map((e, i) => (
-                                        
-                                                <CreditCard
-                                                key={i}
-                                                    title={e.name}
-                                                    price={e.amount / 100}
-                                                    credits={e.credits}
-                                                    handleNavigate={handleNavigate}
-                                                    variant={e.variant}
-                                                    planName={e.name}
-                                                    buttonText={e.buttonText}
-                                                />
 
-                                           
+                                            <CreditCard
+                                                key={i}
+                                                title={e.name}
+                                                price={e.amount / 100}
+                                                credits={e.credits}
+                                                handleNavigate={handleNavigate}
+                                                variant={e.variant}
+                                                planName={e.name}
+                                                buttonText={e.buttonText}
+                                            />
+
+
 
                                         ))
                                     }
@@ -408,11 +408,15 @@ const Credits = () => {
                                     },
                                 }}
                             >
-                                {loading && creditsHistory?.length < 1
-                                    ? "loading..."
-                                    : creditsHistory.map((item, index) => (
-                                        <CreditsHistory item={item} key={index} index={index} />
-                                    ))}
+                                {
+                                    loading
+                                        ? "loading..."
+                                        : creditsHistory?.length === 0
+                                            ? "You have not any history yet"
+                                            : creditsHistory.map((item, index) => (
+                                                <CreditsHistory item={item} key={index} index={index} />
+                                            ))
+}
                             </Box>
                             <Box>
                                 <Typography>
