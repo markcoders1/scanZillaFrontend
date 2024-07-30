@@ -138,7 +138,7 @@ const Home = () => {
       }
     } catch (error) {
       setLoading(false);
-     
+
     }
   };
 
@@ -161,7 +161,7 @@ const Home = () => {
     fetchAnalysed();
     fetchAnalyzeHistory();
     // fetchGraphData()
-    WarningToBuyCredits()
+    // WarningToBuyCredits()
   }, []);
 
   const openModal = (data) => {
@@ -243,8 +243,9 @@ const Home = () => {
 
               <Box sx={{
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+
                 padding: {
-                  sm: "34px 26px",
+                  sm: "19px 26px",
                   xs: "20px 10px"
                 },
                 borderRadius: "10px",
@@ -253,10 +254,15 @@ const Home = () => {
                 alignItems: "start",
                 height: "212px",
                 // justifyContent: "center",
-                gap: "20px"
+                // gap: "20px",
+                '&:hover': {
+                  boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
+                  backgroundColor: "#edecec"
+                }
               }}>
 
                 <Typography sx={{
+
                   color: "#333333",
                   fontWeight: "600",
                   fontSize: "27px",
@@ -267,6 +273,7 @@ const Home = () => {
                 </Typography>
 
                 <Typography sx={{
+                  mt: "20px",
                   fontWeight: "600",
                   fontSize: "80px",
                   lineHeight: "65px",
@@ -275,6 +282,40 @@ const Home = () => {
                 }}>
                   {credits}
                 </Typography>
+
+                {
+                  credits <= 10 ? (
+                    <Box sx={{
+                      mt: "10px",
+                      fontWeight: "600",
+                      fontSize: "16px",
+                      // lineHeight: "65px",
+                      color: "#ffff",
+                      letterSpacing: "0.67px",
+                      backgroundColor: "#D32F2F",
+                      p: "10px 20px",
+                      borderRadius: "5px",
+                      display: "flex"
+                    }}>
+                      You have not Enough Credits <Typography sx={{
+                        color: "white",
+                        backgroundColor: "#1F044C",
+                        ml: "20px",
+                        display: "flex",
+                        fontSize: "10px",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "5px 10px",
+                        borderRadius: "5px",
+                        '&:hover': {
+                          boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
+                          backgroundColor: "blue"
+                        }
+                      }} > Buy Now</Typography>
+                    </Box>
+                  ) : ""
+                }
+
 
               </Box>
             </Box>

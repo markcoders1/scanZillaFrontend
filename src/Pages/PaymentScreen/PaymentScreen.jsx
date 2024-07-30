@@ -12,6 +12,7 @@ const stripePromise = loadStripe("pk_test_51PZF1RRpAMX87OfFfp01TfdMLbrOZFYHtEw3i
 
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Heading from '../../Components/Heading/Heading';
 
 const StripeCardForm = () => {
     const [clientSecret, setClientSecret] = useState('');
@@ -20,7 +21,7 @@ const StripeCardForm = () => {
     const price = queryParams.get('price');
     const plan = queryParams.get('plan');
     const auth = useSelector(state => state.auth)
-    const [inputValue, setInputValue ] = useState()
+    const [inputValue, setInputValue] = useState()
 
     useEffect(() => {
         const clientSecret = localStorage.getItem("clientSecret");
@@ -111,14 +112,14 @@ const StripeCardForm = () => {
                         gap: "0.5rem",
                         alignItems: "end",
                         // border:"2px solid red"
-                        flexShrink:"0"
+                        flexShrink: "0"
                     }}
                 >
-                    
+
                     <Box
                         sx={{
-                           width:"100%",
-                           
+                            width: "100%",
+
                         }}
                     >
                         <Box
@@ -194,16 +195,32 @@ const StripeCardForm = () => {
                 </Box>
             </Box>
             <Box
-            sx={{mt:"50px"}}
+                sx={{ mt: "50px" }}
             >
 
-           
-            {clientSecret && (
-                <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
-                    <PaymentComponent />
-                </Elements>
-            )}
-             </Box>
+
+                {clientSecret && (
+                    <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe' } }}>
+                        <PaymentComponent />
+                    </Elements>
+                )}
+            </Box>
+
+            <Box
+                sx={{
+                    mt: "30px",
+                    display: "flex",
+                    gap:".6rem"
+                }}
+            >
+                <Typography sx={{ color: "red", fontWeight: "600", fontSize: "18px" }} >
+                    Disclaimer : {" "}
+                </Typography>
+                <Typography sx={{ color: "#333333", fontWeight: "600", fontSize: "18px" }} >  You can also do Payment via ( Wise, Payonner & Bank Transfer) </Typography> 
+                <Typography sx={{ color: "blue", fontWeight: "600", fontSize: "18px", textDecoration:"underline" }}  >
+                   Contact Us
+                </Typography>
+            </Box>
         </Box>
     );
 };
