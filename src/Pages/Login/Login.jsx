@@ -199,7 +199,7 @@ const Login = () => {
 
               color: "#1B004D",
               lineHeight: "36.9px",
-              fontSize: "40px",
+              fontSize: "50px",
               fontWeight: "600",
             }}
           >
@@ -378,7 +378,7 @@ const Login = () => {
               boxShadow: "none",
               border: "1px solid grey",
               color: "black",
-              mt: "100px"
+              mt: "150px"
             }}
             variant="contained"
             onClick={handleSignIn}
