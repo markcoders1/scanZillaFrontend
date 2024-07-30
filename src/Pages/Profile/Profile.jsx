@@ -165,7 +165,7 @@ const Profile = () => {
                 // border: "2px solid red"
               }}
             >
-              <Heading Heading="Debit Card Detail" />
+              <Heading Heading="Debit Card Details" />
               <Box
                 sx={{
                   display: "flex",
@@ -192,7 +192,7 @@ const Profile = () => {
                   }}
                 >
                   <DetailedCard
-                    title="Total Analyze"
+                    title="Total Analyzed"
                     detailedCardStyles={{ justifyContent: "center" }}
                     name={numberOfAnalyzed}
                     action=""
