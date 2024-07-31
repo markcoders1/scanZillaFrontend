@@ -1,7 +1,7 @@
 import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
 import React, { useState } from 'react'
 
-const CustomSelect = ({ data = [], handleChange, categoryError = "" }) => {
+const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow = "0px 8px 26px -4px rgba(0, 0, 0, 0.1)" }) => {
   const [selectedCategory, setSelectedCategory] = useState("")
 
   const handleSelectionChange = (e) => {
@@ -22,7 +22,7 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "" }) => {
           alignItems: "center",
           justifyContent: "space-between",
           borderRadius: "10px",
-          boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+          boxShadow: boxShadow,
           width: '100%',
           "& fieldset": { border: 'none' },
           '& .MuiInputLabel-outlined.Mui-focused': {
