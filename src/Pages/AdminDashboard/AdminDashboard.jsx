@@ -47,7 +47,7 @@ const AdminDashboard = () => {
       });
       setTotalIncome(response.data.value.slice(1));
       setTotalIncomeGraph(response.data.result);
-      // console.log(response.data.result);
+      console.log(response.data.result);
       setLoadingIncomeGraph(false);
     } catch (error) {
       console.log(error);

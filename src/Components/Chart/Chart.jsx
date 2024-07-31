@@ -56,7 +56,7 @@ const Chart = ({ data, xKey, yKey, yFormatter, setHoveredValue }) => {
                 <CartesianGrid strokeDasharray="3 8" />
                 <XAxis dataKey={xKey} />
                 <YAxis />
-                <Tooltip content={<CustomTooltip yFormatter={yFormatter} setHoveredValue={setHoveredValue} />} />
+                <Tooltip content={<CustomTooltip  setHoveredValue={setHoveredValue} />} />
                 <Area type="monotone" dataKey={yKey} stroke="#3D0166" fillOpacity={0.1} fill="#EBDBF6" />
             </AreaChart>
         </ResponsiveContainer>
