@@ -9,6 +9,8 @@ import {
   Paper,
   Box,
   TableSortLabel,
+  Tabs,
+  Tab,
 } from "@mui/material";
 import "./Usermanagement.css"; // Make sure to create this CSS file for custom styles
 import CustomButton from "../../Components/CustomButton/CustomButton";
@@ -26,11 +28,12 @@ const UserTable = () => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("createdAt");
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
+  const [filter, setFilter] = useState("user");
   const [loading, setLoading] = useState(true);
   const [loadingButton, setLoadingButton] = useState({});
-  const [loadingButtonAdmin, setLoadingButtonAdmin] = useState({})
+  const [loadingButtonAdmin, setLoadingButtonAdmin] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleBlock = async (userId) => {
     try {
@@ -121,15 +124,19 @@ const UserTable = () => {
     setUsers(sortedUsers);
   };
 
-
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  const handleFilterChange = (event, newValue) => {
+    setFilter(newValue);
+  };
+
   const filteredUsers = users.filter(
     (user) =>
-      user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.credits.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      (filter === "all" || user.role === filter) &&
+      (user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.credits.toString().toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   const renderActionButtons = (userId) => {
@@ -174,7 +181,6 @@ const UserTable = () => {
     );
   };
 
-
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -182,6 +188,7 @@ const UserTable = () => {
     const year = date.getFullYear();
     return `${month}-${day}-${year}`;
   };
+
   return (
     <>
       {loading ? (
@@ -253,6 +260,12 @@ const UserTable = () => {
             </Box>
           </Box>
 
+          <Tabs value={filter} onChange={handleFilterChange} centered>
+            <Tab label="All Users" value="all" />
+            <Tab label="Users" value="user" />
+            <Tab label="Admins" value="admin" />
+          </Tabs>
+
           <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 650, padding: "0px 15px" }}
@@ -270,7 +283,6 @@ const UserTable = () => {
                       textAlign: "center",
                       borderRadius: "8px 0px 0px 8px",
                       width: "160px",
-                      // border:"2px solid red"
                     }}
                   >
                     All Users
@@ -292,7 +304,6 @@ const UserTable = () => {
                       backgroundColor: "#1A0049",
                       color: "#FDFDFD",
                       fontWeight: "500",
-                      // padding: "15px 10px",
                       fontSize: "16px",
                       textAlign: "center",
                     }}
@@ -389,7 +400,6 @@ const UserTable = () => {
                         fontSize: "14px",
                         textAlign: "center",
                         padding: "10px",
-                        // color: "#A0A4A9",
                         fontWeight: "500",
                         border: "none",
                       }}
