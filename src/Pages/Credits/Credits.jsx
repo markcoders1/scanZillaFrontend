@@ -155,6 +155,14 @@ const Credits = () => {
             console.log("hi")
         }
     }
+    const handleChange = (e) => {
+        const value = Number(e.target.value);
+        if (value >= 1) {
+            setInputValue(value);
+        } else {
+            setInputValue(1); // set to minimum value 1 if input is less than 1
+        }
+    };
 
     useEffect(() => {
         fetchCreditsHistory();
@@ -355,7 +363,8 @@ const Credits = () => {
                                                     }}
                                                     placeholder="30"
                                                     value={inputValue}
-                                                    onChange={(e) => setInputValue(e.target.value)}
+                                                    onChange={handleChange}
+                                                    min={"1"}
                                                 />
                                             </Typography>
                                         </Box>
