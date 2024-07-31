@@ -302,7 +302,7 @@ const Home = () => {
                       display: "flex",
                    
                     }}>
-                      You do not have sufficient credits<Typography sx={{
+                      You have low credits<Typography sx={{
                         color: "white",
                         backgroundColor: "#1F044C",
                         ml: "20px",

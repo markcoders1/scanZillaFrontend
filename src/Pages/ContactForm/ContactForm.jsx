@@ -8,11 +8,13 @@ import { useDispatch } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { useNavigate } from 'react-router-dom';
 
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const ContactForm = () => {
+  const navigate = useNavigate()
 
   const [paymentMethod, setPaymentMethod] = useState(["Wise", "Payoneer", "Direct Bank Transfer"]);
   const [data, setData] = useState({
@@ -22,7 +24,7 @@ const ContactForm = () => {
     paymentMethod: '',
   });
 
-
+  const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -44,7 +46,7 @@ const ContactForm = () => {
     console.log(typeof data.email)
 
     console.log(typeof data.credits)
-    console.log(typeof data.paymentMethod)
+    console.log(data.paymentMethod)
 
     
     try {
@@ -54,7 +56,7 @@ const ContactForm = () => {
         data: {
           name: data.name,
           email: data.email,
-          credits: data.credits,
+          credits: +data.credits,
           paymentDetails: data.paymentMethod,
 
         },
@@ -62,10 +64,12 @@ const ContactForm = () => {
 
       })
 
-      console.log(response)
+      dispatch(handleSnackAlert({ open: true, message: "Thank you for reaching out to us! we will contact you shortly", severity: "success" }))
+      
+      setTimeout(()=>{navigate('/dashboard')},2000)
 
     } catch (error) {
-      console.log(error)
+      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
     }
 
   };

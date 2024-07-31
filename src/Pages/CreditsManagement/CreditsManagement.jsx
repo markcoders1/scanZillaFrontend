@@ -175,7 +175,7 @@ const CreditsManagement = () => {
                         mt: '13px',
                       }}
                     >
-                      {e.variant == -1 ? "per " : e.credits} Credits
+                      {e.variant == -1 ? "per Credit" : `${e.credits} Credits`} 
                     </Typography>
                   </Box>
                   <Box
