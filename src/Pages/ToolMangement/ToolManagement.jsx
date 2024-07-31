@@ -66,7 +66,7 @@ const ToolManagement = () => {
         });
        
         console.log(response);
-        if (response.status === 200) {
+        if (response) {
           const updatedKeywords = [...filteredKeywords, data.newKeyword];
           setFilteredKeywords(updatedKeywords);
           setFilteredKeywords(

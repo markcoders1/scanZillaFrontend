@@ -41,6 +41,7 @@ const Analyze = () => {
     severity: "success",
     open: false,
   });
+  const [creditDynamic , setCreditDynamic] = useState(0)
   const [editorLoading, setEditorLoading] = useState(true);
   const handleInputChange = (e) => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
@@ -108,10 +109,20 @@ const Analyze = () => {
     const response = await axiosInstance({
       url: appUrl + "/rules",
       method: "get",
-      
+
     })
     setRules(response.data)
-    console.log("rules response", response.data.titleCharacters)
+    console.log("rules response", response)
+  }
+
+  const getRules = async () => {
+    const response = await axiosInstance({
+      url: appUrl + "/rules",
+      method: "get",
+
+    })
+    setRules(response.data)
+    console.log("rules response", response)
   }
 
   const handleKeyDown = (e) => {
@@ -156,9 +167,31 @@ const Analyze = () => {
     return category !== "" && isTextFieldFilled;
   };
 
+  const calcStringCost = (stringToCalc) => {
+    if(stringToCalc==""){
+      return 0
+    }
+    const fullChunks = Math.floor(stringToCalc.length / rules.characterCost);
+    const partialChunk = stringToCalc.length % rules.characterCost;
+    const valtosend = Math.ceil((fullChunks * rules.creditCost) + (partialChunk > 0 ? (partialChunk / rules.characterCost) * rules.creditCost : 0))
+    return valtosend;
+  }
+
+
   useEffect(()=>{
+    
+    let tempbullets = data.bulletpoints.map(e=>e.value);
+
+    console.log(calcStringCost(tempbullets.join('')))
+    setCreditDynamic(calcStringCost(data.title) + calcStringCost(data.description) + calcStringCost(tempbullets.join('')) + calcStringCost(data.keywords))
+  },[data, setData])
+
+
+  
+  useEffect(() => {
     getLimits()
-  },[])
+    // getRules()
+  }, [])
 
   return (
 
@@ -236,7 +269,7 @@ const Analyze = () => {
                   placeholder="Insert Title Here"
                   border=""
                   boxShadow={true}
-                  maxLength = {rules.titleCharacters}
+                  maxLength={rules.titleCharacters}
                 />
                 {/* {
                   rules.titleCharacters ? console.log(rules.titleCharacters) : ""
@@ -270,7 +303,7 @@ const Analyze = () => {
                     placeholder="Bullet Text"
                     border=""
                     boxShadow={true}
-                    maxLength = {rules.bulletCharacters}
+                    maxLength={rules.bulletCharacters}
                   />
 
 
@@ -383,7 +416,7 @@ const Analyze = () => {
                   height={"360px"}
                   error={errors.description}
                   name={"description"}
-                  maxLength = {rules.descriptionCharacters}
+                  maxLength={rules.descriptionCharacters}
                 />
               </Box>
 
@@ -449,7 +482,7 @@ const Analyze = () => {
                   hovercolor="#1A0049"
                   buttonTextStyle={{}}
                   buttonStyle={{ padding: { lg: "12px 20px" } }}
-                  ButtonText="Analyze (3 Credits)"
+                  ButtonText={`Analyze ${creditDynamic} Credits`}
                   fontSize
                   color="white"
                   fontWeight
