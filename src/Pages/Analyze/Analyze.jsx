@@ -20,6 +20,7 @@ const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
 const Analyze = () => {
   const [category, setCategory] = useState(["Food", "Gadgets", "OutFits", "Arts & Crafts", "Automotive", "Baby", "Beauty & Personal Care", "Books", "Boys' Fashion", "Computers", "Deals", "Digital Music", "Electronics", "Girls' Fashion", "Health & HouseHold", "Home & Kitchen", "Industrail & Scientific", "Kindle Store", "Luggage", "Mens Fashion", "Movies & TV", "Music, Cds & Vinyl", "Pet Supplies", "Prime Video", "Software", "Sports & Outdoor", "Tools & Home Improvement", "Toys & Games", "Video Games", "Women's Fashion"]);
   const navigate = useNavigate();
+  const [rules, setRules] = useState([]);
   const [data, setData] = useState({
     title: "",
     bulletpoints: [{ index: 0, value: "" }],
@@ -103,6 +104,16 @@ const Analyze = () => {
     setIsLoading(false);
   };
 
+  const getLimits = async () => {
+    const response = await axiosInstance({
+      url: appUrl + "/rules",
+      method: "get",
+      
+    })
+    setRules(response.data)
+    console.log("rules response", response.data.titleCharacters)
+  }
+
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleAnalyze();
@@ -110,7 +121,7 @@ const Analyze = () => {
   };
 
   const addBullet = () => {
-    if (data.bulletpoints.length < 10) {
+    if (data.bulletpoints.length < rules.bulletNum) {
       setData(prev => ({
         ...prev,
         bulletpoints: [...prev.bulletpoints, { index: prev.bulletpoints.length, value: "" }]
@@ -144,6 +155,10 @@ const Analyze = () => {
     const isTextFieldFilled = [title, description, keywords].some(field => field !== "") || bulletpoints.some(bullet => bullet.value !== "");
     return category !== "" && isTextFieldFilled;
   };
+
+  useEffect(()=>{
+    getLimits()
+  },[])
 
   return (
 
@@ -221,7 +236,11 @@ const Analyze = () => {
                   placeholder="Insert Title Here"
                   border=""
                   boxShadow={true}
+                  maxLength = {rules.titleCharacters}
                 />
+                {/* {
+                  rules.titleCharacters ? console.log(rules.titleCharacters) : ""
+                } */}
               </Box>
             </Box>
             <Box
@@ -251,6 +270,7 @@ const Analyze = () => {
                     placeholder="Bullet Text"
                     border=""
                     boxShadow={true}
+                    maxLength = {rules.bulletCharacters}
                   />
 
 
@@ -363,6 +383,7 @@ const Analyze = () => {
                   height={"360px"}
                   error={errors.description}
                   name={"description"}
+                  maxLength = {rules.descriptionCharacters}
                 />
               </Box>
 

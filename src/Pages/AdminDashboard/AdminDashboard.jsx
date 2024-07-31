@@ -45,7 +45,7 @@ const AdminDashboard = () => {
         url: appUrl + "/getincome",
         method: "get",
       });
-      setTotalIncome(response.data.value.slice(1));
+      setTotalIncome(response.data.value);
       setTotalIncomeGraph(response.data.result);
       console.log(response.data.result);
       setLoadingIncomeGraph(false);
@@ -88,10 +88,10 @@ const AdminDashboard = () => {
   const convertCentsToDollars = (cents) => cents / 100;
 
   // // Function to format numbers with commas
-  const formatNumberWithCommas = (number) => {
-    return Number(number).toLocaleString();
+  // const formatNumberWithCommas = (number) => {
+  //   return Number(number).toLocaleString();
 
-  };
+  // };
 
   return (
     <>
@@ -127,7 +127,7 @@ const AdminDashboard = () => {
             >
               <DashboardCard
                 title="Total Payment this Month"
-                text={`$${formatNumberWithCommas(totalIncome) || "0"}`}
+                text={`$${totalIncome}`}
                 funcLoading={loadingIncomeGraph}
               />
             </Box>

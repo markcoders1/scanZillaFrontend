@@ -22,7 +22,7 @@ const StripeCardForm = () => {
     const price = queryParams.get('price');
     const plan = queryParams.get('plan');
     const auth = useSelector(state => state.auth)
-    const [inputValue, setInputValue] = useState()
+    const [inputValue, setInputValue] = useState(0)
     const navigate = useNavigate();
 
 

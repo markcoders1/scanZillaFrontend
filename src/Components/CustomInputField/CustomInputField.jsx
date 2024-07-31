@@ -16,7 +16,8 @@ const CustomTextField = forwardRef(({
   placeholder = "",
   border = true,
   boxShadow = false, // Add default value for boxShadow
-  showPasswordToggle = false // Add prop to control password visibility toggle
+  showPasswordToggle = false, // Add prop to control password visibility toggle
+  maxLength // Add maxLength prop
 }, ref) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -47,6 +48,7 @@ const CustomTextField = forwardRef(({
           placeholder={placeholder}
           type={showPassword ? "text" : type}
           ref={ref}
+          m
           sx={{
             '& ::placeholder': {
               fontSize: {
@@ -88,6 +90,9 @@ const CustomTextField = forwardRef(({
           }}
           multiline={multiline}
           rows={rows}
+          inputProps={{
+            maxLength: maxLength // Set the maxLength prop here
+          }}
         />
         {showPasswordToggle && (
           <IconButton

@@ -253,7 +253,7 @@ const Home = () => {
                 flexDirection: "column",
                 alignItems: "start",
                 height: "212px",
-                // justifyContent: "center",
+                justifyContent: "center",
                 // gap: "20px",
                 '&:hover': {
                   boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
@@ -288,16 +288,21 @@ const Home = () => {
                     <Box sx={{
                       mt: "10px",
                       fontWeight: "600",
-                      fontSize: "16px",
+                      fontSize:{
+                        md:"14px",
+                        lg:"16px",
+                        xs:"13px"
+                      },
                       // lineHeight: "65px",
                       color: "#ffff",
                       letterSpacing: "0.67px",
                       backgroundColor: "#D32F2F",
                       p: "10px 20px",
                       borderRadius: "5px",
-                      display: "flex"
+                      display: "flex",
+                   
                     }}>
-                      You have not Enough Credits <Typography sx={{
+                      You do not have sufficient credits<Typography sx={{
                         color: "white",
                         backgroundColor: "#1F044C",
                         ml: "20px",

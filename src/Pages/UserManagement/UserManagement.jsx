@@ -16,6 +16,8 @@ import { useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/images/searchIcon.png";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+import { useDispatch } from "react-redux";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -27,6 +29,8 @@ const UserTable = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [loadingButton, setLoadingButton] = useState({});
+  const [loadingButtonAdmin, setLoadingButtonAdmin] = useState({})
+  const dispatch = useDispatch();
 
   const toggleBlock = async (userId) => {
     try {
@@ -48,6 +52,31 @@ const UserTable = () => {
       console.log(error);
     } finally {
       setLoadingButton((prev) => ({ ...prev, [userId]: false }));
+    }
+  };
+
+  const toggleAdmin = async (userId) => {
+    try {
+      setLoadingButtonAdmin((prev) => ({ ...prev, [userId]: true }));
+      const response = await axiosInstance({
+        url: appUrl + "/makeadmin",
+        method: "get",
+        params: {
+          userId,
+        },
+      });
+      console.log(response);
+      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
+
+      setUsers((prevUsers) =>
+        prevUsers.map((user) =>
+          user._id === userId ? { ...user, role: user.role === "admin" ? "user" : "admin" } : user
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoadingButtonAdmin((prev) => ({ ...prev, [userId]: false }));
     }
   };
 
@@ -92,6 +121,7 @@ const UserTable = () => {
     setUsers(sortedUsers);
   };
 
+
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -105,15 +135,16 @@ const UserTable = () => {
   const renderActionButtons = (userId) => {
     const user = users.find((u) => u._id === userId);
     const active = user && user.active === true;
+    const role = user && user.role === "admin";
     return (
-      <Box sx={{ display: "flex", gap: "1rem" }}>
+      <Box sx={{ display: "flex", gap: ".7rem" }}>
         <CustomButton
           border={active ? "2px solid #EE1D52" : "2px solid #31BA96"}
           borderRadius="10px"
-          fontSize="12px"
+          fontSize="10px"
           color={active ? "#EE1D52" : "#31BA96"}
           fontWeight="600"
-          width="100px"
+          width="70px"
           ButtonText={active ? "Block" : "Unblock"}
           onClick={() => toggleBlock(userId)}
           loading={loadingButton[userId] || false}
@@ -121,16 +152,28 @@ const UserTable = () => {
         <CustomButton
           border="2px solid #333333"
           borderRadius="10px"
-          fontSize="12px"
+          fontSize="10px"
           color="#333333"
           fontWeight="500"
-          width="134px"
+          width="100px"
           ButtonText="View Details"
           onClick={() => navigate(`userdetails/${userId}`)}
+        />
+        <CustomButton
+          border="2px solid #333333"
+          borderRadius="10px"
+          fontSize="10px"
+          color="#333333"
+          fontWeight="500"
+          width="100px"
+          ButtonText={role ? "Make User" : "Make Admin"}
+          onClick={() => toggleAdmin(userId)}
+          loading={loadingButtonAdmin[userId] || false}
         />
       </Box>
     );
   };
+
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
