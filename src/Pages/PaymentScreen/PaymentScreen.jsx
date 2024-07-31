@@ -25,6 +25,16 @@ const StripeCardForm = () => {
     const [inputValue, setInputValue] = useState()
     const navigate = useNavigate();
 
+
+    const handleChange = (e) => {
+        const value = Number(e.target.value);
+        if (value >= 0) {
+            setInputValue(value);
+        } else {
+            setInputValue(1); // set to minimum value 1 if input is less than 1
+        }
+    };
+
     useEffect(() => {
         const clientSecret = localStorage.getItem("clientSecret");
         setClientSecret(clientSecret);
@@ -187,9 +197,10 @@ const StripeCardForm = () => {
                                         fontSize: "18px",
                                         border: auth.autocharge ? "" : "1px solid #190247"
                                     }}
-                                    placeholder="30"
+
                                     value={inputValue}
-                                    onChange={(e) => setInputValue(e.target.value)}
+                                    onChange={handleChange}
+                                    min={"0"}
                                 />
                             </Typography>
                         </Box>
@@ -212,15 +223,15 @@ const StripeCardForm = () => {
                 sx={{
                     mt: "30px",
                     display: "flex",
-                    gap:".6rem"
+                    gap: ".6rem"
                 }}
             >
                 <Typography sx={{ color: "red", fontWeight: "600", fontSize: "18px" }} >
                     Disclaimer : {" "}
                 </Typography>
-                <Typography sx={{ color: "#333333", fontWeight: "600", fontSize: "18px" }} >  You can also do Payment via ( Wise, Payonner & Bank Transfer) </Typography> 
-                <Typography sx={{ color: "blue", fontWeight: "600", fontSize: "18px", textDecoration:"underline", cursor:"pointer" }} onClick={()=>{navigate("/contact-admin")}} >
-                   Contact Us
+                <Typography sx={{ color: "#333333", fontWeight: "600", fontSize: "18px" }} >  You can also do Payment via ( Wise, Payonner & Bank Transfer) </Typography>
+                <Typography sx={{ color: "blue", fontWeight: "600", fontSize: "18px", textDecoration: "underline", cursor: "pointer" }} onClick={() => { navigate("/contact-admin") }} >
+                    Contact Us
                 </Typography>
             </Box>
         </Box>

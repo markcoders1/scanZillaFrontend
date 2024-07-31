@@ -25,7 +25,7 @@ const Credits = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [autoCreditsAmount, setAutoCreditsAmount] = useState([]);
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState(0);
     const [inputToggle, setInputToggle] = useState(null);
     const dispatch = useDispatch();
     const [snackAlertData, setSnackAlertData] = useState({
@@ -157,7 +157,7 @@ const Credits = () => {
     }
     const handleChange = (e) => {
         const value = Number(e.target.value);
-        if (value >= 1) {
+        if (value >= 0) {
             setInputValue(value);
         } else {
             setInputValue(1); // set to minimum value 1 if input is less than 1
@@ -361,10 +361,10 @@ const Credits = () => {
                                                         fontSize: "18px",
                                                         border: auth.autocharge ? "" : "1px solid #190247",
                                                     }}
-                                                    placeholder="30"
+                                                    
                                                     value={inputValue}
                                                     onChange={handleChange}
-                                                    min={"1"}
+                                                    min={"0"}
                                                 />
                                             </Typography>
                                         </Box>
