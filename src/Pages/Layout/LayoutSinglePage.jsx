@@ -59,7 +59,10 @@ const LayoutSinglePage = () => {
                   md: "23px 30px",
                   xs: "60px 20px",
       
-                }
+                },
+                mt:"50px",
+                ml:"70px",
+                // bgcolor:"red"
               }}
             >
             <Outlet/>
@@ -68,7 +71,7 @@ const LayoutSinglePage = () => {
         sx={{
           flexBasis: {
             // lg:"500px",
-            md: "45%",
+            md: "38%",
 
 
           },
