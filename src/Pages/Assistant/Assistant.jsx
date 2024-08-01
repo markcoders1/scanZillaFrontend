@@ -1,85 +1,126 @@
-import { Box, Typography } from '@mui/material'
-import Heading from '../../Components/Heading/Heading'
+import { Box, Tabs, Tab, TextField } from "@mui/material";
+import Heading from "../../Components/Heading/Heading";
 import React, { useState, useEffect } from "react";
 import { useForm, Controller } from "react-hook-form";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
-import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow'
+import CustomInputShadow from "../../Components/CustomInputShadow/CustomInputShadow";
 import { useSelector, useDispatch } from "react-redux";
 import LoaderMain from "../../Components/Loader/LoaderMain";
-import CustomButton from '../../Components/CustomButton/CustomButton';
+import CustomButton from "../../Components/CustomButton/CustomButton";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
-
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const Assistant = () => {
-    const [analysisData, setAnalysisData] = useState(null);
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-
-    const { control, handleSubmit, reset, getValues } = useForm({
-        defaultValues: {
-            titledoes: "",
-            titledont: "",
-            descriptiondoes: "",
-            descriptiondont: "",
-            bulletdoes: "",
-            bulletdont: ""
-        },
+    const [page, setPage] = useState("title");
+    const [pointers, setPointers] = useState({
+        titleDo: [""],
+        titleDont: [""],
+        descriptionDo: [""],
+        descriptionDont: [""],
+        bulletDo: [""],
+        bulletDont: [""],
     });
+
+    const divideString = (string) =>{
+        return string.split(' -').slice(1)
+    }
+
+    const joinArray = (array) => {
+        return array.map(item => `-${item}`).join(' ');
+    }
+
+    const handlePageChange = (event, newValue) => {
+        setPage(newValue);
+    };
+
+    const handleChange = (tab, type, index, value) => {
+        const newData = { ...pointers };
+        newData[`${tab}${type}`][index] = value;
+        setPointers(newData);
+    };
+
+    const addField = (tab, type) => {
+        const newData = { ...pointers };
+        newData[`${tab}${type}`].push("");
+        setPointers(newData);
+    };
+
+    const removeField = (tab, type, index) => {
+        const newData = { ...pointers };
+        newData[`${tab}${type}`].splice(index, 1);
+        setPointers(newData);
+    };
+
+
+    const handleSubmit = async () => {
+        const payload = {
+            titleDo: joinArray(pointers.titleDo),
+            titleDont: joinArray(pointers.titleDont),
+            descriptionDo: joinArray(pointers.descriptionDo),
+            descriptionDont: joinArray(pointers.descriptionDont),
+            bulletDo: joinArray(pointers.bulletDo),
+            bulletDont: joinArray(pointers.bulletDont),
+        };
+        
+        
+
+        try {
+            const response = await axiosInstance({
+                url: `${appUrl}/assistant`,
+                method: "post",
+                data: payload
+            });
+            console.log("response======>", response)
+            dispatch(
+                handleSnackAlert({
+                    open: true,
+                    message: "Intructions updated Successfully",
+                    severity: "success",
+                })
+            );
+            console.log("response======>", response)
+            console.log("hello");
+            console.log(response);
+        } catch (error) {
+            console.error("Error when changing Rules:", error);
+            console.log("hello");
+        }
+
+
+        console.log(payload);
+    };
+
 
     const fetchAnalysis = async () => {
         try {
-            setLoading(true)
+            setLoading(true);
             const response = await axiosInstance({
                 url: `${appUrl}/assistant`,
                 method: "get",
             });
-            setLoading(false)
-            setAnalysisData(response.data);
-            reset({
-                titledoes: response.data.title.Dos,
-                titledont: response.data.title.Donts,
-                descriptiondoes: response.data.description.Dos,
-                descriptiondont: response.data.description.Donts,
-                bulletdoes: response.data.bullets.Dos,
-                bulletdont: response.data.bullets.Donts
+            setLoading(false);
+            console.log(response.data)
+            setPointers({
+                titleDo: divideString(response.data.title.Dos),
+                titleDont: divideString(response.data.title.Donts),
+                descriptionDo: divideString(response.data.description.Dos),
+                descriptionDont: divideString(response.data.description.Donts),
+                bulletDo: divideString(response.data.bullets.Dos),
+                bulletDont: divideString(response.data.bullets.Donts),
             });
-            console.log(response.data);
-
         } catch (error) {
             console.error("Error fetching analysis data:", error);
-        }
-    };
-
-    const onSubmit = async (data) => {
-        console.log("Input Data:", data);
-        try {
-            // console.log("hello")
-            const response = await axiosInstance({
-                url: `${appUrl}/assistant`,
-                method: "post",
-                data: {
-                    titleDo: data.titledoes,
-                    titleDont: data.titledont,
-                    descriptionDo: data.descriptiondoes,
-                    descriptionDont: data.descriptiondont,
-                    bulletsDo: data.bulletdoes,
-                    bulletsDont: data.bulletdont,
-                },
-            });
-            dispatch(handleSnackAlert({ open: true, message: "Intructions updated Successfully", severity: "success" }))
-            console.log("hello")
-            console.log(response);
-        } catch (error) {
-            console.error("Error when changing Rules:", error);
-            console.log("hello")
         }
     };
 
     useEffect(() => {
         fetchAnalysis();
     }, []);
+
 
     return (
         <>
@@ -91,8 +132,7 @@ const Assistant = () => {
                         width: "100%",
                         justifyContent: "center",
                         alignItems: "center",
-                    }}
-                >
+                    }}>
                     <LoaderMain />
                 </Box>
             ) : (
@@ -100,10 +140,121 @@ const Assistant = () => {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        gap: ".7rem"
-                    }}
-                >
-                    <Box>
+                        gap: ".7rem",
+                    }}>
+                    <Tabs
+                        value={page}
+                        onChange={handlePageChange}
+                        centered
+                        indicatorColor="secondary"
+                        textColor="secondary">
+                        <Tab label="title" value="title" />
+                        <Tab label="description" value="description" />
+                        <Tab label="bullet" value="bullet" />
+                    </Tabs>
+
+                    {["title", "description", "bullet"].map(
+                        (tab) =>
+                            page === tab && (
+                                <div key={tab}>
+                                    <Box>
+                                        <h3>Dos</h3>
+                                        {pointers[`${tab}Do`].map((item, index) => (
+                                            <div key={index}>
+                                                <TextField
+                                                    value={item}
+                                                    onChange={(e) =>
+                                                        handleChange(
+                                                            tab,
+                                                            "Do",
+                                                            index,
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    style={{
+                                                        width:"100%",
+                                                        margin:"10px 0"
+                                                    }}
+                                                />
+                                            </div>
+                                        ))}
+                                        <Box sx={{display:"flex", width:"100%", justifyContent:"end", gap:"10px"}}>
+                                            <CustomButton
+                                                borderRadius="12px"
+                                                padding="12px 0px"
+                                                fontSize="14px"
+                                                ButtonText="Add Dos"
+                                                width="143px"
+                                                color="white"
+                                                background="linear-gradient(to right, #1A0049, #3F016A)"
+                                                onClick={() => addField(tab, "Do")}
+                                            />
+                                            <CustomButton
+                                                borderRadius="12px"
+                                                padding="12px 0px"
+                                                fontSize="14px"
+                                                ButtonText="Remove Last"
+                                                width="143px"
+                                                color="white"
+                                                background="linear-gradient(to right, #1A0049, #3F016A)"
+                                                onClick={()=>removeField(tab, "Do", pointers[`${tab}Do`].length-1)}
+                                            />
+                                        </Box>
+                                    </Box>
+                                        
+                                    <Box margin={"20px 0"}>
+                                        <h3>Donts</h3>
+
+                                        
+                                        {pointers[`${tab}Dont`].map((item, index) => (
+                                            <div key={index}>
+                                                <TextField
+                                                    style={{
+                                                    width:"100%",
+                                                    margin:"10px 0"
+                                                    }}
+                                                    value={item}
+                                                    onChange={(e) =>
+                                                        handleChange(
+                                                            tab,
+                                                            "Dont",
+                                                            index,
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                />
+
+                                            </div>
+                                        ))}
+
+                                        <Box sx={{display:"flex", width:"100%", justifyContent:"end", gap:"10px"}}>
+                                            <CustomButton
+                                                borderRadius="12px"
+                                                padding="12px 0px"
+                                                fontSize="14px"
+                                                ButtonText="Add Don't"
+                                                width="143px"
+                                                color="white"
+                                                background="linear-gradient(to right, #1A0049, #3F016A)"
+                                                onClick={() => addField(tab, "Dont")}
+                                            />
+                                            <CustomButton
+                                                borderRadius="12px"
+                                                padding="12px 0px"
+                                                fontSize="14px"
+                                                ButtonText="Remove Last"
+                                                width="143px"
+                                                color="white"
+                                                background="linear-gradient(to right, #1A0049, #3F016A)"
+                                                onClick={()=>removeField(tab, "Dont", pointers[`${tab}Dont`].length-1)}
+                                            />
+                                        </Box>
+                                    </Box>
+                                </div>
+                            )
+                    )}
+
+                    {/* <Box>
                         <Heading Heading="Title (Dos)" />
                         <Box sx={{ mt: "10px" }}>
                             <Controller
@@ -210,8 +361,13 @@ const Assistant = () => {
                                 )}
                             />
                         </Box>
-                    </Box>
-                    <Box sx={{ display: "flex", justifyContent: "end", mt: "10px" }}>
+                    </Box> */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "end",
+                            mt: "10px",
+                        }}>
                         <CustomButton
                             borderRadius="12px"
                             padding="12px 0px"
@@ -220,12 +376,11 @@ const Assistant = () => {
                             width="143px"
                             color="white"
                             background="linear-gradient(to right, #1A0049, #3F016A)"
-                            onClick={handleSubmit(onSubmit)}
+                            onClick={handleSubmit}
                         />
                     </Box>
                 </Box>
             )}
-
         </>
     );
 };

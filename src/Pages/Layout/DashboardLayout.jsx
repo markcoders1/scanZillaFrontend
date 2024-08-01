@@ -61,6 +61,7 @@ const DashboardLayout = () => {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+        backgroundAttachment:"fixed",
         padding: {
           sm: "20px 30px",
           xs: "10px 10px"
@@ -127,6 +128,8 @@ const DashboardLayout = () => {
         </Box>
       </Box>
       <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
+      
+
     </Box>
   );
 };

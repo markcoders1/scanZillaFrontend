@@ -312,9 +312,9 @@ const Analyze = () => {
               {errors && (
                 <Typography sx={{
                   display: errors.bulletpoints ? "flex" : "none",
-                  background: "whitesmoke",
+                  background: "white",
                   p: "10px",
-                  color: "red",
+                  color: "#3d0168",
                   mt: "8px",
                   wordBreak: "break-word"
                 }}>

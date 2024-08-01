@@ -111,11 +111,12 @@ const CustomTextField = forwardRef(({
       </FormControl>
       {error && (
         <Typography sx={{
-          background: "whitesmoke",
+          background: "white",
           p: "10px",
-          color: "red",
+          color: "#3d0168",
           mt: "8px",
-          wordBreak: "break-word"
+          wordBreak: "break-word",
+          fontWeight:"500"
         }}>
           {error}
         </Typography>

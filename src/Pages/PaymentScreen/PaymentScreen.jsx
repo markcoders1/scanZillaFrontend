@@ -226,11 +226,11 @@ const StripeCardForm = () => {
                     gap: ".6rem"
                 }}
             >
-                <Typography sx={{ color: "red", fontWeight: "600", fontSize: "18px" }} >
+                <Typography sx={{ color: "#3d0168", fontWeight: "600", fontSize: "18px" }} >
                     Disclaimer : {" "}
                 </Typography>
                 <Typography sx={{ color: "#333333", fontWeight: "600", fontSize: "18px" }} >  You can also do Payment via ( Wise, Payonner & Bank Transfer) </Typography>
-                <Typography sx={{ color: "blue", fontWeight: "600", fontSize: "18px", textDecoration: "underline", cursor: "pointer" }} onClick={() => { navigate("/contact-admin") }} >
+                <Typography sx={{ color: "#3d0168", fontWeight: "600", fontSize: "18px", textDecoration: "none", cursor: "pointer", borderBottom:"2px solid #3d0168", paddingBottom:"0px"}} onClick={() => { navigate("/contact-admin") }} >
                     Contact Us
                 </Typography>
             </Box>

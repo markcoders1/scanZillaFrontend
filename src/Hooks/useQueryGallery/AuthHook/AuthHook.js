@@ -32,13 +32,13 @@ axiosInstance.interceptors.response.use(
                 const response = await axios.post(`${appUrl}/token`, {refreshToken}, { withCredentials: true });
 
                 
-                if (response.status === 200) {
-                    sessionStorage.setItem('accessToken', response.data.accessToken);
-                    axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response.data.accessToken;
+                if (response?.status === 200) {
+                    sessionStorage.setItem('accessToken', response?.data?.accessToken);
+                    axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response?.data?.accessToken;
                     return await axiosInstance(originalRequest);
                 }
             } catch (tokenError) {
-                if (tokenError.response && tokenError.response.status === 403) {
+                if (tokenError?.response && tokenError?.response?.status === 403) {
                     sessionStorage.removeItem('accessToken');
                     sessionStorage.removeItem('refreshToken');
                     localStorage.removeItem('refreshToken');
