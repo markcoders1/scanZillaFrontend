@@ -57,6 +57,7 @@ const Analyze = () => {
 
   const handleData = (errorsData) => {
     const generatedErrors = errorsData?.error
+    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",generatedErrors)
     setErrors(prev => ({
       ...prev,
       title: generatedErrors.TE,
@@ -318,7 +319,13 @@ const Analyze = () => {
                   mt: "8px",
                   wordBreak: "break-word"
                 }}>
-                  {errors.bulletpoints}
+                  {/* {errors.bulletpoints} */}
+                  {errors.bulletpoints.split('|-|').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < errors.bulletpoints.split('|-|').length - 1 && <br />}
+        </React.Fragment>
+      ))}
                 </Typography>
               )}
               <Box sx={{

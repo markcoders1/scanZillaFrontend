@@ -87,13 +87,18 @@ const CustomInputShadow = forwardRef(({
       </FormControl>
       {error && (
         <Typography sx={{
-          background: "whitesmoke",
+          background: "white",
           p: "10px",
-          color: "red",
+          color: "#3d0168",
           mt: "8px",
           wordBreak: "break-word"
         }}>
-          {error}
+          {error.split('|-|').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < error.split('|-|').length - 1 && <br />}
+        </React.Fragment>
+      ))}
         </Typography>
       )}
     </Box>

@@ -69,6 +69,9 @@ const History = () => {
             const response = await axiosInstance({
                 url: appUrl + "/getuserhistory",
                 method: "get",
+                params:{
+                    limit:100
+                }
             });
             if (response) {
                 setAnalyzeHistory(response.data.Histories);

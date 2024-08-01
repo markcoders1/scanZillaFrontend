@@ -2,6 +2,7 @@ import { Box, FormControl, TextField, Typography, IconButton } from "@mui/materi
 import { forwardRef, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
 
 const CustomTextField = forwardRef(({
   type = "text",
@@ -116,9 +117,13 @@ const CustomTextField = forwardRef(({
           color: "#3d0168",
           mt: "8px",
           wordBreak: "break-word",
-          fontWeight:"500"
         }}>
-          {error}
+          {error.split('|-|').map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          {index < error.split('|-|').length - 1 && <br />}
+        </React.Fragment>
+      ))}
         </Typography>
       )}
     </Box>
