@@ -30,7 +30,7 @@ const Assistant = () => {
     }
 
     const joinArray = (array) => {
-        return array.map(item => `-${item}`).join(' ');
+        return array.map(item => ` -${item}`).join('');
     }
 
     const handlePageChange = (event, newValue) => {
