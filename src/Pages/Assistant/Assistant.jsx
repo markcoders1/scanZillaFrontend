@@ -74,7 +74,6 @@ const Assistant = () => {
                 method: "post",
                 data: payload
             });
-            console.log("response======>", response)
             dispatch(
                 handleSnackAlert({
                     open: true,
@@ -82,8 +81,6 @@ const Assistant = () => {
                     severity: "success",
                 })
             );
-            console.log("response======>", response)
-            console.log("hello");
             console.log(response);
         } catch (error) {
             console.error("Error when changing Rules:", error);
