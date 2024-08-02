@@ -72,6 +72,7 @@ const History = () => {
             });
             if (response) {
                 setAnalyzeHistory(response.data.Histories);
+                console.log(response.data.Histories)
                 setSnackAlertData({
                     open: true,
                     message: response?.data?.message,
@@ -186,6 +187,7 @@ const History = () => {
                                     bullets={item.bullets}
                                     index={index}
                                     openModal={openModal}
+                                    error={item.error}
                                 />
                             ))}
                         </Box>
@@ -237,6 +239,7 @@ const History = () => {
                             title={modalData.title}
                             bullets={modalData.bullets}
                             description={modalData.description}
+                            error={modalData.error}
                         />
 
                         <SnackAlert
