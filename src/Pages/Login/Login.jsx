@@ -56,6 +56,11 @@ const Login = () => {
       sessionStorage.setItem("accessToken", data?.accessToken);
       sessionStorage.setItem("refreshToken", data?.refreshToken);
 
+
+      localStorage.setItem("accessToken", data?.accessToken);
+      localStorage.setItem("refreshToken", data?.refreshToken);
+
+
       if (data.role === "admin") {
         navigate("/dashboard-admin");
       } else if (data.role === "user") {
@@ -85,6 +90,7 @@ const Login = () => {
       sessionStorage.setItem('refreshToken', refreshToken)
       navigate('/dashboard')
     }
+ 
   }, [])
 
   const handleInput = (e) => {
