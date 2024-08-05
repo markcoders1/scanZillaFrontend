@@ -2,9 +2,9 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
 
-const GiftCard = ({ id, title, description, bullets, openModal }) => {
+const GiftCard = ({ id, title, description, bullets, openModal,error }) => {
     const handleClick = () => {
-        openModal({ id, title, description, bullets });
+        openModal({ id, title, description, bullets, error });
     };
 
     return (
