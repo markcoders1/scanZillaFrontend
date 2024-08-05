@@ -61,11 +61,16 @@ const LayoutSinglePage = () => {
       
                 },
                 mt:"50px",
+
+
+
+                
+                // bgcolor:"red"
                 ml:{
                   sm:"70px",
                   xs:"0px"
+
                 }
-                // bgcolor:"red"
               }}
             >
             <Outlet/>

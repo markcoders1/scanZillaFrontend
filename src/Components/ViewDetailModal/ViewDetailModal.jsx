@@ -65,7 +65,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {error.TE}
+                            {error?.TE}
                         </Typography>
                     </Box>
 
@@ -96,7 +96,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {error.BE}
+                            {error?.BE}
                         </Typography>
                     </Box>
 
@@ -125,7 +125,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {error.DE}
+                            {error?.DE}
                         </Typography>
                     </Box>
 
