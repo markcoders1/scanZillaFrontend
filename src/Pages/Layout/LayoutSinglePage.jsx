@@ -61,7 +61,10 @@ const LayoutSinglePage = () => {
       
                 },
                 mt:"50px",
-                ml:"70px",
+                ml:{
+                  sm:"70px",
+                  xs:"0px"
+                }
                 // bgcolor:"red"
               }}
             >
