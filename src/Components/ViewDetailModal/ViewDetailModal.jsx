@@ -25,7 +25,7 @@ const style = {
 
 };
 
-export const ViewDetailModal = ({ open, handleClose, title, bullets, description }) => {
+export const ViewDetailModal = ({ open, handleClose, title, bullets, description,error }) => {
     return (
         <Modal
             aria-labelledby="transition-modal-title"
@@ -57,6 +57,20 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
 
                     <Box>
                         <Typography>
+                            <Heading Heading="Title Error" />
+                        </Typography>
+                        <Typography sx={{
+                            fontSize: "17px",
+                            fontWeight: "500",
+                            color: "#A0A4A9"
+
+                        }}>
+                            {error?.TE}
+                        </Typography>
+                    </Box>
+
+                    <Box>
+                        <Typography>
                             <Heading Heading="Bullets" />
                         </Typography>
                         <Typography sx={{
@@ -70,6 +84,20 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             )) : ""}
                         </Typography>
 
+                    </Box>
+
+                    <Box>
+                        <Typography>
+                            <Heading Heading="Bullet Error" />
+                        </Typography>
+                        <Typography sx={{
+                            fontSize: "17px",
+                            fontWeight: "500",
+                            color: "#A0A4A9"
+
+                        }}>
+                            {error?.BE}
+                        </Typography>
                     </Box>
 
 
@@ -86,6 +114,22 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             {description}
                         </Typography>
                     </Box>
+
+                    <Box>
+                        <Typography>
+                            <Heading Heading="Description Error" />
+                        </Typography>
+                        <Typography sx={{
+                            fontSize: "17px",
+                            fontWeight: "500",
+                            color: "#A0A4A9"
+
+                        }}>
+                            {error?.DE}
+                        </Typography>
+                    </Box>
+
+
                     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
                     <CustomButton
                 
