@@ -52,6 +52,8 @@ const Details = () => {
     setData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  
+
   const handleSave = async () => {
     if (data.sendCredits === "") {
       setErrors({ sendCredits: "You have not entered credits" });
@@ -81,16 +83,19 @@ const Details = () => {
     }
   };
 
+  
+
   const handlekeydown = (e) => {
     if (e.key === "Enter") {
       handleSave();
     }
   };
 
+  
   useEffect(() => {
     inputRef.current.focus();
   }, []);
-
+  
   useEffect(() => {
     const fetchDetails = async () => {
       try {
@@ -108,6 +113,7 @@ const Details = () => {
         setUsername(response.data.userName)
         setEmail(response.data.email)
       } catch (error) {
+        console.log(error)
         setError(error.toString());
       } finally {
         setLoading(false);
@@ -118,6 +124,7 @@ const Details = () => {
   }, [id]);
 
   const openModal = (data) => {
+    console.log("hiboi",data)
     setModalData(data);
     setOpen(true);
   };
@@ -142,9 +149,10 @@ const Details = () => {
           userId: id,
         },
       });
-      // console.log(response);
+      console.log(response);
       setLoading(false);
       if (response) {
+        console.log(response.data)
         setCreditsHistory(response.data);
         setSnackAlertData({
           open: true,
@@ -160,6 +168,7 @@ const Details = () => {
         }
       }
     } catch (error) {
+      console.error(error)
       setLoading(false);
       setSnackAlertData({
         open: true,
@@ -183,7 +192,7 @@ const Details = () => {
           userId: id,
         },
       });
-      // console.log(response);
+      console.log(response);
       if (response) {
         setAnalyzeHistory(response.data.payments);
         setSnackAlertData({
@@ -235,6 +244,7 @@ const Details = () => {
               position: "relative",
             }}
           >
+            
             <Typography
               sx={{
                 fontSize: {
@@ -391,8 +401,10 @@ const Details = () => {
                     description={item.description}
                     bullets={item.bullets}
                     index={index}
+                    error={item.error}
                     openModal={openModal}
                   />
+                  // <p key={index}>{item._id}</p>
                 ))}
             </Box>
             <Box
@@ -447,6 +459,7 @@ const Details = () => {
             title={modalData.title}
             bullets={modalData.bullets}
             description={modalData.description}
+            error={modalData.error}
           />
 
           <SnackAlert
@@ -459,6 +472,7 @@ const Details = () => {
           />
         </Box>
       )}
+      {/* <h1>hi</h1> */}
     </>
   );
 };
