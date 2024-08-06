@@ -135,6 +135,7 @@ const ToolManagement = () => {
   const onSubmit = async (data) => {
     console.log(data);
     console.log("Input Data:", data);
+    console.log(data.category)
 
     if (
       !data.titleCharacters.trim() &&
@@ -153,9 +154,12 @@ const ToolManagement = () => {
             bulletNum: Number(data.totalBullets),
             bulletCharacters: Number(data.bulletcharacters),
             descriptionCharacters: Number(data.descriptionCharacters),
+            category: data.category,
+            totalBulletsLength: Number(data.totalBulletsLength),
             category: data.category
           },
         });
+        
         dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
 
         reset({
