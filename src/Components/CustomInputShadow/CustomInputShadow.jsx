@@ -17,6 +17,7 @@ const CustomInputShadow = forwardRef(({
   height = "56px", // Set default height here
   color = "#2a2b2d",
   disabled = false,
+  
 }, ref) => {
   return (
     <Box sx={{ mb: mb }}>
