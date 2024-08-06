@@ -49,15 +49,15 @@ const Home = () => {
         const response = await axiosInstance({
           url: `${appUrl}/getuser`,
           method: 'get',
-          params: { email: auth.email },
+          params: { email: auth?.email },
         });
 
-        const userData = response.data.user;
-        setUsername(userData.userName);
-        setEmail(userData.email);
-        setCredits(userData.credits);
+        const userData = response?.data?.user;
+        setUsername(userData?.userName);
+        setEmail(userData?.email);
+        setCredits(userData?.credits);
 
-        dispatch(handleAuth({ credits: userData.credits }));
+        dispatch(handleAuth({ credits: userData?.credits }));
         setLoading(false);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -121,7 +121,7 @@ const Home = () => {
         method: "get",
       });
       if (response) {
-        const histories = response.data.Histories.slice(0, 4);
+        const histories = response?.data?.Histories?.slice(0, 4);
         setAnalyzeHistory(histories);
         setSnackAlertData({
           open: true,
@@ -147,7 +147,7 @@ const Home = () => {
       url: `${appUrl}/getgraphdata`,
       method: "get",
     })
-    setGraphdata(response.data)
+    setGraphdata(response?.data)
   }
 
   const WarningToBuyCredits = () => {
