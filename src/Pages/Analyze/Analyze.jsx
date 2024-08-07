@@ -108,7 +108,15 @@ const Analyze = () => {
   };
 
   const hanldeInput = (e) => {
-    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+
+
+    if (e.target.name==="title" && e.target.value.length>=rules[data.category]){
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]) })); 
+    }
+    else{
+      console.log(e.target.name)
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+    }
   };
 
   const handleAnalyze = async () => {
@@ -155,16 +163,6 @@ const Analyze = () => {
     console.log("rules response", response)
   }
 
-  const getRules = async () => {
-    const response = await axiosInstance({
-      url: appUrl + "/rules",
-      method: "get",
-
-    })
-    setRules(response.data)
-    console.log("rules response", response)
-  }
-
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       handleAnalyze();
@@ -190,11 +188,30 @@ const Analyze = () => {
   };
 
   const handleBulletPointChange = (index, value) => {
-    setData(prev => ({
-      ...prev,
-      bulletpoints: prev.bulletpoints.map((bullet, idx) => idx === index ? { ...bullet, value: value } : bullet)
-    }));
-  };
+    // Ensure the individual bullet does not exceed the max length
+    let trimmedValue = value.slice(0, rules.bulletCharacters);
+
+    setData(prev => {
+        // Calculate the combined length of all bullets with the new value
+        const combinedLength = prev.bulletpoints.reduce((acc, bullet, idx) => {
+            return acc + (idx === index ? trimmedValue.length : bullet.value.length);
+        }, 0);
+
+        // Ensure the combined length does not exceed the max length
+        if (combinedLength > rules.totalBulletsLength) {
+            const allowedLength = rules.totalBulletsLength - (combinedLength - trimmedValue.length);
+            trimmedValue = trimmedValue.slice(0, allowedLength);
+        }
+
+        return {
+            ...prev,
+            bulletpoints: prev.bulletpoints.map((bullet, idx) => 
+                idx === index ? { ...bullet, value: trimmedValue } : bullet
+            )
+        };
+    });
+};
+
 
   const handleCategoryChange = (category) => {
     setData(prev => ({ ...prev, category }));
@@ -301,7 +318,7 @@ const Analyze = () => {
               >
                 <Heading Heading="Title" characterText="Character Count" count={data.title.length} />
                 <CustomTextField
-                  handleKeyDown={() => { }}
+                  handleKeyDown={() => {}}
                   onChange={hanldeInput}
                   name="title"
                   value={data?.title}
@@ -309,7 +326,7 @@ const Analyze = () => {
                   placeholder="Insert Title Here"
                   border=""
                   boxShadow={true}
-                  maxLength={rules.titleCharacters}
+                  maxLength={+rules[data.category]}
                 />
                 {/* {
                   rules.titleCharacters ? console.log(rules.titleCharacters) : ""

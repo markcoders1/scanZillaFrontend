@@ -156,7 +156,6 @@ const ToolManagement = () => {
             descriptionCharacters: Number(data.descriptionCharacters),
             category: data.category,
             totalBulletsLength: Number(data.totalBulletsLength),
-            category: data.category
           },
         });
         
