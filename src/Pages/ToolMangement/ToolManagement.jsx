@@ -25,46 +25,30 @@ const ToolManagement = () => {
   const [totalBulletsLength,setTotalBulletsLength] = useState(null)
   const navigate = useNavigate();
   const [category, setCategory] = useState([
-    "Amazon Devices & Accessories",
-    "Amazon Renewed",
     "Appliances",
-    "Apps & Games",
     "Arts, Crafts & Sewing",
-    "Audible Books & Originals",
     "Automotive",
     "Baby",
     "Beauty & Personal Care",
     "Books",
     "Camera & Photo Products",
-    "CDs & Vinyl",
     "Cell Phones & Accessories",
     "Clothing, Shoes & Jewelry",
-    "Collectible Coins",
     "Computers & Accessories",
-    "Digital Educational Resources",
-    "Digital Music",
     "Electronics",
-    "Entertainment Collectibles",
-    "Gift Cards",
     "Grocery & Gourmet Food",
     "Handmade Products",
     "Health & Household",
     "Home & Kitchen",
     "Industrial & Scientific",
-    "Kindle Store",
     "Kitchen & Dining",
-    "Movies & TV",
     "Musical Instruments",
     "Office Products",
     "Patio, Lawn & Garden",
     "Pet Supplies",
-    "Software",
     "Sports & Outdoors",
-    "Sports Collectibles",
     "Tools & Home Improvement",
-    "Toys & Games",
-    "Unique Finds",
-    "Video Games"
+    "Toys & Games"
   ]);
 
   const dispatch = useDispatch();

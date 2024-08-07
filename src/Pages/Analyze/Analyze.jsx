@@ -18,46 +18,32 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
 
 const Analyze = () => {
-  const [category, setCategory] = useState(["Amazon Devices & Accessories",
-"Amazon Renewed",
-"Appliances",
-"Apps & Games",
-"Arts, Crafts & Sewing",
-"Audible Books & Originals",
-"Automotive",
-"Baby",
-"Beauty & Personal Care",
-"Books",
-"Camera & Photo Products",
-"CDs & Vinyl",
-"Cell Phones & Accessories",
-"Clothing, Shoes & Jewelry",
-"Collectible Coins",
-"Computers & Accessories",
-"Digital Educational Resources",
-"Digital Music",
-"Electronics",
-"Entertainment Collectibles",
-"Gift Cards",
-"Grocery & Gourmet Food",
-"Handmade Products",
-"Health & Household",
-"Home & Kitchen",
-"Industrial & Scientific",
-"Kindle Store",
-"Kitchen & Dining",
-"Movies & TV",
-"Musical Instruments",
-"Office Products",
-"Patio, Lawn & Garden",
-"Pet Supplies",
-"Software",
-"Sports & Outdoors",
-"Sports Collectibles",
-"Tools & Home Improvement",
-"Toys & Games",
-"Unique Finds",
-"Video Games"]);
+  const [category, setCategory] = useState([
+  "Appliances",
+  "Arts, Crafts & Sewing",
+  "Automotive",
+  "Baby",
+  "Beauty & Personal Care",
+  "Books",
+  "Camera & Photo Products",
+  "Cell Phones & Accessories",
+  "Clothing, Shoes & Jewelry",
+  "Computers & Accessories",
+  "Electronics",
+  "Grocery & Gourmet Food",
+  "Handmade Products",
+  "Health & Household",
+  "Home & Kitchen",
+  "Industrial & Scientific",
+  "Kitchen & Dining",
+  "Musical Instruments",
+  "Office Products",
+  "Patio, Lawn & Garden",
+  "Pet Supplies",
+  "Sports & Outdoors",
+  "Tools & Home Improvement",
+  "Toys & Games"
+  ]);
   const navigate = useNavigate();
   const [rules, setRules] = useState([]);
   const [data, setData] = useState({
@@ -65,7 +51,8 @@ const Analyze = () => {
     bulletpoints: [{ index: 0, value: "" }],
     description: "",
     keywords: "",
-    category: ""
+    category: "",
+    subtitle:""
   });
   const [errors, setErrors] = useState({
     title: "",
@@ -82,9 +69,6 @@ const Analyze = () => {
   });
   const [creditDynamic , setCreditDynamic] = useState(0)
   const [editorLoading, setEditorLoading] = useState(true);
-  const handleInputChange = (e) => {
-    setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
-  };
 
   // useEffect(() => {
   //   const timer = setTimeout(() => {
@@ -96,7 +80,6 @@ const Analyze = () => {
 
   const handleData = (errorsData) => {
     const generatedErrors = errorsData?.error
-    console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiii",generatedErrors)
     setErrors(prev => ({
       ...prev,
       title: generatedErrors.TE,
@@ -106,14 +89,38 @@ const Analyze = () => {
       category: generatedErrors.CE
     }))
   };
-
   const hanldeInput = (e) => {
 
+    /*
+    
+    this will happen on these conditions
 
-    if (e.target.name==="title" && e.target.value.length>=rules[data.category]){
+    category must be books                                               data.category==="Books"
+    either I'm editing title or subtitle                                 e.target.name==="title" || e.target.name ==="subtitle"
+
+    if I'm editing title, I cant add more title after limit
+    if I'm editing subtitle, I cant add more subtitle after limit        e.target.value.length+data[e.target.name==="title"?"subtitle":"title"].length>=rules["Books"]
+
+    limit is rules["Books"]
+    
+    
+    */
+
+    if((e.target.name==="title" || e.target.name ==="subtitle")&&(data.category==="Books")&&(e.target.value.length+data[e.target.name==="title"?"subtitle":"title"].length>=rules["Books"])){
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]-data[e.target.name==="title"?"subtitle":"title"].length) }))
+    }else if (e.target.name==="title" && e.target.value.length>=rules[data.category]){
+      
+      if(data.category!=="Books"){
+        setData((prev)=>({...prev,subtitle:''}))
+      }
+
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]) })); 
-    }
-    else{
+    }else{
+
+      if(data.category!=="Books"){
+        setData((prev)=>({...prev,subtitle:''}))
+      }
+
       console.log(e.target.name)
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
     }
@@ -122,13 +129,21 @@ const Analyze = () => {
   const handleAnalyze = async () => {
     setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
 
+    const dataToSend = {
+      title:`${data.title} ${data.subtitle}`,
+      description:data.description,
+      bulletpoints:data.bulletpoints,
+      keywords:data.keywords,
+      category:data.category
+    }
+
     try {
       setIsLoading(true);
       console.log(data)
       const response = await axiosInstance({
         url: appUrl + "/verifyText",
         method: "post",
-        data: data,
+        data: dataToSend,
       });
       console.log(response)
       setIsLoading(false);
@@ -316,7 +331,7 @@ const Analyze = () => {
                   gap: "15px"
                 }}
               >
-                <Heading Heading="Title" characterText="Character Count" count={data.title.length} />
+                <Heading Heading="Title" characterText="Character Count" count={data.title.length+data?.subtitle?.length} />
                 <CustomTextField
                   handleKeyDown={() => {}}
                   onChange={hanldeInput}
@@ -328,6 +343,21 @@ const Analyze = () => {
                   boxShadow={true}
                   maxLength={+rules[data.category]}
                 />
+                {data.category=="Books"?
+                <>
+                <Heading Heading="Sub-title"/>
+                <CustomTextField
+                  handleKeyDown={() => {}}
+                  onChange={hanldeInput}
+                  name="subtitle"
+                  value={data?.subtitle}
+                  placeholder="Insert Sub-title Here"
+                  border=""
+                  boxShadow={true}
+                  maxLength={+rules[data.category]}
+                />
+                </>
+                :null}
                 {/* {
                   rules.titleCharacters ? console.log(rules.titleCharacters) : ""
                 } */}
@@ -352,7 +382,7 @@ const Analyze = () => {
                   }}
                 >
                   <CustomTextField
-                    handleKeyDown={() => { }}
+                    handleKeyDown={() => {}}
                     onChange={(e) => handleBulletPointChange(index, e.target.value)}
                     name={""}
                     value={item.value}
@@ -474,7 +504,7 @@ const Analyze = () => {
                   type="text"
                   multiline={true}
                   rows={10}  // Adjust the number of rows to match the desired height
-                  onChange={handleInputChange}
+                  onChange={hanldeInput}
                   value={data.description}
                   height={"360px"}
                   error={errors.description}
