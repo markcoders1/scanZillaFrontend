@@ -22,6 +22,7 @@ const ToolManagement = () => {
   const [totalBullets, setTotalBullets] = useState(null);
   const [descriptionCharacters, setDescriptionCharacters] = useState(null);
   const [bulletcharacters, setBulletcharacters] = useState(null);
+  const [totalBulletsLength,setTotalBulletsLength] = useState(null)
   const navigate = useNavigate();
   const [category, setCategory] = useState([
     "Amazon Devices & Accessories",
@@ -141,7 +142,8 @@ const ToolManagement = () => {
       !data.titleCharacters.trim() &&
       !data.totalBullets.trim() &&
       !data.bulletcharacters.trim() &&
-      !data.descriptionCharacters.trim()
+      !data.descriptionCharacters.trim() &&
+      !data.totalBulletsLength.trim()
     ) {
       dispatch(handleSnackAlert({ open: true, message: "At least one field must be filled", severity: "error" }));
     } else {
@@ -185,6 +187,7 @@ const ToolManagement = () => {
       });
 
       console.log(response);
+      setTotalBulletsLength(response.data.totalBulletsLength)
       setBulletcharacters(response.data.bulletCharacters);
       setDescriptionCharacters(response.data.descriptionCharacters);
       setTotalBullets(response.data.bulletNum);
@@ -340,7 +343,7 @@ const ToolManagement = () => {
                 render={({ field }) => (
                   <CustomInputShadow
                     {...field}
-                    // placeholder={totalBulletsLength}
+                    placeholder={totalBulletsLength}
                     onChange={(e) => field.onChange(e.target.value)}
                     type={"number"}
                   />
