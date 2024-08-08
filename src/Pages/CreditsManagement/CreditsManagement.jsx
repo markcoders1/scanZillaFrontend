@@ -1,46 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
-import checkImg from "../../assets/images/check.png";
+// import checkImg from "../../assets/images/check.png";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 import LoaderMain from "../../Components/Loader/LoaderMain";
-import { useDispatch } from "react-redux";
-import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+// import { useDispatch } from "react-redux";
+// import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreditsManagement = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [characterCost, setCharacterCost] = useState();
-  const [creditCost, setCreditCost] = useState();
-  const { register, handleSubmit } = useForm();
+  // const [characterCost, setCharacterCost] = useState();
+  // const [creditCost, setCreditCost] = useState();
+  // const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
-  const [loadingButton, setLoadingButton] = useState(false);
-  const handleEditPackage = (planName, price, variant, credits) => {
+  // const [loadingButton, setLoadingButton] = useState(false);
+  const handleEditPackage = (planName, price, variant, credits,buttonText) => {
     navigate(
-      `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}&credits=${credits}`
+      `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}&credits=${credits}&ButtonText=${buttonText}`
     );
   };
 
 
-  const fetchRules = async () => {
-    try {
+  // const fetchRules = async () => {
+  //   try {
 
-      const response = await axiosInstance({
-        url: `${appUrl}/rules`,
-        method: "get",
-      });
+  //     const response = await axiosInstance({
+  //       url: `${appUrl}/rules`,
+  //       method: "get",
+  //     });
 
-      setCharacterCost(response.data.characterCost);
-      setCreditCost(response.data.creditCost);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     setCharacterCost(response.data.characterCost);
+  //     setCreditCost(response.data.creditCost);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   const fetchOffers = async () => {
     try {
@@ -58,34 +58,34 @@ const CreditsManagement = () => {
   };
 
   useEffect(() => {
-    fetchRules();
+    // fetchRules();
     fetchOffers();
   }, []);
 
-  const onSubmit = (data) => {
-    const submitCharacterRules = async () => {
-      try {
-        setLoadingButton(true)
-        const response = await axiosInstance({
-          url: `${appUrl}/rules`,
-          method: "post",
-          data: {
-            characterCost: data.characters,
-            creditCost: data.credits,
-          },
-        });
-        setLoadingButton(false)
-        dispatch(handleSnackAlert({ open: true, message: "Rules Updated Successfully", severity: "success" }))
+  // const onSubmit = (data) => {
+  //   const submitCharacterRules = async () => {
+  //     try {
+  //       setLoadingButton(true)
+  //       const response = await axiosInstance({
+  //         url: `${appUrl}/rules`,
+  //         method: "post",
+  //         data: {
+  //           characterCost: data.characters,
+  //           creditCost: data.credits,
+  //         },
+  //       });
+  //       setLoadingButton(false)
+  //       dispatch(handleSnackAlert({ open: true, message: "Rules Updated Successfully", severity: "success" }))
 
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-        dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
-        setLoadingButton(false)
-      }
-    };
-    submitCharacterRules();
-  };
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.error(error);
+  //       dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
+  //       setLoadingButton(false)
+  //     }
+  //   };
+  //   submitCharacterRules();
+  // };
 
   return (
     <>
@@ -207,7 +207,7 @@ const CreditsManagement = () => {
                     color: "#333333",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleEditPackage(e.name, e.amount, e.variant, e.credits)}
+                  onClick={() => handleEditPackage(e.name, e.amount, e.variant, e.credits,e.buttonText)}
                 >
                   Edit Package
                 </Typography>
@@ -217,7 +217,7 @@ const CreditsManagement = () => {
             ))}
           </Box>
           <Box>
-            <Box
+            {/* <Box
               sx={{
                 height: {
                   md: "181px",
@@ -307,7 +307,7 @@ const CreditsManagement = () => {
                   />
                 </Typography>
               </form>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       )}

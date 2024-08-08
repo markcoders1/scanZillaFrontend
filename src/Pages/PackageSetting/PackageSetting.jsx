@@ -17,7 +17,8 @@ const PackageSetting = () => {
   const planName = queryParams.get('planName');
   const price = queryParams.get('price');
   let variant = queryParams.get('variant');
-  let credits = queryParams.get('credits');
+  const credits = queryParams.get('credits');
+  const buttonText = queryParams.get('ButtonText')
   const [loadingButton, setLoadingButton] = useState(false);
 
   variant = Number(variant)
@@ -26,10 +27,10 @@ const PackageSetting = () => {
   // const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState({
-    name: "",
-    amount: 0,
-    credits: 0,
-    buttonText: ""
+    name: planName,
+    amount: (+price/100),
+    credits: +credits,
+    buttonText: buttonText
   });
 
   const inputRef = useRef(null);
@@ -75,15 +76,12 @@ const PackageSetting = () => {
   useEffect(() => {
     // console.log("Query Params:", queryParams.toString());
     // console.log("Plan Name:", planName);
-    // console.log("Price:",typeof price);
-    console.log(typeof data.name, 'name')
+    // console.log("Price:",price);
+    // console.log(typeof data.name, 'name')
     // console.log(data.amount)
-    console.log(typeof Number(data.amount), "amount")
-    console.log(variant)
-
-
-
-    console.log("Variant:", typeof variant);
+    // console.log(typeof Number(data.amount), "amount")
+    // console.log(variant)
+    // console.log("Variant:", typeof variant);
   }, [queryParams, planName, price, variant]);
 
   return (
@@ -91,21 +89,31 @@ const PackageSetting = () => {
       <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "column", xs: "column" }, }} >
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%" }}>
           <Heading Heading='Package' />
-          <CustomInputShadow placeholder={planName} onChange={handleInput} name={"name"} type="text" value={data.name} />
+          <CustomInputShadow placeholder={planName} onChange={handleInput} name={"name"} type="text" />
         </Box>
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%" }} >
           <Heading Heading='Total Amount' />
-          <CustomInputShadow placeholder={price / 100 } onChange={handleInput} name={"amount"} type="number" value={data.amount} />
+          <CustomInputShadow placeholder={price / 100} onChange={handleInput} name={"amount"} type="number" value={data.amount}/>
         </Box>
       </Box>
+
 
       <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "row", xs: "column", }, }} >
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "100%", }} >
           <Heading Heading='Number of Credits' />
-          <CustomInputShadow placeholder={credits} onChange={handleInput}   name={"credits"} type="number" value={data.credits} />
+          <CustomInputShadow placeholder={credits} onChange={handleInput}   name={"credits"} type="number" value={data.credits}/>
         </Box>
-      
       </Box>
+
+
+      <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "row", xs: "column", }, }} >
+        <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "100%", }} >
+          <Heading Heading='Button Text' />
+          <CustomInputShadow placeholder={buttonText} onChange={handleInput} name={"buttonText"} type="text" value={data.buttonText}/>
+        </Box>
+      </Box>
+
+
 
       <Box sx={{ display: "flex", width: "100%", justifyContent: "end", mt: "30px", }} >
         <CustomButton borderRadius='12px' padding='12px 0px' fontSize='14px' ButtonText='Save' width={"143px"} color='white' background="linear-gradient(to right, #1A0049, #3F016A)" onClick={handleSave} loading={loadingButton ? true : false} hovercolor={"white"} />

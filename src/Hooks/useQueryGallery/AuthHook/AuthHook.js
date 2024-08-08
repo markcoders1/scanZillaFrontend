@@ -31,7 +31,6 @@ axiosInstance.interceptors.response.use(
                 const refreshToken=sessionStorage.getItem("refreshToken")
                 const response = await axios.post(`${appUrl}/token`, {refreshToken}, { withCredentials: true });
 
-                
                 if (response?.status === 200) {
                     sessionStorage.setItem('accessToken', response?.data?.accessToken);
                     axiosInstance.defaults.headers['Authorization'] = 'Bearer ' + response?.data?.accessToken;

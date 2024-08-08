@@ -436,7 +436,7 @@ const Analyze = () => {
                     color: "#A0A4A9"
                   }}
                 >
-                  Add More (up to 10 in total)
+                  Add More (up to {rules.bulletNum} in total)
                 </Typography>
 
                 <Box sx={{
