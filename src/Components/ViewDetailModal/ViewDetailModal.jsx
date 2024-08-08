@@ -65,7 +65,13 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {error?.TE}
+                            {Array.isArray(error?.TE)?error?.TE.map((e)=>{
+                                return(
+                                    <>
+                                    <span>{e}</span><br />
+                                    </>
+                                ) 
+                            }):error?.TE}
                         </Typography>
                     </Box>
 
@@ -96,7 +102,13 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {error?.BE}
+                            {Array.isArray(error?.BE)?error?.BE.map((e)=>{
+                                return(
+                                    <>
+                                    <span>{e}</span><br />
+                                    </>
+                                ) 
+                            }):error?.BE}
                         </Typography>
                     </Box>
 
@@ -125,7 +137,13 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {error?.DE}
+                            {Array.isArray(error?.DE)?error?.DE.map((e)=>{
+                                return(
+                                    <>
+                                    <span>{e}</span><br />
+                                    </>
+                                ) 
+                            }):error?.DE}
                         </Typography>
                     </Box>
 
