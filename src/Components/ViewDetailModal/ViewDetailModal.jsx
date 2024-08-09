@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Heading from '../Heading/Heading';
 import CustomButton from '../CustomButton/CustomButton';
+import { Paper } from '@mui/material';
 
 const style = {
     position: 'absolute',
@@ -26,6 +27,7 @@ const style = {
 };
 
 export const ViewDetailModal = ({ open, handleClose, title, bullets, description,error }) => {
+    console.log(error)
     return (
         <Modal
             aria-labelledby="transition-modal-title"
@@ -42,7 +44,11 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
         >
             <Fade in={open}>
                 <Box sx={style}>
-                    <Box>
+
+                    {title?
+                    
+                    <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0"}} >
+                        <Box>
                         <Heading Heading="Title" />
 
                         <Typography sx={{
@@ -71,10 +77,15 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                                     <span>{e}</span><br />
                                     </>
                                 ) 
-                            }):error?.TE}
+                            }):error?.TE || "No Error"}
                         </Typography>
                     </Box>
+                    </Paper>
+                    :null}
 
+
+                    {(Array.isArray(bullets)?bullets[0]:bullets)?
+                <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0"}}>
                     <Box>
                         <Typography>
                             <Heading Heading="Bullets" />
@@ -108,12 +119,17 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                                     <span>{e}</span><br />
                                     </>
                                 ) 
-                            }):error?.BE}
+                            }):error?.BE || "No Error"}
                         </Typography>
                     </Box>
+                </Paper>
+                :
+                null
+                }
 
-
-                    <Box>
+                    {description?
+                    <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0"}}>
+                        <Box>
                         <Typography>
                             <Heading Heading="Description" />
                         </Typography>
@@ -137,15 +153,19 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {Array.isArray(error?.DE)?error?.DE.map((e)=>{
+                            {Array.isArray(error?.DE)?
+                            error?.DE.map((e)=>{
                                 return(
                                     <>
                                     <span>{e}</span><br />
                                     </>
                                 ) 
-                            }):error?.DE}
+                            }):
+                            error?.DE || "No Error"}
                         </Typography>
                     </Box>
+                    </Paper>
+                    :null}
 
 
                     <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>

@@ -451,6 +451,7 @@ const Home = () => {
                         title={item.title}
                         description={item.description}
                         bullets={item.bullets}
+                        error={item.error}
                         index={index}
                         openModal={openModal}
                       />
@@ -519,6 +520,7 @@ const Home = () => {
             title={modalData.title}
             bullets={modalData.bullets}
             description={modalData.description}
+            error={modalData.error}
           />
 
           <SnackAlert
