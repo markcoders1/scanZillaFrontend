@@ -71,6 +71,7 @@ const ToolManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredKeywords, setFilteredKeywords] = useState([]);
   const [loading, setLoading] = useState();
+  const [selectedFile, setSelectedFile] = useState()
 
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
