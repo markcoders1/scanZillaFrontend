@@ -109,21 +109,22 @@ const Analyze = () => {
     if((e.target.name==="title" || e.target.name ==="subtitle")&&(data.category==="Books")&&(e.target.value.length+data[e.target.name==="title"?"subtitle":"title"].length>=rules["Books"])){
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]-data[e.target.name==="title"?"subtitle":"title"].length) }))
     }else if (e.target.name==="title" && e.target.value.length>=rules[data.category]){
-      
-      if(data.category!=="Books"){
-        setData((prev)=>({...prev,subtitle:''}))
-      }
 
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]) })); 
+    }else if(e.target.name==="description" && e.target.value.length>=rules.descriptionCharacters){
+      
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0,rules.descriptionCharacters) }));
     }else{
-
-      if(data.category!=="Books"){
-        setData((prev)=>({...prev,subtitle:''}))
-      }
 
       console.log(e.target.name)
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
     }
+
+
+    if(data.category!=="Books"){
+      setData((prev)=>({...prev,subtitle:''}))
+    }
+
   };
 
   const handleAnalyze = async () => {
