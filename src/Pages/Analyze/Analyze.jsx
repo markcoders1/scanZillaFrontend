@@ -146,6 +146,14 @@ const Analyze = () => {
         data: dataToSend,
       });
       console.log(response)
+      setData({
+        title: "",
+        bulletpoints: [{ index: 0, value: "" }],
+        description: "",
+        keywords: "",
+        category: "",
+        subtitle: ""
+      });
       setIsLoading(false);
       if (response.data.error) {
         handleData(response.data);
