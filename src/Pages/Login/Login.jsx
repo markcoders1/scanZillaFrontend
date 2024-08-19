@@ -31,7 +31,7 @@ const Login = () => {
   const [snackAlertData, setSnackAlertData] = useState({
     open: false,
     message: "",
-    severity: "success"
+    severity: "success",
   });
   const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.auth);

@@ -71,12 +71,7 @@ const Analyze = () => {
   const [editorLoading, setEditorLoading] = useState(true);
 
   // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     setEditorLoading(false);
-  //   }, 2000);
 
-  //   return () => clearTimeout(timer);
-  // }, []);
 
   const handleData = (errorsData) => {
     const generatedErrors = errorsData?.error
@@ -146,15 +141,8 @@ const Analyze = () => {
         method: "post",
         data: dataToSend,
       });
-      console.log(response)
-      setData({
-        title: "",
-        bulletpoints: [{ index: 0, value: "" }],
-        description: "",
-        keywords: "",
-        category: "",
-        subtitle: ""
-      });
+      console.log(response.data)
+    
       setIsLoading(false);
       if (response.data.error) {
         handleData(response.data);
@@ -267,12 +255,26 @@ const Analyze = () => {
     setCreditDynamic(calcStringCost(data.title) + calcStringCost(data.description) + calcStringCost(tempbullets.join('')) + calcStringCost(data.keywords))
   },[data, setData])
 
+  
 
   
   useEffect(() => {
     getLimits()
     // getRules()
-  }, [])
+  }, []);
+
+  const handleClear = () => {
+    setData({
+      title: "",
+      bulletpoints: [{ index: 0, value: "" }],
+      description: "",
+      keywords: "",
+      category: "",
+      subtitle: ""
+    });
+
+    setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
+  }
 
   return (
 
@@ -522,29 +524,7 @@ const Analyze = () => {
                 />
               </Box>
 
-              {/* {errors.description && (
-            <Typography
-              sx={{
-                background: "whitesmoke",
-                p: "10px",
-                color: "red",
-                mt: "8px",
-                wordBreak: "break-word"
-              }}
-            >
-              {errors.description}
-            </Typography>
-          )} */}
-
-              {/* {
-            errors.description && <Typography sx={{
-              background: "whitesmoke",
-              p: "10px",
-              color: "red",
-              mt: "8px",
-              wordBreak: "break-word"
-            }}>{errors.description}</Typography>
-          } */}
+      
             </Box>
             <Box
               sx={{
@@ -572,6 +552,33 @@ const Analyze = () => {
                   boxShadow={true}
                 />
               </Box>
+            </Box>
+
+            <Box 
+            sx={{
+              display:"flex",
+              width:"100%",
+              justifyContent:"end",
+              mt:"28px"
+            }}
+            >
+            <CustomButton
+                  border="2px solid #1A0049"
+                  borderRadius="10px"
+                  background="white"
+                  hoverBg="white"
+                  hovercolor="#1A0049"
+                  buttonTextStyle={{}}
+                  buttonStyle={{ padding: { lg: "12px 20px" } }}
+                  ButtonText={`Clear All  `}
+                  fontSize
+                  color="#1A0049"
+                  fontWeight
+                  width={"160px"}
+                  variant="contained"
+                  padding
+                  onClick={handleClear}
+                />
             </Box>
 
             <Box sx={{ marginTop: "40px", display: isAnyFieldFilled() ? "block" : "none" }}>
