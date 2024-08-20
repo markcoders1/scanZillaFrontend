@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Box, Typography } from '@mui/material';
 import { NavLink } from 'react-router-dom';
@@ -11,6 +11,14 @@ import { RxCross2 } from "react-icons/rx";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
 const MobileSidebar = () => {
   const [username, setUsername] = useState()
   const [email, setEmail] = useState()
@@ -18,6 +26,9 @@ const MobileSidebar = () => {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.sidebarToggle.isOpen);
   const [admin, setAdmin] = useState();
+
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
 
   useEffect(() => {
     // console.log(auth)
@@ -47,6 +58,12 @@ const MobileSidebar = () => {
 
   };
 
+  useEffect(()=>{
+    const {height} = windowDimensions
+    console.log("height",height)
+  },[windowDimensions])
+
+
   return (
     <Box
       className={`sidebar ${isOpen ? 'open' : ''}`}
@@ -71,6 +88,8 @@ const MobileSidebar = () => {
         transition: 'transform 0.3s ease-in-out',
         zIndex: 1000,
         paddingLeft: "20px",
+        overflowY:"auto",
+        paddingTop:`${windowDimensions.height <= 700? "100px":"10px"}`
       }}
     >
       <Box
@@ -80,7 +99,7 @@ const MobileSidebar = () => {
           top: "10px",
           left: "20px",
           fontSize: "2rem",
-          fontWeight: "600"
+          fontWeight: "600",
         }}
       ><RxCross2 onClick={handleToggle} /></Box>
       <Box
@@ -89,7 +108,7 @@ const MobileSidebar = () => {
           flexDirection: 'column',
           gap: '60px',
           justifyContent: 'center',
-          marginBottom: "120px "
+          // marginBottom: `${windowDimensions.height <= 700?"0px":"120px"}`
         }}
       >
         <Box
