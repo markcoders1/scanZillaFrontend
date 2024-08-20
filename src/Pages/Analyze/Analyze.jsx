@@ -13,9 +13,15 @@ import { useNavigate } from "react-router-dom";
 // this is the loader here 
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import CustomInputShadow from "../../Components/CustomInputShadow/CustomInputShadow";
+import { handleAnalyzeErrors } from '../../Redux/Slice/AnalyzeSlice/AnalyzeSlice';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
+
+
+function hasValues(obj) {
+  return Object.values(obj).some(arr => arr.length > 0 && !(arr.length === 1 && arr[0] === ""));
+}
 
 const Analyze = () => {
   const [category, setCategory] = useState([
@@ -55,11 +61,11 @@ const Analyze = () => {
     subtitle:""
   });
   const [errors, setErrors] = useState({
-    title: "",
-    bulletpoints: "",
-    description: "",
-    keywords: "",
-    category: ""
+    title: [],
+    bulletpoints: [],
+    description: [],
+    keywords: [],
+    category: []
   });
   const [isLoading, setIsLoading] = useState(false);
   const [snackAlertData, setSnackAlertData] = useState({
@@ -69,6 +75,7 @@ const Analyze = () => {
   });
   const [creditDynamic , setCreditDynamic] = useState(0)
   const [editorLoading, setEditorLoading] = useState(true);
+  const dispatch = useDispatch()
 
   // useEffect(() => {
 
@@ -141,17 +148,19 @@ const Analyze = () => {
         method: "post",
         data: dataToSend,
       });
-      console.log(response.data)
+      console.log(response.data.error)
     
+      dispatch(handleAnalyzeErrors(response.data.error))
       setIsLoading(false);
       if (response.data.error) {
         handleData(response.data);
       }
+      !hasValues(response.data.error)?
       setSnackAlertData({
         open: true,
         message: response.data.message,
         severity: "success",
-      })
+      }):null
     } catch (error) {
       const errorData = error?.response?.data;
       setIsLoading(false);
@@ -273,7 +282,8 @@ const Analyze = () => {
       subtitle: ""
     });
 
-    setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
+    setErrors({ title: [], bulletpoints: [], description: [], keywords: [] });
+    dispatch(handleAnalyzeErrors({TE:[],BE:[],DE:[],CE:[],KE:[]}))
   }
 
   return (
@@ -294,6 +304,7 @@ const Analyze = () => {
 
         </Box>
       ) : (
+        <>
         <Box
           sx={{
             maxHeight: "680px",
@@ -407,24 +418,32 @@ const Analyze = () => {
 
                 </Box>
               ))}
-              {errors && (
+              {/* errors */}
+
+              {/* {errors.bulletpoints && (
                 <Typography sx={{
-                  display: errors.bulletpoints ? "flex" : "none",
                   background: "white",
                   p: "10px",
                   color: "#3d0168",
                   mt: "8px",
-                  wordBreak: "break-word"
+                  wordBreak: "break-word",
                 }}>
-                  {/* {errors.bulletpoints} */}
-                  {errors.bulletpoints.split('|-|').map((line, index) => (
-        <React.Fragment key={index}>
-          {line}
-          {index < errors.bulletpoints.split('|-|').length - 1 && <br />}
-        </React.Fragment>
-      ))}
+                  {errors.bulletpoints.map((line, index) => (
+                <React.Fragment key={index}>
+                  {line.split("|-|").map((el,i)=>{
+                    return(
+                      <>
+                        {el}
+                        {i < line.split("|-|").length - 1 && <br />}
+                      </>
+                    )
+                  })}
+                  {index < errors.bulletpoints.length - 1 && <br />}
+                </React.Fragment>
+              ))}
                 </Typography>
-              )}
+              )} */}
+
               <Box sx={{
                 display: 'flex',
                 gap: "20px",
@@ -554,35 +573,37 @@ const Analyze = () => {
               </Box>
             </Box>
 
-            <Box 
-            sx={{
-              display:"flex",
-              width:"100%",
-              justifyContent:"end",
-              mt:"28px"
-            }}
-            >
-            <CustomButton
-                  border="2px solid #1A0049"
-                  borderRadius="10px"
-                  background="white"
-                  hoverBg="white"
-                  hovercolor="#1A0049"
-                  buttonTextStyle={{}}
-                  buttonStyle={{ padding: { lg: "12px 20px" } }}
-                  ButtonText={`Clear All  `}
-                  fontSize
-                  color="#1A0049"
-                  fontWeight
-                  width={"160px"}
-                  variant="contained"
-                  padding
-                  onClick={handleClear}
-                />
-            </Box>
+            {!isAnyFieldFilled()?
+                <div style={{
+                  width:"100%",
+                  padding:"40px 0px"
+                }}>
+                  <CustomButton
+                      border="2px solid #1A0049"
+                      borderRadius="10px"
+                      background="white"
+                      hoverBg="white"
+                      hovercolor="#1A0049"
+                      buttonTextStyle={{}}
+                      buttonStyle={{ padding: { lg: "12px 20px" } }}
+                      ButtonText={`Clear All  `}
+                      fontSize
+                      color="#1A0049"
+                      fontWeight
+                      variant="contained"
+                      padding
+                      fullWidth={true}
+                      onClick={handleClear}
+                  />
+                </div>
+              :
+              null
+            }
+
 
             <Box sx={{ marginTop: "40px", display: isAnyFieldFilled() ? "block" : "none" }}>
               {!isLoading ? (
+                <div style={{display:"flex", gap:"10px"}}>
                 <CustomButton
                   border="2px solid #1A0049"
                   borderRadius="10px"
@@ -595,11 +616,30 @@ const Analyze = () => {
                   fontSize
                   color="white"
                   fontWeight
-                  fullWidth={true}
+                  // fullWidth={true}
+                  width="75%"
                   variant="contained"
                   padding
                   onClick={handleAnalyze}
                 />
+                <CustomButton
+                  border="2px solid #1A0049"
+                  borderRadius="10px"
+                  background="white"
+                  hoverBg="white"
+                  hovercolor="#1A0049"
+                  buttonTextStyle={{}}
+                  buttonStyle={{ padding: { lg: "12px 20px" } }}
+                  ButtonText={`Clear All  `}
+                  fontSize
+                  color="#1A0049"
+                  fontWeight
+                  width={"25%"}
+                  variant="contained"
+                  padding
+                  onClick={handleClear}
+                />
+                </div>
               ) : (
                 <div style={{
                   border: "2px solid #1A0049",
@@ -615,6 +655,7 @@ const Analyze = () => {
                 }}>
                   <div className="loader" />
                 </div>
+                
               )}
             </Box>
 
@@ -628,9 +669,31 @@ const Analyze = () => {
             />
           </Box>
         </Box>
+        </>
       )}
     </>
   )
 }
 
 export default Analyze;
+
+
+
+// {errors && (
+//   <Typography sx={{
+//     display: errors.bulletpoints ? "flex" : "none",
+//     background: "white",
+//     p: "10px",
+//     color: "#3d0168",
+//     mt: "8px",
+//     wordBreak: "break-word"
+//   }}>
+//     {/* {errors.bulletpoints} */}
+//     {errors.bulletpoints.split('|-|').map((line, index) => (
+// <React.Fragment key={index}>
+// {line}
+// {index < errors.bulletpoints.split('|-|').length - 1 && <br />}
+// </React.Fragment>
+// ))}
+//   </Typography>
+// )}

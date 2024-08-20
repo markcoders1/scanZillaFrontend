@@ -102,7 +102,7 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
           {data?.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)}
         </Select>
       </FormControl>
-      {
+      {/* {
         categoryError && <Typography sx={{
           background: "whitesmoke",
           p: "10px",
@@ -110,7 +110,7 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
           mt: "8px",
           wordBreak: "break-word"
         }}>{categoryError}</Typography>
-      }
+      } */}
     </Box>
 
   )

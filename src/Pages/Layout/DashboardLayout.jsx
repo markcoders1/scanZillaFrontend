@@ -1,16 +1,26 @@
-import { Box } from '@mui/material';
-import React from 'react';
+import { Box, Button, Paper, Typography } from '@mui/material';
+import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import AppSidebar from '../AppSidebar/AppSidebar';
 import dashboardImg1 from '../../assets/images/dashboard.png';
 import Header from '../../Components/Header/Header';
 import MobileSidebar from '../../Components/MobileSidebar/MobileSidebar';
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleAnalyzeErrors } from '../../Redux/Slice/AnalyzeSlice/AnalyzeSlice';
+import Heading from '../../Components/Heading/Heading';
 
 const DashboardLayout = () => {
   const location = useLocation();
   const snackAlert = useSelector(state => state.snackAlert)
+  const {pathname} = location
+  const showAnalyzeErrorBox =  pathname.includes("/analyze")
+  const AnalyzeErrros = useSelector(state=>state.analyze)
+  const dispatch = useDispatch()
+
+  function hasValues(obj) {
+    return Object.values(obj).some(arr => arr.length > 0 && !(arr.length === 1 && arr[0] === ""));
+  }
 
   const getHeaderTitle = (pathname) => {
     switch (pathname) {
@@ -74,9 +84,16 @@ const DashboardLayout = () => {
         sx={{
           display: 'flex',
           width: '100%',
-          maxWidth: '1440px',
+          maxWidth: `${hasValues(AnalyzeErrros)?"1640px":"1440px"}`,
           boxSizing: 'border-box',
-          gap: "1rem"
+          gap: "1rem",
+          flexDirection:{
+            xl:"row",
+            lg:"row",
+            m:"row",
+            sm:"column",
+            xs:"column"
+          }
         }}
       >
         <Box
@@ -125,8 +142,168 @@ const DashboardLayout = () => {
           >
             <Outlet />
           </Box>
+         
         </Box>
-      </Box>
+
+        {/* <Button onClick={()=>{
+            dispatch(
+              handleAnalyzeErrors(
+                {
+                  TE:["abc", "def", "efg"],
+                  DE:["abc", "def", "efg"],
+                  BE:["abc", "def", "efg"],
+                  KE:["abc", "def", "efg"],
+                  CE:["abc", "def", "efg"],
+                }
+              )
+            )
+          }}>
+          add error
+        </Button> */}
+
+        {
+          (showAnalyzeErrorBox && hasValues(AnalyzeErrros)) ?
+          <Box
+            sx={{
+              backgroundColor:"white",
+              borderRadius:"32px",
+              width:{
+                xl:"50%",
+                lg:"50%",
+                m:"50%",
+                sm:"100%",
+                xs:"100%"
+              },
+              overflowY: "auto",
+              overflowX: "hidden",
+              padding:"40px",
+              "&::-webkit-scrollbar": {
+                width: "8px"
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "#DFDFDF",
+                borderRadius: "10px"
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "black",
+                borderRadius: "10px"
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#b30000"
+              },
+              height:"100%",
+              maxHeight:"90vh"
+            }}
+          >
+            {/* {AnalyzeErrros?.TE?.map((item, index)=><Typography key={index}>{item}</Typography>)} */}
+
+            {/* {console.log(AnalyzeErrros.TE[0])} */}
+            {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
+              <Paper elevation={5} sx={{
+                padding:"20px",
+                margin:"20px 0"
+              }}>
+                <Heading Heading="Title Errors" />
+                {AnalyzeErrros?.TE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                {item.split("|-|").map((el,i)=>{
+                    return (
+                      <>
+                        • {el}
+                        {i < item.split("|-|").length - 1 && <br />}
+                      </>
+                    )
+                })}
+                </Typography>)}
+              </Paper>
+              :
+              null
+            }
+            {AnalyzeErrros.BE.length>0  && AnalyzeErrros.BE[0]!=="" ?
+              <Paper elevation={5} sx={{
+                padding:"20px",
+                margin:"20px 0"
+              }}>
+                <Heading Heading="Bullet Errors" />
+                {AnalyzeErrros?.BE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                  {item.split("|-|").map((el,i)=>{
+                      return (
+                        <>
+                          • {el}
+                          {i < item.split("|-|").length - 1 && <br />}
+                        </>
+                      )
+                  })}
+                </Typography>)}
+              </Paper>
+              :
+              null
+            }
+            {AnalyzeErrros.DE.length>0 && AnalyzeErrros.DE[0]!==""?
+              <Paper elevation={5} sx={{
+                padding:"20px",
+                margin:"20px 0"
+              }}>
+                <Heading Heading="Description Errors" />
+                {AnalyzeErrros?.DE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                {item.split("|-|").map((el,i)=>{
+                    return (
+                      <>
+                        • {el}
+                        {i < item.split("|-|").length - 1 && <br />}
+                      </>
+                    )
+                })}
+                </Typography>)}
+              </Paper>
+              :
+              null
+            }
+            {AnalyzeErrros.KE.length>0 && AnalyzeErrros.KE[0]!==""?
+              <Paper elevation={5} sx={{
+                padding:"20px",
+                margin:"20px 0"
+              }}>
+                <Heading Heading="Keyword Errors" />
+                {AnalyzeErrros?.KE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                {item.split("|-|").map((el,i)=>{
+                    return (
+                      <>
+                        • {el}
+                        {i < item.split("|-|").length - 1 && <br />}
+                      </>
+                    )
+                })}
+                </Typography>)}
+              </Paper>
+              :
+              null
+            }
+            {AnalyzeErrros.CE.length>0 && AnalyzeErrros.CE[0]!==""?
+              <Paper elevation={5} sx={{
+                padding:"20px",
+                margin:"20px 0"
+              }}>
+                <Heading Heading="Category Errors" />
+                {AnalyzeErrros?.CE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                  {item.split("|-|").map((el,i)=>{
+                    return (
+                      <>
+                        • {el}
+                        {i < item.split("|-|").length - 1 && <br />}
+                      </>
+                    )
+                  })}
+                </Typography>)}
+              </Paper>
+              :
+              null
+            }
+          </Box>
+          :
+          null
+        }
+    
+      </Box>  
       <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
       
 

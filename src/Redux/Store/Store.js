@@ -4,11 +4,13 @@ import UserReducer from "./../Slice/UserSlice/UserSlice.js";
 import SidebarToggleReducer from './../Slice/ToggleSidebarSlice/ToggleSidearSlice.js';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import AnalyzeSlice from '../Slice/AnalyzeSlice/AnalyzeSlice.js';
 
 export const rootReducer = combineReducers({
   auth: UserReducer,
   snackAlert: SnackAlertReducer,
   sidebarToggle: SidebarToggleReducer,
+  analyze:AnalyzeSlice
 });
 
 export const persistConfig = {

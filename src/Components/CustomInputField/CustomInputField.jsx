@@ -110,7 +110,7 @@ const CustomTextField = forwardRef(({
           </IconButton>
         )}
       </FormControl>
-      {error && (
+      {/* {error && (
         <Typography sx={{
           background: "white",
           p: "10px",
@@ -118,14 +118,28 @@ const CustomTextField = forwardRef(({
           mt: "8px",
           wordBreak: "break-word",
         }}>
-          {error.split('|-|').map((line, index) => (
+          {error.map((line, index) => (
         <React.Fragment key={index}>
-          {line}
-          {index < error.split('|-|').length - 1 && <br />}
+          {line.split("|-|").map((el,i)=>{
+            return (
+              <>
+              {el}
+              {i < line.split("|-|").length - 1 && <br />}
+              </>
+            )
+          })}
+          {index < error.length - 1 && <br />}
         </React.Fragment>
       ))}
         </Typography>
-      )}
+      )} */}
+
+      {/* {error.map((e,ind)=>{
+        <Typography sx={{background: "white",p: "10px",color: "#3d0168",mt: "8px",wordBreak: "break-word"}} key={ind}> <React.Fragment>{e} </React.Fragment> </Typography>
+      })}
+
+      {/* {console.log(placeholder)} */}
+
     </Box>
   );
 });

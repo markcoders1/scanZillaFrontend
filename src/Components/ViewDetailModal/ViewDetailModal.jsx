@@ -8,25 +8,40 @@ import Typography from '@mui/material/Typography';
 import Heading from '../Heading/Heading';
 import CustomButton from '../CustomButton/CustomButton';
 import { Paper } from '@mui/material';
+import { transform } from 'lodash';
 
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: {
-        xs: "90%",
-        md: "600px"
-    },
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    outline: "none",
-    borderRadius: "20px",
-    p: 4,
 
-};
 
 export const ViewDetailModal = ({ open, handleClose, title, bullets, description,error }) => {
+
+
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)', // Correctly centers the modal
+        bgcolor: 'background.paper',
+        boxShadow: 24,
+        p: 4,
+        borderRadius: "20px",
+        maxHeight:"90vh",
+        overflow: "auto",
+        "&::-webkit-scrollbar": {
+                width: "8px",
+              },
+              "&::-webkit-scrollbar-track": {
+                background: "#DFDFDF",
+                borderRadius: "10px"
+              },
+              "&::-webkit-scrollbar-thumb": {
+                background: "black",
+                borderRadius: "10px"
+              },
+              "&::-webkit-scrollbar-thumb:hover": {
+                background: "#b30000"
+              },
+    };
     console.log(error)
     return (
         <Modal
@@ -40,6 +55,11 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                 backdrop: {
                     timeout: 500,
                 },
+            }}
+            style={{
+                position:'absolute',
+                overflow:"auto",
+                display:'block',
             }}
         >
             <Fade in={open}>
