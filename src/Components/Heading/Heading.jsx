@@ -10,7 +10,12 @@ const Heading = ({
     <Box
     sx={{
       display:"flex",
-      justifyContent:"space-between"
+      justifyContent:"space-between",
+      flexDirection:{
+        sm:"row",
+        xs:"column", 
+      },
+      gap:"0.1rem"
     }}
     >
       <Typography sx={{

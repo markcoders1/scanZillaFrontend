@@ -76,7 +76,7 @@ const DashboardLayout = () => {
           sm: "20px 30px",
           xs: "10px 10px"
         },
-        marginLeft: "-15px",
+        // marginLeft: "-15px",
         boxSizing: 'border-box',
       }}
     >
@@ -84,13 +84,13 @@ const DashboardLayout = () => {
         sx={{
           display: 'flex',
           width: '100%',
-          maxWidth: `${hasValues(AnalyzeErrros)?"1640px":"1440px"}`,
+          maxWidth: `1440px`,
           boxSizing: 'border-box',
           gap: "1rem",
           flexDirection:{
-            xl:"row",
-            lg:"row",
-            m:"row",
+            xl:"column",
+            lg:"column",
+            m:"column",
             sm:"column",
             xs:"column"
           }
@@ -122,44 +122,43 @@ const DashboardLayout = () => {
               lg: '320px', // Adjust to match fixed sidebar width
               xs: '0px',
             },
-            width: '100%',
-            maxWidth: '1140px', // Reduced to fit within the available space
-            padding: {
-              sm: '50px',
-              xs: '30px 12px',
-            },
-            backgroundColor: 'white',
-            borderRadius: '30px',
+            // width: '100%',
+            // maxWidth: '1140px', // Reduced to fit within the available space
+             flexShrink:"1",
+           
             boxSizing: 'border-box',
             overflowY: 'auto', // Enable scrolling for the main content
           }}
         >
-          <Header title={headerTitle} />
+          
           <Box
             sx={{
-              mt: "20px"
+              mt: "20px",
+              display:"flex",
+              flexDirection:"column",
+              ga:"3rem",
+              width:"100%",
+                flexShrink:"1"
             }}
           >
+            
+            <Box sx={{
+               padding: {
+                sm: '50px',
+                xs: '30px 12px',
+                borderRadius: '30px',
+              },
+              backgroundColor: 'white',
+              width:"100%",
+              flexShrink:"1"
+            }} >
+              <Header title={headerTitle} />
             <Outlet />
-          </Box>
-         
-        </Box>
 
-        {/* <Button onClick={()=>{
-            dispatch(
-              handleAnalyzeErrors(
-                {
-                  TE:["abc", "def", "efg"],
-                  DE:["abc", "def", "efg"],
-                  BE:["abc", "def", "efg"],
-                  KE:["abc", "def", "efg"],
-                  CE:["abc", "def", "efg"],
-                }
-              )
-            )
-          }}>
-          add error
-        </Button> */}
+            </Box>
+            <Box sx={{mt:"30px"}} >
+{/* ---------------- */}
+
 
         {
           (showAnalyzeErrorBox && hasValues(AnalyzeErrros)) ?
@@ -168,12 +167,13 @@ const DashboardLayout = () => {
               backgroundColor:"white",
               borderRadius:"32px",
               width:{
-                xl:"50%",
-                lg:"50%",
-                m:"50%",
+                xl:"100%",
+                lg:"100%",
+                md:"100%",
                 sm:"100%",
                 xs:"100%"
               },
+            
               overflowY: "auto",
               overflowX: "hidden",
               padding:"40px",
@@ -192,16 +192,19 @@ const DashboardLayout = () => {
                 background: "#b30000"
               },
               height:"100%",
-              maxHeight:"90vh"
+              maxHeight:"90vh",
+              // maxWidth: '1140px'
             }}
           >
             {/* {AnalyzeErrros?.TE?.map((item, index)=><Typography key={index}>{item}</Typography>)} */}
 
             {/* {console.log(AnalyzeErrros.TE[0])} */}
             {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
-              <Paper elevation={5} sx={{
+              <Paper sx={{
                 padding:"20px",
-                margin:"20px 0"
+                margin:"30px 0",
+                boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                borderRadius:"10px"
               }}>
                 <Heading Heading="Title Errors" />
                 {AnalyzeErrros?.TE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
@@ -219,9 +222,11 @@ const DashboardLayout = () => {
               null
             }
             {AnalyzeErrros.BE.length>0  && AnalyzeErrros.BE[0]!=="" ?
-              <Paper elevation={5} sx={{
+              <Paper sx={{
                 padding:"20px",
-                margin:"20px 0"
+                margin:"20px 0",
+                 boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                borderRadius:"10px"
               }}>
                 <Heading Heading="Bullet Errors" />
                 {AnalyzeErrros?.BE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
@@ -239,9 +244,11 @@ const DashboardLayout = () => {
               null
             }
             {AnalyzeErrros.DE.length>0 && AnalyzeErrros.DE[0]!==""?
-              <Paper elevation={5} sx={{
+              <Paper sx={{
                 padding:"20px",
-                margin:"20px 0"
+                margin:"20px 0",
+                 boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                borderRadius:"10px"
               }}>
                 <Heading Heading="Description Errors" />
                 {AnalyzeErrros?.DE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
@@ -259,9 +266,11 @@ const DashboardLayout = () => {
               null
             }
             {AnalyzeErrros.KE.length>0 && AnalyzeErrros.KE[0]!==""?
-              <Paper elevation={5} sx={{
+              <Paper  sx={{
                 padding:"20px",
-                margin:"20px 0"
+                margin:"20px 0",
+                 boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                borderRadius:"10px"
               }}>
                 <Heading Heading="Keyword Errors" />
                 {AnalyzeErrros?.KE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
@@ -279,9 +288,11 @@ const DashboardLayout = () => {
               null
             }
             {AnalyzeErrros.CE.length>0 && AnalyzeErrros.CE[0]!==""?
-              <Paper elevation={5} sx={{
+              <Paper  sx={{
                 padding:"20px",
-                margin:"20px 0"
+                margin:"20px 0",
+                 boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                borderRadius:"10px"
               }}>
                 <Heading Heading="Category Errors" />
                 {AnalyzeErrros?.CE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
@@ -302,6 +313,29 @@ const DashboardLayout = () => {
           :
           null
         }
+
+{/* ------------------- */}
+            </Box>
+          </Box>
+         
+        </Box>
+
+        {/* <Button onClick={()=>{
+            dispatch(
+              handleAnalyzeErrors(
+                {
+                  TE:["abc", "def", "efg"],
+                  DE:["abc", "def", "efg"],
+                  BE:["abc", "def", "efg"],
+                  KE:["abc", "def", "efg"],
+                  CE:["abc", "def", "efg"],
+                }
+              )
+            )
+          }}>
+          add error
+        </Button> */}
+
     
       </Box>  
       <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />

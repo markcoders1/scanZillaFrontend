@@ -1,19 +1,14 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import React from 'react';
 
-const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow = "0px 8px 26px -4px rgba(0, 0, 0, 0.1)" }) => {
-  const [selectedCategory, setSelectedCategory] = useState("")
+const CustomSelect = ({ data = [], value, handleChange, categoryError = "", boxShadow = "0px 8px 26px -4px rgba(0, 0, 0, 0.1)" }) => {
 
   const handleSelectionChange = (e) => {
-    setSelectedCategory(e.target.value);
     handleChange(e.target.value); // Call the parent's handler
-  }
+  };
 
   return (
-    <Box sx={{
-      mb: 2,
-
-    }}>
+    <Box sx={{ mb: 2 }}>
       <FormControl
         sx={{
           display: "flex",
@@ -38,7 +33,6 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
             color: "#A0A4A9",
           },
           position: "relative",
-
         }}
         variant="outlined"
       >
@@ -59,7 +53,7 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
               lg: "500"
             },
             color: "#A0A4A9",
-            display: selectedCategory ? 'none' : 'flex',
+            display: value ? 'none' : 'flex',
           }}
           id="demo-simple-select-label"
         >
@@ -69,7 +63,7 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Select Category"
-          value={selectedCategory}
+          value={value}
           onChange={handleSelectionChange}
           sx={{
             width: "100%",
@@ -82,7 +76,7 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
             fontWeight: {
               lg: "500"
             },
-            color: selectedCategory ? "black" : "#A0A4A9",
+            color: value ? "black" : "#A0A4A9",
             "&::-webkit-scrollbar": {
               width: "8px"
             },
@@ -99,21 +93,29 @@ const CustomSelect = ({ data = [], handleChange, categoryError = "", boxShadow =
             },
           }}
         >
-          {data?.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)}
+          {data?.map((item, index) => (
+            <MenuItem key={index} value={item}>
+              {item}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-      {/* {
-        categoryError && <Typography sx={{
-          background: "whitesmoke",
-          p: "10px",
-          color: "red",
-          mt: "8px",
-          wordBreak: "break-word"
-        }}>{categoryError}</Typography>
-      } */}
+      {/* You can uncomment this if you want to display errors */}
+      {/* {categoryError && (
+        <Typography
+          sx={{
+            background: "whitesmoke",
+            p: "10px",
+            color: "red",
+            mt: "8px",
+            wordBreak: "break-word"
+          }}
+        >
+          {categoryError}
+        </Typography>
+      )} */}
     </Box>
+  );
+};
 
-  )
-}
-
-export default CustomSelect
+export default CustomSelect;

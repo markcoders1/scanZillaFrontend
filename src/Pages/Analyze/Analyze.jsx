@@ -48,7 +48,7 @@ const Analyze = () => {
   "Pet Supplies",
   "Sports & Outdoors",
   "Tools & Home Improvement",
-  "Toys & Games"
+  "Toys & Games",
   ]);
   const navigate = useNavigate();
   const [rules, setRules] = useState([]);
@@ -149,6 +149,7 @@ const Analyze = () => {
         data: dataToSend,
       });
       console.log(response.data.error);
+
     
       dispatch(handleAnalyzeErrors(response.data.error))
       setIsLoading(false);
@@ -163,6 +164,7 @@ const Analyze = () => {
       }):null
     } catch (error) {
       const errorData = error?.response?.data;
+      console.log(error)
       setIsLoading(false);
 
       setSnackAlertData({
@@ -277,10 +279,13 @@ const Analyze = () => {
       description: "",
       keywords: "",
       category: "",
-      subtitle: ""
+      subtitle: "",
     });
 
+    console.log("data",data)
+    
     setErrors({ title: [], bulletpoints: [], description: [], keywords: [] });
+    
     dispatch(handleAnalyzeErrors({TE:[],BE:[],DE:[],CE:[],KE:[]}))
   }
 
@@ -555,11 +560,18 @@ const Analyze = () => {
               }}
             >
             
-            <Box sx={{display:"flex", justifyContent:"space-between"}}
+            <Box sx={{display:"flex", justifyContent:"space-between", flexDirection:{
+        sm:"row",
+        xs:"column", 
+      },
+      gap:"0.1rem"}}
             >
               <Typography
                 sx={{
-                  fontSize: "20px",
+                  fontSize: {
+                    sm:"20px",
+                    xs:"18px"
+                  },
                   fontWeight: "500",
                   lineHeight: "33px"
                 }}
@@ -590,33 +602,8 @@ const Analyze = () => {
               </Box>
             </Box>
 
-            {!isAnyFieldFilled()?
-                <div style={{
-                  width:"100%",
-                  padding:"40px 0px"
-                }}>
-                  <CustomButton
-                      border="2px solid #1A0049"
-                      borderRadius="10px"
-                      background="white"
-                      hoverBg="white"
-                      hovercolor="#1A0049"
-                      buttonTextStyle={{}}
-                      buttonStyle={{ padding: { lg: "12px 20px" } }}
-                      ButtonText={`Clear All  `}
-                      fontSize
-                      color="#1A0049"
-                      fontWeight
-                      variant="contained"
-                      padding
-                      fullWidth={true}
-                      onClick={handleClear}
-                  />
-                </div>
-              :
-              null
-            }
-
+ 
+             
 
             <Box sx={{ marginTop: "40px", display: isAnyFieldFilled() ? "block" : "none" }}>
               {!isLoading ? (
