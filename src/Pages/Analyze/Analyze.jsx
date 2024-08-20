@@ -148,7 +148,7 @@ const Analyze = () => {
         method: "post",
         data: dataToSend,
       });
-      console.log(response.data.error)
+      console.log(response.data.error);
     
       dispatch(handleAnalyzeErrors(response.data.error))
       setIsLoading(false);
@@ -209,16 +209,13 @@ const Analyze = () => {
   };
 
   const handleBulletPointChange = (index, value) => {
-    // Ensure the individual bullet does not exceed the max length
     let trimmedValue = value.slice(0, rules.bulletCharacters);
 
     setData(prev => {
-        // Calculate the combined length of all bullets with the new value
         const combinedLength = prev.bulletpoints.reduce((acc, bullet, idx) => {
             return acc + (idx === index ? trimmedValue.length : bullet.value.length);
         }, 0);
 
-        // Ensure the combined length does not exceed the max length
         if (combinedLength > rules.totalBulletsLength) {
             const allowedLength = rules.totalBulletsLength - (combinedLength - trimmedValue.length);
             trimmedValue = trimmedValue.slice(0, allowedLength);
@@ -232,6 +229,7 @@ const Analyze = () => {
         };
     });
 };
+
 
 
   const handleCategoryChange = (category) => {
@@ -340,7 +338,12 @@ const Analyze = () => {
               gap: ".7rem"
             }}
           >
-            <CustomSelect categoryError={errors?.category} data={category} handleChange={handleCategoryChange} />
+            <CustomSelect
+            categoryError={errors?.category}
+            data={category}
+            handleChange={handleCategoryChange}
+            value={data.category} 
+            />
             <Box sx={{
               display: "flex",
               flexDirection: "column",
@@ -392,8 +395,8 @@ const Analyze = () => {
                 gap: "15px"
               }}
             >
-              <Heading Heading="Bullet Points" />
-              {data.bulletpoints.map((item, index) => (
+              {data.bulletpoints.map((item, index) => (<>
+              <Heading Heading="Bullet Points" characterText="Character Count" count={item.value.length} />
                 <Box
                   key={index}
                   sx={{
@@ -416,7 +419,8 @@ const Analyze = () => {
                   />
 
 
-                </Box>
+                </Box> 
+                </>
               ))}
               {/* errors */}
 
@@ -493,7 +497,7 @@ const Analyze = () => {
                       onClick={removeBullet}
                       hoverBg="#1A0049"
                       hovercolor="white"
-                      width={"189px"}
+                      width={"225px"}
                     />
                   )}
 
@@ -517,14 +521,14 @@ const Analyze = () => {
                     variant="contained"
                     padding
                     onClick={addBullet}
-                  // width={"143px"}
+                  width={"183px"}
 
                   />
                 </Box>
               </Box>
             </Box>
             <Box>
-              <Heading Heading="Product Description" />
+              <Heading Heading="Product Description" characterText="Character Count" count={data.description.length} />
               <Box
                 sx={{
                   mt: "10px"
@@ -550,6 +554,9 @@ const Analyze = () => {
                 mt: "20px"
               }}
             >
+            
+            <Box sx={{display:"flex", justifyContent:"space-between"}}
+            >
               <Typography
                 sx={{
                   fontSize: "20px",
@@ -559,6 +566,16 @@ const Analyze = () => {
               >
                 Search Terms (Backend keywords)
               </Typography>
+
+              <Typography sx={{
+               fontSize: "16px",
+               fontWeight: "600",
+               lineHeight: "33px"
+      }}>
+        Character Count &nbsp; {data.keywords.length}
+      </Typography>
+
+            </Box>
               <Box>
                 <CustomTextField
                   handleKeyDown={() => { }}
@@ -612,7 +629,7 @@ const Analyze = () => {
                   hovercolor="#1A0049"
                   buttonTextStyle={{}}
                   buttonStyle={{ padding: { lg: "12px 20px" } }}
-                  ButtonText={`Analyze ${creditDynamic} Credits`}
+                  ButtonText={`Analyze (${creditDynamic} Credits)`}
                   fontSize
                   color="white"
                   fontWeight
