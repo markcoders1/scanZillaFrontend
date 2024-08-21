@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import CustomSelect from "../../Components/CustomSelect/CustomSelect";
 import Heading from "../../Components/Heading/Heading";
 import CustomTextField from "../../Components/CustomInputField/CustomInputField";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import { Editor } from '@tinymce/tinymce-react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
@@ -76,6 +76,12 @@ const Analyze = () => {
   const [creditDynamic , setCreditDynamic] = useState(0)
   const [editorLoading, setEditorLoading] = useState(true);
   const dispatch = useDispatch()
+  const AnalyzeErrros = useSelector(state=>state.analyze)
+
+
+  function hasValues(obj) {
+    return Object.values(obj).some(arr => arr.length > 0 && !(arr.length === 1 && arr[0] === ""));
+  }
 
   // useEffect(() => {
 
@@ -118,6 +124,8 @@ const Analyze = () => {
     
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0,5000) }));
     
+    }else if(e.target.name==="keywords" && e.target.value.length >= 500){
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0,500) }));
     }else{
 
       console.log(e.target.name)
@@ -583,6 +591,7 @@ const Analyze = () => {
                   placeholder="Search Terms (Generic Keywords)"
                   border=""
                   boxShadow={true}
+                  maxLength={500}
                 />
               </Box>
             </Box>
@@ -673,8 +682,188 @@ const Analyze = () => {
                 </div>
                 
               )}
+
+
+
+
+
+
             </Box>
 
+            {
+                hasValues(AnalyzeErrros) ?
+                <Box>
+                  {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"30px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"10px"
+                    }}>
+                      <Heading Heading="Title Errors" />
+                      {AnalyzeErrros?.TE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                      {item.split("|-|").map((el,i)=>{
+                          return (
+                            <>
+                              • {el}
+                              {i < item.split("|-|").length - 1 && <br />}
+                            </>
+                          )
+                      })}
+                      </Typography>)}
+                    </Paper>
+                    :
+                    null
+                  }
+                  {AnalyzeErrros.BE.length>0  && AnalyzeErrros.BE[0]!=="" ?
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"20px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"10px"
+                    }}>
+                      <Heading Heading="Bullet Point Errors" />
+
+                    
+
+                      {AnalyzeErrros.joi==true?
+                        AnalyzeErrros?.BE?.map((item,index)=>{
+
+                          if(typeof item !== "object"){
+                            return(
+                              <Typography key={index} sx={{padding:"10px 0"}}>• {item}</Typography>
+                            )
+                          }
+
+                          if(item.message.includes("|-|")){
+
+                            const messages = item.message.split("|-|")
+
+                            return(
+                              <Typography sx={{padding:"10px 0"}} key={index}>
+                                {item.point}.
+                                <br />
+                                <Box sx={{paddingLeft:"10px"}}>
+                                  {messages.map((el,ind)=>{
+                                    return (
+                                      <>
+                                        <span key={ind}> • {el.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                                        {ind < messages.length - 1 && <br />}
+                                      </>
+                                    )
+                                  })}
+                                </Box>
+                              </Typography>
+                            )
+                          }
+
+                          console.log(item)
+
+                          if(item.point==-10){
+                            return (<Typography sx={{padding:"10px 0"}} key={index}>
+                              • {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}
+                            </Typography>)
+                          }
+
+                          return(
+                            <Typography sx={{padding:"10px 0"}} key={index}>
+                              {item.point}. <br />
+                              <span style={{paddingLeft:"10px"}}>• {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                            </Typography>
+                          )
+
+
+                        })
+                        :
+                        AnalyzeErrros?.BE?.map((item, index)=>
+                          <Typography sx={{padding:"10px 0"}} key={index}>
+                            {item.split("|-|").map((el,i)=>{
+                                return (
+                                  <>
+                                    • {el}
+                                    {i < item.split("|-|").length - 1 && <br />}
+                                  </>
+                                )
+                            })}
+                          </Typography>
+                        )  
+                      }
+
+
+                    </Paper>
+                    :
+                    null
+                  }
+                  {AnalyzeErrros.DE.length>0 && AnalyzeErrros.DE[0]!==""?
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"20px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"10px"
+                    }}>
+                      <Heading Heading="Description Errors" />
+                      {AnalyzeErrros?.DE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                      {item.split("|-|").map((el,i)=>{
+                          return (
+                            <>
+                              • {el}
+                              {i < item.split("|-|").length - 1 && <br />}
+                            </>
+                          )
+                      })}
+                      </Typography>)}
+                    </Paper>
+                    :
+                    null
+                  }
+                  {AnalyzeErrros.KE.length>0 && AnalyzeErrros.KE[0]!==""?
+                    <Paper  sx={{
+                      padding:"20px",
+                      margin:"20px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"10px"
+                    }}>
+                      <Heading Heading="Keyword Errors" />
+                      {AnalyzeErrros?.KE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                      {item.split("|-|").map((el,i)=>{
+                          return (
+                            <>
+                              • {el}
+                              {i < item.split("|-|").length - 1 && <br />}
+                            </>
+                          )
+                      })}
+                      </Typography>)}
+                    </Paper>
+                    :
+                    null
+                  }
+                  {AnalyzeErrros.CE.length>0 && AnalyzeErrros.CE[0]!==""?
+                    <Paper  sx={{
+                      padding:"20px",
+                      margin:"20px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"10px"
+                    }}>
+                      <Heading Heading="Category Errors" />
+                      {AnalyzeErrros?.CE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
+                        {item.split("|-|").map((el,i)=>{
+                          return (
+                            <>
+                              • {el}
+                              {i < item.split("|-|").length - 1 && <br />}
+                            </>
+                          )
+                        })}
+                      </Typography>)}
+                    </Paper>
+                    :
+                    null
+                  }
+                </Box>
+                :
+                null
+              }
 
 
             <SnackAlert

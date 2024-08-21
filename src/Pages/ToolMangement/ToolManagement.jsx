@@ -23,6 +23,7 @@ const ToolManagement = () => {
   const [descriptionCharacters, setDescriptionCharacters] = useState(null);
   const [bulletcharacters, setBulletcharacters] = useState(null);
   const [totalBulletsLength,setTotalBulletsLength] = useState(null)
+  const [searchTerms,setSearchTerms] = useState(null)
   const navigate = useNavigate();
   const [category, setCategory] = useState([
     "Appliances",
@@ -63,7 +64,7 @@ const ToolManagement = () => {
       newKeyword: "",
       totalBulletsLength: "",
       category: "",
-
+      searchTerms:""
     },
   });
 
@@ -128,7 +129,8 @@ const ToolManagement = () => {
       !data.totalBullets.trim() &&
       !data.bulletcharacters.trim() &&
       !data.descriptionCharacters.trim() &&
-      !data.totalBulletsLength.trim()
+      !data.totalBulletsLength.trim() &&
+      !data.searchTerms.trim()
     ) {
       dispatch(handleSnackAlert({ open: true, message: "At least one field must be filled", severity: "error" }));
     } else {
@@ -143,6 +145,7 @@ const ToolManagement = () => {
             descriptionCharacters: Number(data.descriptionCharacters),
             category: data.category,
             totalBulletsLength: Number(data.totalBulletsLength),
+            searchTerms: Number(data.searchTerms)
           },
         });
         
@@ -154,7 +157,8 @@ const ToolManagement = () => {
           bulletcharacters: "",
           descriptionCharacters: "",
           category: "",
-          totalBulletsLength:""
+          totalBulletsLength:"",
+          searchTerms:""
         });
         console.log(response);
       } catch (error) {
@@ -173,6 +177,7 @@ const ToolManagement = () => {
 
       console.log(response);
       setTotalBulletsLength(response.data.totalBulletsLength)
+      setSearchTerms(response.data.searchTerms)
       setBulletcharacters(response.data.bulletCharacters);
       setDescriptionCharacters(response.data.descriptionCharacters);
       setTotalBullets(response.data.bulletNum);
@@ -389,6 +394,21 @@ const ToolManagement = () => {
                   <CustomInputShadow
                     {...field}
                     placeholder={descriptionCharacters}
+                    onChange={(e) => field.onChange(e.target.value)}
+                    type={"number"}
+                  />
+                )}
+              />
+            </Box>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+              <Heading Heading="Search Terms Length" />
+              <Controller
+                name="searchTerms"
+                control={control}
+                render={({ field }) => (
+                  <CustomInputShadow
+                    {...field}
+                    placeholder={searchTerms}
                     onChange={(e) => field.onChange(e.target.value)}
                     type={"number"}
                   />
