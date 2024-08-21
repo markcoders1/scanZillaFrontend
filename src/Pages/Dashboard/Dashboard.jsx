@@ -454,6 +454,7 @@ const Home = () => {
                         error={item.error}
                         index={index}
                         openModal={openModal}
+                        keywords ={item.keywords}
                       />
                     ))
                   )
@@ -521,6 +522,7 @@ const Home = () => {
             bullets={modalData.bullets}
             description={modalData.description}
             error={modalData.error}
+            keywords={modalData.keywords}
           />
 
           <SnackAlert

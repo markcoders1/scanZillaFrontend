@@ -12,8 +12,7 @@ import { transform } from 'lodash';
 
 
 
-export const ViewDetailModal = ({ open, handleClose, title, bullets, description,error }) => {
-
+export const ViewDetailModal = ({ open, handleClose, title, bullets, description,keywords,error }) => {
 
 
     const style = {
@@ -26,6 +25,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
         p: 4,
         borderRadius: "20px",
         maxHeight:"90vh",
+        maxWidth:"50vw",
         overflow: "auto",
         "&::-webkit-scrollbar": {
                 width: "8px",
@@ -42,7 +42,6 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                 background: "#b30000"
               },
     };
-    console.log(error)
     return (
         <Modal
             aria-labelledby="transition-modal-title"
@@ -66,8 +65,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                 <Box sx={style}>
 
                     {title?
-                    
-                    <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0"}} >
+                    <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0", overflowX:"hidden"}} >
                         <Box>
                         <Heading Heading="Title" />
 
@@ -80,7 +78,6 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             {title}
                         </Typography>
                     </Box>
-
                     <Box>
                         <Typography>
                             <Heading Heading="Title Error" />
@@ -105,7 +102,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
 
 
                     {(Array.isArray(bullets)?bullets[0]:bullets)?
-                <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0"}}>
+                <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0" }}>
                     <Box>
                         <Typography>
                             <Heading Heading="Bullets" />
@@ -117,7 +114,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
 
                         }}>
                             {bullets && bullets.length >= 1 ? bullets.map((bullet, index) => (
-                                <li key={index}>{bullet}</li>
+                                <li key={index} style={{wordWrap:"break-word", hyphens:"auto"}}>{bullet}</li>
                             )) : ""}
                         </Typography>
 
@@ -133,13 +130,54 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {/* {Array.isArray(error?.BE)?error?.BE.map((e)=>{
-                                return(
-                                    <>
-                                    <span>{e}</span><br />
-                                    </>
-                                ) 
-                            }):error?.BE || "No Error"} */}
+
+                            {error?.joi==true?
+                                error?.BE?.map((item,index)=>{
+                                    if(item.message.includes("|-|")){
+                                    const messages = item.message.split("|-|")
+                                    return(
+                                        <Typography sx={{padding:"10px 0"}} key={index}>
+                                        {item.point}.
+                                        <br />
+                                        <Box sx={{paddingLeft:"10px"}}>
+                                            {messages.map((el,ind)=>{
+                                            return (
+                                                <>
+                                                <span key={ind}> • {el.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                                                {ind < messages.length - 1 && <br />}
+                                                </>
+                                            )
+                                            })}
+                                        </Box>
+                                        </Typography>
+                                    )
+                                    }
+                                    if(item.point==-10){
+                                    return (<Typography sx={{padding:"10px 0"}} key={index}>
+                                        • {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}
+                                    </Typography>)
+                                    }
+                                    return(
+                                    <Typography sx={{padding:"10px 0"}} key={index}>
+                                        {item.point}. <br />
+                                        <span style={{paddingLeft:"10px"}}>• {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                                    </Typography>
+                                    )
+                                })
+                                :
+                                error?.BE?.map((item, index)=>
+                                    <Typography sx={{padding:"10px 0"}} key={index}>
+                                    {item.split("|-|").map((el,i)=>{
+                                        return (
+                                            <>
+                                            • {el}
+                                            {i < item.split("|-|").length - 1 && <br />}
+                                            </>
+                                        )
+                                    })}
+                                    </Typography>
+                                )  
+                            }
                         </Typography>
                     </Box>
                 </Paper>
@@ -156,7 +194,9 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                         <Typography sx={{
                             fontSize: "17px",
                             fontWeight: "500",
-                            color: "#A0A4A9"
+                            color: "#A0A4A9",
+                            wordWrap:"break-word",
+                            hyphens:"auto"
 
                         }}>
                             {description}
@@ -185,6 +225,48 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                         </Typography>
                     </Box>
                     </Paper>
+                    :null}
+
+                    {keywords?
+                        <Paper elevation={10} sx={{padding:"10px 25px",margin:"10px 0"}}>
+                            <Box>
+                            <Typography>
+                                <Heading Heading="Keywords" />
+                            </Typography>
+                            <Typography sx={{
+                                fontSize: "17px",
+                                fontWeight: "500",
+                                color: "#A0A4A9",
+                                wordWrap:"break-word",
+                                hyphens:"auto"
+
+                            }}>
+                                {keywords}
+                            </Typography>
+                        </Box>
+
+                        <Box>
+                            <Typography>
+                                <Heading Heading="Description Error" />
+                            </Typography>
+                            <Typography sx={{
+                                fontSize: "17px",
+                                fontWeight: "500",
+                                color: "#A0A4A9"
+
+                            }}>
+                                {Array.isArray(error?.KE)?
+                                error?.KE.map((e)=>{
+                                    return(
+                                        <>
+                                        <span>{e}</span><br />
+                                        </>
+                                    ) 
+                                }):
+                                error?.KE || "No Error"}
+                            </Typography>
+                        </Box>
+                        </Paper>
                     :null}
 
 

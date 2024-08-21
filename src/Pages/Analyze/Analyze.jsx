@@ -136,8 +136,10 @@ const Analyze = () => {
   const handleAnalyze = async () => {
     setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
 
+    let titleToSend = data.subtitle?`${data.title} ${data.subtitle}`:data.title
+
     const dataToSend = {
-      title:`${data.title} ${data.subtitle}`,
+      title:titleToSend,
       description:data.description,
       bulletpoints:data.bulletpoints,
       keywords:data.keywords,
@@ -578,7 +580,7 @@ const Analyze = () => {
                   name="keywords"
                   value={data?.keywords}
                   error={errors?.keywords}
-                  placeholder=""
+                  placeholder="Search Terms (Generic Keywords)"
                   border=""
                   boxShadow={true}
                 />
