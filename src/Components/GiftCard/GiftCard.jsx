@@ -26,7 +26,7 @@ const GiftCard = ({ id, title, description, bullets, openModal,error }) => {
                     color: "#A0A4A9",
                 }}
             >
-                Analyzation # {id.substring(16)}
+                Analyzation {title.slice(0,16)}
           
             </Typography>
             <Typography>

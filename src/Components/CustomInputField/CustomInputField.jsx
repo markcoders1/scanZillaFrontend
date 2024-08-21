@@ -18,7 +18,8 @@ const CustomTextField = forwardRef(({
   border = true,
   boxShadow = false, // Add default value for boxShadow
   showPasswordToggle = false, // Add prop to control password visibility toggle
-  maxLength // Add maxLength prop
+  maxLength, // Add maxLength prop
+  sx
 }, ref) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,7 +28,7 @@ const CustomTextField = forwardRef(({
   };
 
   return (
-    <Box sx={{ mb: mb }}>
+    <Box sx={{ ...sx, mb: mb }}>
       <FormControl variant="standard" fullWidth
         sx={{
           border: border ? "1px solid #666666" : "",

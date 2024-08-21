@@ -4,7 +4,8 @@ import React from 'react'
 const Heading = ({
   Heading = "",
   characterText = "",
-  count = ""
+  count = "",
+  number
 }) => {
   return (
     <Box
@@ -18,13 +19,15 @@ const Heading = ({
       gap:"0.1rem"
     }}
     >
-      <Typography sx={{
-        fontSize: "22px",
-        fontWeight: "600",
-        lineHeight: "33px"
-      }}>
+      {number?
+        <Typography sx={{ fontSize: "16px", fontWeight: "300", lineHeight: "16px" }}>
+        {number}
+        </Typography>
+        :
+        <Typography sx={{ fontSize: "22px", fontWeight: "600", lineHeight: "33px" }}>
         {Heading}
-      </Typography>
+        </Typography>
+      }
       <Typography sx={{
         fontSize: "16px",
         fontWeight: "600",

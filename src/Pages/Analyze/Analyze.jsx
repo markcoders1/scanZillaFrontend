@@ -109,17 +109,21 @@ const Analyze = () => {
     */
 
     if((e.target.name==="title" || e.target.name ==="subtitle")&&(data.category==="Books")&&(e.target.value.length+data[e.target.name==="title"?"subtitle":"title"].length>=rules["Books"])){
-      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]-data[e.target.name==="title"?"subtitle":"title"].length) }))
-    }else if (e.target.name==="title" && e.target.value.length>=rules[data.category]){
 
-      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, rules[data.category]) })); 
-    }else if(e.target.name==="description" && e.target.value.length>=rules.descriptionCharacters){
-      
-      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0,rules.descriptionCharacters) }));
+
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0, 500-data[e.target.name==="title"?"subtitle":"title"].length) }))
+
+
+    }else if(e.target.name==="description" && e.target.value.length >= 5000){
+    
+      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value.slice(0,5000) }));
+    
     }else{
 
       console.log(e.target.name)
       setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+
+
     }
 
 
@@ -186,12 +190,6 @@ const Analyze = () => {
     console.log("rules response", response)
   }
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      handleAnalyze();
-    }
-  };
-
   const addBullet = () => {
     if (data.bulletpoints.length < rules.bulletNum) {
       setData(prev => ({
@@ -211,17 +209,17 @@ const Analyze = () => {
   };
 
   const handleBulletPointChange = (index, value) => {
-    let trimmedValue = value.slice(0, rules.bulletCharacters);
+    let trimmedValue = value.slice(0, 500);
 
     setData(prev => {
-        const combinedLength = prev.bulletpoints.reduce((acc, bullet, idx) => {
-            return acc + (idx === index ? trimmedValue.length : bullet.value.length);
-        }, 0);
+        // const combinedLength = prev.bulletpoints.reduce((acc, bullet, idx) => {
+        //     return acc + (idx === index ? trimmedValue.length : bullet.value.length);
+        // }, 0);
 
-        if (combinedLength > rules.totalBulletsLength) {
-            const allowedLength = rules.totalBulletsLength - (combinedLength - trimmedValue.length);
-            trimmedValue = trimmedValue.slice(0, allowedLength);
-        }
+        // if (combinedLength > rules.totalBulletsLength) {
+        //     const allowedLength = rules.totalBulletsLength - (combinedLength - trimmedValue.length);
+        //     trimmedValue = trimmedValue.slice(0, allowedLength);
+        // }
 
         return {
             ...prev,
@@ -371,7 +369,7 @@ const Analyze = () => {
                   placeholder="Insert Title Here"
                   border=""
                   boxShadow={true}
-                  maxLength={+rules[data.category]}
+                  maxLength={500}
                 />
                 {data.category=="Books"?
                 <>
@@ -384,7 +382,7 @@ const Analyze = () => {
                   placeholder="Insert Sub-title Here"
                   border=""
                   boxShadow={true}
-                  maxLength={+rules[data.category]}
+                  maxLength={500}
                 />
                 </>
                 :null}
@@ -400,8 +398,9 @@ const Analyze = () => {
                 gap: "15px"
               }}
             >
+              <Heading Heading="Bullet Points" />
               {data.bulletpoints.map((item, index) => (<>
-              <Heading Heading="Bullet Points" characterText="Character Count" count={item.value.length} />
+              <Heading characterText="Character Count:" count={`${item.value.length} / 500`}/>
                 <Box
                   key={index}
                   sx={{
@@ -411,17 +410,27 @@ const Analyze = () => {
                     // mt: "10px"
                   }}
                 >
-                  <CustomTextField
-                    handleKeyDown={() => {}}
-                    onChange={(e) => handleBulletPointChange(index, e.target.value)}
-                    name={""}
-                    value={item.value}
-                    // error={errors?.bulletpoints}
-                    placeholder="Bullet Text"
-                    border=""
-                    boxShadow={true}
-                    maxLength={rules.bulletCharacters}
-                  />
+                  <Box sx={{
+                    display:"flex",
+                    alignItems:"center"
+
+                  }}>
+                    <h4
+                    style={{height:"100%", display:"block", width:"3%",fontSize:"1.2rem", paddingBottom:"1rem"}}
+                    >{index+1}.</h4>
+                    <CustomTextField
+                      handleKeyDown={() => {}}
+                      onChange={(e) => handleBulletPointChange(index, e.target.value)}
+                      name={""}
+                      value={item.value}
+                      // error={errors?.bulletpoints}
+                      placeholder="Bullet Point"
+                      border=""
+                      boxShadow={true}
+                      maxLength={500}
+                      sx={{width:"97%"}}
+                    />
+                  </Box>
 
 
                 </Box> 
@@ -548,7 +557,7 @@ const Analyze = () => {
                   height={"360px"}
                   error={errors.description}
                   name={"description"}
-                  maxLength={rules.descriptionCharacters}
+                  maxLength={5000}
                 />
               </Box>
 
@@ -560,35 +569,9 @@ const Analyze = () => {
               }}
             >
             
-            <Box sx={{display:"flex", justifyContent:"space-between", flexDirection:{
-        sm:"row",
-        xs:"column", 
-      },
-      gap:"0.1rem"}}
-            >
-              <Typography
-                sx={{
-                  fontSize: {
-                    sm:"20px",
-                    xs:"18px"
-                  },
-                  fontWeight: "500",
-                  lineHeight: "33px"
-                }}
-              >
-                Search Terms (Backend keywords)
-              </Typography>
 
-              <Typography sx={{
-               fontSize: "16px",
-               fontWeight: "600",
-               lineHeight: "33px"
-      }}>
-        Character Count &nbsp; {data.keywords.length}
-      </Typography>
-
-            </Box>
-              <Box>
+            <Heading count={data.keywords.length} Heading="Search Terms (Generic Keywords)" characterText="Character Count" />
+            <Box>
                 <CustomTextField
                   handleKeyDown={() => { }}
                   onChange={hanldeInput}
@@ -602,6 +585,33 @@ const Analyze = () => {
               </Box>
             </Box>
 
+
+            {!isAnyFieldFilled()?
+                <div style={{
+                  width:"100%",
+                  padding:"40px 0px"
+                }}>
+                  <CustomButton
+                      border="2px solid #1A0049"
+                      borderRadius="10px"
+                      background="white"
+                      hoverBg="white"
+                      hovercolor="#1A0049"
+                      buttonTextStyle={{}}
+                      buttonStyle={{ padding: { lg: "12px 20px" } }}
+                      ButtonText={`Clear All  `}
+                      fontSize
+                      color="#1A0049"
+                      fontWeight
+                      variant="contained"
+                      padding
+                      fullWidth={true}
+                      onClick={handleClear}
+                  />
+                </div>
+              :
+              null
+            }
  
              
 

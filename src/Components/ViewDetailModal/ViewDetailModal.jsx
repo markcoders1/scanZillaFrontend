@@ -133,13 +133,13 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             color: "#A0A4A9"
 
                         }}>
-                            {Array.isArray(error?.BE)?error?.BE.map((e)=>{
+                            {/* {Array.isArray(error?.BE)?error?.BE.map((e)=>{
                                 return(
                                     <>
                                     <span>{e}</span><br />
                                     </>
                                 ) 
-                            }):error?.BE || "No Error"}
+                            }):error?.BE || "No Error"} */}
                         </Typography>
                     </Box>
                 </Paper>

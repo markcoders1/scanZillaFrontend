@@ -228,17 +228,70 @@ const DashboardLayout = () => {
                  boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
                 borderRadius:"10px"
               }}>
-                <Heading Heading="Bullet Errors" />
-                {AnalyzeErrros?.BE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
-                  {item.split("|-|").map((el,i)=>{
-                      return (
-                        <>
-                          • {el}
-                          {i < item.split("|-|").length - 1 && <br />}
-                        </>
+                <Heading Heading="Bullet Point Errors" />
+
+              
+
+                {AnalyzeErrros.joi==true?
+                  AnalyzeErrros?.BE?.map((item,index)=>{
+
+                    if(item.message.includes("|-|")){
+
+
+                      console.log(item)
+                      const messages = item.message.split("|-|")
+
+                      return(
+                        <Typography sx={{padding:"10px 0"}} key={index}>
+                          {item.point}.
+                          <br />
+                          <Box sx={{paddingLeft:"10px"}}>
+                            {messages.map((el,ind)=>{
+                              return (
+                                <>
+                                  <span key={ind}> • {el.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                                  {ind < messages.length - 1 && <br />}
+                                </>
+                              )
+                            })}
+                          </Box>
+                        </Typography>
                       )
-                  })}
-                </Typography>)}
+                    }
+
+                    console.log(item)
+
+                    if(item.point==-10){
+                      return (<Typography sx={{padding:"10px 0"}} key={index}>
+                        • {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}
+                      </Typography>)
+                    }
+
+                    return(
+                      <Typography sx={{padding:"10px 0"}} key={index}>
+                        {item.point}. <br />
+                        <span style={{paddingLeft:"10px"}}>• {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                      </Typography>
+                    )
+
+
+                  })
+                  :
+                  AnalyzeErrros?.BE?.map((item, index)=>
+                    <Typography sx={{padding:"10px 0"}} key={index}>
+                      {item.split("|-|").map((el,i)=>{
+                          return (
+                            <>
+                              • {el}
+                              {i < item.split("|-|").length - 1 && <br />}
+                            </>
+                          )
+                      })}
+                    </Typography>
+                  )  
+                }
+
+
               </Paper>
               :
               null
