@@ -692,6 +692,9 @@ const Analyze = () => {
 
             {
                 hasValues(AnalyzeErrros) ?
+
+                <>
+                <Typography sx={{fontSize:"2.5rem", fontWeight:"600"}}>Results</Typography>
                 <Box>
                   {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
                     <Paper sx={{
@@ -861,6 +864,7 @@ const Analyze = () => {
                     null
                   }
                 </Box>
+                </>
                 :
                 null
               }
