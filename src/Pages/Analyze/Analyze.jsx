@@ -693,15 +693,15 @@ const Analyze = () => {
             {
                 hasValues(AnalyzeErrros) ?
 
-                <>
-                <Typography sx={{fontSize:"2.5rem", fontWeight:"600"}}>Results</Typography>
+                <Box sx={{mt:"50px"}} >
+                <Typography sx={{fontSize:"40px", fontWeight:"600", color:"#333333"}}>Results</Typography>
                 <Box>
                   {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
                     <Paper sx={{
                       padding:"20px",
-                      margin:"30px 0",
+                      margin:"10px 0",
                       boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                      borderRadius:"10px"
+                      borderRadius:"12px"
                     }}>
                       <Heading Heading="Title Errors" />
                       {AnalyzeErrros?.TE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
@@ -750,7 +750,7 @@ const Analyze = () => {
                                   {messages.map((el,ind)=>{
                                     return (
                                       <>
-                                        <span key={ind}> • {el.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                                        <span key={ind}> {el.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
                                         {ind < messages.length - 1 && <br />}
                                       </>
                                     )
@@ -864,7 +864,7 @@ const Analyze = () => {
                     null
                   }
                 </Box>
-                </>
+                </Box>
                 :
                 null
               }
