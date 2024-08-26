@@ -491,7 +491,8 @@ const Analyze = () => {
                   sx={{
                     fontWeight: "500",
                     fontSize: "16px",
-                    color: "#A0A4A9"
+                    color: "#A0A4A9",
+                    marginBottom:"auto"
                   }}
                 >
                   Add More (up to {rules.bulletNum} in total)
@@ -551,7 +552,7 @@ const Analyze = () => {
                 </Box>
               </Box>
             </Box>
-            <Box>
+            <Box sx={{marginTop:"1rem"}}>
               <Heading Heading="Product Description" characterText="Character Count" count={data.description.length} />
               <Box
                 sx={{
@@ -579,8 +580,9 @@ const Analyze = () => {
               }}
             >
             
-
-            <Heading count={data.keywords.length} Heading="Search Terms (Generic Keywords)" characterText="Character Count" />
+              <Box sx={{marginBottom:"1rem"}}> 
+                <Heading count={data.keywords.length} Heading="Search Terms (Generic Keywords)" characterText="Character Count"/>
+              </Box>
             <Box>
                 <CustomTextField
                   handleKeyDown={() => { }}

@@ -21,12 +21,16 @@ const Assistant = () => {
         titleDont: [""],
         descriptionDo: [""],
         descriptionDont: [""],
-        bulletDo: [""],
-        bulletDont: [""],
+        bulletsDo: [""],
+        bulletsDont: [""],
     });
 
+    useEffect(()=>{
+        console.log(pointers)
+    },[pointers])
+
     const divideString = (string) =>{
-        return string.split(' -').slice(1)
+        return string
     }
 
     const joinArray = (array) => {
@@ -58,12 +62,12 @@ const Assistant = () => {
 
     const handleSubmit = async () => {
         const payload = {
-            titleDo: joinArray(pointers.titleDo),
-            titleDont: joinArray(pointers.titleDont),
-            descriptionDo: joinArray(pointers.descriptionDo),
-            descriptionDont: joinArray(pointers.descriptionDont),
-            bulletDo: joinArray(pointers.bulletDo),
-            bulletDont: joinArray(pointers.bulletDont),
+            titleDo: pointers.titleDo,
+            titleDont: pointers.titleDont,
+            descriptionDo: pointers.descriptionDo,
+            descriptionDont: pointers.descriptionDont,
+            bulletsDo: pointers.bulletsDo,
+            bulletsDont: pointers.bulletsDont,
         };
         
         
@@ -106,8 +110,8 @@ const Assistant = () => {
                 titleDont: divideString(response.data.title.Donts),
                 descriptionDo: divideString(response.data.description.Dos),
                 descriptionDont: divideString(response.data.description.Donts),
-                bulletDo: divideString(response.data.bullets.Dos),
-                bulletDont: divideString(response.data.bullets.Donts),
+                bulletsDo: divideString(response.data.bullets.Dos),
+                bulletsDont: divideString(response.data.bullets.Donts),
             });
         } catch (error) {
             console.error("Error fetching analysis data:", error);
@@ -145,12 +149,12 @@ const Assistant = () => {
                         centered
                         indicatorColor="secondary"
                         textColor="secondary">
-                        <Tab label="title" value="title" />
-                        <Tab label="description" value="description" />
-                        <Tab label="bullet" value="bullet" />
+                        <Tab label="Title" value="title" />
+                        <Tab label="Description" value="description" />
+                        <Tab label="Bullet Points" value="bullets" />
                     </Tabs>
 
-                    {["title", "description", "bullet"].map(
+                    {["title", "description", "bullets"].map(
                         (tab) =>
                             page === tab && (
                                 <div key={tab}>
