@@ -102,7 +102,7 @@ const Credits = () => {
             });
             setLoading(false);
             console.log(response)
-            setAutoCreditsAmount(response.data.offers.slice(1));
+            setAutoCreditsAmount(response.data.offers.filter((e)=>e.variant>0).sort((a,b)=>a.variant-b.variant));
         } catch (error) {
             console.error(error);
         }
