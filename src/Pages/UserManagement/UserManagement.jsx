@@ -20,9 +20,7 @@ import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import { useDispatch } from "react-redux";
-
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
-
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [order, setOrder] = useState("asc");
@@ -426,5 +424,8 @@ const UserTable = () => {
     </>
   );
 };
+   
+
+
 
 export default UserTable;
