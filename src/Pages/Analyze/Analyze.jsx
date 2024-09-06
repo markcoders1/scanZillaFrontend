@@ -69,7 +69,9 @@ const Analyze = () => {
     keywords: [],
     category: []
   });
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isScroll, setScroll] = useState(false);
+
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
     severity: "success",
@@ -172,6 +174,7 @@ const Analyze = () => {
         message: "Text Anaylyzed",
         severity: "success",
       })
+      setScroll(true)  
     
       dispatch(handleAnalyzeErrors(response.data.error))
       setIsLoading(false);
@@ -199,14 +202,14 @@ const Analyze = () => {
   };
 
   useEffect(() => {
-  if (!isLoading && scrollBoxRef.current) {
+  if (isScroll && scrollBoxRef.current) {
     scrollBoxRef.current.scrollTo({
       top: scrollBoxRef.current.scrollHeight, // Scroll to bottom
       behavior: "smooth", // Optional smooth scroll
     });
-    setIsLoading(null)
+    setScroll(false)
   }
-}, [isLoading]);
+}, [setScroll, handleAnalyze]);
   const getLimits = async () => {
     const response = await axiosInstance({
       url: appUrl + "/rules",
