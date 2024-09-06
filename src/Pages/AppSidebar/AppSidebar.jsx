@@ -198,8 +198,9 @@ const AppSidebar = () => {
         <Typography
           sx={{
             fontWeight: '400',
-            fontSize: '1.1rem',
+            fontSize: '1rem',
             color: '#a49ab7',
+           
           }}
         >
           {email}

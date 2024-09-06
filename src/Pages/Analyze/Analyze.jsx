@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Typography, Paper } from '@mui/material';
 import CustomSelect from "../../Components/CustomSelect/CustomSelect";
 import Heading from "../../Components/Heading/Heading";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import CustomInputShadow from "../../Components/CustomInputShadow/CustomInputShadow";
 import { handleAnalyzeErrors } from '../../Redux/Slice/AnalyzeSlice/AnalyzeSlice';
+import Uiverse from "../../Components/Uiverse/Uiverse";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY
@@ -51,6 +52,7 @@ const Analyze = () => {
   "Toys & Games",
   ]);
   const navigate = useNavigate();
+  const scrollBoxRef = useRef(null);
   const [rules, setRules] = useState([]);
   const [data, setData] = useState({
     title: "",
@@ -67,7 +69,7 @@ const Analyze = () => {
     keywords: [],
     category: []
   });
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(null);
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
     severity: "success",
@@ -164,6 +166,12 @@ const Analyze = () => {
       });
       console.log(response.data.error);
 
+
+      setSnackAlertData({
+        open: true,
+        message: "Text Anaylyzed",
+        severity: "success",
+      })
     
       dispatch(handleAnalyzeErrors(response.data.error))
       setIsLoading(false);
@@ -173,7 +181,7 @@ const Analyze = () => {
       !hasValues(response.data.error)?
       setSnackAlertData({
         open: true,
-        message: response.data.message,
+        message: "Text Anaylyzed",
         severity: "success",
       }):null
     } catch (error) {
@@ -190,6 +198,15 @@ const Analyze = () => {
     setIsLoading(false);
   };
 
+  useEffect(() => {
+  if (!isLoading && scrollBoxRef.current) {
+    scrollBoxRef.current.scrollTo({
+      top: scrollBoxRef.current.scrollHeight, // Scroll to bottom
+      behavior: "smooth", // Optional smooth scroll
+    });
+    setIsLoading(null)
+  }
+}, [isLoading]);
   const getLimits = async () => {
     const response = await axiosInstance({
       url: appUrl + "/rules",
@@ -308,15 +325,17 @@ const Analyze = () => {
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
-            flexDirection: "column"
+            flexDirection: "column",
+            backgroundColor:"white"
           }}
         >
-          <LoaderMain />
+          <Uiverse />
 
         </Box>
       ) : (
         <>
         <Box
+          ref={scrollBoxRef}
           sx={{
             maxHeight: "680px",
             display: "flex",
