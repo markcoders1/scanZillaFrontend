@@ -79,6 +79,7 @@ const Analyze = () => {
   });
   const [creditDynamic , setCreditDynamic] = useState(0)
   const [editorLoading, setEditorLoading] = useState(true);
+  const [loaderState,setLoaderState] = useState(0)
   const dispatch = useDispatch()
   const AnalyzeErrros = useSelector(state=>state.analyze)
 
@@ -161,6 +162,25 @@ const Analyze = () => {
     try {
       setIsLoading(true);
       console.log(data)
+      setLoaderState(0)
+
+      const interval = setInterval(() => {
+        setLoaderState(prevState => {
+          
+          if (prevState >= 90) {
+            clearInterval(interval); // Clear interval if state is 100 or more
+            if(prevState>=100){
+              return 100
+            }
+            else return 90
+          }else{
+            const increment = Math.floor(Math.random() * 15) ; // Generates a random number between 5 and 15
+            return prevState + increment;
+          }
+
+        });
+      }, 1000);
+      
       const response = await axiosInstance({
         url: appUrl + "/verifyText",
         method: "post",
@@ -177,6 +197,8 @@ const Analyze = () => {
       setScroll(true)  
     
       dispatch(handleAnalyzeErrors(response.data.error))
+      setLoaderState(100)
+      await new Promise(resolve => setTimeout(resolve, 1200));
       setIsLoading(false);
       if (response.data.error) {
         handleData(response.data);
@@ -210,6 +232,7 @@ const Analyze = () => {
     setScroll(false)
   }
 }, [setScroll, handleAnalyze]);
+
   const getLimits = async () => {
     const response = await axiosInstance({
       url: appUrl + "/rules",
@@ -332,7 +355,7 @@ const Analyze = () => {
             backgroundColor:"white"
           }}
         >
-          <Uiverse />
+          <Uiverse progress={loaderState}/>
 
         </Box>
       ) : (
@@ -391,7 +414,7 @@ const Analyze = () => {
                   gap: "15px"
                 }}
               >
-                <Heading Heading="Title" characterText="Character Count" count={data.title.length+data?.subtitle?.length} />
+                <Heading Heading="Title" characterText="Character Count" count={`${data.title.length+data?.subtitle?.length}${data.category?` / ${rules[`${data.category}`]}`:''}`} />
                 <CustomTextField
                   handleKeyDown={() => {}}
                   onChange={hanldeInput}

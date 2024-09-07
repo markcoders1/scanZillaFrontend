@@ -1,83 +1,36 @@
 .loader1234 {
-    display: block;
-    position: relative;
-    height: 32px;
-    width: 200px;
-    background: rgb(241, 237, 237);
-    border: 2px solid #fff;
-    color: #fff;
-    overflow: hidden;
-    border-radius: 8px;
-  }
-  
-  .loader1234::before {
-    content: '';
-    background: #180447;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 0;
-    height: 100%;
-    animation: loading_302 1s linear infinite;
-  }
-  
-  .loader1234:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    font-size: 18px;
-    line-height: 32px;
-    color: rgb(0,255,255);
-    color:#fff;
-    mix-blend-mode: difference;
-    animation: percentage_302 1s linear infinite;
-  }
-  
-  @keyframes loading_302 {
-    0% {
-      width: 0
-    }
-  
-    100% {
-      width: 100%
-    }
-  }
-  
-  @keyframes percentage_302 {
-    0% {
-      content: "0%"
-    }
-  
-    20% {
-      content: "20%"
-    }
-  
-  
-    50% {
-      content: "50%"
-    }
-  
-    60% {
-      content: "60%"
-    }
-  
-   
-    90% {
-      content: "90%"
-    }
-  
-    98% {
-      content: "98%"
-    }
-  
-  
-    100% {
-      content: "100%"
-    }
-  }
-    
-    
+  display: block;
+  position: relative;
+  height: 32px;
+  width: 200px;
+  background: rgb(241, 237, 237);
+  border: 2px solid #fff;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.loader1234::before {
+  content: '';
+  background: #180447;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--percentage, 0%);
+  height: 100%;
+  transition: width 0.3s linear;
+}
+
+.loader1234::after {
+  content: attr(data-percentage) ' %'; /* Use data attribute to display percentage */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Center the text horizontally and vertically */
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  line-height: 32px;
+  color: #fff; /* Initial color of the text */
+  mix-blend-mode: difference;
+  transition: color 0.3s linear;
+}
