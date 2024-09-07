@@ -191,7 +191,7 @@ const Analyze = () => {
 
       setSnackAlertData({
         open: true,
-        message: "Text Anaylyzed",
+        message: "Text Analyzed",
         severity: "success",
       })
       setScroll(true)  
@@ -206,7 +206,7 @@ const Analyze = () => {
       !hasValues(response.data.error)?
       setSnackAlertData({
         open: true,
-        message: "Text Anaylyzed",
+        message: "Text Analyzed",
         severity: "success",
       }):null
     } catch (error) {
