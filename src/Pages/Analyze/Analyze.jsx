@@ -171,7 +171,7 @@ const Analyze = () => {
 
       setSnackAlertData({
         open: true,
-        message: "Text Anaylyzed",
+        message: "Analysis Completed",
         severity: "success",
       })
       setScroll(true)  

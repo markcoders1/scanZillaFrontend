@@ -285,10 +285,10 @@ const Credits = () => {
                                                     alignItems: "start",
                                                     fontSize: "65px",
                                                 }}
-                                                name={credits}
+                                                name={credits?.toLocaleString()}
                                                 action=""
                                                 nameStyles={{
-                                                    fontSize: "65px",
+                                                    fontSize: "40px",
                                                     marginTop: "10px",
                                                 }}
                                             />
