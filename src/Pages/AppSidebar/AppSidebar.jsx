@@ -132,7 +132,7 @@ const AppSidebar = () => {
                   isActive ? 'anchortag anchorActive' : 'anchortag'
                 }
               >
-                DashBoard
+                Dashboard
               </NavLink>
             </Typography>
             <Typography>
@@ -198,7 +198,7 @@ const AppSidebar = () => {
         <Typography
           sx={{
             fontWeight: '400',
-            fontSize: '1rem',
+            fontSize: '0.9rem',
             color: '#a49ab7',
            
           }}

@@ -281,7 +281,7 @@ const Home = () => {
                   color: "#190247",
                   letterSpacing: "0.67px"
                 }}>
-                  {credits}
+                  {credits.toLocaleString()}
                 </Typography>
 
                 {

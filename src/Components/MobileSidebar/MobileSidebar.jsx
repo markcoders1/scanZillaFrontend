@@ -210,7 +210,7 @@ const MobileSidebar = () => {
                   }
                   onClick={handleNavLinkClick}
                 >
-                  DashBoard
+                  Dashboard
                 </NavLink>
               </Typography>
 

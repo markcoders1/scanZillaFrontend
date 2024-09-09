@@ -78,7 +78,7 @@ const DashboardLayout = () => {
         sx={{
           display: 'flex',
           width: '100%',
-          maxWidth: `1440px`,
+          maxWidth: `1540px`,
           boxSizing: 'border-box',
           gap: "1rem",
           flexDirection:{
@@ -93,7 +93,7 @@ const DashboardLayout = () => {
         <Box
           sx={{
             width: {
-              lg: '320px',
+              lg: '340px',
               xs: '0px', // Hidden on smaller screens
             },
             position: 'fixed', // Fixed position
@@ -113,7 +113,7 @@ const DashboardLayout = () => {
         <Box
           sx={{
             marginLeft: {
-              lg: '320px', // Adjust to match fixed sidebar width
+              lg: '340px', // Adjust to match fixed sidebar width
               xs: '0px',
             },
             // width: '100%',
