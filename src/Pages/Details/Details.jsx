@@ -295,7 +295,7 @@ const Details = () => {
                   flexGrow: "1",
                 }}
               >
-                <ProfileCard title="No of Credits" name={credits} />
+                <ProfileCard title="No of Credits" name={credits.toLocaleString()} />
               </Box>
             </Box>
           </Box>
