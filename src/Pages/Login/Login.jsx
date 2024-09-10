@@ -74,7 +74,7 @@ const Login = () => {
       setSnackAlertData({
         open: true,
         message: error.response.data.message,
-        severity: "success",
+        severity: "error",
       })
 
 
