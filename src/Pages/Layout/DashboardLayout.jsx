@@ -1,6 +1,6 @@
 import { Box, Button, Paper, Typography } from '@mui/material';
-import React, { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import AppSidebar from '../AppSidebar/AppSidebar';
 import dashboardImg1 from '../../assets/images/dashboard.png';
 import Header from '../../Components/Header/Header';
@@ -9,13 +9,21 @@ import SnackAlert from '../../Components/SnackAlert/SnackAlert';
 import { useDispatch, useSelector } from 'react-redux';
 import { handleAnalyzeErrors } from '../../Redux/Slice/AnalyzeSlice/AnalyzeSlice';
 import Heading from '../../Components/Heading/Heading';
+import { handleSnackAlert } from '../../Redux/Slice/SnackAlertSlice/SnackAlertSlice';
 
 const DashboardLayout = () => {
   const location = useLocation();
   const snackAlert = useSelector(state => state.snackAlert)
   const {pathname} = location
   const showAnalyzeErrorBox =  pathname.includes("/analyze")
-
+  const [loading, setLoading] = useState(true)
+  const auth = useSelector(state=>state?.auth)
+  const dispatch = useDispatch()
+  
+  if(!auth?.authenticated){
+      dispatch(handleSnackAlert({open:true, message:"You're not Authorized, Login first.", severity:"error"}))
+          return <Navigate to="/" replace={true} />
+  } 
   const getHeaderTitle = (pathname) => {
     switch (pathname) {
       case '/dashboard':
@@ -54,7 +62,16 @@ const DashboardLayout = () => {
   // contact-admin
   const headerTitle = getHeaderTitle(location.pathname);
 
+  setTimeout(()=>{
+ setLoading(false)
+  },[])
+
+  if (loading) {
+    return <>loading</>
+  }
+
   return (
+    
     <Box
       sx={{
         display: 'flex',
@@ -90,6 +107,7 @@ const DashboardLayout = () => {
           }
         }}
       >
+        
         <Box
           sx={{
             width: {
