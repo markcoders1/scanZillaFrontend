@@ -43,45 +43,62 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const responseData = await signInWithGooglePopup();
-      console.log("response data", responseData)
-      const data = responseData.data
-      data.authenticated = true
-
-      dispatch(handleAuth(data))
-
-
-
-
-
+      console.log("response data", responseData);
+      const data = responseData.data;
+      data.authenticated = true;
+  
+      dispatch(handleAuth(data));
+  
       sessionStorage.setItem("accessToken", data?.accessToken);
       sessionStorage.setItem("refreshToken", data?.refreshToken);
-
-
+  
       localStorage.setItem("accessToken", data?.accessToken);
       localStorage.setItem("refreshToken", data?.refreshToken);
-
-
+  
       if (data.role === "admin") {
         navigate("/dashboard-admin");
       } else if (data.role === "user") {
         navigate("/dashboard");
       }
-
-      dispatch(handleSnackAlert({ open: true, message: responseData.data.message, severity: "success" }))
-
+  
+      dispatch(handleSnackAlert({ open: true, message: responseData.data.message, severity: "success" }));
+  
     } catch (error) {
       console.error("Sign-in failed:", error);
-      setSnackAlertData({
+  
+      // Check if error response exists (meaning server returned a response)
+      if (error.response) {
+        setSnackAlertData({
+          open: true,
+          message: error.response.data.message || "An error occurred during sign-in.",
+          severity: "error",
+        });
+      } 
+      // Handle network errors, such as server being down
+      else if (error.request) {
+        setSnackAlertData({
+          open: true,
+          message: "Server is currently unreachable. Please try again later.",
+          severity: "error",
+        });
+      }
+      // Handle any other unknown errors
+      else {
+        setSnackAlertData({
+          open: true,
+          message: "An unexpected error occurred. Please try again.",
+          severity: "error",
+        });
+      }
+      
+      dispatch(handleSnackAlert({
         open: true,
-        message: error.response.data.message,
+        message: error.response?.data?.message || "An error occurred.",
         severity: "error",
-      })
-
-
-      dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "success" }))
-
+      }));
     }
   };
+  
 
   useEffect(() => {
     console.log(auth)

@@ -37,13 +37,5 @@ export const signInWithGooglePopup = async () => {
 
      return responseData
    
-    // const accessToken = response.data.accessToken;
-    // const refreshToken = response.data.refreshToken;
-    // const userId = result.user.uid; 
-
-    // console.log("Access Token:", accessToken);
-    // console.log("Refresh Token:", refreshToken);
-    // console.log("User ID:", userId);
-
-    // return { accessToken, refreshToken, userId };
+  
 };
