@@ -54,6 +54,7 @@ const Analyze = () => {
   const navigate = useNavigate();
   const scrollBoxRef = useRef(null);
   const [rules, setRules] = useState([]);
+  const [result, setResult] =  useState("")
   const [data, setData] = useState({
     title: "",
     bulletpoints: [{ index: 0, value: "" }],
@@ -194,7 +195,8 @@ const Analyze = () => {
         message: "Analysis Completed",
         severity: "success",
       })
-      setScroll(true)  
+      setScroll(true)  ;
+      setResult("Results")
     
       dispatch(handleAnalyzeErrors(response.data.error))
       setLoaderState(100)
@@ -332,6 +334,7 @@ const Analyze = () => {
       category: "",
       subtitle: "",
     });
+    setResult("")
 
     console.log("data",data)
     
@@ -741,7 +744,7 @@ const Analyze = () => {
                 hasValues(AnalyzeErrros) ?
 
                 <Box sx={{mt:"50px"}} >
-                <Typography sx={{fontSize:"40px", fontWeight:"600", color:"#333333"}}>Results</Typography>
+                <Typography sx={{fontSize:"40px", fontWeight:"600", color:"#333333"}}>{result}</Typography>
                 <Box>
                   {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
                     <Paper sx={{
