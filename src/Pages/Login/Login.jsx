@@ -78,7 +78,7 @@ const Login = () => {
       else if (error.request) {
         setSnackAlertData({
           open: true,
-          message: "Server is currently unreachable. Please try again later.",
+          message: "Server is currently under maintenance",
           severity: "error",
         });
       }
@@ -86,7 +86,7 @@ const Login = () => {
       else {
         setSnackAlertData({
           open: true,
-          message: "An unexpected error occurred. Please try again.",
+          message: "Server is currently under maintenance",
           severity: "error",
         });
       }
