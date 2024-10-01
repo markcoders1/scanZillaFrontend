@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import {Outlet } from "react-router-dom";
 import React from 'react'
-import background1 from "../../assets/images/LoginImg.png";
-import background2 from "../../assets/images/SignupBackground.png";
+import background1 from "../../assets/images/LoginImg.webp";
+import background2 from "../../assets/images/SignupBackground.webp";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 

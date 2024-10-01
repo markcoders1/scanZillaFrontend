@@ -22,10 +22,8 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(auth);
 
-    console.log(auth.email);
-    console.log(auth.username);
+
 
     setUsername(auth.userName);
     setEmail(auth.email);
@@ -56,7 +54,7 @@ const Profile = () => {
       });
       setLoading(false);
       if (response) {
-        console.log(response);
+        
         setNumberOfAnalyzed(response?.data?.count);
         setSnackAlertData({
           open: true,
@@ -92,7 +90,7 @@ const Profile = () => {
         <Box
           sx={{
             display: "flex",
-            height: "70vh",
+            height: "38vh",
             width: "100%",
             justifyContent: "center",
             alignItems: "center",

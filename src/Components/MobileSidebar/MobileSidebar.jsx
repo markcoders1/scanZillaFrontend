@@ -60,7 +60,6 @@ const MobileSidebar = () => {
 
   useEffect(()=>{
     const {height} = windowDimensions
-    console.log("height",height)
   },[windowDimensions])
 
 

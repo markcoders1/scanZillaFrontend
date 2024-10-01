@@ -67,7 +67,7 @@ const Home = () => {
 
     if (auth.email) {
       fetchUser();
-      console.log(auth)
+     
     }
   }, [auth.email, dispatch]);
 

@@ -242,7 +242,7 @@ const Analyze = () => {
 
     })
     setRules(response.data)
-    console.log("rules response", response)
+  
   }
 
   const addBullet = () => {
@@ -313,7 +313,7 @@ const Analyze = () => {
     
     let tempbullets = data.bulletpoints.map(e=>e.value);
 
-    console.log(calcStringCost(tempbullets.join('')))
+    // console.log(calcStringCost(tempbullets.join('')))
     setCreditDynamic(calcStringCost(data.title) + calcStringCost(data.description) + calcStringCost(tempbullets.join('')) + calcStringCost(data.keywords))
   },[data, setData])
 

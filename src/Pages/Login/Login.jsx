@@ -43,7 +43,7 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const responseData = await signInWithGooglePopup();
-      console.log("response data", responseData);
+    
       const data = responseData.data;
       data.authenticated = true;
   
@@ -101,12 +101,11 @@ const Login = () => {
   
 
   useEffect(() => {
-    console.log(auth)
     const refreshToken = localStorage.getItem('refreshToken')
     if (refreshToken) {
       sessionStorage.setItem('refreshToken', refreshToken)
       navigate('/dashboard')
-      console.log("===========================================================")
+     
     }
  
   }, [])

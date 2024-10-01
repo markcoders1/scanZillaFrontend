@@ -67,6 +67,7 @@ const Credits = () => {
                 method: "get",
             });
             setLoading(false);
+
             if (response) {
                 setCreditsHistory(response?.data?.payments);
                 setSnackAlertData({
@@ -101,7 +102,7 @@ const Credits = () => {
                 method: "get",
             });
             setLoading(false);
-            console.log(response)
+            
             setAutoCreditsAmount(response.data.offers.filter((e)=>e.variant>0).sort((a,b)=>a.variant-b.variant));
         } catch (error) {
             console.error(error);
@@ -439,13 +440,18 @@ const Credits = () => {
                                 }
                             </Box>
                             <Box>
-                                <Typography>
+                                <Typography
+                                sx={{
+                                 
+                                    p:"0px 24px 0px 0px"
+                                }}
+                                >
                                     <NavLink to="/history">
                                         <Button
                                             sx={{
                                                 p: "15px 20px",
                                                 background: "linear-gradient(to right, #1A0049, #41016C)",
-                                                width: "90%",
+                                                width: "100%",
                                                 height: "46px",
                                                 borderRadius: "5px",
                                                 fontSize: {
@@ -460,6 +466,7 @@ const Credits = () => {
                                                     color: "white",
                                                 },
                                                 boxShadow: "none",
+                                               
                                             }}
                                             variant="contained"
                                         >
