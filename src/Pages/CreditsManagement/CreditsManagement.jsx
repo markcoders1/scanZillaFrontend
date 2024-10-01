@@ -50,7 +50,7 @@ const CreditsManagement = () => {
         method: "get",
       });
       setLoading(false);
-      console.log(response.data.offers)
+     
       setOffers(response.data.offers);
     } catch (error) {
       console.error(error);
@@ -93,7 +93,7 @@ const CreditsManagement = () => {
         <Box
           sx={{
             display: "flex",
-            height: "70vh",
+            height: "40vh",
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
@@ -119,7 +119,7 @@ const CreditsManagement = () => {
             {offers.map((e, i) => (
               
               <Box key={i}>
-                {console.log(e)}
+              
                 <Box
                   sx={{
                     // border:"2px solid red",

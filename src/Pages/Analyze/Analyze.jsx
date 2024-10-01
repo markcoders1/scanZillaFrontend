@@ -4,7 +4,7 @@ import CustomSelect from "../../Components/CustomSelect/CustomSelect";
 import Heading from "../../Components/Heading/Heading";
 import CustomTextField from "../../Components/CustomInputField/CustomInputField";
 import CustomButton from "../../Components/CustomButton/CustomButton";
-import { Editor } from '@tinymce/tinymce-react';
+
 import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";

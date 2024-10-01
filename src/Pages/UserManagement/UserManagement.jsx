@@ -88,7 +88,7 @@ const UserTable = () => {
         method: "get",
       });
       setUsers(response.data);
-      console.log(response);
+     
     } catch (error) {
       console.log(error);
     } finally {

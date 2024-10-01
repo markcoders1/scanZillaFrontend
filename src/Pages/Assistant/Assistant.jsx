@@ -25,10 +25,6 @@ const Assistant = () => {
         bulletsDont: [""],
     });
 
-    useEffect(()=>{
-        console.log(pointers)
-    },[pointers])
-
     const divideString = (string) =>{
         return string
     }
@@ -104,7 +100,7 @@ const Assistant = () => {
                 method: "get",
             });
             setLoading(false);
-            console.log(response.data)
+           
             setPointers({
                 titleDo: divideString(response.data.title.Dos),
                 titleDont: divideString(response.data.title.Donts),
