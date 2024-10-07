@@ -257,6 +257,17 @@ const MobileSidebar = () => {
                   Profile
                 </NavLink>
               </Typography>
+              <Typography>
+                <NavLink
+                  to="/contact"
+                  className={({ isActive }) =>
+                    isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
+                  }
+                  onClick={handleNavLinkClick}
+                >
+                  Contact Us
+                </NavLink>
+              </Typography>
             </Box>
         }
       </Box>

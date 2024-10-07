@@ -175,6 +175,16 @@ const AppSidebar = () => {
                 Profile
               </NavLink>
             </Typography>
+            <Typography>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+              >
+                Contact Us
+              </NavLink>
+            </Typography>
           </Box>
         )}
       </Box>

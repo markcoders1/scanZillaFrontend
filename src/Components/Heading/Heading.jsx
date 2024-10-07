@@ -5,7 +5,8 @@ const Heading = ({
   Heading = "",
   characterText = "",
   count = "",
-  number
+  number,
+  headingstyle,
 }) => {
   return (
     <Box
@@ -16,7 +17,8 @@ const Heading = ({
         sm:"row",
         xs:"column", 
       },
-      gap:"0.1rem"
+      gap:"0.1rem",
+      ...headingstyle
     }}
     >
       {number?

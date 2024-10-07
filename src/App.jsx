@@ -28,6 +28,7 @@ const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm/Checkout
 const PackageSetting = React.lazy(() => import('./Pages/PackageSetting/PackageSetting'));
 const AssistantInstructions = React.lazy(() => import('./Pages/Assistant/Assistant'));
 const ContactForm = React.lazy(() => import('./Pages/ContactForm/ContactForm'));
+import Contactus from "./Pages/ContactUs/Contactus";
 
 import PageNotFound from "./Pages/404page/PageNotFound";
 
@@ -68,6 +69,8 @@ function App() {
               <Route path="dashboard-admin" element={<Protected children={<AdminDashboard />} />} />
               <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
               <Route path="contact-admin" element={<Protected children={<ContactForm />} />} />
+              <Route path="contact" element={<Protected children={<Contactus />} />} />
+
             </Route>
             <Route path="*" element={<PageNotFound/>} />
           </Routes>
