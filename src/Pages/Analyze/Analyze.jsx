@@ -399,9 +399,9 @@ const Analyze = () => {
               gap: ".7rem"
             }}
           >
-            <marquee
+            <div
             style={{
-              padding:"10px 0px",
+              padding:"15px 15px",
               backgroundColor:"#1A0049",
               color:"white",
               borderRadius:"5px",
@@ -411,7 +411,7 @@ const Analyze = () => {
             >
            Disclaimer : This tool is designed to assist in identifying potential TOS violations and evaluating indexing performance within Amazon listings. While it is regularly updated, it may not capture every TOS violation. Please note that thorough keyword research is essential for achieving optimal ranking and visibility. Personal review and discretion are advised for best results.
 
-            </marquee>
+            </div>
             
             <CustomSelect
             categoryError={errors?.category}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 import CustomTextField from '../../Components/CustomInputField/CustomInputField'
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
@@ -8,7 +8,7 @@ import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputSha
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import { Mail } from 'lucide-react';
 import { Clock } from 'lucide-react';   
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
@@ -16,9 +16,16 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const Contactus = () => {
     const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+
+  const auth = useSelector((state) => state.auth);
+
+  useEffect(()=>{
+    setEmail(auth.email)
+  },[])
+
     const [data, setData] = useState({
         name: '',
-        email: '',
         content: '',
         
       });
@@ -36,6 +43,8 @@ const Contactus = () => {
 
       const handleSubmit = async () => {
         console.log('Form Data:', data);
+
+        console.log(email)
     
         
         try {
@@ -45,20 +54,27 @@ const Contactus = () => {
             method: "post",
             data: {
               name : data.name,
-              email : data.email,
+              email : email,
               content : data.content
             }
+
+            
     
     
           })
           console.log(response)
+
+          setData({
+            name: "",
+            content: ""
+          })
     
-        //   dispatch(handleSnackAlert({ open: true, message: "Thank you for reaching out to us! we will contact you shortly", severity: "success" }))
+          dispatch(handleSnackAlert({ open: true, message: "Thank you for reaching out to us! we will contact you shortly", severity: "success" }))
           
-          setTimeout(()=>{navigate('/dashboard')},2000)
+         
     
         } catch (error) {
-        //   dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
+          dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
         }
     
       };
@@ -80,7 +96,7 @@ const Contactus = () => {
         display:"flex",
         flexDirection:"column",
         gap:"10px",
-        flexBasis:"50%",
+        flexBasis:"100%",
        
      }}
     >
@@ -110,26 +126,6 @@ const Contactus = () => {
                   name="name"
                   value={data?.name}
                   error={errors?.name}
-                  placeholder=""
-                  border=""
-                  boxShadow={true}
-                  maxLength={500}
-                />
-              </Box>
-              <Box
-              sx={{
-                display:"flex",
-                flexDirection:"column",
-                gap:"10px"
-             }}
-              >
-              <Heading Heading='Email *' />
-                <CustomTextField
-                  handleKeyDown={() => { }}
-                  onChange={handleInput}
-                  name="email"
-                  value={data?.email}
-                  error={errors?.email}
                   placeholder=""
                   border=""
                   boxShadow={true}
@@ -176,50 +172,7 @@ const Contactus = () => {
                 />
     </Box>
 
-    <Box
-     sx={{
-        display:"flex",
-        flexDirection:"column",
-        gap:"10px",
-        flexBasis:"50%",
-        // border:"2px solid red"
-     }}
-    >
-           <Typography sx={{
-        color: "#333333",
-        fontWeight: "600",
-        fontSize: {
-          sm: "30px",
-          xs: "26px"
-        },
-      }}>
-        Contact Info
-      </Typography>
-
-      <Box
-      sx={{
-        display:"flex",
-        alignItems:"center",
-        gap:"15px",
-        mt:{md:"60px", xs:"20px"}
-      }}
-      >
-      <Mail /> E-MAIL : amz@blazecopywriting.com
-      </Box>
-     
-      <Heading  Heading='Hours of Operation' headingstyle={{mt:"30px"}} />
-      <Box
-      sx={{
-        display:"flex",
-        alignItems:"center",
-        gap:"15px",
-        mt:"8px"
-      }}
-      >
-        <Clock /> Monday-Friday : 8am to 6pm
-      </Box>
-
-    </Box>
+   
     </Box>
   )
 }
