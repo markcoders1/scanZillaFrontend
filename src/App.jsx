@@ -6,32 +6,30 @@ import Login from "./Pages/Login/Login";
 import Protected from "./Pages/Protected/Protected";
 import { PageLoader } from "./Components/Loader/PageLoader";
 
-const LayoutForOnePageScreens = React.lazy(() => import('./Pages/Layout/LayoutSinglePage'));
-const Signup = React.lazy(() => import('./Pages/Signup/Signup'));
-const OTP = React.lazy(() => import('./Pages/OTP/OTP'));
-const SetPassword = React.lazy(() => import('./Pages/SetPassword/SetPassword'));
-const DashboardLayout = React.lazy(() => import('./Pages/Layout/DashboardLayout'));
-const EmailFieldForgot = React.lazy(() => import('./Pages/EmailFieldForgot/EmailFieldForgot'));
-const Analyzed = React.lazy(() => import('./Pages/Analyze/Analyze'));
-const History = React.lazy(() => import('./Pages/History/History'));
-const Profile = React.lazy(() => import('./Pages/Profile/Profile'));
-const Credits = React.lazy(() => import('./Pages/Credits/Credits'));
-const Dashboard = React.lazy(() => import('./Pages/Dashboard/Dashboard'));
-const Debit = React.lazy(() => import('./Pages/Debit&CreditCard/Debit&CreditCard'));
-const PaymentScreen = React.lazy(() => import('./Pages/PaymentScreen/PaymentScreen'));
-const Details = React.lazy(() => import('./Pages/Details/Details'));
-const ToolManagement = React.lazy(() => import('./Pages/ToolMangement/ToolManagement'));
-const CreditsManagement = React.lazy(() => import('./Pages/CreditsManagement/CreditsManagement'));
-import UserManagement from './Pages/UserManagement/UserManagement'
-const AdminDashboard = React.lazy(() => import('./Pages/AdminDashboard/AdminDashboard'));
+import LayoutForOnePageScreens from './Pages/Layout/LayoutSinglePage';
+import Signup from './Pages/Signup/Signup';
+import OTP from './Pages/OTP/OTP';
+import SetPassword from './Pages/SetPassword/SetPassword';
+import DashboardLayout from './Pages/Layout/DashboardLayout';
+import EmailFieldForgot from './Pages/EmailFieldForgot/EmailFieldForgot';
+import Analyzed from './Pages/Analyze/Analyze';
+import History from './Pages/History/History';
+import Profile from './Pages/Profile/Profile';
+import Credits from './Pages/Credits/Credits';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import Debit from './Pages/Debit&CreditCard/Debit&CreditCard';
+import PaymentScreen from './Pages/PaymentScreen/PaymentScreen';
+import Details from './Pages/Details/Details';
+import ToolManagement from './Pages/ToolMangement/ToolManagement';
+import CreditsManagement from './Pages/CreditsManagement/CreditsManagement';
+import UserManagement from './Pages/UserManagement/UserManagement';
+import AdminDashboard from './Pages/AdminDashboard/AdminDashboard';
 const CheckoutForm = React.lazy(() => import('./Components/CheckoutForm/CheckoutForm'));
-const PackageSetting = React.lazy(() => import('./Pages/PackageSetting/PackageSetting'));
-const AssistantInstructions = React.lazy(() => import('./Pages/Assistant/Assistant'));
-const ContactForm = React.lazy(() => import('./Pages/ContactForm/ContactForm'));
+import PackageSetting from './Pages/PackageSetting/PackageSetting';
+import AssistantInstructions from './Pages/Assistant/Assistant';
+import ContactForm from './Pages/ContactForm/ContactForm';
 import Contactus from "./Pages/ContactUs/Contactus";
-
 import PageNotFound from "./Pages/404page/PageNotFound";
-
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -70,7 +68,6 @@ function App() {
               <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
               <Route path="contact-admin" element={<Protected children={<ContactForm />} />} />
               <Route path="contact" element={<Protected children={<Contactus />} />} />
-
             </Route>
             <Route path="*" element={<PageNotFound/>} />
           </Routes>

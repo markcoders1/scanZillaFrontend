@@ -350,7 +350,7 @@ const Analyze = () => {
         <Box
           sx={{
             display: "flex",
-            height: "70vh",
+            height: "69vh",
             width: "100%",
             justifyContent: "center",
             alignItems: "center",

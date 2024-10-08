@@ -104,7 +104,7 @@ const Home = () => {
       setLoading(false);
       setSnackAlertData({
         open: true,
-        message: error.toString(),
+        message: error.response.data.message,
         severity: "error",
       });
     }
@@ -199,6 +199,8 @@ const Home = () => {
             md: "row"
           },
           gap: "30px",
+        
+
           // border: "2px solid red",
 
         }}>

@@ -125,3 +125,58 @@ select:-webkit-autofill:focus {
   -webkit-box-shadow: transparent inset;
   transition: background-color 5000s ease-in-out 0s;
 }
+
+
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 3px;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1); /* Optional for the track color */
+  display: none;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ffa100; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Roundness of the scrollbar thumb */
+  display: none;
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #020408; /* Color of the scrollbar thumb when hovered */
+  display: none;
+
+}
+
+/* Hide scrollbar when not in use */
+* {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #000000 rgba(255, 255, 255, 0.1); /* Firefox */
+
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+
+}
+
+body {
+  overflow-y: scroll; /* Always show vertical scrollbar */
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+body::-webkit-scrollbar {
+  display: block;
+  background: transparent; /* Making scrollbar transparent when not hovered */
+}
+
+body::-webkit-scrollbar-thumb {
+  display: block;
+}

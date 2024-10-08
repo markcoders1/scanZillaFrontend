@@ -74,7 +74,8 @@ const Profile = () => {
       setLoading(false);
       setSnackAlertData({
         open: true,
-        message: error.toString(),
+        message: error.response.data.message,
+
         severity: "error",
       });
     }
@@ -90,7 +91,7 @@ const Profile = () => {
         <Box
           sx={{
             display: "flex",
-            height: "38vh",
+            height: "70vh",
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
@@ -103,6 +104,8 @@ const Profile = () => {
           sx={{
             display: "flex",
             gap: "50px",
+            height: "70vh",
+
           }}
         >
           <Box

@@ -88,7 +88,9 @@ const Contactus = () => {
     sx={{
         display:"flex",
         gap:{md:"30px", xs:"100px"},
-        flexDirection:{md:"row", xs:"column"}
+        flexDirection:{md:"row", xs:"column"},
+       
+
     }}
     >
     <Box
@@ -97,6 +99,7 @@ const Contactus = () => {
         flexDirection:"column",
         gap:"10px",
         flexBasis:"100%",
+      
        
      }}
     >
@@ -110,13 +113,18 @@ const Contactus = () => {
       }}>
         Got a Question? Email Us
       </Typography>
+      <Box
+      sx={{
+        height:"70vh"
+      }}
+      >
+
          <Box
          sx={{
             display:"flex",
             flexDirection:"column",
             gap:"10px",
-            
-           
+          
          }}
          >
          <Heading Heading='Name *   ' />
@@ -171,6 +179,8 @@ const Contactus = () => {
                   onClick={handleSubmit}    
                 />
     </Box>
+    </Box>
+
 
    
     </Box>

@@ -78,7 +78,7 @@ const Credits = () => {
                 if (response?.code > 200) {
                     setSnackAlertData({
                         open: true,
-                        message: response?.message,
+                        message: response?.data?.message,
                         severity: "error",
                     });
                 }
@@ -86,11 +86,11 @@ const Credits = () => {
         } catch (error) {
             console.log(error);
             setLoading(false);
-            // setSnackAlertData({
-            //     open: true,
-            //     message: error.toString(),
-            //     severity: "error",
-            // });
+            setSnackAlertData({
+                open: true,
+                message: error.response.data.message,
+                severity: "error",
+            });
         }
     };
 
@@ -144,7 +144,8 @@ const Credits = () => {
             setLoading(false);
             setSnackAlertData({
                 open: true,
-                message: error.toString(),
+                message: error.response.data.message,
+
                 severity: "error",
             });
         }
@@ -192,10 +193,31 @@ const Credits = () => {
                         display: "flex",
                         gap: "2.2rem",
                         marginTop: "10px",
+                        // border:"2px solid red",
+                        height:"70vh",
                         flexDirection: {
                             md: "column",
                             xs: "column",
                         },
+                        overflowY: "auto",
+            overflowX: "hidden",
+            padding: "20px 15px",
+            "&::-webkit-scrollbar": {
+              width: "8px"
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "#DFDFDF",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "black",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#b30000"
+            },
+            // zIndex:"-1"
+            backgroundColor: "transparent"
                     }}
                 >
                     <Box

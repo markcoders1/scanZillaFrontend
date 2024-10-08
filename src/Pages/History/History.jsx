@@ -53,7 +53,8 @@ const History = () => {
             setLoading(false);
             setSnackAlertData({
                 open: true,
-                message: error.toString(),
+                message: error.response.data.message,
+
                 severity: "error",
             });
         }
@@ -92,7 +93,7 @@ const History = () => {
             setLoading(false);
             setSnackAlertData({
                 open: true,
-                message: error.toString(),
+                message: error.response.data.message,
                 severity: "error",
             });
         }
@@ -135,6 +136,8 @@ const History = () => {
                             marginTop: "15px",
                             display: "flex",
                             gap: "2.2rem",
+                            height: "70vh",
+
                             flexDirection: {
                                 lg: "row",
                                 xs: 'column',
@@ -180,19 +183,25 @@ const History = () => {
                                 Analyze History
                             </Typography>
 
-                            {loading ? "loading...." : analyzeHistory.map((item, index) => (
-                                <GiftCard
-                                    key={item._id}
-                                    id={item._id}
-                                    title={item.title}
-                                    description={item.description}
-                                    bullets={item.bullets}
-                                    index={index}
-                                    openModal={openModal}
-                                    error={item.error}
-                                    keywords = {item.keywords}
-                                />
-                            ))}
+                            {
+                                analyzeHistory.length < 1 ? (
+                                    <Typography>You have not analyzed yet</Typography>
+                                ) : (
+                                    analyzeHistory.map((item, index) => (
+                                        <GiftCard
+                                            key={item._id}
+                                            id={item._id}
+                                            title={item.title}
+                                            description={item.description}
+                                            bullets={item.bullets}
+                                            index={index}
+                                            openModal={openModal}
+                                            error={item.error}
+                                            keywords={item.keywords}
+                                        />
+                                    ))
+                                )
+                            }
                         </Box>
                         <Box
                             sx={{
@@ -231,9 +240,15 @@ const History = () => {
                             >
                                 Credits History
                             </Typography>
-                            {loading && creditsHistory.length < 1 ? "loading..." : creditsHistory.map((item, index) => (
-                                <CreditsHistory item={item} key={index} index={index} />
-                            ))}
+                            {
+                                creditsHistory.length < 1 ? (
+                                    <Typography>You do not have any credit history yet</Typography>
+                                ) : (
+                                    creditsHistory.map((item, index) => (
+                                        <CreditsHistory item={item} key={index} index={index} />
+                                    ))
+                                )
+                            }
                         </Box>
 
                         <ViewDetailModal

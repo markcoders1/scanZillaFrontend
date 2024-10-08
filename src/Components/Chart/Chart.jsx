@@ -18,7 +18,7 @@ const CustomTooltip = ({ active, payload, label, yFormatter, setHoveredValue }) 
 
 const Chart = ({ data, xKey, yKey, yFormatter, setHoveredValue }) => {
     const [dynamicWidth, setDynamicWidth] = useState("100%");
-    const [dynamicHeight, setDynamicHeight] = useState(400); // Default height
+    const [dynamicHeight, setDynamicHeight] = useState(350); // Default height
 
     const getAutomaticHeightAndWidth = () => {
         if (window.innerWidth <= 300) {
