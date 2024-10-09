@@ -1,5 +1,5 @@
 import React from 'react'
-import bg from "./../../assets/images/bg.png"
+import bg from "./../../assets/images/bg1.webp"
 import visa from "./../../assets/images/visa circles.png"
 import { Box, Typography } from '@mui/material'
 

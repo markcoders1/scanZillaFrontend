@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import AppSidebar from '../AppSidebar/AppSidebar';
-import dashboardImg1 from '../../assets/images/dashboard.webp';  
+import dashboardImg1 from '../../assets/images/dashboard1.webp';  
 import Header from '../../Components/Header/Header';
 import MobileSidebar from '../../Components/MobileSidebar/MobileSidebar';
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';

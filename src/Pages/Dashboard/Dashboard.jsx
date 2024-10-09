@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import DetailedCard from "../../Components/DetailedCard/DetailedCard";
 import Customcard from "../../Components/Customcard/Customcard";
 import CardIWithImageBackground from "../../Components/CardIWithImageBackground/CardIWithImageBackground";
-import bg from "./../../assets/images/bg.png";
+import bg from "./../../assets/images/bg1.webp";
 import CreditsHistory from "../../Components/CreditsHistory/CreditsHistory";
 import GiftCard from "../../Components/GiftCard/GiftCard";
 import CustomButton from "../../Components/CustomButton/CustomButton";
