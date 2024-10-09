@@ -62,7 +62,7 @@ const CustomSelect = ({
           }}
           id="demo-simple-select-label"
         >
-          Select Payment Method
+          {placeHolder}
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"

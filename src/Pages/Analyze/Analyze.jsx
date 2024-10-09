@@ -418,6 +418,7 @@ const Analyze = () => {
             data={category}
             handleChange={handleCategoryChange}
             value={data.category} 
+            placeHolder={"Select Category"}
             />
             <Box sx={{
               display: "flex",

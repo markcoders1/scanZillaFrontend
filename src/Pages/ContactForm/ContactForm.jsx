@@ -155,7 +155,7 @@ const ContactForm = () => {
       >
         <Heading Heading='Payment Method' />
 
-        <CustomSelect categoryError={errors?.paymentMethod} data={paymentMethod} handleChange={handleCategoryChange} boxShadow='0px 8px 26px -4px rgba(0, 0, 0, 0.3)' placeHolder={"hello"}  />
+        <CustomSelect categoryError={errors?.paymentMethod} data={paymentMethod} handleChange={handleCategoryChange} boxShadow='0px 8px 26px -4px rgba(0, 0, 0, 0.3)' placeHolder={"Select Payment Method"}  />
       </Box>
       <CustomButton
         border="2px solid #1A0049"

@@ -60,7 +60,7 @@ const Logout = () => {
             }
           }}
           border={"2px solid white"}
-          ButtonText={"Log out"}
+          ButtonText={"Log Out"}
           color={"white"}
           fontSize={"14px"}
           
