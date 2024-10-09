@@ -9,6 +9,7 @@ import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import { useNavigate } from 'react-router-dom';
+import CustomSelectTool from '../../Components/CustomSelectTool/CustomSelectTool';
 
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
@@ -154,7 +155,7 @@ const ContactForm = () => {
       >
         <Heading Heading='Payment Method' />
 
-        <CustomSelect categoryError={errors?.paymentMethod} data={paymentMethod} handleChange={handleCategoryChange} boxShadow='0px 8px 26px -4px rgba(0, 0, 0, 0.3)'  />
+        <CustomSelect categoryError={errors?.paymentMethod} data={paymentMethod} handleChange={handleCategoryChange} boxShadow='0px 8px 26px -4px rgba(0, 0, 0, 0.3)' placeHolder={"hello"}  />
       </Box>
       <CustomButton
         border="2px solid #1A0049"

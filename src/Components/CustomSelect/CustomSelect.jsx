@@ -1,5 +1,5 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 const CustomSelect = ({
   data = [],
@@ -11,7 +11,12 @@ const CustomSelect = ({
 }) => {
   const handleSelectionChange = (e) => {
     handleChange(e.target.value); // Call the parent's handler
+    setSelectValue(true);
+
   };
+  const [selectValue , setSelectValue] = useState(false);
+
+
 
   return (
     <Box sx={{ mb: 2 }}>
@@ -53,11 +58,11 @@ const CustomSelect = ({
             lineHeight: { lg: "30px" },
             fontWeight: { lg: "500" },
             color: "#A0A4A9",
-            display: value ? "none " : "flex",
+            display: selectValue ? "none " : "flex",
           }}
           id="demo-simple-select-label"
         >
-           Payment Method
+          Select Payment Method
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
@@ -77,7 +82,7 @@ const CustomSelect = ({
             fontWeight: {
               lg: "500",
             },
-            color: value ? "black" : "#A0A4A9",
+            color: selectValue ? "black" : "#A0A4A9",
             "&::-webkit-scrollbar": { width: "8px" },
             "&::-webkit-scrollbar-track": {
               background: "#DFDFDF",
