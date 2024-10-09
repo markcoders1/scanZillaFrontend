@@ -104,7 +104,26 @@ const Profile = () => {
           sx={{
             display: "flex",
             gap: "50px",
-            height: "70vh",
+            height:"70vh",
+            overflowY: "auto",
+            overflowX: "hidden",
+            padding: "20px 15px",
+            "&::-webkit-scrollbar": {
+              width: "8px"
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "#DFDFDF",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "black",
+              borderRadius: "10px"
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#b30000"
+            },
+           
+          
 
           }}
         >
@@ -190,6 +209,7 @@ const Profile = () => {
                 <Box
                   sx={{
                     flexGrow: 1,
+                    mb:"20px"
                   }}
                 >
                   <DetailedCard

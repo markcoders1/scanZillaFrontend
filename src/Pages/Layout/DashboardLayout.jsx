@@ -54,6 +54,8 @@ const DashboardLayout = () => {
         return 'Assistant Instructions';
         case '/contact-admin':
           return 'Contact Admin';
+          case '/contact':
+            return 'Got a Question? Email Us';
       // Add more cases as needed for other routes
       default:
         return '';
@@ -83,6 +85,7 @@ const DashboardLayout = () => {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundAttachment:"fixed",
+
         padding: {
           sm: "20px 30px",
           xs: "10px 10px"
@@ -131,7 +134,7 @@ const DashboardLayout = () => {
         <Box
           sx={{
             marginLeft: {
-              lg: '340px', // Adjust to match fixed sidebar width
+              lg: auth.role == "user" ? "300px": "340px", 
               xs: '0px',
             },
             // width: '100%',
@@ -156,13 +159,15 @@ const DashboardLayout = () => {
             
             <Box sx={{
                padding: {
-                sm: '50px',
+                xl: '50px',
+                md:"30px",
                 xs: '30px 12px',
                 borderRadius: '30px',
               },
               backgroundColor: 'white',
               width:"100%",
-              flexShrink:"1"
+              flexShrink:"1",
+             
             }} >
               <Header title={headerTitle} />
             <Outlet />

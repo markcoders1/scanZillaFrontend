@@ -32,7 +32,7 @@ const AppSidebar = () => {
         flexDirection: 'column',
         gap: '4rem',
         justifyContent: 'center',
-        marginTop: '40px',
+        marginTop: {xl:'40px', xs:"20px"},
         padding: '20px', // Added padding for better spacing
       }}
     >
@@ -40,7 +40,7 @@ const AppSidebar = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '80px',
+          gap:  {xl:'80px', xs:"40px"},
           justifyContent: 'center',
         }}
       >
@@ -48,7 +48,7 @@ const AppSidebar = () => {
           <Typography
             sx={{
               fontWeight: '600',
-              fontSize: '3rem',
+              fontSize:{xl: '3rem', xs:"2.5rem"},
               lineHeight: '35px',
               color: '#D081FF',
             }}
@@ -62,7 +62,8 @@ const AppSidebar = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem',
+              gap: {xl:'1.5rem', xs:".8rem"},
+
             }}
           >
             <Typography>
@@ -122,7 +123,7 @@ const AppSidebar = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem',
+              gap: {xl:'1.5rem', xs:".8rem"},
             }}
           >
             <Typography>

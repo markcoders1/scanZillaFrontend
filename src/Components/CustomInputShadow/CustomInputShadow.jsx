@@ -17,6 +17,7 @@ const CustomInputShadow = forwardRef(({
   height = "56px", // Set default height here
   color = "#2a2b2d",
   disabled = false,
+  textFieldStyle = {}
   
 }, ref) => {
   return (
@@ -73,6 +74,7 @@ const CustomInputShadow = forwardRef(({
               lg: "500"
             },
             color: "color",
+            ...textFieldStyle
             
           }}
           onKeyDown={handleKeyDown}

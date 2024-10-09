@@ -6,7 +6,7 @@ import Heading from '../../Components/Heading/Heading';
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputShadow';
 import CustomButton from '../../Components/CustomButton/CustomButton';
-import { Mail } from 'lucide-react';
+import { Mail, MapPinHouse } from 'lucide-react';
 import { Clock } from 'lucide-react';   
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -54,7 +54,7 @@ const Contactus = () => {
             method: "post",
             data: {
               name : data.name,
-              email : email,
+              
               content : data.content
             }
 
@@ -99,23 +99,34 @@ const Contactus = () => {
         flexDirection:"column",
         gap:"10px",
         flexBasis:"100%",
+        p:"10px 15px",
+        height: "70vh",
+        overflowY: "auto",
+        overflowX: "hidden",
+        padding: "20px 15px",
+        "&::-webkit-scrollbar": {
+          width: "8px"
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#DFDFDF",
+          borderRadius: "10px"
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "black",
+          borderRadius: "10px"
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#b30000"
+        },
+       
       
        
      }}
     >
-        <Typography sx={{
-        color: "#333333",
-        fontWeight: "600",
-        fontSize: {
-          sm: "30px",
-          xs: "26px"
-        },
-      }}>
-        Got a Question? Email Us
-      </Typography>
+       
       <Box
       sx={{
-        height:"70vh"
+        // height:"70vh"
       }}
       >
 
@@ -154,9 +165,15 @@ const Contactus = () => {
                   rows={10}  // Adjust the number of rows to match the desired height
                   onChange={handleInput}
                   value={data.content}
-                  height={"360px"}
+                 
                   error={errors.content}
                   name={"content"}
+                  textFieldStyle={{
+                  
+                  height:"280px",
+                  minHeight: "100%"
+                 
+                  }}
                 
                 />
               </Box>

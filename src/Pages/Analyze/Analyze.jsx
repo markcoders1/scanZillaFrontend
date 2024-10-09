@@ -366,7 +366,7 @@ const Analyze = () => {
         <Box
           ref={scrollBoxRef}
           sx={{
-            maxHeight: "680px",
+            height: "70vh",
             display: "flex",
             gap: "20px",
             flexDirection: "column",
@@ -484,11 +484,13 @@ const Analyze = () => {
                 >
                   <Box sx={{
                     display:"flex",
-                    alignItems:"center"
+                    alignItems:"center",
+                    gap:"10px",
+                    
 
                   }}>
                     <h4
-                    style={{height:"100%", display:"block", width:"3%",fontSize:"1.2rem", paddingBottom:"1rem"}}
+                    style={{height:"100%", display:"flex", width:"3%",fontSize:"1.5rem", paddingBottom:"0rem", justifyContent:"center", alignItems:"center" }}
                     >{index+1}.</h4>
                     <CustomTextField
                       handleKeyDown={() => {}}

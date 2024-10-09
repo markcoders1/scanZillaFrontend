@@ -12,6 +12,7 @@ const Header = ({ title }) => {
         xs: "0px 0px 0px 0px"
       },
       alignItems: "center",
+      
     }}>
       <Typography sx={{
         color: "#333333",

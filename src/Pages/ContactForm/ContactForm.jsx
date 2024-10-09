@@ -19,7 +19,7 @@ const ContactForm = () => {
   const [paymentMethod, setPaymentMethod] = useState(["Wise", "Payoneer", "Direct Bank Transfer"]);
   const [data, setData] = useState({
     name: '',
-    email: '',
+    
     credits: '',
     paymentMethod: '',
   });
@@ -43,7 +43,7 @@ const ContactForm = () => {
     console.log('Form Data:', data);
 
     console.log(typeof data.name)
-    console.log(typeof data.email)
+    
 
     console.log(typeof data.credits)
     console.log(data.paymentMethod)
@@ -55,14 +55,14 @@ const ContactForm = () => {
         method: "post",
         data: {
           name: data.name,
-          email: data.email,
+         
           credits: +data.credits,
           paymentDetails: data.paymentMethod,
 
         },
-
-
+        
       })
+      console.log(response)
 
       dispatch(handleSnackAlert({ open: true, message: "Thank you for reaching out to us! we will contact you shortly", severity: "success" }))
       
@@ -70,6 +70,8 @@ const ContactForm = () => {
 
     } catch (error) {
       dispatch(handleSnackAlert({ open: true, message: error.response.data.message, severity: "error" }))
+      console.log(error)
+
     }
 
   };
@@ -84,6 +86,25 @@ const ContactForm = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: '15px',
+        p:"10px 15px",
+        height: "70vh",
+        overflowY: "auto",
+        overflowX: "hidden",
+        padding: "20px 15px",
+        "&::-webkit-scrollbar": {
+          width: "8px"
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#DFDFDF",
+          borderRadius: "10px"
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "black",
+          borderRadius: "10px"
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#b30000"
+        },
       }}
     >
       <Box
@@ -101,25 +122,6 @@ const ContactForm = () => {
           value={data.name}
           error={errors.name}
           placeholder="Name"
-          border=""
-          boxShadow={true}
-        />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px"
-        }}
-      >
-        <Heading Heading='Email' />
-        <CustomInputShadow
-          handleKeyDown={handleKeyDown}
-          onChange={handleInput}
-          name="email"
-          value={data.email}
-          error={errors.email}
-          placeholder="Email"
           border=""
           boxShadow={true}
         />
@@ -152,7 +154,7 @@ const ContactForm = () => {
       >
         <Heading Heading='Payment Method' />
 
-        <CustomSelect categoryError={errors?.paymentMethod} data={paymentMethod} handleChange={handleCategoryChange} boxShadow='0px 8px 26px -4px rgba(0, 0, 0, 0.3)' />
+        <CustomSelect categoryError={errors?.paymentMethod} data={paymentMethod} handleChange={handleCategoryChange} boxShadow='0px 8px 26px -4px rgba(0, 0, 0, 0.3)'  />
       </Box>
       <CustomButton
         border="2px solid #1A0049"

@@ -1,8 +1,14 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import React from 'react';
+import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import React from "react";
 
-const CustomSelect = ({ data = [], value, handleChange, categoryError = "", boxShadow = "0px 8px 26px -4px rgba(0, 0, 0, 0.1)" }) => {
-
+const CustomSelect = ({
+  data = [],
+  value,
+  handleChange,
+  categoryError = "",
+  boxShadow = "0px 8px 26px -4px rgba(0, 0, 0, 0.1)",
+  placeHolder,
+}) => {
   const handleSelectionChange = (e) => {
     handleChange(e.target.value); // Call the parent's handler
   };
@@ -13,19 +19,19 @@ const CustomSelect = ({ data = [], value, handleChange, categoryError = "", boxS
         sx={{
           display: "flex",
           flexDirection: "column",
-          padding: "0px 26px",
+          padding: "0px 20px",
           alignItems: "center",
           justifyContent: "space-between",
           borderRadius: "10px",
           boxShadow: boxShadow,
-          width: '100%',
-          "& fieldset": { border: 'none' },
-          '& .MuiInputLabel-outlined.Mui-focused': {
+          width: "100%",
+          "& fieldset": { border: "none" },
+          "& .MuiInputLabel-outlined.Mui-focused": {
             fontSize: {
-              lg: "20px"
+              lg: "20px",
             },
             lineHeight: {
-              lg: "30px"
+              lg: "30px",
             },
             fontWeight: {
               lg: "500",
@@ -38,59 +44,50 @@ const CustomSelect = ({ data = [], value, handleChange, categoryError = "", boxS
       >
         <InputLabel
           sx={{
-            position: 'absolute',
-            top: '50%',
+            position: "absolute",
+            top: "50%",
             left: "26px",
-            transform: 'translateY(-50%)',
+            transform: "translateY(-50%)",
             width: "100%",
-            fontSize: {
-              lg: "20px"
-            },
-            lineHeight: {
-              lg: "30px"
-            },
-            fontWeight: {
-              lg: "500"
-            },
+            fontSize: { lg: "20px" },
+            lineHeight: { lg: "30px" },
+            fontWeight: { lg: "500" },
             color: "#A0A4A9",
-            display: value ? 'none' : 'flex',
+            display: value ? "none " : "flex",
           }}
           id="demo-simple-select-label"
         >
-          Select Category
+           Payment Method
         </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="Select Category"
           value={value}
+          placeholder={placeHolder}
           onChange={handleSelectionChange}
           sx={{
             width: "100%",
             fontSize: {
-              lg: "20px"
+              lg: "20px",
             },
             lineHeight: {
-              lg: "30px"
+              lg: "30px",
             },
             fontWeight: {
-              lg: "500"
+              lg: "500",
             },
             color: value ? "black" : "#A0A4A9",
-            "&::-webkit-scrollbar": {
-              width: "8px"
-            },
+            "&::-webkit-scrollbar": { width: "8px" },
             "&::-webkit-scrollbar-track": {
               background: "#DFDFDF",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb": {
               background: "black",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
-            "&::-webkit-scrollbar-thumb:hover": {
-              background: "#b30000"
-            },
+            "&::-webkit-scrollbar-thumb:hover": { background: "#b30000" },
           }}
         >
           {data?.map((item, index) => (

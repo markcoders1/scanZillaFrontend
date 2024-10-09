@@ -204,7 +204,7 @@ const UserTable = () => {
       ) : (
         <Box
           sx={{
-            position: "relative",
+          
             top: {
               lg: "0px",
               xs: "80px",
@@ -231,18 +231,18 @@ const UserTable = () => {
         >
           <Box
             sx={{
-              position: "absolute",
-              top: "-60px",
-              right: {
-                xs: "0px",
-                sm: "20px",
-              },
+              display:"flex",
+              flexDirection:{md:"row-reverse",xs:"column-reverse"},
+              justifyContent:"space-between",
+            gap:"1rem"
+
             }}
           >
             <Box
               sx={{
                 position: "relative",
                 width: "100%",
+                width:{md:"350px", xs:"100%"}
               }}
             >
               <input
@@ -259,6 +259,7 @@ const UserTable = () => {
                   outline: "none",
                   position: "relative",
                   width: "100%",
+                  
                 }}
                 placeholder="Search"
                 value={searchTerm}
@@ -274,13 +275,15 @@ const UserTable = () => {
                 }}
               />
             </Box>
+
+            <Tabs value={filter} onChange={handleFilterChange} start>
+              <Tab label="All Users" value="all" />
+              <Tab label="Users" value="user" />
+              <Tab label="Admins" value="admin" />
+            </Tabs>
+
           </Box>
 
-          <Tabs value={filter} onChange={handleFilterChange} centered>
-            <Tab label="All Users" value="all" />
-            <Tab label="Users" value="user" />
-            <Tab label="Admins" value="admin" />
-          </Tabs>
 
           <TableContainer component={Paper}>
             <Table
@@ -370,7 +373,8 @@ const UserTable = () => {
               </TableHead>
               <TableBody>
                 {filteredUsers.map((user) => (
-                  <TableRow key={user._id} sx={{ marginTop: "12px" }}>
+           
+                  <TableRow key={user._id} sx={{ marginTop: "12px",  }}>
                     <TableCell
                       component="th"
                       scope="row"
