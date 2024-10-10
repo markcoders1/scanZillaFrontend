@@ -47,23 +47,24 @@ const CustomSelect = ({
         }}
         variant="outlined"
       >
-        <InputLabel
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "26px",
-            transform: "translateY(-50%)",
-            width: "100%",
-            fontSize: { lg: "20px" },
-            lineHeight: { lg: "30px" },
-            fontWeight: { lg: "500" },
-            color: "#A0A4A9",
-            display: selectValue ? "none " : "flex",
-          }}
-          id="demo-simple-select-label"
-        >
-          {placeHolder}
-        </InputLabel>
+          <InputLabel
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "26px",
+              transform: "translateY(-50%)",
+              // width: "100%",
+              fontSize: { lg: "20px" },
+              lineHeight: { lg: "30px" },
+              fontWeight: { lg: "500" },
+              color: "#A0A4A9",
+              display: value || selectValue  ? "none " : "flex",
+              // border:"1px solid red !important"
+            }}
+            id="demo-simple-select-label"
+          >
+            {placeHolder}
+          </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
@@ -82,7 +83,7 @@ const CustomSelect = ({
             fontWeight: {
               lg: "500",
             },
-            color: selectValue ? "black" : "#A0A4A9",
+            color: selectValue ? "black" : "black",
             "&::-webkit-scrollbar": { width: "8px" },
             "&::-webkit-scrollbar-track": {
               background: "#DFDFDF",

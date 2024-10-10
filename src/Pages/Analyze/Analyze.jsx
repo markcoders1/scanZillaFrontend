@@ -664,36 +664,11 @@ const Analyze = () => {
             </Box>
 
 
-            {!isAnyFieldFilled()?
-                <div style={{
-                  width:"100%",
-                  padding:"40px 0px"
-                }}>
-                  <CustomButton
-                      border="2px solid #1A0049"
-                      borderRadius="10px"
-                      background="white"
-                      hoverBg="white"
-                      hovercolor="#1A0049"
-                      buttonTextStyle={{}}
-                      buttonStyle={{ padding: { lg: "12px 20px" } }}
-                      ButtonText={`Clear All  `}
-                      fontSize
-                      color="#1A0049"
-                      fontWeight
-                      variant="contained"
-                      padding
-                      fullWidth={true}
-                      onClick={handleClear}
-                  />
-                </div>
-              :
-              null
-            }
+          
  
              
 
-            <Box sx={{ marginTop: "40px", display: isAnyFieldFilled() ? "block" : "none" }}>
+            <Box sx={{ marginTop: "40px",}}>
               {!isLoading ? (
                 <div style={{display:"flex", gap:"10px"}}>
                 <CustomButton
