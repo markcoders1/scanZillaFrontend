@@ -83,6 +83,7 @@ const Analyze = () => {
   const [loaderState,setLoaderState] = useState(0)
   const dispatch = useDispatch()
   const AnalyzeErrros = useSelector(state=>state.analyze)
+  
 
 
   function hasValues(obj) {
@@ -405,7 +406,9 @@ const Analyze = () => {
               backgroundColor:"#1A0049",
               color:"white",
               borderRadius:"5px",
-              marginBottom:"10px"
+              marginBottom:"10px",
+              textAlign:"justify"
+
 
             }}
             >
@@ -758,7 +761,17 @@ const Analyze = () => {
                       </Typography>)}
                     </Paper>
                     :
-                    null
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"10px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"12px"
+                    }}>
+                      <Heading Heading="Title" />
+                    <Typography sx={{padding:"10px 0"}}>
+                    No issues found, you're good to go.
+                      </Typography>
+                    </Paper>
                   }
                   {AnalyzeErrros.BE.length>0  && AnalyzeErrros.BE[0]!=="" ?
                     <Paper sx={{
@@ -837,7 +850,17 @@ const Analyze = () => {
 
                     </Paper>
                     :
-                    null
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"10px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"12px"
+                    }}>
+                      <Heading Heading="Bullet Points" />
+                    <Typography sx={{padding:"10px 0"}}>
+                    No issues found, you're good to go.
+                      </Typography>
+                    </Paper>
                   }
                   {AnalyzeErrros.DE.length>0 && AnalyzeErrros.DE[0]!==""?
                     <Paper sx={{
@@ -859,7 +882,17 @@ const Analyze = () => {
                       </Typography>)}
                     </Paper>
                     :
-                    null
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"10px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"12px"
+                    }}>
+                      <Heading Heading="Description" />
+                    <Typography sx={{padding:"10px 0"}}>
+                    No issues found, you're good to go.
+                      </Typography>
+                    </Paper>
                   }
                   {AnalyzeErrros.KE.length>0 && AnalyzeErrros.KE[0]!==""?
                     <Paper  sx={{
@@ -881,7 +914,17 @@ const Analyze = () => {
                       </Typography>)}
                     </Paper>
                     :
-                    null
+                    <Paper sx={{
+                      padding:"20px",
+                      margin:"10px 0",
+                      boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius:"12px"
+                    }}>
+                      <Heading Heading="Keywords"/>
+                    <Typography sx={{padding:"10px 0"}}>
+                    No issues found, you're good to go.
+                      </Typography> 
+                    </Paper>
                   }
                   {AnalyzeErrros.CE.length>0 && AnalyzeErrros.CE[0]!==""?
                     <Paper  sx={{
