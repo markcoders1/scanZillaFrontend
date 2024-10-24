@@ -77,7 +77,7 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
           color={'#333333'}
           margin={'auto'}
           onClick={() => {
-            handleNavigate(variant, price, planName);
+            handleNavigate(variant, price, credits);
           }}
         />
       </Box>

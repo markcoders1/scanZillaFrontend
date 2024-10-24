@@ -901,7 +901,7 @@ const Analyze = () => {
                       boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
                       borderRadius:"10px"
                     }}>
-                      <Heading Heading="Keyword Errors" />
+                      <Heading Heading="Search Terms (Generic Keywords) Errors" />
                       {AnalyzeErrros?.KE?.map((item, index)=><Typography sx={{padding:"10px 0"}} key={index}>
                       {item.split("|-|").map((el,i)=>{
                           return (
@@ -920,7 +920,7 @@ const Analyze = () => {
                       boxShadow:"0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
                       borderRadius:"12px"
                     }}>
-                      <Heading Heading="Keywords"/>
+                      <Heading Heading="Search Terms (Generic Keywords)"/>
                     <Typography sx={{padding:"10px 0"}}>
                     No issues found, you're good to go.
                       </Typography> 

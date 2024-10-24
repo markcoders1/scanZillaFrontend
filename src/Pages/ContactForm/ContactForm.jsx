@@ -15,13 +15,15 @@ import CustomSelectTool from '../../Components/CustomSelectTool/CustomSelectTool
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 const ContactForm = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
 
+  const price = queryParams.get('price');
+  const credits = queryParams.get('credits');
   const [paymentMethod, setPaymentMethod] = useState(["Wise", "Payoneer", "Direct Bank Transfer"]);
   const [data, setData] = useState({
     name: '',
-    
-    credits: '',
+    credits: credits ? credits : '',
     paymentMethod: '',
   });
 
@@ -42,10 +44,7 @@ const ContactForm = () => {
 
   const handleSubmit = async () => {
     console.log('Form Data:', data);
-
     console.log(typeof data.name)
-    
-
     console.log(typeof data.credits)
     console.log(data.paymentMethod)
 
@@ -139,6 +138,7 @@ const ContactForm = () => {
           handleKeyDown={handleKeyDown}
           onChange={handleInput}
           name="credits"
+          
           value={data.credits}
           error={errors.credits}
           placeholder="No. of Credits"
