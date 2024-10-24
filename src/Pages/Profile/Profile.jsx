@@ -209,7 +209,7 @@ const Profile = () => {
                 <Box
                   sx={{
                     flexGrow: 1,
-                    mb:"20px"
+                    // mb:"20px"
                   }}
                 >
                   <DetailedCard
@@ -223,7 +223,7 @@ const Profile = () => {
             </Box>
           </Box>
 
-          <Box
+          {/* <Box
             sx={{
               display: {
                 xs: "none",
@@ -235,7 +235,7 @@ const Profile = () => {
               flexShrink: 0,
               boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
             }}
-          ></Box>
+          ></Box> */}
           <ChangePasswordModal
             open={open}
             handleClose={() => {
