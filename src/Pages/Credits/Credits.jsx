@@ -57,7 +57,8 @@ const Credits = () => {
   };
 
   const handleNavigateToContact = (variant, price, credits) => {
-    navigate(`/contact-admin?price=${price}&credits=${credits}`);
+    // navigate(`/contact-admin?price=${price}&credits=${credits}`);
+    navigate('/contact')
 
   }
 
