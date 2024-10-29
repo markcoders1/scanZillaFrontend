@@ -741,7 +741,10 @@ const Analyze = () => {
                 <Box sx={{mt:"50px"}} >
                 <Typography sx={{fontSize:"40px", fontWeight:"600", color:"#333333"}}>{result}</Typography>
                 <Box>
-                  {(AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
+                  {
+                   !data.title ? "" :
+                  
+                  (AnalyzeErrros.TE.length>0 && AnalyzeErrros.TE[0]!=="")?
                     <Paper sx={{
                       padding:"20px",
                       margin:"10px 0",
@@ -773,7 +776,9 @@ const Analyze = () => {
                       </Typography>
                     </Paper>
                   }
-                  {AnalyzeErrros.BE.length>0  && AnalyzeErrros.BE[0]!=="" ?
+                  {
+                   !data.bulletpoints[0].value ? "" :
+                  AnalyzeErrros.BE.length>0  && AnalyzeErrros.BE[0]!=="" ?
                     <Paper sx={{
                       padding:"20px",
                       margin:"20px 0",
@@ -862,7 +867,9 @@ const Analyze = () => {
                       </Typography>
                     </Paper>
                   }
-                  {AnalyzeErrros.DE.length>0 && AnalyzeErrros.DE[0]!==""?
+                  {
+                  !data.description ? "" :
+                  AnalyzeErrros.DE.length>0 && AnalyzeErrros.DE[0]!==""?
                     <Paper sx={{
                       padding:"20px",
                       margin:"20px 0",
@@ -894,7 +901,9 @@ const Analyze = () => {
                       </Typography>
                     </Paper>
                   }
-                  {AnalyzeErrros.KE.length>0 && AnalyzeErrros.KE[0]!==""?
+                  {
+                  !data.keywords ? "" :  
+                  AnalyzeErrros.KE.length>0 && AnalyzeErrros.KE[0]!==""?
                     <Paper  sx={{
                       padding:"20px",
                       margin:"20px 0",
