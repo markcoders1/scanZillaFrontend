@@ -56,6 +56,7 @@ const ToolManagement = () => {
       totalBulletsLength: "",
       category: "",
       searchTerms: "",
+      newAbbrevation: ""
     },
   });
 
@@ -347,7 +348,154 @@ const ToolManagement = () => {
     );
   }, [abbData, searchTermAbb]);
 
+  const removeAbbrevationMutation = useMutation({
+    mutationFn: async (keyword) => {
+      const response = await axiosInstance.delete(`${appUrl}/abbwords`, {
+        params: { word: keyword },
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["allowedAbbrevation"]);
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: "Allowed Abbrevation removed successfully",
+          severity: "success",
+        })
+      );
+    },
+    onError: (error) => {
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: error.response?.data?.message || "An error occurred",
+          severity: "error",
+        })
+      );
+    },
+  });
+
+
+  const handleRemoveAbbrevation = (keyword) => {
+    console.log(keyword)
+    removeAbbrevationMutation.mutate(keyword);
+  };
+
+    // Mutations
+    const addAbbrevationMutation = useMutation({
+      mutationFn: async (newAbbrevation) => {
+        const response = await axiosInstance.post(`${appUrl}/abbwords`, {
+          word: newAbbrevation,
+        });
+        return response.data;
+      },
+      onSuccess: () => {
+        queryClient.invalidateQueries(["allowedAbbrevation"]);
+        dispatch(
+          handleSnackAlert({
+            open: true,
+            message: "Allowed Abbrevation added successfully",
+            severity: "success",
+          })
+        );
+      },
+      onError: (error) => {
+        dispatch(
+          handleSnackAlert({
+            open: true,
+            message: error.response?.data?.message || "An error occurred",
+            severity: "error",
+          })
+        );
+      },
+    });
+    // Event Handlers
+    const handleAddAbbrevation = (data) => {
+      console.log("add abb", data.newAbbrevation);
+      if (data.newAbbrevation.trim() === "") {
+        dispatch(
+          handleSnackAlert({
+            open: true,
+            message: "Keyword cannot be empty",
+            severity: "error",
+          })
+        );
+      } else {
+        addAbbrevationMutation.mutate(data.newAbbrevation);
+        reset({ newAbbrevation: "" });
+      }
+    };
   
+
+
+  const downloadAbbCsv = async () => {
+    console.log("abb CSv func");
+    try {
+      const response = await axiosInstance({
+        url: `${appUrl}/abbcsv`,
+        method: "get",
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "text/csv" })
+      );
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "data.csv");
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading the CSV file:", error);
+    }
+  };
+
+  const uploadCsvMutationAbb = useMutation({
+    mutationFn: async (file) => {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axiosInstance.post(`${appUrl}/abbcsv`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data;
+    },
+    onSuccess: (data) => {
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: data.message,
+          severity: "success",
+        })
+      );
+      queryClient.invalidateQueries(["restrictedKeywords"]);
+    },
+    onError: (error) => {
+      console.error("Error uploading the file:", error);
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: error.response?.data?.message || "An error occurred",
+          severity: "error",
+        })
+      );
+    },
+  });
+
+  const handleFileChangeAbb = (event) => {
+    console.log(event.target.files[0]);
+    console.log("function for select file");
+    const file = event.target.files[0];
+
+    if (file) {
+      uploadCsvMutationAbb.mutate(file);
+    }
+  };
+
 
   // Handle Loading and Error States
   if (rulesLoading || keywordsLoading) {
@@ -843,21 +991,21 @@ const ToolManagement = () => {
                     <RestrictedKeyword
                       key={index}
                       content={keyword}
-                      onRemove={() => handleRemoveKeyword(keyword)}
+                      onRemove={() => handleRemoveAbbrevation(keyword)}
                     />
                   ))}
                 </Box>
               </Box>
               <Box sx={{ position: "relative", marginTop: "30px" }}>
                 <Controller
-                  name="newKeyword"
+                  name="newAbbrevation"
                   control={control}
                   render={({ field }) => (
                     <input
                       {...field}
                       type="text"
-                      name="newKeyword"
-                      id="newKeyword"
+                      name="newAbbrevation"
+                      id="newAbbrevation"
                       style={{
                         color: "#A0A4A9",
                         fontSize: "18px",
@@ -869,7 +1017,7 @@ const ToolManagement = () => {
                         width: "100%",
                         position: "relative",
                       }}
-                      placeholder="Add new keyword"
+                      placeholder="Add new Abbrevation"
                     />
                   )}
                 />
@@ -894,7 +1042,7 @@ const ToolManagement = () => {
                     width={"90px"}
                     color="white"
                     background="linear-gradient(to right, #1A0049, #3F016A)"
-                    onClick={handleSubmit(handleAddKeyword)}
+                    onClick={handleSubmit(handleAddAbbrevation)}
                   />
                 </Typography>
               </Box>
@@ -920,13 +1068,13 @@ const ToolManagement = () => {
               width={"143px"}
               color="white"
               background="linear-gradient(to right, #1A0049, #3F016A)"
-              onClick={downloadCsv}
+              onClick={downloadAbbCsv}
             />
             <div>
               <input
                 type="file"
                 id="fileInput"
-                onChange={handleFileChange}
+                onChange={handleFileChangeAbb}
                 style={{
                   display: "none",
                 }}
