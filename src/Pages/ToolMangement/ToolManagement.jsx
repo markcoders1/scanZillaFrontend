@@ -60,6 +60,8 @@ const ToolManagement = () => {
   });
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [searchTermAbb, setSearchTermAbb] = useState("");
+
 
   // Fetch Rules Data
   const {
@@ -117,7 +119,9 @@ const ToolManagement = () => {
   // Mutations
   const addKeywordMutation = useMutation({
     mutationFn: async (newKeyword) => {
-      const response = await axiosInstance.post(`${appUrl}/words`, { word: newKeyword });
+      const response = await axiosInstance.post(`${appUrl}/words`, {
+        word: newKeyword,
+      });
       return response.data;
     },
     onSuccess: () => {
@@ -238,7 +242,7 @@ const ToolManagement = () => {
       !data.totalBullets &&
       !data.bulletcharacters &&
       !data.descriptionCharacters &&
-      !data.totalBulletsLength&&
+      !data.totalBulletsLength &&
       !data.searchTerms
     ) {
       dispatch(
@@ -303,7 +307,9 @@ const ToolManagement = () => {
         responseType: "blob",
       });
 
-      const url = window.URL.createObjectURL(new Blob([response.data], { type: "text/csv" }));
+      const url = window.URL.createObjectURL(
+        new Blob([response.data], { type: "text/csv" })
+      );
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", "data.csv");
@@ -314,6 +320,34 @@ const ToolManagement = () => {
       console.error("Error downloading the CSV file:", error);
     }
   };
+
+  // Allowed Keywords
+
+    // Fetch Allowed Abb
+    const {
+      data: abbData,
+      isLoading: abLoading,
+      isError: abbError,
+    } = useQuery({
+      queryKey: ["allowedAbbrevation"],
+      queryFn: async () => {
+        const response = await axiosInstance.get(`${appUrl}/abbwords`);
+        console.log("abbWords",response);
+        return response.data;
+      },
+      staleTime: 5 * 60 * 1000,
+      cacheTime: 10 * 60 * 1000,
+    });
+
+      // Filtered Keywords
+  const filteredAbbrevation = React.useMemo(() => {
+    if (!keywordsData) return [];
+    return abbData.filter((keyword) =>
+      keyword.toLowerCase().includes(searchTermAbb.toLowerCase())
+    );
+  }, [abbData, searchTermAbb]);
+
+  
 
   // Handle Loading and Error States
   if (rulesLoading || keywordsLoading) {
@@ -357,25 +391,24 @@ const ToolManagement = () => {
         flexDirection: {
           md: "row",
           xs: "column",
-
         },
         height: "70vh",
         overflowY: "auto",
         overflowX: "hidden",
         padding: "20px 15px",
         "&::-webkit-scrollbar": {
-          width: "8px"
+          width: "8px",
         },
         "&::-webkit-scrollbar-track": {
           background: "#DFDFDF",
-          borderRadius: "10px"
+          borderRadius: "10px",
         },
         "&::-webkit-scrollbar-thumb": {
           background: "black",
-          borderRadius: "10px"
+          borderRadius: "10px",
         },
         "&::-webkit-scrollbar-thumb:hover": {
-          background: "#b30000"
+          background: "#b30000",
         },
         // zIndex:"-1"
       }}
@@ -513,7 +546,7 @@ const ToolManagement = () => {
             display: "flex",
             mt: "15px",
             justifyContent: {
-              md: "start",
+              md: "end",
               xs: "end",
             },
           }}
@@ -544,185 +577,375 @@ const ToolManagement = () => {
           },
         }}
       >
-        {/* Restricted Keywords Section */}
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.3rem",
-            padding: "24px 30px",
-            boxShadow: "4px 5px 15px 0px #C8C8C8 ",
-            borderRadius: "10px",
-          }}
-        >
-          <Heading Heading="Restricted Keywords" />
-          <Box sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}>
-            <Box sx={{ position: "relative" }}>
-              <input
-                type="search"
-                name="search"
-                id="search"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{
-                  color: "#A0A4A9",
-                  fontSize: "18px",
-                  padding: "9px 45px 9px 27px",
-                  borderRadius: "44px",
-                  boxShadow: "4px 5px 15px 0px #C8C8C8 inset",
-                  border: "none",
-                  outline: "none",
-                  width: "100%",
-                  position: "relative",
-                }}
-                placeholder="Search"
-              />
-              <img
-                src={SearchIcon}
-                alt=""
-                style={{
-                  position: "absolute",
-                  top: "14px",
-                  right: "20px",
-                }}
-              />
-            </Box>
+        <Box>
+          {/* Restricted Keywords Section */}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.3rem",
+              padding: "24px 30px",
+              boxShadow: "4px 5px 15px 0px #C8C8C8 ",
+              borderRadius: "10px",
+            }}
+          >
+            <Heading Heading="Restricted Keywords" />
             <Box
-              sx={{
-                overflowY: "auto",
-                "&::-webkit-scrollbar": {
-                  width: "8px",
-                },
-                "&::-webkit-scrollbar-track": {
-                  background: "#DFDFDF",
-                  borderRadius: "10px",
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  background: "black",
-                  borderRadius: "10px",
-                },
-                "&::-webkit-scrollbar-thumb:hover": {
-                  background: "#b30000",
-                },
-                borderRadius: "10px",
-                marginTop: "10px",
-                height: "255px",
-              }}
+              sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}
             >
+              <Box sx={{ position: "relative" }}>
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{
+                    color: "#A0A4A9",
+                    fontSize: "18px",
+                    padding: "9px 45px 9px 27px",
+                    borderRadius: "44px",
+                    boxShadow: "4px 5px 15px 0px #C8C8C8 inset",
+                    border: "none",
+                    outline: "none",
+                    width: "100%",
+                    position: "relative",
+                  }}
+                  placeholder="Search"
+                />
+                <img
+                  src={SearchIcon}
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    top: "14px",
+                    right: "20px",
+                  }}
+                />
+              </Box>
               <Box
                 sx={{
-                  paddingRight: "15px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "35px",
+                  overflowY: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: "8px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    background: "#DFDFDF",
+                    borderRadius: "10px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "black",
+                    borderRadius: "10px",
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    background: "#b30000",
+                  },
+                  borderRadius: "10px",
+                  marginTop: "10px",
+                  height: "200px",
                 }}
               >
-                {filteredKeywords.map((keyword, index) => (
-                  <RestrictedKeyword
-                    key={index}
-                    content={keyword}
-                    onRemove={() => handleRemoveKeyword(keyword)}
+                <Box
+                  sx={{
+                    paddingRight: "15px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "35px",
+                  }}
+                >
+                  {filteredKeywords.map((keyword, index) => (
+                    <RestrictedKeyword
+                      key={index}
+                      content={keyword}
+                      onRemove={() => handleRemoveKeyword(keyword)}
+                    />
+                  ))}
+                </Box>
+              </Box>
+              <Box sx={{ position: "relative", marginTop: "30px" }}>
+                <Controller
+                  name="newKeyword"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      type="text"
+                      name="newKeyword"
+                      id="newKeyword"
+                      style={{
+                        color: "#A0A4A9",
+                        fontSize: "18px",
+                        padding: "9px 27px",
+                        borderRadius: "44px",
+                        boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                        border: "none",
+                        outline: "none",
+                        width: "100%",
+                        position: "relative",
+                      }}
+                      placeholder="Add new keyword"
+                    />
+                  )}
+                />
+                <Typography
+                  sx={{
+                    position: "absolute",
+                    top: {
+                      sm: "7px",
+                      xs: "6px",
+                    },
+                    right: {
+                      xs: "05px",
+                      sm: "20px",
+                    },
+                  }}
+                >
+                  <CustomButton
+                    borderRadius="44px"
+                    padding="3px 0px"
+                    fontSize="14px"
+                    ButtonText="Add +"
+                    width={"90px"}
+                    color="white"
+                    background="linear-gradient(to right, #1A0049, #3F016A)"
+                    onClick={handleSubmit(handleAddKeyword)}
                   />
-                ))}
+                </Typography>
               </Box>
             </Box>
-            <Box sx={{ position: "relative", marginTop: "30px" }}>
-              <Controller
-                name="newKeyword"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    {...field}
-                    type="text"
-                    name="newKeyword"
-                    id="newKeyword"
-                    style={{
-                      color: "#A0A4A9",
-                      fontSize: "18px",
-                      padding: "9px 27px",
-                      borderRadius: "44px",
-                      boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                      border: "none",
-                      outline: "none",
-                      width: "100%",
-                      position: "relative",
-                    }}
-                    placeholder="Add new keyword"
-                  />
-                )}
+          </Box>
+          {/* Download and Upload Buttons */}
+          <Box
+            sx={{
+              display: "flex",
+              mt: "20px",
+              gap: "1rem",
+              justifyContent: {
+                md: "end",
+                xs: "end",
+              },
+            }}
+          >
+            <CustomButton
+              borderRadius="12px"
+              padding="12px 0px"
+              fontSize="14px"
+              ButtonText="Download CSV"
+              width={"143px"}
+              color="white"
+              background="linear-gradient(to right, #1A0049, #3F016A)"
+              onClick={downloadCsv}
+            />
+            <div>
+              <input
+                type="file"
+                id="fileInput"
+                onChange={handleFileChange}
+                style={{
+                  display: "none",
+                }}
               />
-              <Typography
-                sx={{
-                  position: "absolute",
-                  top: {
-                    sm: "7px",
-                    xs: "6px",
-                  },
-                  right: {
-                    xs: "05px",
-                    sm: "20px",
-                  },
+              <label
+                htmlFor="fileInput"
+                style={{
+                  display: "inline-block",
+                  padding: "12px 20px",
+                  borderRadius: "12px",
+                  background: "linear-gradient(to right, #1A0049, #3F016A)",
+                  color: "white",
+                  cursor: "pointer",
                 }}
               >
-                <CustomButton
-                  borderRadius="44px"
-                  padding="3px 0px"
-                  fontSize="14px"
-                  ButtonText="Add +"
-                  width={"90px"}
-                  color="white"
-                  background="linear-gradient(to right, #1A0049, #3F016A)"
-                  onClick={handleSubmit(handleAddKeyword)}
-                />
-              </Typography>
-            </Box>
+                Select CSV File
+              </label>
+            </div>
           </Box>
         </Box>
-        {/* Download and Upload Buttons */}
-        <Box
-          sx={{
-            display: "flex",
-            mt: "15px",
-            gap: "1rem",
-            justifyContent: {
-              md: "start",
-              xs: "end",
-            },
-          }}
-        >
-          <CustomButton
-            borderRadius="12px"
-            padding="12px 0px"
-            fontSize="14px"
-            ButtonText="Download CSV"
-            width={"143px"}
-            color="white"
-            background="linear-gradient(to right, #1A0049, #3F016A)"
-            onClick={downloadCsv}
-          />
-          <div>
-            <input
-              type="file"
-              id="fileInput"
-              onChange={handleFileChange}
-              style={{
-                display: "none",
-              }}
-            />
-            <label
-              htmlFor="fileInput"
-              style={{
-                display: "inline-block",
-                padding: "12px 20px",
-                borderRadius: "12px",
-                background: "linear-gradient(to right, #1A0049, #3F016A)",
-                color: "white",
-                cursor: "pointer",
-              }}
+
+        {/* Abbrevation Keyword section  */}
+
+        <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1.3rem",
+              padding: "24px 30px",
+              boxShadow: "4px 5px 15px 0px #C8C8C8 ",
+              borderRadius: "10px",
+            }}
+          >
+            <Heading Heading="Allowed Abbreviations" />
+            <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "1.3rem" }}
             >
-              Select CSV File
-            </label>
-          </div>
+              <Box sx={{ position: "relative" }}>
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  value={searchTermAbb}
+                  onChange={(e) => setSearchTermAbb(e.target.value)}
+                  style={{
+                    color: "#A0A4A9",
+                    fontSize: "18px",
+                    padding: "9px 45px 9px 27px",
+                    borderRadius: "44px",
+                    boxShadow: "4px 5px 15px 0px #C8C8C8 inset",
+                    border: "none",
+                    outline: "none",
+                    width: "100%",
+                    position: "relative",
+                  }}
+                  placeholder="Search"
+                />
+                <img
+                  src={SearchIcon}
+                  alt=""
+                  style={{
+                    position: "absolute",
+                    top: "14px",
+                    right: "20px",
+                  }}
+                />
+              </Box>
+              <Box
+                sx={{
+                  overflowY: "auto",
+                  "&::-webkit-scrollbar": {
+                    width: "8px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    background: "#DFDFDF",
+                    borderRadius: "10px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "black",
+                    borderRadius: "10px",
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    background: "#b30000",
+                  },
+                  borderRadius: "10px",
+                  marginTop: "10px",
+                  height: "200px",
+                }}
+              >
+                <Box
+                  sx={{
+                    paddingRight: "15px",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "35px",
+                  }}
+                >
+                  {filteredAbbrevation.map((keyword, index) => (
+                    <RestrictedKeyword
+                      key={index}
+                      content={keyword}
+                      onRemove={() => handleRemoveKeyword(keyword)}
+                    />
+                  ))}
+                </Box>
+              </Box>
+              <Box sx={{ position: "relative", marginTop: "30px" }}>
+                <Controller
+                  name="newKeyword"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      type="text"
+                      name="newKeyword"
+                      id="newKeyword"
+                      style={{
+                        color: "#A0A4A9",
+                        fontSize: "18px",
+                        padding: "9px 27px",
+                        borderRadius: "44px",
+                        boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                        border: "none",
+                        outline: "none",
+                        width: "100%",
+                        position: "relative",
+                      }}
+                      placeholder="Add new keyword"
+                    />
+                  )}
+                />
+                <Typography
+                  sx={{
+                    position: "absolute",
+                    top: {
+                      sm: "7px",
+                      xs: "6px",
+                    },
+                    right: {
+                      xs: "05px",
+                      sm: "20px",
+                    },
+                  }}
+                >
+                  <CustomButton
+                    borderRadius="44px"
+                    padding="3px 0px"
+                    fontSize="14px"
+                    ButtonText="Add +"
+                    width={"90px"}
+                    color="white"
+                    background="linear-gradient(to right, #1A0049, #3F016A)"
+                    onClick={handleSubmit(handleAddKeyword)}
+                  />
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+          {/* Download and Upload Buttons */}
+          <Box
+            sx={{
+              display: "flex",
+              mt: "20px",
+              gap: "1rem",
+              justifyContent: {
+                md: "end",
+                xs: "end",
+              },
+            }}
+          >
+            <CustomButton
+              borderRadius="12px"
+              padding="12px 0px"
+              fontSize="14px"
+              ButtonText="Download CSV"
+              width={"143px"}
+              color="white"
+              background="linear-gradient(to right, #1A0049, #3F016A)"
+              onClick={downloadCsv}
+            />
+            <div>
+              <input
+                type="file"
+                id="fileInput"
+                onChange={handleFileChange}
+                style={{
+                  display: "none",
+                }}
+              />
+              <label
+                htmlFor="fileInput"
+                style={{
+                  display: "inline-block",
+                  padding: "12px 20px",
+                  borderRadius: "12px",
+                  background: "linear-gradient(to right, #1A0049, #3F016A)",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+              >
+                Select CSV File
+              </label>
+            </div>
+          </Box>
         </Box>
       </Box>
     </Box>
