@@ -16,7 +16,7 @@ const RestrictedKeyword = ({ content, onRemove }) => {
                 sx={{
                     fontWeight: "400",
                     fontSize: {
-                        sm:"20px",
+                        sm:"16px",
                         xs:"16px"
                     },
                     color: "#A0A4A9",

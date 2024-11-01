@@ -844,7 +844,7 @@ const ToolManagement = () => {
                     },
                     right: {
                       xs: "05px",
-                      sm: "20px",
+                      sm: "10px",
                     },
                   }}
                 >
@@ -883,6 +883,7 @@ const ToolManagement = () => {
               color="white"
               background="linear-gradient(to right, #1A0049, #3F016A)"
               onClick={downloadCsv}
+              border="none"
             />
             <div>
               <input
@@ -897,11 +898,12 @@ const ToolManagement = () => {
                 htmlFor="fileInput"
                 style={{
                   display: "inline-block",
-                  padding: "12px 20px",
+                  padding: "16px 20px",
                   borderRadius: "12px",
                   background: "linear-gradient(to right, #1A0049, #3F016A)",
                   color: "white",
                   cursor: "pointer",
+                  fontSize:"14px"
                 }}
               >
                 Select CSV File
@@ -1030,7 +1032,7 @@ const ToolManagement = () => {
                     },
                     right: {
                       xs: "05px",
-                      sm: "20px",
+                      sm: "10px",
                     },
                   }}
                 >
@@ -1069,6 +1071,7 @@ const ToolManagement = () => {
               color="white"
               background="linear-gradient(to right, #1A0049, #3F016A)"
               onClick={downloadAbbCsv}
+              border="none"
             />
             <div>
               <input
@@ -1083,11 +1086,13 @@ const ToolManagement = () => {
                 htmlFor="fileInput"
                 style={{
                   display: "inline-block",
-                  padding: "12px 20px",
+                  padding: "16px 20px",
+
                   borderRadius: "12px",
                   background: "linear-gradient(to right, #1A0049, #3F016A)",
                   color: "white",
                   cursor: "pointer",
+                  fontSize:"14px"
                 }}
               >
                 Select CSV File
