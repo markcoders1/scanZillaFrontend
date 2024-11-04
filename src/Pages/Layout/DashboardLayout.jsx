@@ -52,9 +52,9 @@ const DashboardLayout = () => {
         return 'Dashboard';
       case '/assistant-instruction':
         return 'Assistant Instructions';
-        case '/contact-admin':
-          return 'Contact Admin';
-          case '/contact':
+        case '/contact':
+          return 'Choose Your Perfect Plan';
+          case '/Support':
             return 'Got a Question? Email Us';
       // Add more cases as needed for other routes
       default:

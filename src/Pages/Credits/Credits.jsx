@@ -269,13 +269,15 @@ const Credits = () => {
                   {autoCreditsAmount.map((e, i) => (
                     <CreditCard
                       key={i}
-                      title={e.name}
-                      price={e.amount / 100}
-                      credits={e.credits}
-                      handleNavigate={() => handleNavigateToContact(e.variant)}
-                      variant={e.variant}
-                      planName={e.name}
-                      buttonText={e.buttonText}
+                      title={e?.name}
+                      price={ i === 3 ? "": e?.amount / 100}
+                      credits={e?.credits}
+                      handleNavigate={() => handleNavigateToContact(e?.variant)}
+                      variant={e?.variant}
+                      planName={e?.name}
+                      buttonText={e?.buttonText}
+                      desc={e?.description}
+                      visibility={i == 3 ? "hidden": "visible "}
                     />
                   ))}
                   {/* <CreditCard
@@ -301,7 +303,7 @@ const Credits = () => {
                         md: "218px",
                       },
                       borderRadius: "10px",
-                      height: "322px",
+                      height: "342px",
                       flexGrow: "1",
                       flexShrink: "1",
                       minWidth: "25%",

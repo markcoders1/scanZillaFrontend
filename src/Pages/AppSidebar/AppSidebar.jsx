@@ -5,6 +5,7 @@ import './AppSidebar.css';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 import { useSelector } from 'react-redux';
+import logo from '../../assets/images/sample.png'
 
 const AppSidebar = () => {
   const [username, setUsername] = useState('');
@@ -30,9 +31,9 @@ const AppSidebar = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '4rem',
+        gap: '2.5rem',
         justifyContent: 'center',
-        marginTop: {xl:'40px', xs:"20px"},
+        marginTop: {xl:'20px', xs:"10px"},
         padding: '20px', // Added padding for better spacing
       }}
     >
@@ -40,21 +41,12 @@ const AppSidebar = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap:  {xl:'80px', xs:"40px"},
+          gap:  {xl:'30px', xs:"10px"},
           justifyContent: 'center',
         }}
       >
         <Box>
-          <Typography
-            sx={{
-              fontWeight: '600',
-              fontSize:{xl: '3rem', xs:"2.5rem"},
-              lineHeight: '35px',
-              color: '#D081FF',
-            }}
-          >
-            ScanZilla
-          </Typography>
+          <img src={logo} alt="" style={{width:"120px",backgroundColor:"transparent", marginLeft:"-20px"}} />
         </Box>
 
         {admin ? (

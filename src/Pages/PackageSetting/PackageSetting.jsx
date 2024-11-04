@@ -20,17 +20,22 @@ const PackageSetting = () => {
   const credits = queryParams.get('credits');
   const buttonText = queryParams.get('ButtonText')
   const [loadingButton, setLoadingButton] = useState(false);
+  
 
   variant = Number(variant)
 
 
   // const [loading, setLoading] = useState(false);
-
+  const {state} = location;
+  console.log(state)
   const [data, setData] = useState({
-    name: planName,
-    amount: (+price/100),
-    credits: +credits,
-    buttonText: buttonText
+    name: state?.name? state?.name: "",
+    amount: (state?.amount/100) ? (state?.amount/100) : "",
+    credits: state?.credits ? state?.credits : "",
+    buttonText: state?.buttonText ? state?.buttonText: "",
+    description: state?.description ? state?.description: "",
+    variant: state?.variant ? state?.variant: "",
+
   });
 
   const inputRef = useRef(null);
@@ -41,10 +46,7 @@ const PackageSetting = () => {
 
   const handleSave = async () => {
 
-    if (!variant || !planName) {
-      console.error("Variant or Plan Name is missing.");
-      return;
-    }
+  
 
     try {
       setLoadingButton(true);
@@ -52,11 +54,12 @@ const PackageSetting = () => {
         url: `${appUrl}/offers`,
         method: "post",
         data: {
-          variant: variant,
+          variant: data.variant,
           name: data.name,
           amount: Number(data.amount),
           buttonText:data.buttonText,
-          credits:data.credits
+          credits:data.credits,
+          description : data.description,
         },
       });
       setLoadingButton(false);
@@ -85,7 +88,34 @@ const PackageSetting = () => {
   }, [queryParams, planName, price, variant]);
 
   return (
-    <Box>
+    <Box
+    sx={{
+      height: "70vh",
+      overflowY: "auto",
+      overflowX: "hidden",
+      padding: "20px 15px",
+      "&::-webkit-scrollbar": {
+        width: "8px"
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#DFDFDF",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "black",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        background: "#b30000"
+      },
+    }}
+    >
+      <Box
+      sx={{
+     
+      }}
+      >
+
       <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "column", xs: "column" }, }} >
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%" }}>
           <Heading Heading='Package' />
@@ -104,6 +134,13 @@ const PackageSetting = () => {
           <CustomInputShadow placeholder={credits} onChange={handleInput}   name={"credits"} type="number" value={data.credits}/>
         </Box>
       </Box>
+      
+      <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "row", xs: "column", }, }} >
+        <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "100%", }} >
+          <Heading Heading='Description' />
+          <CustomInputShadow placeholder={""} onChange={handleInput}   name={"description"} type="text" value={data.description}/>
+        </Box>
+      </Box>
 
 
       <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "row", xs: "column", }, }} >
@@ -118,6 +155,8 @@ const PackageSetting = () => {
       <Box sx={{ display: "flex", width: "100%", justifyContent: "end", mt: "30px", }} >
         <CustomButton borderRadius='12px' padding='12px 0px' fontSize='14px' ButtonText='Save' width={"143px"} color='white' background="linear-gradient(to right, #1A0049, #3F016A)" onClick={handleSave} loading={loadingButton ? true : false} hovercolor={"white"} />
       </Box>
+      </Box>
+
     </Box>
   );
 };

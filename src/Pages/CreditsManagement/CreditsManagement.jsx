@@ -23,10 +23,8 @@ const CreditsManagement = () => {
   const [loading, setLoading] = useState(false);
   const [offers, setOffers] = useState([]);
   // const [loadingButton, setLoadingButton] = useState(false);
-  const handleEditPackage = (planName, price, variant, credits,buttonText) => {
-    navigate(
-      `/credits-management/package-setting?planName=${planName}&price=${price}&variant=${variant}&credits=${credits}&ButtonText=${buttonText}`
-    );
+  const handleEditPackage = (state) => {
+    navigate(`/credits-management/package-setting`, {state});
   };
 
 
@@ -235,7 +233,7 @@ const CreditsManagement = () => {
                     color: "#333333",
                     cursor: "pointer",
                   }}
-                  onClick={() => handleEditPackage(e.name, e.amount, e.variant, e.credits,e.buttonText)}
+                  onClick={() => handleEditPackage(e)}
                 >
                   Edit Package
                 </Typography>

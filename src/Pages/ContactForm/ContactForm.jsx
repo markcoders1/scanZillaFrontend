@@ -158,7 +158,7 @@ const ContactForm = () => {
           
          }}
          >
-         <Heading Heading='Name *   ' />
+         <Heading Heading='Name' />
                 <CustomTextField
                   handleKeyDown={() => { }}
                   onChange={handleInput}
@@ -172,7 +172,7 @@ const ContactForm = () => {
                 />
               </Box>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Heading Heading='Plan Name *' />
+          <Heading Heading='Plan Name' />
           <CustomSelect
           categoryError={errors?.category}
           data={offerRender?.map((offer) => offer?.name)}
@@ -183,7 +183,7 @@ const ContactForm = () => {
         </Box>
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Heading Heading='Credits *' />
+          <Heading Heading='Credits' />
           <CustomTextField
           type="number"
             value={credits}
@@ -216,7 +216,7 @@ const ContactForm = () => {
 
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Heading Heading='How Can We Help? *' />
+          <Heading Heading='Payment Details *' />
           <CustomInputShadow
             type="text"
             multiline={true}

@@ -38,7 +38,7 @@ const CustomTextField = forwardRef(({
           },
           display: "flex",
           flexDirection: "column",
-          padding: padding ? "0px 20px": "0px 10px",
+          padding: padding ? "0px 25px": "0px 10px",
           justifyContent: "space-between",
           borderRadius: "10px",
           mb: 2,
