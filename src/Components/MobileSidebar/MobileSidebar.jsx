@@ -7,6 +7,8 @@ import './MobileSidebar.css';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 import { RxCross2 } from "react-icons/rx";
+import logo from '../../assets/images/sample.png'
+
 
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
@@ -115,19 +117,9 @@ const MobileSidebar = () => {
             gap: "20px",
           }}
         >
-          <Typography
-            sx={{
-              fontWeight: '600',
-              fontSize: {
-                sm: "'2.8rem'",
-                xs: "2rem"
-              },
-              lineHeight: '35px',
-              color: '#D081FF',
-            }}
-          >
-            ScanZilla
-          </Typography>
+         <Box>
+          <img src={logo} alt="" style={{width:"120px",backgroundColor:"transparent", marginLeft:"-20px"}} />
+        </Box>
         </Box>
         {
           admin ? <Box
