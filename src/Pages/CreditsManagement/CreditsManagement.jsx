@@ -6,13 +6,16 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 // import { useForm } from "react-hook-form";
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+
+import { useDispatch } from "react-redux";
 // import { useDispatch } from "react-redux";
 // import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const CreditsManagement = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [characterCost, setCharacterCost] = useState();
   // const [creditCost, setCreditCost] = useState();
@@ -50,7 +53,15 @@ const CreditsManagement = () => {
         method: "get",
       });
       setLoading(false);
-     
+  //  dispatch(handleSnackAlert({ open: true, message: "Packages Details Updated Successfully", severity: "success" }));
+  //  console.log("offers updated")
+  //  dispatch(
+  //   handleSnackAlert({
+  //     open: true,
+  //     message: "Keyword added successfully",
+  //     severity: "success",
+  //   })
+  // );
       setOffers(response.data.offers);
     } catch (error) {
       console.error(error);

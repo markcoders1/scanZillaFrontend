@@ -19,7 +19,8 @@ const CustomTextField = forwardRef(({
   boxShadow = false, // Add default value for boxShadow
   showPasswordToggle = false, // Add prop to control password visibility toggle
   maxLength, // Add maxLength prop
-  sx
+  sx,
+  padding=false
 }, ref) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -37,7 +38,7 @@ const CustomTextField = forwardRef(({
           },
           display: "flex",
           flexDirection: "column",
-          padding: "0px 10px",
+          padding: padding ? "0px 20px": "0px 10px",
           justifyContent: "space-between",
           borderRadius: "10px",
           mb: 2,
@@ -50,7 +51,7 @@ const CustomTextField = forwardRef(({
           placeholder={placeholder}
           type={showPassword ? "text" : type}
           ref={ref}
-          m
+          
           sx={{
             '& ::placeholder': {
               fontSize: {

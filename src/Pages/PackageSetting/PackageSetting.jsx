@@ -60,7 +60,7 @@ const PackageSetting = () => {
         },
       });
       setLoadingButton(false);
-      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }))
+      dispatch(handleSnackAlert({ open: true, message: "Package Details Updated Successfully", severity: "success" }))
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -89,7 +89,7 @@ const PackageSetting = () => {
       <Box sx={{ display: "flex", gap: "2.5rem", flexDirection: { md: "column", xs: "column" }, }} >
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%" }}>
           <Heading Heading='Package' />
-          <CustomInputShadow placeholder={planName} onChange={handleInput} name={"name"} type="text" />
+          <CustomInputShadow placeholder={planName} onChange={handleInput} name={"name"} type="text" value={data.name} />
         </Box>
         <Box sx={{ display: "flex", gap: ".5rem", flexDirection: "column", flexBasis: "50%" }} >
           <Heading Heading='Total Amount' />

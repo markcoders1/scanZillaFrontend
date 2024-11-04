@@ -71,7 +71,7 @@ const CustomSelect = ({
           label="Select Category"
           value={value}
           placeholder={placeHolder}
-          onChange={handleSelectionChange}
+          onChange={(e) => handleChange(e.target.value)}
           sx={{
             width: "100%",
             fontSize: {

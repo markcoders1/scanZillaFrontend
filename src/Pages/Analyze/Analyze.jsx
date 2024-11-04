@@ -353,6 +353,7 @@ const Analyze = () => {
       subtitle: "",
     });
     setResult("");
+    setReccomendations("");
 
     console.log("data", data);
 

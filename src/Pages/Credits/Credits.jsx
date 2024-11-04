@@ -15,6 +15,8 @@ import CreditCard from "../../Components/CustomCreditCard/CustomCreditCard";
 import CustomCard from "../../Components/Customcard/Customcard";
 import { useDispatch } from "react-redux";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+import CustomSelect from "../../Components/CustomSelect/CustomSelect";
+
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -56,9 +58,9 @@ const Credits = () => {
     localStorage.setItem("clientSecret", response.data.clientSecret);
   };
 
-  const handleNavigateToContact = (variant, price, credits) => {
+  const handleNavigateToContact = (variant) => {
     // navigate(`/contact-admin?price=${price}&credits=${credits}`);
-    navigate('/contact')
+    navigate(`/contact?variant=${variant}`);
 
   }
 
@@ -75,7 +77,6 @@ const Credits = () => {
         method: "get",
       });
       setLoading(false);
-
       if (response) {
         setCreditsHistory(response?.data?.payments);
         setSnackAlertData({
@@ -110,6 +111,7 @@ const Credits = () => {
         method: "get",
       });
       setLoading(false);
+      console.log("Offers",response.data)
 
       setAutoCreditsAmount(
         response.data.offers
@@ -270,7 +272,7 @@ const Credits = () => {
                       title={e.name}
                       price={e.amount / 100}
                       credits={e.credits}
-                      handleNavigate={handleNavigateToContact}
+                      handleNavigate={() => handleNavigateToContact(e.variant)}
                       variant={e.variant}
                       planName={e.name}
                       buttonText={e.buttonText}

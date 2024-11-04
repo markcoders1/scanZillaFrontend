@@ -31,7 +31,7 @@ const RestrictedKeyword = ({ content, onRemove }) => {
                     color={"#333333"}
                     fontSize={"12px"}
                     variant={"outlined"}
-                    fontWeight={"500"}
+                    fontWeight={"500"}  
                     onClick={onRemove}
                 />
             </Typography>

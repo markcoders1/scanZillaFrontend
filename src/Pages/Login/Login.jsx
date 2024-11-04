@@ -413,38 +413,7 @@ const Login = () => {
             </span>
           </Button>
         </Box>
-        <Box
-
-          sx={{
-            display: "flex",
-            // border:"2px solid red",
-            alignItems: "center",
-            gap: "4px",
-            justifyContent: "center",
-            marginTop: "250px"
-          }}>
-          <Typography
-            sx={{
-              fontSize: {
-                xs: "12px",
-                sm: "18px"
-              },
-              color: "#A0A4A9",
-            }}
-          >Don’t have an account? </Typography>
-          <Typography
-            sx={{
-              color: "#1E004D",
-              textDecoration: "underline"
-            }}
-          ><NavLink to='signup'
-            style={{
-              color: "#1E004D",
-              fontWeight: "600",
-
-            }}
-          >Sign Up</NavLink></Typography>
-        </Box>
+      
 
       </Box>
       <SnackAlert
