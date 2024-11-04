@@ -178,7 +178,7 @@ const AppSidebar = () => {
             </Typography>
             <Typography>
               <NavLink
-                to="/contact"
+                to="/support"
                 className={({ isActive }) =>
                   isActive ? 'anchortag anchorActive' : 'anchortag'
                 }

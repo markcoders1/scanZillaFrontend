@@ -66,8 +66,8 @@ function App() {
               <Route path="credits-management/package-setting" element={<Protected children={<PackageSetting />} />} />
               <Route path="dashboard-admin" element={<Protected children={<AdminDashboard />} />} />
               <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
-              <Route path="contact-admin" element={<Protected children={<ContactForm />} />} />
-              <Route path="contact" element={<Protected children={<Contactus />} />} />
+              <Route path="contact" element={<Protected children={<ContactForm />} />} />
+              <Route path="support" element={<Protected children={<Contactus />} />} />
             </Route>
             <Route path="*" element={<PageNotFound/>} />
           </Routes>

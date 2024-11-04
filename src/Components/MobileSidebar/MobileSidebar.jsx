@@ -259,7 +259,7 @@ const MobileSidebar = () => {
               </Typography>
               <Typography>
                 <NavLink
-                  to="/contact"
+                  to="/support"
                   className={({ isActive }) =>
                     isActive ? 'anchortag2 anchorActive2' : 'anchortag2'
                   }
