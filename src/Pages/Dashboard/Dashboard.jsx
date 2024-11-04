@@ -365,7 +365,8 @@ const Home = () => {
               padding: "20px",
               borderRadius: "10px",
               justifyContent: "center",
-              paddingLeft: "26px"
+              paddingLeft: "26px",
+             
             }}>
 
               {/* <Typography sx={{
@@ -516,9 +517,9 @@ const Home = () => {
             <Box
               onClick={() => navigate("/analyze")}
               sx={{
-                flexBasis: "45%", cursor: "pointer", flexGrow: 1, justifyContent: "center", display: "flex", gap: "20px", flexDirection: "column",
+                flexBasis: "30%", cursor: "pointer", flexGrow: 1, justifyContent: "center", display: "flex", gap: "20px", flexDirection: "column",
                 background: `linear-gradient(rgba(27, 2, 75, .1), rgba(27, 2, 75, .1)), url(${bg})`,
-                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px"
+                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px",
               }}>
 
               <Typography sx={{

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../../Components/CustomButton/CustomButton';
+import { PiSuitcaseSimpleBold } from 'react-icons/pi';
 
 const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, planName, buttonText, key, desc, visibility= "" }) => {
   return (
@@ -40,7 +41,10 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
           gap: '0px',
         }}
       >
-        <Typography
+        {
+          visibility === "hidden" ? <PiSuitcaseSimpleBold style={{fontSize:"80px", margin:"auto", color:"navy"}} /> : (
+            <>
+             <Typography
           sx={{
             fontSize: '50px',
             fontWeight: '600',
@@ -63,6 +67,11 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
         >
           {credits} Credits
         </Typography>
+            </>
+       
+      )
+        }
+       
       </Box>
       <Typography
           sx={{

@@ -200,7 +200,8 @@ const Profile = () => {
                   sx={{
                     flexGrow: 3,
                     // cursor: "pointer"
-                    // border: "2px solid red"
+                    // border: "2px solid red",
+                  display:"none"
                   }}
                   // onClick={handleNavigate}
                 >
@@ -209,6 +210,7 @@ const Profile = () => {
                 <Box
                   sx={{
                     flexGrow: 1,
+                    // display:"none"
                     // mb:"20px"
                   }}
                 >
