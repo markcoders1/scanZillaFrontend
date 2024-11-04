@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import dayjs from 'dayjs';
 
-const CustomTooltip = ({ active, payload, label, setHoveredValue }) => {
+const CustomTooltip = ({ active, payload, label, yFormatter, setHoveredValue }) => {
     if (active && payload && payload.length) {
-        const value = payload[0].value;
-        const formattedLabel = dayjs(label).format('DD/MM/YY'); // Format label date
+        const value = yFormatter ? yFormatter(payload[0].value) : payload[0].value;
         setHoveredValue(value);
-
         return (
             <div className="custom-tooltip" style={{ backgroundColor: '#fff', padding: '10px', border: '1px solid #ccc' }}>
-                <p className="label">{formattedLabel}</p>
-                <p className="intro">{`Credits Used: ${value}`}</p>
+                <p className="label">{`${label}`}</p>
+                <p className="intro">{`Value: ${value}`}</p>
             </div>
         );
     }
@@ -19,7 +16,7 @@ const CustomTooltip = ({ active, payload, label, setHoveredValue }) => {
     return null;
 };
 
-const Chart = ({ data, setHoveredValue }) => {
+const ChartAnalysis = ({ data, xKey, yKey, yFormatter, setHoveredValue }) => {
     const [dynamicWidth, setDynamicWidth] = useState("100%");
     const [dynamicHeight, setDynamicHeight] = useState(350); // Default height
 
@@ -42,11 +39,8 @@ const Chart = ({ data, setHoveredValue }) => {
         return () => window.removeEventListener("resize", getAutomaticHeightAndWidth);
     }, []);
 
-    // Map API data structure to chart-friendly format
-    const formattedData = data.map(item => ({
-        date: dayjs(item.date).format('DD/MM/YY'), // Format date
-        creditsUsed: item.creditsUsed
-    }));
+    // Apply yFormatter to the data if provided
+    const formattedData = yFormatter ? data.map(item => ({ ...item, [yKey]: yFormatter(item[yKey]) })) : data;
 
     return (
         <ResponsiveContainer width={dynamicWidth} height={dynamicHeight}>
@@ -60,13 +54,13 @@ const Chart = ({ data, setHoveredValue }) => {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 8" />
-                <XAxis dataKey="date" />
+                <XAxis dataKey={xKey} />
                 <YAxis />
-                <Tooltip content={<CustomTooltip setHoveredValue={setHoveredValue} />} />
-                <Area type="monotone" dataKey="creditsUsed" stroke="#3D0166" fillOpacity={0.1} fill="#EBDBF6" />
+                <Tooltip content={<CustomTooltip  setHoveredValue={setHoveredValue} />} />
+                <Area type="monotone" dataKey={yKey} stroke="#3D0166" fillOpacity={0.1} fill="#EBDBF6" />
             </AreaChart>
         </ResponsiveContainer>
     );
 };
 
-export default Chart;
+export default ChartAnalysis;

@@ -4,6 +4,7 @@ import DashboardCard from "../../Components/DashboardCard/DashboardCard";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import Chart from "../../Components/Chart/Chart";
+import ChartAnalysis from "../../Components/Chart/ChartAnalysis";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -42,12 +43,13 @@ const AdminDashboard = () => {
     try {
       setLoadingIncomeGraph(true);
       const response = await axiosInstance({
-        url: appUrl + "/getincome",
+        url: appUrl + "/getCredits",
         method: "get",
       });
-      setTotalIncome(response.data.value);
-      setTotalIncomeGraph(response.data.result);
-      // console.log(response.data.result);
+      console.log(response)
+      setTotalIncome(response.data.totalCreditsUsed);
+      setTotalIncomeGraph(response?.data.results);
+      // console.log(response.data);
       setLoadingIncomeGraph(false);
     } catch (error) {
       console.log(error);
@@ -148,8 +150,8 @@ const AdminDashboard = () => {
               }}
             >
               <DashboardCard
-                title="Total Payment this Month"
-                text={`$${totalIncome}`}
+                title="Total credits used this month"
+                text={`${totalIncome} Credits`}
                 funcLoading={loadingIncomeGraph}
               />
             </Box>
@@ -194,8 +196,8 @@ const AdminDashboard = () => {
                 }}
               >
                 {hoveredIncomeValue !== null
-                  ? `$${hoveredIncomeValue} Dollars`
-                  : "$ Dollars"}
+                  ? `$${hoveredIncomeValue} Credits`
+                  : "Credits Used"}
               </Typography>
               {loadingIncomeGraph ? (
                 <Box
@@ -214,9 +216,9 @@ const AdminDashboard = () => {
                 <Box>
                   <Chart
                     data={totalIncomeGraph}
-                    xKey="createdAt"
-                    yKey="amount"
-                    yFormatter={convertCentsToDollars}
+                    xKey="date"
+                    yKey="creditsUsed"
+                 
                     setHoveredValue={setHoveredIncomeValue}
                   />
                 </Box>
@@ -246,7 +248,7 @@ const AdminDashboard = () => {
                   : "Analysis Data"}
               </Typography>
               <Box>
-                <Chart
+                <ChartAnalysis
                   data={analysisGraph}
                   xKey="date"
                   yKey="analysis"
