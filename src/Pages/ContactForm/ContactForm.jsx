@@ -50,7 +50,9 @@ const ContactForm = () => {
         setPlanName(preselectedPlan?.name)
         setAmount(preselectedPlan?.amount);
         setCredits(preselectedPlan?.credits);
-        setIsEditable(preselectedPlan?.variant == 4 ? false : true);
+        setIsEditable(preselectedPlan?.variant == 4 ? true : false);
+      setVariant(preselectedPlan.variant)
+
       } else {
         console.warn("No plan found for variant:", initialVariant);
       }

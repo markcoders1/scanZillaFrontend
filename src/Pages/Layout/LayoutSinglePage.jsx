@@ -98,7 +98,8 @@ const LayoutSinglePage = () => {
         <img
           style={{
             width: "100%",
-            height: "100%"
+            height: "100%",
+            padding:"80px"
           }}
           src={logo} alt="" />
 

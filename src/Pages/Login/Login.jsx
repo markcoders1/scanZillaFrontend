@@ -208,13 +208,14 @@ const Login = () => {
           flexDirection: "column",
           justifyContent: "center",
           gap: "0px",
+         
         }}
       >
         <Typography
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "10px"
+            gap: "30px"
           }}
         >
           <Typography
@@ -347,8 +348,8 @@ const Login = () => {
           ><NavLink to="submit-email-for-otp" >Forgot Password</NavLink></Typography>
         </Box> */}
         <Box sx={{
-          position: "relative",
-          marginTop: "80px",
+          // position: "relative",
+          marginTop: {xl:"70px", xs:"10px"},
           display: "flex",
           flexDirection: "column",
           gap: "1.56rem",
