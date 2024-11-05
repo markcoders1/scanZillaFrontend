@@ -20,7 +20,8 @@ const ContactForm = () => {
   const [amount, setAmount] = useState('');
   const [credits, setCredits] = useState();
   const [isEditable, setIsEditable] = useState(true);
-  const [planName,setPlanName] = useState("")
+  const [planName, setPlanName] = useState("")
+  const [variant, setVariant]= useState();
 
   const auth = useSelector((state) => state.auth);
 
@@ -40,7 +41,7 @@ const ContactForm = () => {
 
       console.log(response.data.offers.slice(1));
 
-     
+
       const preselectedPlan = response.data.offers.find(
         (offer) => offer.variant === Number(initialVariant)
       );
@@ -65,16 +66,18 @@ const ContactForm = () => {
 
   const handlePlanChange = (selectedName) => {
     const plan = offerRender.find((offer) => offer.name === selectedName);
+    console.log(plan)
     if (plan) {
       setSelectedPlan(plan);
       setAmount(plan?.amount);
       setCredits(plan?.credits);
-      setIsEditable(plan?.variant === 4? true : false);
+      setIsEditable(plan?.variant === 4 ? true : false);
+      setVariant(plan.variant)
     } else {
       console.warn("Selected plan not found in offers");
     }
   };
-  
+
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -83,10 +86,10 @@ const ContactForm = () => {
 
   const handleSubmit = async () => {
     // console.log('Form Data:', data);
-  //   console.log(selectedPlan.variant);
-  //   console.log(credits);
-  // console.log(data.name);
-  // console.log(data.content);
+    //   console.log(selectedPlan.variant);
+    //   console.log(credits);
+    // console.log(data.name);
+    // console.log(data.content);
 
 
 
@@ -108,7 +111,7 @@ const ContactForm = () => {
       setData({
         name: "",
         content: "",
-       
+
       });
 
       dispatch(handleSnackAlert({ open: true, message: "Thank you for reaching out to us! We will contact you shortly.", severity: "success" }));
@@ -121,7 +124,7 @@ const ContactForm = () => {
     name: '',
     content: '',
   });
-  
+
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -150,47 +153,49 @@ const ContactForm = () => {
           "&::-webkit-scrollbar-thumb:hover": { background: "#b30000" },
         }}
       >
-         <Box
-         sx={{
-            display:"flex",
-            flexDirection:"column",
-            gap:"10px",
-          
-         }}
-         >
-         <Heading Heading='Name' />
-                <CustomTextField
-                  handleKeyDown={() => { }}
-                  onChange={handleInput}
-                  name="name"
-                  value={data?.name}
-                  error={errors?.name}
-                  placeholder=""
-                  border=""
-                  boxShadow={true}
-                  maxLength={500}
-                />
-              </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "10px",
+
+          }}
+        >
+          <Heading Heading='Name' />
+          <CustomTextField
+            handleKeyDown={() => { }}
+            onChange={handleInput}
+            name="name"
+            value={data?.name}
+            error={errors?.name}
+            placeholder=""
+            border=""
+            boxShadow={true}
+            maxLength={500}
+            padding={true}
+
+          />
+        </Box>
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Heading Heading='Plan Name' />
           <CustomSelect
-          categoryError={errors?.category}
-          data={offerRender?.map((offer) => offer?.name)}
-          handleChange={handlePlanChange}
-          value={selectedPlan ? selectedPlan.name : ''}
-          placeHolder={"Select Plan"}
-        />
+            categoryError={errors?.category}
+            data={offerRender?.map((offer) => offer?.name)}
+            handleChange={handlePlanChange}
+            value={selectedPlan ? selectedPlan.name : ''}
+            placeHolder={"Select Plan"}
+          />
         </Box>
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Heading Heading='Credits' />
           <CustomTextField
-          type="number"
+            type="number"
             value={credits}
             placeholder='Credits'
             border=''
             boxShadow={true}
-            
+
             disabled={isEditable}
             padding={true}
             onChange={
@@ -198,21 +203,25 @@ const ContactForm = () => {
             }
           />
         </Box>
+            {
+              variant !== 4 ? (
+                <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+                <Heading Heading='Amount' />
+                <CustomTextField
+                  value={`${amount / 100} $`}
+                  placeholder="Amount"
+                  border=""
+                  boxShadow={true}
+                  maxLength={500}
+                  disabled={!isEditable}
+                  padding={true}
       
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-        <Heading Heading='Amount' />
-        <CustomTextField
-          value={`${amount/100} $`}
-          placeholder="Amount"
-          border=""
-          boxShadow={true}
-          maxLength={500}
-          disabled={!isEditable}
-          padding={true}
+                />
+              </Box>
+              ) : null
+            }
+      
 
-        />
-      </Box>
-        
 
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -224,7 +233,7 @@ const ContactForm = () => {
             onChange={handleInput}
             value={data.content}
             error={errors.content}
-         
+
 
             name={"content"}
             textFieldStyle={{
