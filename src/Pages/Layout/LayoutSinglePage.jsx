@@ -4,6 +4,8 @@ import React from 'react'
 import background1 from "../../assets/images/LoginImg.webp";
 import background2 from "../../assets/images/SignupBackground.webp";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
+import logo from '../../assets/images/sample.webp'
+
 
 
 import { useLocation } from "react-router-dom";
@@ -79,7 +81,7 @@ const LayoutSinglePage = () => {
         sx={{
           flexBasis: {
             // lg:"500px",
-            md: "38%",
+            md: "48%",
 
 
           },
@@ -98,7 +100,7 @@ const LayoutSinglePage = () => {
             width: "100%",
             height: "100%"
           }}
-          src={location.pathname ==="/signup" ? background2 : background1 } alt="" />
+          src={logo} alt="" />
 
       </Box>
 

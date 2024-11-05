@@ -5,7 +5,7 @@ import './AppSidebar.css';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 import { useSelector } from 'react-redux';
-import logo from '../../assets/images/sample.png'
+import logo from '../../assets/images/sample.webp';
 
 const AppSidebar = () => {
   const [username, setUsername] = useState('');

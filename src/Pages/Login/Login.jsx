@@ -409,7 +409,7 @@ const Login = () => {
           >
             <span style={{ display: "flex", alignItems: "center", gap: "15px" }}>
               <img src={GoogleIcon} alt="Google Icon" style={{ height: "40px" }} />
-              <span>Sign in With Google</span>
+              <span>Continue with Google</span>
             </span>
           </Button>
         </Box>
