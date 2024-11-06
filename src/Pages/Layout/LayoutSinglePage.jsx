@@ -59,17 +59,17 @@ const LayoutSinglePage = () => {
                 },
                 p: {
                   md: "23px 30px",
-                  xs: "60px 20px",
+                  xs: "0px 20px",
       
                 },
-                mt:"50px",
+                mt:{lg:"50px", xs:"20px"},
 
 
 
                 
                 // bgcolor:"red"
                 ml:{
-                  sm:"70px",
+                  lg:"70px",
                   xs:"0px"
 
                 }
@@ -89,7 +89,7 @@ const LayoutSinglePage = () => {
           flexGrow:0,
           display: {
             xs: "none",
-            md: "block",
+            lg: "block",
           },
           
         }}

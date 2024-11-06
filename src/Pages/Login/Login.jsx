@@ -17,6 +17,8 @@ import { signInWithGooglePopup } from "../../../firebase.config";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 // import SnackAlert from '../SnackAlert/SnackAlert';
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
+import logo from '../../assets/images/sample.webp'
+
 
 const Login = () => {
 
@@ -208,14 +210,28 @@ const Login = () => {
           flexDirection: "column",
           justifyContent: "center",
           gap: "0px",
+          
          
         }}
       >
+       
+       <Box
+        sx={{
+          display:{lg:"none", xs:"flex"},
+          justifyContent:"center",
+          alignItems:"center",
+        }}
+        >
+        <img src={logo} style={{width:"80px"}} alt="" />
+
+        </Box>
         <Typography
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "30px"
+            gap: "25px",
+            mt:"20px",
+            textAlign:{lg:"start", xs:"center"}
           }}
         >
           <Typography
@@ -223,7 +239,7 @@ const Login = () => {
 
               color: "#1B004D",
               lineHeight: "36.9px",
-              fontSize: "50px",
+              fontSize: {md:"50px", xs:"40px"},
               fontWeight: "600",
             }}
           >
@@ -239,6 +255,7 @@ const Login = () => {
             Welcome back! Please enter your details.
           </Typography>
         </Typography>
+
         {/* <Box
           sx={{
             display: "flex",
@@ -349,7 +366,7 @@ const Login = () => {
         </Box> */}
         <Box sx={{
           // position: "relative",
-          marginTop: {xl:"70px", xs:"10px"},
+          marginTop: {xl:"70px", xs:"0px"},
           display: "flex",
           flexDirection: "column",
           gap: "1.56rem",

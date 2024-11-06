@@ -81,7 +81,7 @@ const MobileSidebar = () => {
         right: -30,
         width: {
           sm: "370px",
-          xs: "280px",
+          xs: "300px",
         },
         height: '100%',
         backgroundColor: '#060413',
@@ -90,14 +90,14 @@ const MobileSidebar = () => {
         zIndex: 1000,
         paddingLeft: "20px",
         overflowY:"auto",
-        paddingTop:`${windowDimensions.height <= 700? "100px":"10px"}`
+        paddingTop:`${windowDimensions.height <= 700? "0px":"10px"}`
       }}
     >
       <Box
         sx={{
           position: "absolute",
           color: "white",
-          top: "10px",
+          top: " 10px",
           left: "20px",
           fontSize: "2rem",
           fontWeight: "600",
@@ -107,7 +107,7 @@ const MobileSidebar = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '60px',
+          gap: '20px',
           justifyContent: 'center',
           // marginBottom: `${windowDimensions.height <= 700?"0px":"120px"}`
         }}
