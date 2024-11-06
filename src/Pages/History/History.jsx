@@ -134,7 +134,10 @@ const History = () => {
           sx={{
             marginTop: "15px",
             display: "flex",
-            gap: "2.2rem",
+            gap: {
+              lg: "2.2rem",
+              xs: "1rem",
+            },
             height: "70vh",
 
             flexDirection: {
@@ -142,7 +145,7 @@ const History = () => {
               xs: "column",
             },
             overflowY: "auto",
-            overflowX: "hidden",
+            // overflowX: "hidden",
             padding: {sm:"20px 15px", xs:"5px 8px"},
             "&::-webkit-scrollbar": {
               width: "8px",
@@ -229,7 +232,7 @@ const History = () => {
               borderRadius: "10px",
               flexDirection: "column",
               maxHeight: "680px",
-              // height:"500px",
+             
               overflow: "auto",
               boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
               "&::-webkit-scrollbar": {

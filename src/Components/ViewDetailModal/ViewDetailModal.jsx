@@ -29,7 +29,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
         p: 4,
         borderRadius: "20px",
         maxHeight: "90vh",
-        maxWidth: "50vw",
+        maxWidth: {md:"50vw", xs:"90%"},
         overflow: "auto",
         "&::-webkit-scrollbar": {
             width: "8px",
@@ -65,6 +65,7 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                 display: 'block',
             }}
         >
+         
             <Fade in={open}>
                 <Box sx={style}>
 
@@ -327,17 +328,17 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                             buttonStyle={{
                                 padding: {
                                     // lg: "12px 20px",
-                                    xs: "20px 40px"
+                                    xs: "10px 40px"
 
                                 },
                             }}
                             ButtonText="close"
-                            fontSize
+                            fontSize="14px"
                             color={"white"}
                             fontWeight
                             fullWidth={false}
                             variant="contained"
-                            padding
+                            
                             onClick={handleClose}
                         />
 

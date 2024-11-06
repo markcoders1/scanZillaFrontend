@@ -170,11 +170,12 @@ const ContactForm = () => {
             name="name"
             value={data?.name}
             error={errors?.name}
-            placeholder=""
+            placeholder="Name"
             border=""
             boxShadow={true}
             maxLength={500}
-            padding={true}
+           
+
 
           />
         </Box>
@@ -199,7 +200,7 @@ const ContactForm = () => {
             boxShadow={true}
 
             disabled={isEditable}
-            padding={true}
+            
             onChange={
               isEditable ? (e) => setCredits(e.target.value) : undefined
             }
@@ -216,7 +217,7 @@ const ContactForm = () => {
                   boxShadow={true}
                   maxLength={500}
                   disabled={!isEditable}
-                  padding={true}
+               
       
                 />
               </Box>
@@ -227,13 +228,15 @@ const ContactForm = () => {
 
 
         <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Heading Heading='Payment Details *' />
+          <Heading Heading='Payment Details' />
           <CustomInputShadow
             type="text"
             multiline={true}
             rows={10}
             onChange={handleInput}
             value={data.content}
+            placeholder='Payment Details'
+
             error={errors.content}
 
 

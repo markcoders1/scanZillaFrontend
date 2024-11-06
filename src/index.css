@@ -180,3 +180,8 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   display: block;
 }
+
+#newKeyword::placeholder, #newAbbrevation::placeholder {
+  font-size: 14px; /* Adjust font size as needed */
+  /* color: #A0A4A9; Optional: Set placeholder color */
+}

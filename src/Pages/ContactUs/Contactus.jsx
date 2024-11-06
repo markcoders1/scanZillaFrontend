@@ -145,10 +145,12 @@ const Contactus = () => {
                   name="name"
                   value={data?.name}
                   error={errors?.name}
-                  placeholder=""
+                  placeholder="Name"
                   border=""
                   boxShadow={true}
                   maxLength={500}
+           
+
                 />
               </Box>
               <Box
@@ -158,13 +160,14 @@ const Contactus = () => {
                 gap:"10px"
              }}
               >
-                 <Heading Heading='How Can We Help? *' />
+                 <Heading Heading='How Can We Help?' />
                 <CustomInputShadow
                   type="text"
                   multiline={true}
                   rows={10}  // Adjust the number of rows to match the desired height
                   onChange={handleInput}
                   value={data.content}
+            placeholder='How can we Help?'
                  
                   error={errors.content}
                   name={"content"}

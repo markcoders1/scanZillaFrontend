@@ -185,7 +185,7 @@ const Profile = () => {
                 // border: "2px solid red"
               }}
             >
-              <Heading Heading="Debit Card Details" />
+             
               <Box
                 sx={{
                   display: "flex",

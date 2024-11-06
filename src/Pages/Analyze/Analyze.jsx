@@ -469,7 +469,7 @@ const Analyze = () => {
                     name="title"
                     value={data?.title}
                     error={errors?.title}
-                    placeholder="Insert Title Here"
+                    placeholder="Title Here"
                     border=""
                     boxShadow={true}
                     maxLength={500}
@@ -684,6 +684,8 @@ const Analyze = () => {
                     error={errors.description}
                     name={"description"}
                     maxLength={5000}
+                    placeholder="Product Description Here"
+
                   />
                 </Box>
               </Box>

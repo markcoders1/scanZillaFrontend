@@ -301,7 +301,7 @@ const UserTable = () => {
                       fontSize: "14px",
                       textAlign: "center",
                       borderRadius: "8px 0px 0px 8px",
-                      width: "160px",
+                      minWidth:"260px"
                     }}
                   >
                     All Users
@@ -314,6 +314,8 @@ const UserTable = () => {
                       padding: "15px 10px",
                       fontSize: "14px",
                       textAlign: "center",
+                      minWidth:"160px"
+
                     }}
                   >
                     No of Credits
@@ -337,6 +339,8 @@ const UserTable = () => {
                       padding: "15px 10px",
                       fontSize: "16px",
                       textAlign: "center",
+                      minWidth:"160px"
+
                     }}
                   >
                     <TableSortLabel

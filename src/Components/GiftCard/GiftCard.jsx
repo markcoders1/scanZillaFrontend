@@ -13,7 +13,7 @@ const GiftCard = ({ id, title, description, bullets, openModal,error,keywords , 
             display = "No Value Entered"
         }
     }else{
-        display = collectiveString.slice(0,16) + " ..."
+        display = collectiveString.slice(0,12) + " ..."
     }
 
     const handleClick = () => {
@@ -25,8 +25,13 @@ const GiftCard = ({ id, title, description, bullets, openModal,error,keywords , 
             sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: 'center',
-                gap: "20px"
+                alignItems: {sm:"center", xs:"start"},
+                gap: "20px",
+                flexDirection:{
+                    sm:"row",
+                    xs:"column"
+                }
+
             }}
         >
             <Typography
@@ -40,7 +45,6 @@ const GiftCard = ({ id, title, description, bullets, openModal,error,keywords , 
                 }}
             >
                 Analyzation {display}
-          
             </Typography>
             <Typography>
                 <CustomButton

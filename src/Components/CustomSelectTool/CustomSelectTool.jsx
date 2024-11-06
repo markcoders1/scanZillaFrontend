@@ -21,7 +21,7 @@ const CustomSelectTool = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          padding: "0px 26px",
+          padding: "0px 13px",
           alignItems: "center",
           justifyContent: "space-between",
           borderRadius: "10px",

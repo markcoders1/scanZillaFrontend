@@ -24,7 +24,7 @@ const CustomSelect = ({
         sx={{
           display: "flex",
           flexDirection: "column",
-          padding: "0px 20px",
+          padding: "0px 12px",
           alignItems: "center",
           justifyContent: "space-between",
           borderRadius: "10px",
