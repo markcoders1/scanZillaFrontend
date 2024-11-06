@@ -2,9 +2,10 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import CustomButton from '../CustomButton/CustomButton';
 
-const GiftCard = ({ id, title, description, bullets, openModal,error,keywords }) => {
-
-    const collectiveString = `${title}${description}${bullets?.join(" ")}${keywords?keywords:""}`
+const GiftCard = ({ id, title, description, bullets, openModal,error,keywords , reccomendations}) => {
+    // console.log("recomendations ===>",reccomendations)
+    const collectiveString = `${title}${description}${bullets?.join(" ")}${keywords?keywords:""}`;
+    
     let display
     if(collectiveString.length<16){
         display = collectiveString.length>0?collectiveString.slice(0,collectiveString.length):"No Value Entered"
@@ -16,7 +17,7 @@ const GiftCard = ({ id, title, description, bullets, openModal,error,keywords })
     }
 
     const handleClick = () => {
-        openModal({ id, title, description, bullets, error,keywords });
+        openModal({ id, title, description, bullets, error,keywords,reccomendations });
     };
 
     return (

@@ -74,8 +74,9 @@ const History = () => {
           limit: 100,
         },
       });
+      console.log(response)
       if (response) {
-        setAnalyzeHistory(response.data.Histories);
+        setAnalyzeHistory(response?.data?.Histories);
         setSnackAlertData({
           open: true,
           message: response?.data?.message,
@@ -140,10 +141,9 @@ const History = () => {
               lg: "row",
               xs: "column",
             },
-            height: "70vh",
             overflowY: "auto",
             overflowX: "hidden",
-            padding: "20px 15px",
+            padding: {sm:"20px 15px", xs:"5px 8px"},
             "&::-webkit-scrollbar": {
               width: "8px",
             },
@@ -166,11 +166,13 @@ const History = () => {
               display: "flex",
               gap: "1.8rem",
               flexBasis: "50%",
-              padding: "24px 30px",
+              padding: {sm:"24px 30px", xs:"14px 20px"},
               borderRadius: "10px",
               flexDirection: "column",
               maxHeight: "680px",
               overflow: "auto",
+              // overflowX:"hidden",
+              // border:"2px solid red",
               boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
               "&::-webkit-scrollbar": {
                 width: "8px",
@@ -190,7 +192,7 @@ const History = () => {
           >
             <Typography
               sx={{
-                fontSize: "27px",
+                fontSize: {sm:"27px", xs:"22px"},
                 fontWeight: "600",
                 color: "#333333",
               }}
@@ -203,15 +205,16 @@ const History = () => {
             ) : (
               analyzeHistory.map((item, index) => (
                 <GiftCard
-                  key={item._id}
-                  id={item._id}
-                  title={item.title}
-                  description={item.description}
-                  bullets={item.bullets}
+                  key={item?._id}
+                  id={item?._id}
+                  title={item?.title}
+                  description={item?.description}
+                  bullets={item?.bullets}
                   index={index}
                   openModal={openModal}
-                  error={item.error}
-                  keywords={item.keywords}
+                  error={item?.error}
+                  keywords={item?.keywords}
+                  reccomendations={item?.reccomendations}
                 />
               ))
             )}
@@ -226,6 +229,7 @@ const History = () => {
               borderRadius: "10px",
               flexDirection: "column",
               maxHeight: "680px",
+              // height:"500px",
               overflow: "auto",
               boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
               "&::-webkit-scrollbar": {
@@ -246,7 +250,8 @@ const History = () => {
           >
             <Typography
               sx={{
-                fontSize: "27px",
+                fontSize: {sm:"27px", xs:"22px"},
+
                 fontWeight: "600",
                 color: "#333333",
               }}
@@ -270,7 +275,10 @@ const History = () => {
             description={modalData.description}
             error={modalData.error}
             keywords={modalData.keywords}
+            reccomendations= {modalData?.reccomendations}
+
           />
+       
 
           <SnackAlert
             message={snackAlertData.message}
