@@ -41,7 +41,7 @@ const CreditsHistory = ({ index, item }) => {
                     color: "#333333",
                 }}
             >
-                Price: {item.amount/100} {getCurrencySymbol(item.currency)}
+                Price:  {getCurrencySymbol(item.currency)} {item.amount/100}
             </Typography>
         </Box>
     );
