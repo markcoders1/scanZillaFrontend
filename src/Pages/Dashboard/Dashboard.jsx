@@ -122,7 +122,7 @@ const Home = () => {
         method: "get",
       });
       if (response) {
-        const histories = response?.data?.Histories?.slice(0, 4);
+        const histories = response?.data?.Histories?.slice(0, 3);
         setAnalyzeHistory(histories);
         setSnackAlertData({
           open: true,

@@ -689,7 +689,7 @@ const Analyze = () => {
                   <CustomInputShadow
                     type="text"
                     multiline={true}
-                    rows={10} // Adjust the number of rows to match the desired height
+                    rows={14} 
                     onChange={hanldeInput}
                     value={data.description}
                     height={"360px"}
@@ -1083,7 +1083,7 @@ const Analyze = () => {
                           borderRadius: "10px",
                         }}
                       >
-                        <Heading Heading="Indexing Recomendations" />
+                        <Heading Heading="Indexing Recommendations" />
                         {reccomendations?.map((item, index) => (
                           <Typography sx={{ padding: "10px 0" }} key={index}>
                             {item.split("|-|").map((el, i) => {

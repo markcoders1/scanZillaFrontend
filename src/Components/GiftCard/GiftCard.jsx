@@ -13,7 +13,7 @@ const GiftCard = ({ id, title, description, bullets, openModal,error,keywords , 
             display = "No Value Entered"
         }
     }else{
-        display = collectiveString.slice(0,12) + " ..."
+        display = collectiveString.slice(0,20) + " ..."
     }
 
     const handleClick = () => {
@@ -44,7 +44,7 @@ const GiftCard = ({ id, title, description, bullets, openModal,error,keywords , 
                     color: "#A0A4A9",
                 }}
             >
-                Analyzation {display}
+               {display}
             </Typography>
             <Typography>
                 <CustomButton
