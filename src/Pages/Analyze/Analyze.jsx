@@ -327,14 +327,17 @@ const Analyze = () => {
   };
 
   useEffect(() => {
-    let tempbullets = data.bulletpoints.map((e) => e.value);
+
+
+    let tempbullets = data.bulletpoints.map((e) => e.value).filter(Boolean); 
+    console.log(tempbullets);
 
     // console.log(calcStringCost(tempbullets.join('')))
     setCreditDynamic(
       calcStringCost(data.title) +
         calcStringCost(data.description) +
-        calcStringCost(tempbullets.join("")) +
-        calcStringCost(data.keywords)
+        calcStringCost(data.keywords) +
+        (tempbullets.length > 0 ? tempbullets.length * 0.5 : 0) 
     );
   }, [data, setData]);
 
@@ -612,6 +615,10 @@ const Analyze = () => {
                     sx={{
                       display: "flex",
                       gap: "20px",
+                     flexDirection:{
+                      sm:"row",
+                      xs:"column"
+                     }
                     }}
                   >
                     {data.bulletpoints.length > 1 && (
@@ -649,6 +656,11 @@ const Analyze = () => {
                         padding: {
                           lg: "12px 20px",
                         },
+                        width:{
+                          sm:"180px",
+                          xs:"225px"
+                        }
+                        
                       }}
                       ButtonText="Add A Bullet +"
                       fontSize
@@ -658,7 +670,7 @@ const Analyze = () => {
                       variant="contained"
                       padding
                       onClick={addBullet}
-                      width={"183px"}
+                      // width={"183px"}
                     />
                   </Box>
                 </Box>
