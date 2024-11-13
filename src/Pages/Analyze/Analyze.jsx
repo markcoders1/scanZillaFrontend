@@ -739,7 +739,7 @@ const Analyze = () => {
                       hovercolor="#1A0049"
                       buttonTextStyle={{}}
                       buttonStyle={{ padding: { lg: "12px 20px" } }}
-                      ButtonText={`Analyze (${creditDynamic} Credits)`}
+                      ButtonText={`Analyze (${creditDynamic} ${creditDynamic == 1? "Credit": "Credits" })`}
                       fontSize
                       color="white"
                       fontWeight

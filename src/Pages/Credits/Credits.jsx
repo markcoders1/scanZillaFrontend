@@ -560,9 +560,9 @@ const Credits = () => {
                 </Typography>
               </Box>
             </Box>
-            <Box>
+            {/* <Box>
               <CustomCard cardStyle={{ height: "153px" }} />
-            </Box>
+            </Box> */}
           </Box>
           <SnackAlert
             message={snackAlertData.message}

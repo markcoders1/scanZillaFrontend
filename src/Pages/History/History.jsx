@@ -200,7 +200,7 @@ const History = () => {
                 color: "#333333",
               }}
             >
-              Analyze History
+              Analysis History
             </Typography>
 
             {analyzeHistory.length < 1 ? (
