@@ -86,6 +86,7 @@ const Analyze = () => {
   const [loaderState, setLoaderState] = useState(0);
   const dispatch = useDispatch();
   const AnalyzeErrros = useSelector((state) => state.analyze);
+  const [bulletPointsCredits , setBulletPointsCredits] =  useState(0);
 
   function hasValues(obj) {
     return Object.values(obj).some(
@@ -106,54 +107,52 @@ const Analyze = () => {
       category: generatedErrors.CE,
     }));
   };
+
+  const capitalizeFirstLetterOfSentences = (text) => {
+    return text.replace(/(^\s*\w|[.!?]\s*\w)/g, function (c) {
+      return c.toUpperCase();
+    });
+  };
+  /*
+  
+  this will happen on these conditions
+
+  category must be books                                               data.category==="Books"
+  either I'm editing title or subtitle                                 e.target.name==="title" || e.target.name ==="subtitle"
+
+  if I'm editing title, I cant add more title after limit
+  if I'm editing subtitle, I cant add more subtitle after limit        e.target.value.length+data[e.target.name==="title"?"subtitle":"title"].length>=rules["Books"]
+
+  limit is rules["Books"]
+  
+  
+  */
   const hanldeInput = (e) => {
-    /*
-    
-    this will happen on these conditions
-
-    category must be books                                               data.category==="Books"
-    either I'm editing title or subtitle                                 e.target.name==="title" || e.target.name ==="subtitle"
-
-    if I'm editing title, I cant add more title after limit
-    if I'm editing subtitle, I cant add more subtitle after limit        e.target.value.length+data[e.target.name==="title"?"subtitle":"title"].length>=rules["Books"]
-
-    limit is rules["Books"]
-    
-    
-    */
-
+    let value = e.target.value;
+  
+    // Existing length limit logic
     if (
       (e.target.name === "title" || e.target.name === "subtitle") &&
       data.category === "Books" &&
-      e.target.value.length +
+      value.length +
         data[e.target.name === "title" ? "subtitle" : "title"].length >=
         rules["Books"]
     ) {
-      setData((prev) => ({
-        ...prev,
-        [e?.target?.name]: e?.target?.value.slice(
-          0,
-          500 - data[e.target.name === "title" ? "subtitle" : "title"].length
-        ),
-      }));
-    } else if (
-      e.target.name === "description" &&
-      e.target.value.length >= 5000
-    ) {
-      setData((prev) => ({
-        ...prev,
-        [e?.target?.name]: e?.target?.value.slice(0, 5000),
-      }));
-    } else if (e.target.name === "keywords" && e.target.value.length >= 500) {
-      setData((prev) => ({
-        ...prev,
-        [e?.target?.name]: e?.target?.value.slice(0, 500),
-      }));
-    } else {
-      console.log(e.target.name);
-      setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
+      value = value.slice(
+        0,
+        500 - data[e.target.name === "title" ? "subtitle" : "title"].length
+      );
+    } else if (e.target.name === "description" && value.length >= 5000) {
+      value = value.slice(0, 5000);
+    } else if (e.target.name === "keywords" && value.length >= 500) {
+      value = value.slice(0, 500);
     }
-
+  
+    // Apply capitalization
+    value = capitalizeFirstLetterOfSentences(value);
+  
+    setData((prev) => ({ ...prev, [e?.target?.name]: value }));
+  
     if (data.category !== "Books") {
       setData((prev) => ({ ...prev, subtitle: "" }));
     }
@@ -277,19 +276,21 @@ const Analyze = () => {
     }
   };
 
+  // const combinedLength = prev.bulletpoints.reduce((acc, bullet, idx) => {
+  //     return acc + (idx === index ? trimmedValue.length : bullet.value.length);
+  // }, 0);
+
+  // if (combinedLength > rules.totalBulletsLength) {
+  //     const allowedLength = rules.totalBulletsLength - (combinedLength - trimmedValue.length);
+  //     trimmedValue = trimmedValue.slice(0, allowedLength);
+  // }
   const handleBulletPointChange = (index, value) => {
     let trimmedValue = value.slice(0, 500);
-
+  
+    // Apply capitalization
+    trimmedValue = capitalizeFirstLetterOfSentences(trimmedValue);
+  
     setData((prev) => {
-      // const combinedLength = prev.bulletpoints.reduce((acc, bullet, idx) => {
-      //     return acc + (idx === index ? trimmedValue.length : bullet.value.length);
-      // }, 0);
-
-      // if (combinedLength > rules.totalBulletsLength) {
-      //     const allowedLength = rules.totalBulletsLength - (combinedLength - trimmedValue.length);
-      //     trimmedValue = trimmedValue.slice(0, allowedLength);
-      // }
-
       return {
         ...prev,
         bulletpoints: prev.bulletpoints.map((bullet, idx) =>
@@ -339,6 +340,8 @@ const Analyze = () => {
         calcStringCost(data.keywords) +
         (tempbullets.length > 0 ? tempbullets.length * 0.5 : 0) 
     );
+
+    setBulletPointsCredits(tempbullets.length > 0 ? tempbullets.length * 0.5 : 0)
   }, [data, setData]);
 
   useEffect(() => {
@@ -465,6 +468,12 @@ const Analyze = () => {
                     count={`${data.title.length + data?.subtitle?.length}${
                       data.category ? ` / ${rules[`${data.category}`]}` : ""
                     }`}
+
+                    creditText={"Credits"}
+                    creditUtilized={calcStringCost(data.title)}
+                    sx={{
+                      gap:"1rem"
+                      }}
                   />
                   <CustomTextField
                     handleKeyDown={() => {}}
@@ -504,12 +513,21 @@ const Analyze = () => {
                   gap: "15px",
                 }}
               >
-                <Heading Heading="Bullet Points" />
+                <Heading Heading="Bullet Points" 
+                  creditText={"Credits"}
+                  creditUtilized={bulletPointsCredits}
+                  sx={{
+                  gap:"1rem"
+                  }}
+                />
                 {data.bulletpoints.map((item, index) => (
                   <>
                     <Heading
                       characterText="Character Count:"
                       count={`${item.value.length} / 500`}
+
+                    
+
                     />
                     <Box
                       key={index}
@@ -680,6 +698,12 @@ const Analyze = () => {
                   Heading="Product Description"
                   characterText="Character Count"
                   count={data.description.length}
+
+                  creditText={"Credits"}
+                  creditUtilized={calcStringCost(data.description)}
+                  sx={{
+                    gap:"1rem"
+                    }}
                 />
                 <Box
                   sx={{
@@ -711,6 +735,12 @@ const Analyze = () => {
                     count={data.keywords.length}
                     Heading="Search Terms (Generic Keywords)"
                     characterText="Character Count"
+
+                    creditText={"Credits"}
+                    creditUtilized={calcStringCost(data.keywords)}
+                    sx={{
+                      gap:"1rem"
+                      }}
                   />
                 </Box>
                 <Box>

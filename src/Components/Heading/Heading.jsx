@@ -7,6 +7,10 @@ const Heading = ({
   count = "",
   number,
   headingstyle,
+  creditText,
+  creditUtilized,
+  sx,
+
 }) => {
   return (
     <Box
@@ -30,6 +34,13 @@ const Heading = ({
         {Heading}
         </Typography>
       }
+      <Box
+      sx={{
+        display:"flex",
+        ...sx
+      }}
+      >
+
       <Typography sx={{
         fontSize: "16px",
         fontWeight: "600",
@@ -37,6 +48,14 @@ const Heading = ({
       }}>
         {characterText} &nbsp; {count}
       </Typography>
+      <Typography sx={{
+        fontSize: "16px",
+        fontWeight: "600",
+        lineHeight: "33px"
+      }}>
+        {creditText} &nbsp; {creditUtilized}
+      </Typography>
+        </Box>
     </Box>
 
   )
