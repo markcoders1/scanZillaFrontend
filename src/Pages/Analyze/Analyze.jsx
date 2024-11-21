@@ -824,6 +824,7 @@ const Analyze = () => {
                       fontSize: "40px",
                       fontWeight: "600",
                       color: "#333333",
+                     
                     }}
                   >
                     {result}
@@ -912,7 +913,7 @@ const Analyze = () => {
                                         return (
                                           <>
                                             <span key={ind}>
-                                              {" "}
+                                            •{" "}
                                               {el.replace(
                                                 /"bulletpoints\[\d+\]"/g,
                                                 ""
@@ -951,9 +952,9 @@ const Analyze = () => {
                                   sx={{ padding: "10px 0" }}
                                   key={index}
                                 >
-                                  {item.point}. <br />
+                                  {item.point}.
                                   <span style={{ paddingLeft: "10px" }}>
-                                    •{" "}
+                                    {" "}
                                     {item.message.replace(
                                       /"bulletpoints\[\d+\]"/g,
                                       ""
@@ -1103,7 +1104,11 @@ const Analyze = () => {
                       </Paper>
                     ) : null}
 
-                    {reccomendations.length > 0 &&
+                  </Box>
+                </Box>
+              ) : null}
+              
+              {reccomendations.length > 0 &&
                     reccomendations[0]  !== "" ? (
                       <Paper
                         sx={{
@@ -1128,9 +1133,6 @@ const Analyze = () => {
                         ))}
                       </Paper>
                     ) : null}
-                  </Box>
-                </Box>
-              ) : null}
 
               <SnackAlert
                 message={snackAlertData.message}
