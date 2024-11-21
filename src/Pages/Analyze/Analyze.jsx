@@ -847,7 +847,7 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                  • {el}
+                                 {AnalyzeErrros?.TE.length > 1 && "•"}  {el} 
                                   {i < item.split("|-|").length - 1 && <br />}
                                 </>
                               );
@@ -866,7 +866,7 @@ const Analyze = () => {
                       >
                         <Heading Heading="Title" />
                         <Typography sx={{ padding: "10px 0" }}>
-                          No issues found, you're good to go.
+                          No issues found, you're good to go. 
                         </Typography>
                       </Paper>
                     )}
@@ -970,7 +970,7 @@ const Analyze = () => {
                                 {item.split("|-|").map((el, i) => {
                                   return (
                                     <>
-                                      • {el}
+                                     {AnalyzeErrros?.BE.length > 1 &&  "•"} {el}
                                       {i < item.split("|-|").length - 1 && (
                                         <br />
                                       )}
@@ -1013,7 +1013,7 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                  • {el}
+                                   {AnalyzeErrros?.DE.length > 1 &&  "•"} {el}
                                   {i < item.split("|-|").length - 1 && <br />}
                                 </>
                               );
@@ -1054,7 +1054,7 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                  • {el}
+                                  {AnalyzeErrros?.KE.length > 1 &&  "•"} {el}
                                   {i < item.split("|-|").length - 1 && <br />}
                                 </>
                               );
@@ -1093,8 +1093,8 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                  • {el}
-                                  {i < item.split("|-|").length - 1 && <br />}
+                                 {AnalyzeErrros?.CE.length > 1 &&  "•"}  {el}
+                                  {i < item.split("|-|").length - 1 && <br />} 
                                 </>
                               );
                             })}
@@ -1119,7 +1119,7 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                  • {el}
+                                {reccomendations?.length > 1 && "•"}   {el} 
                                   {i < item.split("|-|").length - 1 && <br />}
                                 </>
                               );
