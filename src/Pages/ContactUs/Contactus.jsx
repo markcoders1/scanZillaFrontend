@@ -27,7 +27,6 @@ const Contactus = () => {
     const [data, setData] = useState({
         name: '',
         content: '',
-        
       });
 
       const handleInput = (e) => {
@@ -86,42 +85,63 @@ const Contactus = () => {
 
     <Box
     sx={{
-        display:"flex",
-        gap:{md:"30px", xs:"100px"},
-        flexDirection:{md:"row", xs:"column"},
-       
-
-    }}
+      display:"flex",
+      flexDirection:"column",
+      gap:"10px",
+      flexBasis:"100%",
+      p:"10px 15px",
+      height: "70vh",
+      overflowY: "auto",
+      overflowX: "hidden",
+      padding: "20px 15px",
+      "&::-webkit-scrollbar": {
+        width: "8px"
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#DFDFDF",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "black",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        background: "#b30000"
+      },
+     
+    
+     
+   }}
     >
     <Box
-    sx={{
-        display:"flex",
-        flexDirection:"column",
-        gap:"10px",
-        flexBasis:"100%",
-        p:"10px 15px",
-        height: "70vh",
-        overflowY: "auto",
-        overflowX: "hidden",
-        padding: "20px 15px",
-        "&::-webkit-scrollbar": {
-          width: "8px"
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "#DFDFDF",
-          borderRadius: "10px"
-        },
-        "&::-webkit-scrollbar-thumb": {
-          background: "black",
-          borderRadius: "10px"
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-          background: "#b30000"
-        },
+    // sx={{
+    //     display:"flex",
+    //     flexDirection:"column",
+    //     gap:"10px",
+    //     flexBasis:"100%",
+    //     p:"10px 15px",
+    //     height: "70vh",
+    //     overflowY: "auto",
+    //     overflowX: "hidden",
+    //     padding: "20px 15px",
+    //     "&::-webkit-scrollbar": {
+    //       width: "8px"
+    //     },
+    //     "&::-webkit-scrollbar-track": {
+    //       background: "#DFDFDF",
+    //       borderRadius: "10px"
+    //     },
+    //     "&::-webkit-scrollbar-thumb": {
+    //       background: "black",
+    //       borderRadius: "10px"
+    //     },
+    //     "&::-webkit-scrollbar-thumb:hover": {
+    //       background: "#b30000"
+    //     },
        
       
        
-     }}
+    //  }}
     >
        
       <Box

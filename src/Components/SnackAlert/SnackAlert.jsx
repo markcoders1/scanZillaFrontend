@@ -40,7 +40,7 @@ const SnackAlert = ({
     >
       <Alert
         className="manRope500"
-        // onClose={handleSnackbarClose}
+        onClose={handleSnackbarClose}
         severity={severity}
         variant="filled"
         sx={{ width: "100%", color: "white" }}

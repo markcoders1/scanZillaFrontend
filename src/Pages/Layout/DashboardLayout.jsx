@@ -54,7 +54,7 @@ const DashboardLayout = () => {
         return 'Assistant Instructions';
         case '/contact':
           return 'Choose Your Perfect Plan';
-          case '/Support':
+          case '/support':
             return 'Got a Question? Email Us';
       // Add more cases as needed for other routes
       default:
@@ -88,7 +88,7 @@ const DashboardLayout = () => {
 
         padding: {
           sm: "20px 30px",
-          xs: "10px 10px"
+          xs: "0px 10px"
         },
         // marginLeft: "-15px",
         boxSizing: 'border-box',
