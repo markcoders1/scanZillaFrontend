@@ -8,6 +8,7 @@ import CustomInputShadow from '../../Components/CustomInputShadow/CustomInputSha
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import { useDispatch, useSelector } from 'react-redux';
 import CustomSelect from '../../Components/CustomSelect/CustomSelect';
+import { useLocation } from 'react-router-dom';
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -25,8 +26,9 @@ const ContactForm = () => {
 
   const auth = useSelector((state) => state.auth);
 
-  const queryParams = new URLSearchParams(window.location.search);
-  let initialVariant = queryParams.get('variant') || '4';
+  const location = useLocation();
+  const variantState = location.state?.variant;
+  let initialVariant = variantState || '4';
 
 
   const fetchOffers = async () => {
@@ -155,21 +157,21 @@ const ContactForm = () => {
         }}
     >
       <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          flexBasis: "100%",
-          p: "10px 15px",
-          height: "70vh",
-          overflowY: "auto",
-          overflowX: "hidden",
-          padding: "20px 15px",
-          "&::-webkit-scrollbar": { width: "8px" },
-          "&::-webkit-scrollbar-track": { background: "#DFDFDF", borderRadius: "10px" },
-          "&::-webkit-scrollbar-thumb": { background: "black", borderRadius: "10px" },
-          "&::-webkit-scrollbar-thumb:hover": { background: "#b30000" },
-        }}
+        // sx={{
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   gap: "10px",
+        //   flexBasis: "100%",
+        //   p: "10px 15px",
+        //   height: "70vh",
+        //   overflowY: "auto",
+        //   overflowX: "hidden",
+        //   padding: "20px 15px",
+        //   "&::-webkit-scrollbar": { width: "8px" },
+        //   "&::-webkit-scrollbar-track": { background: "#DFDFDF", borderRadius: "10px" },
+        //   "&::-webkit-scrollbar-thumb": { background: "black", borderRadius: "10px" },
+        //   "&::-webkit-scrollbar-thumb:hover": { background: "#b30000" },
+        // }}
       >
         <Box
           sx={{

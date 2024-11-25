@@ -169,7 +169,12 @@ const DashboardLayout = () => {
               flexShrink:"1",
              
             }} >
-              <Header title={headerTitle} />
+              <Header title={headerTitle} sx={{
+                 fontSize: {
+                  sm: "40px",
+                  xs: "22px"
+                },
+              }} />
             <Outlet />
 
             </Box>

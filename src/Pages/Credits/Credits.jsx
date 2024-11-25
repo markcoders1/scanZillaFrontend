@@ -60,10 +60,8 @@ const Credits = () => {
   };
 
   const handleNavigateToContact = (variant) => {
-    navigate(`/contact?variant=${variant}`);
-    // navigate(`/support?variant=${variant}`);
-
-  }
+    navigate('/contact', { state: { variant } });
+  };
 
   const fetchCreditsHistory = async () => {
     setSnackAlertData({

@@ -420,6 +420,10 @@ const Analyze = () => {
                 display: "flex",
                 flexDirection: "column",
                 gap: ".7rem",
+                textAlign: {
+                  sm:"justify !important",
+                  xs:"left"
+                },
               }}
             >
               <div
@@ -429,7 +433,7 @@ const Analyze = () => {
                   color: "white",
                   borderRadius: "5px",
                   marginBottom: "10px",
-                  textAlign: "justify",
+              
                 }}
               >
                 Disclaimer : This tool is designed to assist in identifying
@@ -760,7 +764,14 @@ const Analyze = () => {
 
               <Box sx={{ marginTop: "40px" }}>
                 {!isLoading ? (
-                  <div style={{ display: "flex", gap: "10px" }}>
+                  <div style={{ display: "flex", gap: "10px", 
+                    flexDirection:{
+                      xs:"column",
+                      sm:"row",
+                     
+                    },
+                  
+                  }}>
                     <CustomButton
                       border="2px solid #1A0049"
                       borderRadius="10px"

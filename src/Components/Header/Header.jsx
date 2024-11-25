@@ -2,7 +2,7 @@ import { Box, Typography } from '@mui/material'
 import React from 'react'
 import MenuBar from '../MenuBar/MenuBar'
 
-const Header = ({ title }) => {
+const Header = ({ title, sx }) => {
   return (
     <Box sx={{
       display: "flex",
@@ -21,6 +21,7 @@ const Header = ({ title }) => {
           sm: "40px",
           xs: "26px"
         },
+        ...sx
       }}>
         {title}
       </Typography>

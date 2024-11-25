@@ -234,7 +234,7 @@ const Home = () => {
               md: "50%",
               xs: "100%"
             },
-            // border: "2px solid black",
+           
 
 
             flexShrink: 1,
@@ -245,6 +245,7 @@ const Home = () => {
               flexGrow: 2,
               flexShrink: "1",
               height: "150px",
+             
             }}>
               <CardIWithImageBackground
                 text={username}
@@ -257,7 +258,8 @@ const Home = () => {
               },
               flexGrow: 1,
               flexShrink: "1",
-              cursor: "pointer"
+              cursor: "pointer",
+
             }}
               onClick={() => navigate("/credits")}>
 
@@ -266,7 +268,7 @@ const Home = () => {
 
                 padding: {
                   sm: "19px 26px",
-                  xs: "20px 10px"
+                  xs: "26px 32px"
                 },
                 borderRadius: "10px",
                 display: "flex",
@@ -279,13 +281,17 @@ const Home = () => {
                   boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
                   backgroundColor: "#edecec"
                 }
+               
               }}>
 
                 <Typography sx={{
 
                   color: "#333333",
                   fontWeight: "600",
-                  fontSize: "27px",
+                  fontSize: {
+                    md:"27px",
+                    xs:"20px"
+                  },
                   lineHeight: "30px",
                   letterSpacing: "0.34px"
                 }}>
@@ -293,9 +299,12 @@ const Home = () => {
                 </Typography>
 
                 <Typography sx={{
-                  mt: "20px",
+                  mt: "0px",
                   fontWeight: "600",
-                  fontSize: "80px",
+                  fontSize: {
+                    md:"80px",
+                    xs:"50px"
+                  },
                   lineHeight: "65px",
                   color: "#190247",
                   letterSpacing: "0.67px"
@@ -379,7 +388,10 @@ const Home = () => {
                 </Typography> */}
               <Typography sx={{
                 color: "#190247",
-                fontSize: "40px",
+                fontSize: {
+                  md:"40px",
+                  xs:"35px"
+                },
                 lineHeight: "50px",
                 fontWeight: "600"
               }}>
