@@ -433,7 +433,7 @@ const Analyze = () => {
                   color: "white",
                   borderRadius: "5px",
                   marginBottom: "10px",
-              
+                  
                 }}
               >
                 Disclaimer : This tool is designed to assist in identifying

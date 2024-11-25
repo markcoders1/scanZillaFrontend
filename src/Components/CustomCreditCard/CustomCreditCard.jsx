@@ -14,7 +14,7 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
         padding: '30px 16px 0px 16px',
         boxShadow: '4px 5px 15px 0px #C8C8C8',
         borderRadius: '10px',
-        height: '342px',
+        height: '350px',
         flexGrow: '1',
    
       }}
@@ -81,7 +81,7 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
             color: '#333333',
             mt: '20px',
             textAlign:"center",
-            maxWidth:"250px",
+            maxWidth:"270px",
           }}
         >
           {desc}

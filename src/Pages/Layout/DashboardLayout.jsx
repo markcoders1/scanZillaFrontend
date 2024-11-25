@@ -31,7 +31,7 @@ const DashboardLayout = () => {
       case '/analyze':
         return 'Analyze';
       case '/credits':
-        return 'Credits & Pricing';
+        return 'Credits Top Up';
       case '/history':
         return 'History';
       case '/profile':

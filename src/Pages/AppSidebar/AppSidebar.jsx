@@ -145,7 +145,7 @@ const AppSidebar = () => {
                   isActive ? 'anchortag anchorActive' : 'anchortag'
                 }
               >
-                Credits
+               Credits Top Up
               </NavLink>
             </Typography>
             <Typography>

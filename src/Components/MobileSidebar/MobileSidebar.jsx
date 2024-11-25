@@ -224,7 +224,7 @@ const MobileSidebar = () => {
                   }
                   onClick={handleNavLinkClick}
                 >
-                  Credits
+                  Credits Top Up
                 </NavLink>
               </Typography>
               <Typography>
