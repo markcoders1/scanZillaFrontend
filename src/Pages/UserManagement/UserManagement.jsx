@@ -330,6 +330,7 @@ const UserTable = () => {
                     }}
                   >
                     Email
+                    
                   </TableCell>
                   <TableCell
                     sx={{
