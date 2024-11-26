@@ -3,10 +3,36 @@ import { Box, Typography } from '@mui/material';
 import CustomButton from '../../Components/CustomButton/CustomButton';
 import { PiSuitcaseSimpleBold } from 'react-icons/pi';
 
-const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, planName, buttonText, key, desc, visibility= "" }) => {
+const CustomCreditCard = ({
+  title,
+  price,
+  credits,
+  handleNavigate,
+  variant,
+  planName,
+  buttonText,
+  key,
+  desc,
+  visibility = "",
+}) => {
+  // Function to render the description with strong tags around the first and second "*"
+  const renderDesc = (desc) => {
+    const parts = desc.split('*');
+    if (parts.length > 2) {
+      return (
+        <>
+          {parts[0]}
+          <strong>{parts[1]}</strong>
+          {parts[2]}
+        </>
+      );
+    }
+    return desc; // If there's no "*" to split, return the description as is.
+  };
+
   return (
     <Box
-    key={key}
+      key={key}
       sx={{
         flexBasis: {
           md: '290px',
@@ -16,7 +42,8 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
         borderRadius: '10px',
         height: '350px',
         flexGrow: '1',
-   
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       <Typography
@@ -24,13 +51,14 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
           fontSize: '23px',
           color: '#333333',
           fontWeight: '600',
-          textAlign:"center",
+          textAlign: 'center',
           margin: 'auto',
           mt: '5px',
         }}
       >
         {title}
       </Typography>
+
       <Box
         sx={{
           marginTop: '20px',
@@ -41,57 +69,62 @@ const CustomCreditCard = ({ title, price, credits, handleNavigate, variant, plan
           gap: '0px',
         }}
       >
-        {
-          visibility === "hidden" ? <PiSuitcaseSimpleBold style={{fontSize:"80px", margin:"auto", color:"navy"}} /> : (
-            <>
-             <Typography
-          sx={{
-            fontSize: '50px',
-            fontWeight: '600',
-            color: '#1E004D',
-            lineHeight: '40px',
-            visibility: visibility ? visibility : "visible",
-
-          }}
-        >
-          ${price}
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: '17.46px',
-            fontWeight: '500',
-            color: '#333333',
-            mt: '13px',
-            visibility: visibility ? visibility : "visible",
-          }}
-        >
-          {credits} Credits
-        </Typography>
-            </>
-       
-      )
-        }
-       
+        {visibility === 'hidden' ? (
+          <PiSuitcaseSimpleBold
+            style={{ fontSize: '80px', margin: 'auto', color: 'navy' }}
+          />
+        ) : (
+          <>
+            <Typography
+              sx={{
+                fontSize: '50px',
+                fontWeight: '600',
+                color: '#1E004D',
+                lineHeight: '40px',
+                visibility: visibility ? visibility : 'visible',
+              }}
+            >
+              ${price}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: '17.46px',
+                fontWeight: '500',
+                color: '#333333',
+                mt: '13px',
+                visibility: visibility ? visibility : 'visible',
+              }}
+            >
+              {credits} Credits
+            </Typography>
+          </>
+        )}
       </Box>
-      <Typography
+
+      {/* This Box will take up the remaining space */}
+      <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+        <Typography
           sx={{
             fontSize: '14.46px',
             fontWeight: '500',
-            m:"auto",
+            m: 'auto',
             color: '#333333',
             mt: '20px',
-            textAlign:"center",
-            maxWidth:"270px",
+            textAlign: 'center',
+            maxWidth: '270px',
           }}
         >
-          {desc}
+          {renderDesc(desc)}
         </Typography>
+      </Box>
+
+      {/* Button positioned 30px above the bottom */}
       <Box
         sx={{
-          margin: 'auto',
-          marginTop: '25PX',
           display: 'flex',
           justifyContent: 'center',
+          mt: 'auto',
+          mb: '30px',
         }}
       >
         <CustomButton

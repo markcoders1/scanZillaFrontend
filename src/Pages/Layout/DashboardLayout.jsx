@@ -159,8 +159,8 @@ const DashboardLayout = () => {
             
             <Box sx={{
                padding: {
-                xl: '50px',
-                md:"30px",
+                xl: '40px 40px',
+                md:"20px 30px",
                 xs: '30px 12px',
                 borderRadius: '30px',
               },

@@ -60,7 +60,7 @@ const Credits = () => {
   };
 
   const handleNavigateToContact = (variant) => {
-    navigate('/contact', { state: { variant } });
+    navigate('/support', { state: { variant } });
   };
 
   const fetchCreditsHistory = async () => {
@@ -276,7 +276,7 @@ const Credits = () => {
                       planName={e?.name}
                       buttonText={e?.buttonText}
                       desc={e?.description}
-                      visibility={i == 3 ? "hidden": "visible "}
+                      visibility={i == 3 ? "hidden": "visible"}
                     />
                   ))}
                   {/* <CreditCard

@@ -917,7 +917,7 @@ const Analyze = () => {
                                     sx={{ padding: "10px 0" }}
                                     key={index}
                                   >
-                                    {item.point}.
+                                    hello{item.point}.
                                     <br />
                                     <Box sx={{ paddingLeft: "10px" }}>
                                       {messages.map((el, ind) => {
@@ -963,7 +963,7 @@ const Analyze = () => {
                                   sx={{ padding: "10px 0" }}
                                   key={index}
                                 >
-                                  {item.point}.
+                                  Bullet {item.point}.
                                   <span style={{ paddingLeft: "10px" }}>
                                     {" "}
                                     {item.message.replace(
