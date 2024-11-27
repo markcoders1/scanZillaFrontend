@@ -96,7 +96,7 @@ const DashboardLayout = () => {
 
         padding: {
           sm: "20px 30px",
-          xs: "0px 10px"
+          xs: "50px 10px"
         },
         // marginLeft: "-15px",
         boxSizing: 'border-box',
