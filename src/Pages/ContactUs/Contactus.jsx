@@ -154,11 +154,13 @@ const Contactus = () => {
          sx={{
             display:"flex",
             flexDirection:"column",
-            gap:"10px",
+            gap:"10px"
           
          }}
          >
-         <Heading Heading='Name *   ' />
+         <Heading Heading='Name *' sx={{
+          display:"none"
+         }} />
                 <CustomTextField
                   handleKeyDown={() => { }}
                   onChange={handleInput}
@@ -180,7 +182,9 @@ const Contactus = () => {
                 gap:"10px"
              }}
               >
-                 <Heading Heading='How Can We Help?' />
+                 <Heading Heading='How Can We Help?'  sx={{
+          display:"none"
+         }} />
                 <CustomInputShadow
                   type="text"
                   multiline={true}
