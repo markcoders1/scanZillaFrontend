@@ -11,6 +11,7 @@ import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 import LoaderMain from "../../Components/Loader/LoaderMain";
+import editIcon from '../../assets/images/edit.png'
 
 const Profile = () => {
   const [username, setUsername] = useState();
@@ -158,7 +159,7 @@ const Profile = () => {
                   },
                 }}
               >
-                <ProfileCard title=" Name" name={username} />
+                <ProfileCard title=" Name" name={username} iconToSHow={true} />
               </Box>
               <Box
                 sx={{

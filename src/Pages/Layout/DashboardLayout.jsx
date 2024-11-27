@@ -79,7 +79,7 @@ const DashboardLayout = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        minHeight: '100vh',
+        // minHeight: '100vh',
         backgroundImage: `linear-gradient(rgba(27, 2, 75, .7), rgba(27, 2, 75, .8)), url(${dashboardImg1})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -151,7 +151,7 @@ const DashboardLayout = () => {
               mt: "20px",
               display:"flex",
               flexDirection:"column",
-              ga:"3rem",
+              gap:"3rem",
               width:"100%",
                 flexShrink:"1"
             }}

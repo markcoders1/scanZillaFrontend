@@ -6,6 +6,8 @@ import axiosInstance from '../../Hooks/useQueryGallery/AuthHook/AuthHook';
 import { useSelector } from 'react-redux';
 import LoaderMain from '../Loader/LoaderMain';
 import { useNavigate } from 'react-router-dom';
+import editIcon from '../../assets/images/edit.png'
+
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -72,6 +74,7 @@ const CustomCard = ({ cardStyle, cb }) => {
                         ...cardStyle
                     }}
                 >
+                   
                     <Typography
                         sx={{
                             fontWeight: "600",
