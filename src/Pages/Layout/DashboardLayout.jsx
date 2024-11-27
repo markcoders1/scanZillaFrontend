@@ -18,7 +18,13 @@ const DashboardLayout = () => {
   const showAnalyzeErrorBox =  pathname.includes("/analyze")
   const [loading, setLoading] = useState(true)
   const auth = useSelector(state=>state?.auth)
-  const dispatch = useDispatch();
+ 
+  const dispatch = useDispatch()
+  const handleCloseSnackAlert=()=>{
+    dispatch(handleSnackAlert( {
+      open:false,
+  }))
+}
   
   
   if(!auth?.authenticated){
@@ -194,7 +200,7 @@ const DashboardLayout = () => {
 
     
       </Box>  
-      <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
+      <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
       
 
     </Box>

@@ -31,9 +31,9 @@ const Login = () => {
     password: "",
   });
   const [snackAlertData, setSnackAlertData] = useState({
-    open: false,
     message: "",
     severity: "success",
+    open: false,
   });
   const [isLoading, setIsLoading] = useState(false);
   const auth = useSelector((state) => state.auth);
@@ -56,19 +56,21 @@ const Login = () => {
   
       localStorage.setItem("accessToken", data?.accessToken);
       localStorage.setItem("refreshToken", data?.refreshToken);
+      setSnackAlertData({
+        open: true,
+        message: "Logged in successfully.",
+        severity: "success", 
+      });
   
       if (data.role === "admin") {
         navigate("/dashboard-admin");
       } else if (data.role === "user") {
         navigate("/dashboard");
       }
+      console.log(responseData)
   
-      // dispatch(handleSnackAlert({ open: true, message: responseData.data.message, severity: "success" }));
-      setSnackAlertData({
-        open: true,
-        message: responseData.data.message,
-        severity: "success",
-      });
+  
+      // dispatch(handleSnackAlert({ open: true, message: "Logged in successfully.", severity: "success" }));
   
     } catch (error) {
       console.error("Sign-in failed:", error);
@@ -440,11 +442,13 @@ const Login = () => {
 
       </Box>
       <SnackAlert
-        severity={snackAlertData.severity}
-        message={snackAlertData.message}
-        open={snackAlertData.open}
-        handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
-      />
+                message={snackAlertData.message}
+                severity={snackAlertData.severity}
+                open={snackAlertData.open}
+                handleClose={() => {
+                  setSnackAlertData((prev) => ({message:"",severity:"", open: false }));
+                }}
+              />
     </Box>
 
   );
