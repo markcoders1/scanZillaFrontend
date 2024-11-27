@@ -63,7 +63,12 @@ const Login = () => {
         navigate("/dashboard");
       }
   
-      dispatch(handleSnackAlert({ open: true, message: responseData.data.message, severity: "success" }));
+      // dispatch(handleSnackAlert({ open: true, message: responseData.data.message, severity: "success" }));
+      setSnackAlertData({
+        open: true,
+        message: responseData.data.message,
+        severity: "success",
+      });
   
     } catch (error) {
       console.error("Sign-in failed:", error);

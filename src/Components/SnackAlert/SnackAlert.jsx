@@ -32,7 +32,7 @@ const SnackAlert = ({
     handleClose(); // Close Snackbar
   };
   return (
-    message && <Snackbar
+    message && open&&<Snackbar
       anchorOrigin={anchorOrigin}
       open={open}
       autoHideDuration={null}

@@ -86,7 +86,7 @@ const Analyze = () => {
   const [loaderState, setLoaderState] = useState(0);
   const dispatch = useDispatch();
   const AnalyzeErrros = useSelector((state) => state.analyze);
-  const [bulletPointsCredits , setBulletPointsCredits] =  useState(0);
+  const [bulletPointsCredits, setBulletPointsCredits] = useState(0);
 
   function hasValues(obj) {
     return Object.values(obj).some(
@@ -129,14 +129,14 @@ const Analyze = () => {
   */
   const hanldeInput = (e) => {
     let value = e.target.value;
-  
+
     // Existing length limit logic
     if (
       (e.target.name === "title" || e.target.name === "subtitle") &&
       data.category === "Books" &&
       value.length +
-        data[e.target.name === "title" ? "subtitle" : "title"].length >=
-        rules["Books"]
+      data[e.target.name === "title" ? "subtitle" : "title"].length >=
+      rules["Books"]
     ) {
       value = value.slice(
         0,
@@ -147,12 +147,12 @@ const Analyze = () => {
     } else if (e.target.name === "keywords" && value.length >= 500) {
       value = value.slice(0, 500);
     }
-  
+
     // Apply capitalization
     value = capitalizeFirstLetterOfSentences(value);
-  
+
     setData((prev) => ({ ...prev, [e?.target?.name]: value }));
-  
+
     if (data.category !== "Books") {
       setData((prev) => ({ ...prev, subtitle: "" }));
     }
@@ -218,10 +218,10 @@ const Analyze = () => {
       }
       !hasValues(response.data.error)
         ? setSnackAlertData({
-            open: true,
-            message: "Text Analyzed",
-            severity: "success",
-          })
+          open: true,
+          message: "Text Analyzed",
+          severity: "success",
+        })
         : null;
     } catch (error) {
       const errorData = error?.response?.data;
@@ -286,10 +286,10 @@ const Analyze = () => {
   // }
   const handleBulletPointChange = (index, value) => {
     let trimmedValue = value.slice(0, 500);
-  
+
     // Apply capitalization
     trimmedValue = capitalizeFirstLetterOfSentences(trimmedValue);
-  
+
     setData((prev) => {
       return {
         ...prev,
@@ -320,9 +320,9 @@ const Analyze = () => {
     const partialChunk = stringToCalc.length % rules.characterCost;
     const valtosend = Math.ceil(
       fullChunks * rules.creditCost +
-        (partialChunk > 0
-          ? (partialChunk / rules.characterCost) * rules.creditCost
-          : 0)
+      (partialChunk > 0
+        ? (partialChunk / rules.characterCost) * rules.creditCost
+        : 0)
     );
     return valtosend;
   };
@@ -330,15 +330,15 @@ const Analyze = () => {
   useEffect(() => {
 
 
-    let tempbullets = data.bulletpoints.map((e) => e.value).filter(Boolean); 
+    let tempbullets = data.bulletpoints.map((e) => e.value).filter(Boolean);
     console.log(tempbullets);
 
     // console.log(calcStringCost(tempbullets.join('')))
     setCreditDynamic(
       calcStringCost(data.title) +
-        calcStringCost(data.description) +
-        calcStringCost(data.keywords) +
-        (tempbullets.length > 0 ? tempbullets.length * 0.5 : 0) 
+      calcStringCost(data.description) +
+      calcStringCost(data.keywords) +
+      (tempbullets.length > 0 ? tempbullets.length * 0.5 : 0)
     );
 
     setBulletPointsCredits(tempbullets.length > 0 ? tempbullets.length * 0.5 : 0)
@@ -366,6 +366,58 @@ const Analyze = () => {
     setErrors({ title: [], bulletpoints: [], description: [], keywords: [] });
 
     dispatch(handleAnalyzeErrors({ TE: [], BE: [], DE: [], CE: [], KE: [] }));
+  };
+
+  const TextWithBlacklist = (text, length, i, item) => {
+    // Split the input text at '||||'
+    const [beforeDelimiter, afterDelimiter] = text.split('||||');
+
+    // If there is content after '||||', split it by '||' to create an array of blacklisted words
+    const blacklistWords = afterDelimiter ? afterDelimiter.split('||') : [];
+
+
+
+    return (
+      <>
+        {length > 1 && "• "}
+
+        {beforeDelimiter}
+        {text.startsWith("The text contains the following blacklisted words:") ?
+
+          blacklistWords.length > 0 && (
+            <ul style={{ marginLeft: "30px" }} >
+              {blacklistWords.map((word, index) => (
+                <li key={index}> {word.trim()}</li>
+              ))}
+            </ul>
+          )
+
+          : null}
+        { }
+        {i < text.split("|-|").length - 1 && <br />}
+
+      </>
+
+    )
+
+    // return {beforeDelimiter, afterDelimiter}
+
+
+    // (
+    //   <div>
+    //     {/* Display normal text before '||||' */}
+    //     <p>{beforeDelimiter}</p>
+
+    //     {/* If there are blacklisted words, display them in an unordered list */}
+    //     {blacklistWords.length > 0 && (
+    //       <ul style={{marginLeft:"30px"}} >
+    //         {blacklistWords.map((word, index) => (
+    //           <li key={index}> {word.trim()}</li>
+    //         ))}
+    //       </ul>
+    //     )}
+    //   </div>
+    // );
   };
 
   return (
@@ -421,8 +473,8 @@ const Analyze = () => {
                 flexDirection: "column",
                 gap: ".7rem",
                 textAlign: {
-                  sm:"justify !important",
-                  xs:"left"
+                  sm: "justify !important",
+                  xs: "left"
                 },
               }}
             >
@@ -433,7 +485,7 @@ const Analyze = () => {
                   color: "white",
                   borderRadius: "5px",
                   marginBottom: "10px",
-                  
+
                 }}
               >
                 Disclaimer : This tool is designed to assist in identifying
@@ -469,18 +521,17 @@ const Analyze = () => {
                   <Heading
                     Heading="Title"
                     characterText="Character Count"
-                    count={`${data.title.length + data?.subtitle?.length}${
-                      data.category ? ` / ${rules[`${data.category}`]}` : ""
-                    }`}
+                    count={`${data.title.length + data?.subtitle?.length}${data.category ? ` / ${rules[`${data.category}`]}` : ""
+                      }`}
 
                     creditText={"Credits"}
                     creditUtilized={calcStringCost(data.title)}
                     sx={{
-                      gap:"1rem"
-                      }}
+                      gap: "1rem"
+                    }}
                   />
                   <CustomTextField
-                    handleKeyDown={() => {}}
+                    handleKeyDown={() => { }}
                     onChange={hanldeInput}
                     name="title"
                     value={data?.title}
@@ -494,7 +545,7 @@ const Analyze = () => {
                     <>
                       <Heading Heading="Sub-title" />
                       <CustomTextField
-                        handleKeyDown={() => {}}
+                        handleKeyDown={() => { }}
                         onChange={hanldeInput}
                         name="subtitle"
                         value={data?.subtitle}
@@ -517,11 +568,11 @@ const Analyze = () => {
                   gap: "15px",
                 }}
               >
-                <Heading Heading="Bullet Points" 
+                <Heading Heading="Bullet Points"
                   creditText={"Credits"}
                   creditUtilized={bulletPointsCredits}
                   sx={{
-                  gap:"1rem"
+                    gap: "1rem"
                   }}
                 />
                 {data.bulletpoints.map((item, index) => (
@@ -530,7 +581,7 @@ const Analyze = () => {
                       characterText="Character Count:"
                       count={`${item.value.length} / 500`}
 
-                    
+
 
                     />
                     <Box
@@ -563,7 +614,7 @@ const Analyze = () => {
                           {index + 1}.
                         </h4>
                         <CustomTextField
-                          handleKeyDown={() => {}}
+                          handleKeyDown={() => { }}
                           onChange={(e) =>
                             handleBulletPointChange(index, e.target.value)
                           }
@@ -637,10 +688,10 @@ const Analyze = () => {
                     sx={{
                       display: "flex",
                       gap: "20px",
-                     flexDirection:{
-                      sm:"row",
-                      xs:"column"
-                     }
+                      flexDirection: {
+                        sm: "row",
+                        xs: "column"
+                      }
                     }}
                   >
                     {data.bulletpoints.length > 1 && (
@@ -678,11 +729,11 @@ const Analyze = () => {
                         padding: {
                           lg: "12px 20px",
                         },
-                        width:{
-                          sm:"180px",
-                          xs:"225px"
+                        width: {
+                          sm: "180px",
+                          xs: "225px"
                         }
-                        
+
                       }}
                       ButtonText="Add A Bullet +"
                       fontSize
@@ -692,7 +743,7 @@ const Analyze = () => {
                       variant="contained"
                       padding
                       onClick={addBullet}
-                      // width={"183px"}
+                    // width={"183px"}
                     />
                   </Box>
                 </Box>
@@ -706,8 +757,8 @@ const Analyze = () => {
                   creditText={"Credits"}
                   creditUtilized={calcStringCost(data.description)}
                   sx={{
-                    gap:"1rem"
-                    }}
+                    gap: "1rem"
+                  }}
                 />
                 <Box
                   sx={{
@@ -717,7 +768,7 @@ const Analyze = () => {
                   <CustomInputShadow
                     type="text"
                     multiline={true}
-                    rows={14} 
+                    rows={14}
                     onChange={hanldeInput}
                     value={data.description}
                     height={"360px"}
@@ -743,13 +794,13 @@ const Analyze = () => {
                     creditText={"Credits"}
                     creditUtilized={calcStringCost(data.keywords)}
                     sx={{
-                      gap:"1rem"
-                      }}
+                      gap: "1rem"
+                    }}
                   />
                 </Box>
                 <Box>
                   <CustomTextField
-                    handleKeyDown={() => {}}
+                    handleKeyDown={() => { }}
                     onChange={hanldeInput}
                     name="keywords"
                     value={data?.keywords}
@@ -764,13 +815,14 @@ const Analyze = () => {
 
               <Box sx={{ marginTop: "40px" }}>
                 {!isLoading ? (
-                  <div style={{ display: "flex", gap: "10px", 
-                    flexDirection:{
-                      xs:"column",
-                      sm:"row",
-                     
+                  <div style={{
+                    display: "flex", gap: "10px",
+                    flexDirection: {
+                      xs: "column",
+                      sm: "row",
+
                     },
-                  
+
                   }}>
                     <CustomButton
                       border="2px solid #1A0049"
@@ -780,7 +832,7 @@ const Analyze = () => {
                       hovercolor="#1A0049"
                       buttonTextStyle={{}}
                       buttonStyle={{ padding: { lg: "12px 20px" } }}
-                      ButtonText={`Analyze (${creditDynamic} ${creditDynamic == 1? "Credit": "Credits" })`}
+                      ButtonText={`Analyze (${creditDynamic} ${creditDynamic == 1 ? "Credit" : "Credits"})`}
                       fontSize
                       color="white"
                       fontWeight
@@ -835,7 +887,7 @@ const Analyze = () => {
                       fontSize: "40px",
                       fontWeight: "600",
                       color: "#333333",
-                     
+
                     }}
                   >
                     {result}
@@ -859,14 +911,15 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                 {AnalyzeErrros?.TE.length > 1 && "•"}  {el} 
-                                  {i < item.split("|-|").length - 1 && <br />}
+                                  {TextWithBlacklist(el, AnalyzeErrros.TE.length, i, item)}
+
                                 </>
                               );
                             })}
                           </Typography>
                         ))}
                       </Paper>
+
                     ) : (
                       <Paper
                         sx={{
@@ -878,7 +931,7 @@ const Analyze = () => {
                       >
                         <Heading Heading="Title" />
                         <Typography sx={{ padding: "10px 0" }}>
-                          No issues found, you're good to go. 
+                          No issues found, you're good to go.
                         </Typography>
                       </Paper>
                     )}
@@ -898,65 +951,27 @@ const Analyze = () => {
 
                         {AnalyzeErrros.joi == true
                           ? AnalyzeErrros?.BE?.map((item, index) => {
-                              if (typeof item !== "object") {
-                                return (
-                                  <Typography
-                                    key={index}
-                                    sx={{ padding: "10px 0" }}
-                                  >
-                                    • {item}
-                                  </Typography>
-                                );
-                              }
 
-                              if (item.message.includes("|-|")) {
-                                const messages = item.message.split("|-|");
 
-                                return (
-                                  <Typography
-                                    sx={{ padding: "10px 0" }}
-                                    key={index}
-                                  >
-                                    hello{item.point}.
-                                    <br />
-                                    <Box sx={{ paddingLeft: "10px" }}>
-                                      {messages.map((el, ind) => {
-                                        return (
-                                          <>
-                                            <span key={ind}>
-                                            •{" "}
-                                              {el.replace(
-                                                /"bulletpoints\[\d+\]"/g,
-                                                ""
-                                              )}
-                                            </span>
-                                            {ind < messages.length - 1 && (
-                                              <br />
-                                            )}
-                                          </>
-                                        );
-                                      })}
-                                    </Box>
-                                  </Typography>
-                                );
-                              }
 
-                              console.log(item);
 
-                              if (item.point == -10) {
-                                return (
-                                  <Typography
-                                    sx={{ padding: "10px 0" }}
-                                    key={index}
-                                  >
-                                    •{" "}
-                                    {item.message.replace(
-                                      /"bulletpoints\[\d+\]"/g,
-                                      ""
-                                    )}
-                                  </Typography>
-                                );
-                              }
+
+                            if (typeof item !== "object") {
+
+                              return (
+                                <Typography
+                                  key={index}
+                                  sx={{ padding: "10px 0" }}
+                                >
+                                  • {item}
+                                </Typography>
+                              );
+                            }
+
+
+
+                            if (item.message.includes("|-|")) {
+                              const messages = item.message.split("|-|");
 
                               return (
                                 <Typography
@@ -964,33 +979,66 @@ const Analyze = () => {
                                   key={index}
                                 >
                                   Bullet {item.point}.
-                                  <span style={{ paddingLeft: "10px" }}>
-                                    {" "}
-                                    {item.message.replace(
-                                      /"bulletpoints\[\d+\]"/g,
-                                      ""
-                                    )}
-                                  </span>
+                                  <br />
+                                  <Box sx={{ paddingLeft: "10px" }}>
+                                    {messages.map((el, ind) => {
+                                      return (
+                                        <>
+                                          {TextWithBlacklist(el, messages.length, ind, item)}
+                                        </>
+                                      );
+                                    })}
+                                  </Box>
                                 </Typography>
                               );
-                            })
-                          : AnalyzeErrros?.BE?.map((item, index) => (
+                            }
+
+
+                            if (item.point == -10) {
+                              return (
+                                <Typography
+                                  sx={{ padding: "10px 0" }}
+                                  key={index}
+                                >
+                                  •{" "}
+                                  {item.message.replace(
+                                    /"bulletpoints\[\d+\]"/g,
+                                    ""
+                                  )}
+                                </Typography>
+                              );
+                            }
+
+                            return (
                               <Typography
                                 sx={{ padding: "10px 0" }}
                                 key={index}
                               >
-                                {item.split("|-|").map((el, i) => {
-                                  return (
-                                    <>
-                                     {AnalyzeErrros?.BE.length > 1 &&  "•"} {el}
-                                      {i < item.split("|-|").length - 1 && (
-                                        <br />
-                                      )}
-                                    </>
-                                  );
-                                })}
+                                Bullet {item.point}. <br />
+                                {TextWithBlacklist(item.message, 1, 0)}
                               </Typography>
-                            ))}
+                            );
+
+
+
+                          })
+                          : AnalyzeErrros?.BE?.map((item, index) => (
+                            <Typography
+                              sx={{ padding: "10px 0" }}
+                              key={index}
+                            >
+                              {item.split("|-|").map((el, i) => {
+                                return (
+                                  <>
+                                    {AnalyzeErrros?.BE.length > 1 && "•"} {el}
+                                    {i < item.split("|-|").length - 1 && (
+                                      <br />
+                                    )}
+                                  </>
+                                );
+                              })}
+                            </Typography>
+                          ))}
                       </Paper>
                     ) : (
                       <Paper
@@ -1025,8 +1073,8 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                   {AnalyzeErrros?.DE.length > 1 &&  "•"} {el}
-                                  {i < item.split("|-|").length - 1 && <br />}
+                                  {TextWithBlacklist(el, AnalyzeErrros.DE.length, i, item)}
+
                                 </>
                               );
                             })}
@@ -1066,8 +1114,8 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                  {AnalyzeErrros?.KE.length > 1 &&  "•"} {el}
-                                  {i < item.split("|-|").length - 1 && <br />}
+
+                                  {TextWithBlacklist(el, AnalyzeErrros.KE.length, i, item)}
                                 </>
                               );
                             })}
@@ -1090,7 +1138,7 @@ const Analyze = () => {
                       </Paper>
                     )}
                     {AnalyzeErrros.CE.length > 0 &&
-                    AnalyzeErrros.CE[0] !== "" ? (
+                      AnalyzeErrros.CE[0] !== "" ? (
                       <Paper
                         sx={{
                           padding: "20px",
@@ -1105,8 +1153,8 @@ const Analyze = () => {
                             {item.split("|-|").map((el, i) => {
                               return (
                                 <>
-                                 {AnalyzeErrros?.CE.length > 1 &&  "•"}  {el}
-                                  {i < item.split("|-|").length - 1 && <br />} 
+                                  {AnalyzeErrros?.CE.length > 1 && "•"}  {el}
+                                  {i < item.split("|-|").length - 1 && <br />}
                                 </>
                               );
                             })}
@@ -1118,32 +1166,32 @@ const Analyze = () => {
                   </Box>
                 </Box>
               ) : null}
-              
+
               {reccomendations.length > 0 &&
-                    reccomendations[0]  !== "" ? (
-                      <Paper
-                        sx={{
-                          padding: "20px",
-                          margin: "20px 0",
-                          boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                          borderRadius: "10px",
-                        }}
-                      >
-                        <Heading Heading="Indexing Recommendations" />
-                        {reccomendations?.map((item, index) => (
-                          <Typography sx={{ padding: "10px 0" }} key={index}>
-                            {item.split("|-|").map((el, i) => {
-                              return (
-                                <>
-                                {reccomendations?.length > 1 && "•"}   {el} 
-                                  {i < item.split("|-|").length - 1 && <br />}
-                                </>
-                              );
-                            })}
-                          </Typography>
-                        ))}
-                      </Paper>
-                    ) : null}
+                reccomendations[0] !== "" ? (
+                <Paper
+                  sx={{
+                    padding: "20px",
+                    margin: "20px 0",
+                    boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <Heading Heading="Indexing Recommendations" />
+                  {reccomendations?.map((item, index) => (
+                    <Typography sx={{ padding: "10px 0" }} key={index}>
+                      {item.split("|-|").map((el, i) => {
+                        return (
+                          <>
+                            {reccomendations?.length > 1 && "•"}   {el}
+                            {i < item.split("|-|").length - 1 && <br />}
+                          </>
+                        );
+                      })}
+                    </Typography>
+                  ))}
+                </Paper>
+              ) : null}
 
               <SnackAlert
                 message={snackAlertData.message}
