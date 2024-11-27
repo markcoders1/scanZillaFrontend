@@ -90,7 +90,7 @@ const Contactus = () => {
       gap:"10px",
       flexBasis:"100%",
       p:"10px 15px",
-      height: "70vh",
+      height: "100vh",
       overflowY: "auto",
       overflowX: "hidden",
       padding: "20px 15px",
