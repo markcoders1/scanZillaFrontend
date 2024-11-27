@@ -79,7 +79,7 @@ const DashboardLayout = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        minHeight: '100vh',
+        // minHeight: '100vh',
         backgroundImage: `linear-gradient(rgba(27, 2, 75, .7), rgba(27, 2, 75, .8)), url(${dashboardImg1})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -88,7 +88,7 @@ const DashboardLayout = () => {
 
         padding: {
           sm: "20px 30px",
-          xs: "0px 0px"
+          xs: "0px 10px"
         },
         // marginLeft: "-15px",
         boxSizing: 'border-box',
