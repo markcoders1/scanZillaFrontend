@@ -166,11 +166,7 @@ select:-webkit-autofill:focus {
 
 }
 
-body {
-  overflow-y: scroll; /* Always show vertical scrollbar */
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
+
 
 body::-webkit-scrollbar {
   display: block;
@@ -185,3 +181,4 @@ body::-webkit-scrollbar-thumb {
   font-size: 14px; /* Adjust font size as needed */
   /* color: #A0A4A9; Optional: Set placeholder color */
 }
+

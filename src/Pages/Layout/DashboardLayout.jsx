@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import AppSidebar from '../AppSidebar/AppSidebar';
-import dashboardImg1 from '../../assets/images/dashboard1.webp';
+import dashboardImg1 from '../../assets/images/dashboard1.webp';  
 import Header from '../../Components/Header/Header';
 import MobileSidebar from '../../Components/MobileSidebar/MobileSidebar';
 import SnackAlert from '../../Components/SnackAlert/SnackAlert';
@@ -14,17 +14,17 @@ import { handleSnackAlert } from '../../Redux/Slice/SnackAlertSlice/SnackAlertSl
 const DashboardLayout = () => {
   const location = useLocation();
   const snackAlert = useSelector(state => state.snackAlert)
-  const { pathname } = location
-  const showAnalyzeErrorBox = pathname.includes("/analyze")
+  const {pathname} = location
+  const showAnalyzeErrorBox =  pathname.includes("/analyze")
   const [loading, setLoading] = useState(true)
-  const auth = useSelector(state => state?.auth)
+  const auth = useSelector(state=>state?.auth)
   const dispatch = useDispatch();
-
-
-  if (!auth?.authenticated) {
-    dispatch(handleSnackAlert({ open: true, message: "You're not Authorized, Login first.", severity: "error" }))
-    return <Navigate to="/" replace={true} />
-  }
+  
+  
+  if(!auth?.authenticated){
+      dispatch(handleSnackAlert({open:true, message:"You're not Authorized, Login first.", severity:"error"}))
+          return <Navigate to="/" replace={true} />
+  } 
   const getHeaderTitle = (pathname) => {
     switch (pathname) {
       case '/dashboard':
@@ -53,10 +53,10 @@ const DashboardLayout = () => {
         return 'Dashboard';
       case '/assistant-instruction':
         return 'Assistant Instructions';
-      case '/contact':
-        return 'Choose Your Perfect Plan';
-      case '/support':
-        return 'Got a Question? Email Us';
+        case '/contact':
+          return 'Choose Your Perfect Plan';
+          case '/support':
+            return 'Got a Question? Email Us';
       // Add more cases as needed for other routes
       default:
         return '';
@@ -65,32 +65,38 @@ const DashboardLayout = () => {
   // contact-admin
   const headerTitle = getHeaderTitle(location.pathname);
 
-  setTimeout(() => {
-    setLoading(false)
-  }, [])
+  setTimeout(()=>{
+ setLoading(false)
+  },[])
 
   // if (loading) {
   //   return <>loading</>
   // }
 
   return (
-
+    
     <Box
       sx={{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-
-
+        minHeight:{
+          xs:"70vh",
+          sm:"100vh"
+        },
+        maxHeight:{
+          xs:"110vh",
+          sm:"100vh"  
+        },
         backgroundImage: `linear-gradient(rgba(27, 2, 75, .7), rgba(27, 2, 75, .8)), url(${dashboardImg1})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        backgroundAttachment: "fixed",
+        backgroundAttachment:"fixed",
 
         padding: {
           sm: "20px 30px",
-          xs: "50px 10px"
+          xs: "30px 13px"
         },
         // marginLeft: "-15px",
         boxSizing: 'border-box',
@@ -103,16 +109,16 @@ const DashboardLayout = () => {
           maxWidth: `1540px`,
           boxSizing: 'border-box',
           gap: "1rem",
-          flexDirection: {
-            xl: "column",
-            lg: "column",
-            m: "column",
-            sm: "column",
-            xs: "column"
+          flexDirection:{
+            xl:"column",
+            lg:"column",
+            m:"column",
+            sm:"column",
+            xs:"column"
           }
         }}
       >
-
+        
         <Box
           sx={{
             width: {
@@ -136,56 +142,80 @@ const DashboardLayout = () => {
         <Box
           sx={{
             marginLeft: {
-              lg: auth.role == "user" ? "300px" : "340px",
+              lg: auth.role == "user" ? "300px": "340px", 
               xs: '0px',
             },
-          
-            flexShrink: "1",
-
+            // width: '100%',
+            // maxWidth: '1140px', // Reduced to fit within the available space
+             flexShrink:"1",
+           
             boxSizing: 'border-box',
-            overflowY: 'auto', 
+            overflowY: 'auto', // Enable scrolling for the main content
           }}
         >
-
+          
           <Box
             sx={{
               mt: "20px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "3rem",
-              width: "100%",
-              flexShrink: "1"
+              display:"flex",
+              flexDirection:"column",
+              gap:"3rem",
+              width:"100%",
+                flexShrink:"1"
             }}
           >
-
+            
             <Box sx={{
-              padding: {
+               padding: {
                 xl: '40px 40px',
-                md: "20px 30px",
+                md:"20px 30px",
                 xs: '30px 12px',
                 borderRadius: '30px',
               },
               backgroundColor: 'white',
-              width: "100%",
-              flexShrink: "1",
-
+              width:"100%",
+              flexShrink:"1",
+             
             }} >
               <Header title={headerTitle} sx={{
-                fontSize: {
+                 fontSize: {
                   sm: "40px",
                   xs: "22px"
                 },
               }} />
-              <Outlet />
+            <Outlet />
 
             </Box>
+            <Box sx={{mt:"30px"}} >
+        
+        {/* ---------------- */}
 
+        {/* ------------------- */}
+            </Box>
           </Box>
-
+         
         </Box>
-      </Box>
-      <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
 
+        {/* <Button onClick={()=>{
+            dispatch(
+              handleAnalyzeErrors(
+                {
+                  TE:["abc", "def", "efg"],
+                  DE:["abc", "def", "efg"],
+                  BE:["abc", "def", "efg"],
+                  KE:["abc", "def", "efg"],
+                  CE:["abc", "def", "efg"],
+                }
+              )
+            )
+          }}>
+          add error
+        </Button> */}
+
+    
+      </Box>  
+      <SnackAlert open={snackAlert.open} message={snackAlert.message} severity={snackAlert.severity} />
+      
 
     </Box>
   );
