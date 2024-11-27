@@ -16,7 +16,14 @@ const CreditsHistory = ({ index, item }) => {
 
         return formatter.format(0).replace(/\d/g, '').replace(/\u2212/g, '').trim();
     }
-
+    function formatDate(dateString) {
+        const date = new Date(dateString);  // Convert string to Date object
+        const options = { year: 'numeric', month: 'short', day: '2-digit' };  // Format options
+        return date.toLocaleDateString('en-US', options).replace(',', '');  // Format and remove comma
+    }
+    
+    const formattedDate = formatDate('2024-11-27T17:10:01.720Z');
+    console.log(formattedDate);
     return (
         <Box
             sx={{
@@ -32,7 +39,7 @@ const CreditsHistory = ({ index, item }) => {
                     color: "#A0A4A9",
                 }}
             >
-                {item.credits} Credits
+                {formatDate(item?.createdAt)}
             </Typography>
             <Typography
                 sx={{
@@ -41,7 +48,11 @@ const CreditsHistory = ({ index, item }) => {
                     color: "#333333",
                 }}
             >
-                Price:  {getCurrencySymbol(item.currency)} {item.amount/100}
+                {
+                    item?.credits ? `Credits Used  ${item?.credits} `: "--"
+                }
+           
+
             </Typography>
         </Box>
     );

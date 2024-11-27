@@ -34,6 +34,7 @@ const History = () => {
         method: "get",
       });
       setLoading(false);
+      
       if (response) {
         setCreditsHistory(response?.data?.payments);
         setSnackAlertData({
@@ -74,7 +75,7 @@ const History = () => {
           limit: 100,
         },
       });
-      console.log(response)
+      console.log(response);
       if (response) {
         setAnalyzeHistory(response?.data?.Histories);
         setSnackAlertData({
@@ -261,10 +262,10 @@ const History = () => {
             >
               Credits History
             </Typography>
-            {creditsHistory.length < 1 ? (
+            {analyzeHistory.length < 1 ? (
               <Typography>You do not have any credit history yet</Typography>
             ) : (
-              creditsHistory.map((item, index) => (
+              analyzeHistory.map((item, index) => (
                 <CreditsHistory item={item} key={index} index={index} />
               ))
             )}

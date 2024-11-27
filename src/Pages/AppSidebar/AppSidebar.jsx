@@ -196,7 +196,7 @@ const AppSidebar = () => {
             color: '#ffff',
           }}
         >
-          {username}
+          {auth.userName}
         </Typography>
         <Typography
           sx={{

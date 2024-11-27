@@ -21,6 +21,7 @@ const Profile = () => {
 
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  console.log(auth)
 
   useEffect(() => {
 
@@ -159,7 +160,7 @@ const Profile = () => {
                   },
                 }}
               >
-                <ProfileCard title=" Name" name={username} iconToSHow={true} />
+                <ProfileCard title=" Name" name={auth.userName} iconToSHow={true} />
               </Box>
               <Box
                 sx={{
@@ -170,7 +171,7 @@ const Profile = () => {
                   flexGrow: 1,
                 }}
               >
-                <ProfileCard title="Email" name={email} />
+                <ProfileCard title="Email" name={auth?.email} />
               </Box>
             </Box>
 

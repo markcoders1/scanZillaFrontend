@@ -186,31 +186,11 @@ const DashboardLayout = () => {
             <Outlet />
 
             </Box>
-            <Box sx={{mt:"30px"}} >
-        
-        {/* ---------------- */}
-
-        {/* ------------------- */}
-            </Box>
+              
           </Box>
          
         </Box>
 
-        {/* <Button onClick={()=>{
-            dispatch(
-              handleAnalyzeErrors(
-                {
-                  TE:["abc", "def", "efg"],
-                  DE:["abc", "def", "efg"],
-                  BE:["abc", "def", "efg"],
-                  KE:["abc", "def", "efg"],
-                  CE:["abc", "def", "efg"],
-                }
-              )
-            )
-          }}>
-          add error
-        </Button> */}
 
     
       </Box>  
