@@ -17,7 +17,8 @@ const CustomInputShadow = forwardRef(({
   height = "56px", // Set default height here
   color = "#2a2b2d",
   disabled = false,
-  textFieldStyle = {}
+  textFieldStyle = {},
+  onBlur = () => {}, 
   
 }, ref) => {
   return (
@@ -44,6 +45,8 @@ const CustomInputShadow = forwardRef(({
           type={type}
           ref={ref}
           disabled = {disabled}
+          onBlur={onBlur} 
+          
           sx={{
             '& ::placeholder': {
               fontSize: {

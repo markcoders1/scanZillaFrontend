@@ -18,7 +18,8 @@ const DashboardLayout = () => {
   const showAnalyzeErrorBox =  pathname.includes("/analyze")
   const [loading, setLoading] = useState(true)
   const auth = useSelector(state=>state?.auth)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
   
   if(!auth?.authenticated){
       dispatch(handleSnackAlert({open:true, message:"You're not Authorized, Login first.", severity:"error"}))
@@ -79,7 +80,14 @@ const DashboardLayout = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        // minHeight: '100vh',
+        minHeight:{
+          xs:"70vh",
+          sm:"100vh"
+        },
+        maxHeight:{
+          xs:"110vh",
+          sm:"100vh"  
+        },
         backgroundImage: `linear-gradient(rgba(27, 2, 75, .7), rgba(27, 2, 75, .8)), url(${dashboardImg1})`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
