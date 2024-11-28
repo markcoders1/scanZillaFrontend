@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const SnackAlert = ({
-  duration = 10000,
+  duration = 5200,
   anchorOrigin = { vertical: "top", horizontal: "right" },
   severity = "success",
   message = "",

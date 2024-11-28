@@ -3,8 +3,12 @@ import axios from 'axios';
 import {store} from '../../../Redux/Store/Store.js';
 import { handleAuth } from '../../../Redux/Slice/UserSlice/UserSlice';
 // import { navigate } from './../utils/navigation';
+import {navigate} from '../../../utilis/navigattion.js'
+import SnackAlert from '../../../Components/SnackAlert/SnackAlert.jsx';
 // import { API_BASE_URL } from '../constants';
 // import { ROUTES } from '../../routesName';
+import {ROUTES} from './Routes.js'
+import { handleSnackAlert } from '../../../Redux/Slice/SnackAlertSlice/SnackAlertSlice.js';
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
 // Create an Axios instance
@@ -73,11 +77,19 @@ axiosInstance.interceptors.response.use(
 
       const state = store.getState();
       const refreshToken = state.auth?.refreshToken;
-
+      console.log(refreshToken);
       if (!refreshToken) {
-        // No refresh token, logout user
-        store.dispatch(handleAuth());
-        // navigate(ROUTES.LOGIN);
+        store.dispatch(handleAuth({
+          accessToken:null,
+          refreshToken:null,
+          authenticated:false
+        }));
+        store.dispatch(({
+          message:"Your session has expired. Please log in again to continue.",
+          severity:"error",
+          open:true
+        }))
+        navigate("/");
         return Promise.reject(error);
       }
 
@@ -85,6 +97,8 @@ axiosInstance.interceptors.response.use(
         const response = await axios.post(`${appUrl}/token`, {
           refreshToken,
         });
+
+        console.log("403 response",response.status)
         
 
         const newAccessToken = response.data.accessToken;
@@ -106,9 +120,21 @@ axiosInstance.interceptors.response.use(
 
         return axiosInstance(originalRequest);
       } catch (err) {
+        console.log(err)
         processQueue(err, null);
-        store.dispatch(handleAuth());
-        // navigate(ROUTES.LOGIN);
+        store.dispatch(handleAuth({
+          accessToken: null,
+          refreshToken:null,
+          authenticated:false
+
+        }));
+        navigate("/");
+        store.dispatch(({
+          message:"Your session has expired. Please log in again to continue.",
+          severity:"error",
+          open:true
+        }))
+        
         return Promise.reject(err);
       } finally {
         isRefreshing = false;

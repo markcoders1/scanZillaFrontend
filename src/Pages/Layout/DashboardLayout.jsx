@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { handleAnalyzeErrors } from '../../Redux/Slice/AnalyzeSlice/AnalyzeSlice';
 import Heading from '../../Components/Heading/Heading';
 import { handleSnackAlert } from '../../Redux/Slice/SnackAlertSlice/SnackAlertSlice';
+import { useNavigation } from '../../utilis/navigattion';
 
 const DashboardLayout = () => {
   const location = useLocation();
@@ -25,10 +26,10 @@ const DashboardLayout = () => {
       open:false,
   }))
 }
-  
+useNavigation()
   
   if(!auth?.authenticated){
-      dispatch(handleSnackAlert({open:true, message:"You're not Authorized, Login first.", severity:"error"}))
+      dispatch(handleSnackAlert({open:true, message:"Your session has expired. Please log in again to continue.", severity:"error"}))
           return <Navigate to="/" replace={true} />
   } 
   const getHeaderTitle = (pathname) => {

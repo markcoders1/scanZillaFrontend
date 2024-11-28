@@ -51,11 +51,7 @@ const Login = () => {
   
       dispatch(handleAuth(data));
   
-      sessionStorage.setItem("accessToken", data?.accessToken);
-      sessionStorage.setItem("refreshToken", data?.refreshToken);
-  
-      localStorage.setItem("accessToken", data?.accessToken);
-      localStorage.setItem("refreshToken", data?.refreshToken);
+    
       setSnackAlertData({
         open: true,
         message: "Logged in successfully.",
@@ -110,11 +106,15 @@ const Login = () => {
   
 
   useEffect(() => {
-    const refreshToken = localStorage.getItem('refreshToken')
+    const refreshToken = auth?.refreshToken;
+    console.log("...................", refreshToken)
     if (refreshToken) {
-      sessionStorage.setItem('refreshToken', refreshToken)
-      navigate('/dashboard')
-     
+      
+      if (auth.role === "admin") {
+        navigate("/dashboard-admin");
+      } else if (auth.role === "user") {
+        navigate("/dashboard");
+      }
     }
  
   }, [])
@@ -189,15 +189,15 @@ const Login = () => {
     inputRef?.current?.focus();
   }, []);
 
-  // useEffect(() => {
-  //   if (auth.authenticated) {
-  //     if (auth.role === "admin") {
-  //       navigate("/dashboard-admin");
-  //     } else if (auth.role === "user") {
-  //       navigate("/dashboard");
-  //     }
-  //   }
-  // }, [auth, navigate]);
+  useEffect(() => {
+    if (auth.authenticated) {
+      if (auth.role === "admin") {
+        navigate("/dashboard-admin");
+      } else if (auth.role === "user") {
+        navigate("/dashboard");
+      }
+    }
+  }, [auth, navigate]);
 
 
   const handlekeydown = (e) => {

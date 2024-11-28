@@ -19,7 +19,8 @@ const userSlice = createSlice({
     customerId: null,
     success: null,
     authenticated: false,
-    otp : null
+    otp : null,
+    logout: false,
   },
   reducers: {
     handleAuth: (state, action) => {

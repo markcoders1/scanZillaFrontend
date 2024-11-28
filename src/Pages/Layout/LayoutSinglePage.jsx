@@ -5,14 +5,24 @@ import background1 from "../../assets/images/LoginImg.webp";
 import background2 from "../../assets/images/SignupBackground.webp";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import logo from '../../assets/images/sample.webp'
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
+import { useSelector, useDispatch } from "react-redux";
 
 
 
 import { useLocation } from "react-router-dom";
 
 const LayoutSinglePage = () => {
+  const snackAlert = useSelector(state => state.snackAlert)
+
+  const handleCloseSnackAlert=()=>{
+    dispatch(handleSnackAlert( {
+      open:false,
+  }))
+}
 
     const location = useLocation();
+    
 
   return (
     <div>
@@ -106,6 +116,7 @@ const LayoutSinglePage = () => {
       </Box>
 
         </Box>
+        <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
     </div>
   )
 }
