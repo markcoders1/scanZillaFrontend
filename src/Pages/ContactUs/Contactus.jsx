@@ -52,8 +52,6 @@ const Contactus = () => {
         url: `${appUrl}/supportEmail`,
         method: "post",
         data: {
-          name: data.name,
-
           content: data.content
         }
 
@@ -64,7 +62,6 @@ const Contactus = () => {
       console.log(response)
 
       setData({
-        name: "",
         content: ""
       })
 
@@ -119,32 +116,6 @@ const Contactus = () => {
         },
       }}
     >
-
-
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-        }}
-      >
-        <Heading Heading='Name *' sx={{
-          display: "none"
-        }} />
-        <CustomTextField
-          handleKeyDown={() => { }}
-          onChange={handleInput}
-          name="name"
-          value={data?.name}
-          error={errors?.name}
-          placeholder="Name"
-          border=""
-          boxShadow={true}
-          maxLength={500}
-
-
-        />
-      </Box>
       <Box
         sx={{
           display: "flex",
