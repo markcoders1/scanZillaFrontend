@@ -84,7 +84,7 @@ const ChangeNameModal = ({
       if (response) {
         setSnackAlertData({
           open: true,
-          message: "User Name Change Successfully",
+          message: "Name Updated Successfully",
           severity: 'success',
         });
         if (response?.code > 200) {

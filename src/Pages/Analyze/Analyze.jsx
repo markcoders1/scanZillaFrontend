@@ -379,7 +379,7 @@ const Analyze = () => {
 
     return (
       <>
-        {length > 1 && "• "}
+        {length > 1 && "● "}
 
         {beforeDelimiter}
         {text.startsWith("The text contains the following blacklisted words:") ?
@@ -488,7 +488,7 @@ const Analyze = () => {
 
                 }}
               >
-                Disclaimer : This tool is designed to assist in identifying
+                Disclaimer: This tool is designed to assist in identifying
                 potential TOS violations and evaluating indexing performance
                 within Amazon listings. While it is regularly updated, it may
                 not capture every TOS violation. Please note that thorough

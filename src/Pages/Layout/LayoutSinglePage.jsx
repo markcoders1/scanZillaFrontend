@@ -13,12 +13,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const LayoutSinglePage = () => {
-  const snackAlert = useSelector(state => state.snackAlert)
+  const snackAlert = useSelector(state => state.snackAlert);
+  const dispatch = useDispatch();
 
   const handleCloseSnackAlert=()=>{
     dispatch(handleSnackAlert( {
       open:false,
-  }))
+  }));
 }
 
     const location = useLocation();

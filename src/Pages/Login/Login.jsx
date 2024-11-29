@@ -66,7 +66,7 @@ const Login = () => {
       console.log(responseData)
   
   
-      // dispatch(handleSnackAlert({ open: true, message: "Logged in successfully.", severity: "success" }));
+      dispatch(handleSnackAlert({ open: true, message: "Logged in successfully.", severity: "success" }));
   
     } catch (error) {
       console.error("Sign-in failed:", error);

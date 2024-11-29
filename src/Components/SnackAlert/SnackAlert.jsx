@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
 const SnackAlert = ({
-  duration = 5200,
+  duration = 10000,
   anchorOrigin = { vertical: "top", horizontal: "right" },
   severity = "success",
   message = "",
@@ -35,7 +35,7 @@ const SnackAlert = ({
     message && open&&<Snackbar
       anchorOrigin={anchorOrigin}
       open={open}
-      autoHideDuration={null}
+      autoHideDuration={duration}
       onClose={handleSnackbarClose}
     >
       <Alert
