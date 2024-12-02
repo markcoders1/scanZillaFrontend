@@ -28,7 +28,9 @@ const ChangeNameModal = ({
     open: false,
   });
   const [data, setData] = React.useState({
-    name: '',
+    firstName: '',
+    lastName: '',
+
   });
 
   const handleInput = (e) => {
@@ -58,10 +60,25 @@ const ChangeNameModal = ({
       severity: 'success',
     });
 
-    if (!data?.name) {
+    if (!data?.firstName && !data?.firstName) {
       return setSnackAlertData({
         open: true,
-        message: 'Name is required',
+        message: 'First name & last name is required',
+        severity: 'error',
+      });
+    }
+
+    if (!data?.firstName) {
+      return setSnackAlertData({
+        open: true,
+        message: 'First name is required',
+        severity: 'error',
+      });
+    }
+    if (!data?.lastName) {
+      return setSnackAlertData({
+        open: true,
+        message: 'Last name is required',
         severity: 'error',
       });
     }
@@ -71,7 +88,11 @@ const ChangeNameModal = ({
       const response = await axiosInstance({
         url: appUrl + '/changeName',
         method: 'post',
-        data: data,
+        data: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+
+        },
       });
       setLoading(false);
       onNameChange(name); // Update the name in parent component
@@ -101,9 +122,11 @@ const ChangeNameModal = ({
    
     } catch (error) {
       setLoading(false);
+      console.log(error)
+      console.log(data)
       setSnackAlertData({
         open: true,
-        message: error.toString(),
+        message: error.response.data.message,
         severity: 'error',
       });
       handleClose(); // Close the modal
@@ -130,13 +153,21 @@ const ChangeNameModal = ({
           <Box sx={style}>
             <Heading Heading="Change Name" />
             <Box sx={{ mt: '20px' }}>
-              <Typography sx={{ my: '10px' }}>Name</Typography>
               <CustomTextField
                 handleKeyDown={() => {}}
                 onChange={handleInput}
-                name="name"
-                value={data?.name}
-                placeholder="Enter your name"
+                name="firstName"
+                value={data?.firstName}
+                placeholder="Enter your First name"
+                border=""
+                boxShadow={true}
+              />
+              <CustomTextField
+                handleKeyDown={() => {}}
+                onChange={handleInput}
+                name="lastName"
+                value={data?.lastName}
+                placeholder="Enter your Last name"
                 border=""
                 boxShadow={true}
               />
