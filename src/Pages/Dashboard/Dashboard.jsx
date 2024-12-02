@@ -247,14 +247,16 @@ const Home = () => {
               <CardIWithImageBackground
                 text={auth.userName}
                 title="Hello,"
+                sxCardCss={{
+                  height:"100px",
+                  minHeight:"90px",
+                  height:"130px",
+
+                }}
               />
             </Box>
             <Box sx={{
-              flexBasis: {
-                // xl: "154px"
-              },
-        
-              flexShrink: "1",
+             
               cursor: "pointer",
            
 
@@ -272,11 +274,12 @@ const Home = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "start",
-                 minHeight: "140px",
+               minHeight:"120px",
+               height:"120px",
+               flexGrow:"1",
               maxHeight:"190px",
-            
                 justifyContent: "center",
-                // gap: "20px",
+
                 '&:hover': {
                   boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
                   backgroundColor: "#edecec"
@@ -289,8 +292,10 @@ const Home = () => {
                   color: "#333333",
                   fontWeight: "600",
                   fontSize: {
-                    md:"24px",
-                    xs:"20px"
+                    xl:"25px",
+                    xs:"20px",
+                     lg:"22px"
+
                   },
                   lineHeight: "30px",
                   letterSpacing: "0.34px"
@@ -302,8 +307,9 @@ const Home = () => {
                   mt: "0px",
                   fontWeight: "600",
                   fontSize: {
-                    md:"60px",
-                    xs:"45px"
+                    xl:"60px",
+                    xs:"45px",
+                    lg:"45px"
                   },
                   lineHeight: "65px",
                   color: "#190247",
@@ -376,8 +382,10 @@ const Home = () => {
               justifyContent: "center",
               paddingLeft: "26px",
               flexShrink:"2",
-              minHeight: "150px",
+              minHeight: "130px",
               // maxHeight:"210px",
+              height:"130px",
+              maxHeight:"100%"
              
             }}>
 
@@ -410,7 +418,7 @@ const Home = () => {
 
           <Box sx={{
             display: "flex",
-            gap: "40px",
+            gap: "20px",
             flexDirection: {
               xs: "column",
               md: "column"

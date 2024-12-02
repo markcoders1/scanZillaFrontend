@@ -5,7 +5,12 @@ import { Box, Typography } from '@mui/material'
 
 const CardIWithImageBackground = ({
     title = "",
-    text = ""
+    text = "",
+    sxCardCss = {},
+    sxTextCss = {},
+
+    sxTitleCss = {},
+
 }) => {
     return (
         <Box sx={{
@@ -24,26 +29,31 @@ const CardIWithImageBackground = ({
             height: "150px",
             
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+            ...sxCardCss
 
         }}>
 
             <Typography sx={{
                 fontWeight: "600",
                 fontSize: {
-                    sm: "27px",
-                    xs: "24px"
+                    sm: "25px",
+                    xs: "22px",
+                    lg:"22px"
                 },
                 lineHeight: "40px",
+                ...sxTitleCss
             }}>
                 {title}
             </Typography>
             <Typography sx={{
                 fontWeight: "600",
                 fontSize: {
-                    sm: "27px",
-                    xs: "24px"
+                    sm: "25px",
+                    xs: "22px",
+                     lg:"22px"
                 },
                 lineHeight: "40px",
+                ...sxTextCss
 
             }}>
                 {text}
