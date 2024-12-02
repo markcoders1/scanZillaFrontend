@@ -335,7 +335,7 @@ const Credits = () => {
                       <Box
                         sx={{
                           height: "50%",
-                          flexBasis: "218px",
+                         
                           borderRadius: "10px",
                           flexGrow: "1",
                           backgroundImage: auth.autocharge
@@ -375,7 +375,7 @@ const Credits = () => {
                       <Box
                         sx={{
                           height: "50%",
-                          flexBasis: "218px",
+                         
                           borderRadius: "10px",
                           flexGrow: "1",
                           backgroundImage: auth.autocharge
@@ -434,7 +434,7 @@ const Credits = () => {
                             style={{
                               width: "50px",
                               height: "32px",
-                              border: "none",
+                              
                               outline: "none",
                               borderRadius: "5px",
                               fontWeight: "600",

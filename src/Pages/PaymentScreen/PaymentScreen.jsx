@@ -205,7 +205,7 @@ const StripeCardForm = () => {
                                     style={{
                                         width: "50px",
                                         height: "32px",
-                                        border: "none",
+                                       
                                         outline: "none",
                                         borderRadius: "5px",
                                         fontWeight: "600",

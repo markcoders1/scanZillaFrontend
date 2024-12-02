@@ -241,7 +241,7 @@ const UserTable = () => {
             <Box
               sx={{
                 position: "relative",
-                width: "100%",
+             
                 width:{md:"350px", xs:"100%"}
               }}
             >

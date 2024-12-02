@@ -131,7 +131,7 @@ const CustomCard = ({ cardStyle, cb }) => {
                         backgroundRepeat: "no-repeat",
                         borderRadius: "10px",
                         position: "relative",
-                        color: "white",
+                       
                         padding: "26px 32px",
                         display: "flex",
                         flexDirection: "column",

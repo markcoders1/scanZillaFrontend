@@ -248,7 +248,7 @@ const Home = () => {
                 text={auth.userName}
                 title="Hello,"
                 sxCardCss={{
-                  height:"100px",
+                
                   minHeight:"90px",
                   height:"130px",
 
@@ -406,7 +406,7 @@ const Home = () => {
                   xs:"35px",
                   lg:"30px"
                 },
-                lineHeight: "50px",
+               
                 fontWeight: "600",
                 lineHeight:{
                   lg:"34px",
