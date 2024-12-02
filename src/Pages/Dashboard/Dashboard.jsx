@@ -316,7 +316,11 @@ const Home = () => {
                     lg:credits <= 10 ? "37px": "50px"
 
                   },
-                  lineHeight: "65px",
+                  lineHeight: {
+                    xl:"65px",
+                    lg:"45px",
+                    xs:"65px"
+                  },
                   color: "#190247",
                   letterSpacing: "0.67px"
                 }}>
