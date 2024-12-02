@@ -18,6 +18,7 @@ import Uiverse from "../../Components/Uiverse/Uiverse";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY;
+import { Link, animateScroll as scroll } from 'react-scroll';
 
 function hasValues(obj) {
   return Object.values(obj).some(
@@ -206,11 +207,17 @@ const Analyze = () => {
         message: "Analysis Completed",
         severity: "success",
       });
-      setScroll(true);
+    setScroll(true)
       setResult("Results");
 
       dispatch(handleAnalyzeErrors(response.data.error));
       setLoaderState(100);
+      // if (response && scrollBoxRef.current) {
+      //   scrollBoxRef.current.scrollTo({
+      //     top: document.getElementById('result').offsetTop - 50, // Adjust offset as needed
+      //     behavior: "smooth",
+      //   });
+      // }
       await new Promise((resolve) => setTimeout(resolve, 1200));
       setIsLoading(false);
       if (response.data.error) {
@@ -240,8 +247,8 @@ const Analyze = () => {
   useEffect(() => {
     if (isScroll && scrollBoxRef.current) {
       scrollBoxRef.current.scrollTo({
-        top: scrollBoxRef.current.scrollHeight, // Scroll to bottom
-        behavior: "smooth", // Optional smooth scroll
+        top:document.getElementById('result').offsetTop - 150,// Scroll to bottom
+        behavior: "smooth", 
       });
       setScroll(false);
     }
@@ -879,6 +886,9 @@ const Analyze = () => {
                   </div>
                 )}
               </Box>
+              <Box
+              id="result"
+              >
 
               {hasValues(AnalyzeErrros) ? (
                 <Box sx={{ mt: "50px" }}>
@@ -889,6 +899,7 @@ const Analyze = () => {
                       color: "#333333",
 
                     }}
+                    id="result"
                   >
                     {result}
                   </Typography>
@@ -1192,6 +1203,8 @@ const Analyze = () => {
                   ))}
                 </Paper>
               ) : null}
+              </Box>
+
 
               <SnackAlert
                 message={snackAlertData.message}
@@ -1211,21 +1224,3 @@ const Analyze = () => {
 
 export default Analyze;
 
-// {errors && (
-//   <Typography sx={{
-//     display: errors.bulletpoints ? "flex" : "none",
-//     background: "white",
-//     p: "10px",
-//     color: "#3d0168",
-//     mt: "8px",
-//     wordBreak: "break-word"
-//   }}>
-//     {/* {errors.bulletpoints} */}
-//     {errors.bulletpoints.split('|-|').map((line, index) => (
-// <React.Fragment key={index}>
-// {line}
-// {index < errors.bulletpoints.split('|-|').length - 1 && <br />}
-// </React.Fragment>
-// ))}
-//   </Typography>
-// )}
