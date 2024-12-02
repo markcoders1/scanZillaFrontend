@@ -102,7 +102,7 @@ useNavigation()
         backgroundAttachment:"fixed",
 
         padding: {
-          sm: "20px 30px",
+          sm: "15px 30px",
           xs: "30px 13px"
         },
         // marginLeft: "-15px",
@@ -163,7 +163,7 @@ useNavigation()
           
           <Box
             sx={{
-              mt: "20px",
+              mt: "0px",
               display:"flex",
               flexDirection:"column",
               gap:"3rem",

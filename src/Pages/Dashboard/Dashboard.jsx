@@ -203,7 +203,7 @@ const Home = () => {
           overflowX: "hidden",
           padding: "20px 15px",
           "&::-webkit-scrollbar": {
-            width: "8px"
+            width: "8px",
           },
           "&::-webkit-scrollbar-track": {
             background: "#DFDFDF",
@@ -225,8 +225,9 @@ const Home = () => {
             display: "flex",
             flexDirection: "column",
             gap: {
-              md: "20px",
-              xs: "30px"
+              md: "15px",
+              xs: "30px",
+              xl:"40px"
             },
             flexGrow: 1,
             flexBasis: {
@@ -250,7 +251,11 @@ const Home = () => {
                 sxCardCss={{
                 
                   minHeight:"90px",
-                  height:"130px",
+                  height:{
+                    lg:"120px",
+                    xs:"140px",
+                    xl:"140px"
+                  },
 
                 }}
               />
@@ -275,7 +280,11 @@ const Home = () => {
                 flexDirection: "column",
                 alignItems: "start",
                minHeight:"160px",
-               height:"160px",
+               height:{
+                lg:"150px",
+                xs:"160px",
+                xl:"160px"
+               },
                flexGrow:"1",
               maxHeight:"190px",
                 justifyContent: "center",
@@ -298,7 +307,7 @@ const Home = () => {
                   fontSize: {
                     xl:"23px",
                     xs:"20px",
-                     lg:credits <= 10 ? "18px": "30px"
+                     lg:credits >= 10 ? "18px": "30px"
 
                   },
                   lineHeight: "30px",
@@ -313,7 +322,7 @@ const Home = () => {
                   fontSize: {
                     xl:"56px",
                     xs:"45px",
-                    lg:credits <= 10 ? "37px": "50px"
+                    lg:credits >= 10 ? "37px": "50px"
 
                   },
                   lineHeight: {
@@ -328,7 +337,7 @@ const Home = () => {
                 </Typography>
                 </Box>
                 {
-                  credits <= 10 ? (
+                  credits >= 10 ? (
                     <Box sx={{
                       mt: "10px",
                       fontWeight: "600",
@@ -393,7 +402,11 @@ const Home = () => {
               flexShrink:"2",
               minHeight: "100px",
               // maxHeight:"210px",
-              height:"110px",
+              height:{
+                lg:"110px",
+                xs:"140px",
+                xl:"140px"
+              },
               maxHeight:"100%"
              
             }}>
@@ -483,7 +496,7 @@ const Home = () => {
                 },
                 display: "flex",
                 flexDirection: "column",
-                gap: "40px",
+                gap: "20px",
                 borderRadius: "10px",
                 paddingRight: "10px"
               }}>
@@ -513,7 +526,11 @@ const Home = () => {
               <Box
                 sx={{
                   position: "absolute",
-                  bottom: "30px",
+                  bottom: {
+                    xs:"30px",
+                    lg:"20px",
+                    xl:"30px"
+                  },
                   width: "90%",
                   left: "0px",
                   right: "0px",
