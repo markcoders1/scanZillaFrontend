@@ -822,8 +822,8 @@ const Analyze = () => {
 
               <Box sx={{ marginTop: "40px" }}>
                 {!isLoading ? (
-                  <div style={{
-                    display: "flex", gap: "10px",
+                  <Box sx={{
+                    display: "flex", gap: "15px",
                     flexDirection: {
                       xs: "column",
                       sm: "row",
@@ -831,6 +831,15 @@ const Analyze = () => {
                     },
 
                   }}>
+                    <Box
+                    sx={{
+                      flexBasis:{
+                        sm:"75%",
+                        xs:"100%"
+                      }
+                    }}
+                    >
+
                     <CustomButton
                       border="2px solid #1A0049"
                       borderRadius="10px"
@@ -843,30 +852,45 @@ const Analyze = () => {
                       fontSize
                       color="white"
                       fontWeight
-                      // fullWidth={true}
-                      width="75%"
+                      fullWidth={true}
+                      // width="75%"
                       variant="contained"
                       padding
                       onClick={handleAnalyze}
                     />
+                    </Box>
+<Box
+ sx={{
+  flexBasis:{
+    sm:"25%",
+    xs:"100%"
+  }
+}}
+>
+
                     <CustomButton
                       border="2px solid #1A0049"
                       borderRadius="10px"
                       background="white"
                       hoverBg="white"
                       hovercolor="#1A0049"
-                      buttonTextStyle={{}}
                       buttonStyle={{ padding: { lg: "12px 20px" } }}
                       ButtonText={`Clear All  `}
                       fontSize
                       color="#1A0049"
                       fontWeight
-                      width={"25%"}
+                      
+                      // buttonTextStyle={{
+                      //   width:{}
+                      // }}
+                      fullWidth={true}
                       variant="contained"
                       padding
                       onClick={handleClear}
                     />
-                  </div>
+</Box>
+
+                  </Box>
                 ) : (
                   <div
                     style={{
