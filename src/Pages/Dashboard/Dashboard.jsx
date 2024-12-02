@@ -274,8 +274,8 @@ const Home = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "start",
-               minHeight:"120px",
-               height:"120px",
+               minHeight:"160px",
+               height:"160px",
                flexGrow:"1",
               maxHeight:"190px",
                 justifyContent: "center",
@@ -286,15 +286,19 @@ const Home = () => {
                 }
                
               }}>
-
+                <Box
+                sx={{
+                  // border:"2px solid red"
+                }}
+                >
                 <Typography sx={{
 
                   color: "#333333",
                   fontWeight: "600",
                   fontSize: {
-                    xl:"25px",
+                    xl:"23px",
                     xs:"20px",
-                     lg:"22px"
+                     lg:credits <= 10 ? "18px": "30px"
 
                   },
                   lineHeight: "30px",
@@ -307,9 +311,10 @@ const Home = () => {
                   mt: "0px",
                   fontWeight: "600",
                   fontSize: {
-                    xl:"60px",
+                    xl:"56px",
                     xs:"45px",
-                    lg:"45px"
+                    lg:credits <= 10 ? "37px": "50px"
+
                   },
                   lineHeight: "65px",
                   color: "#190247",
@@ -317,7 +322,7 @@ const Home = () => {
                 }}>
                   {credits.toLocaleString()}
                 </Typography>
-
+                </Box>
                 {
                   credits <= 10 ? (
                     <Box sx={{
@@ -325,14 +330,14 @@ const Home = () => {
                       fontWeight: "600",
                       fontSize:{
                         md:"14px",
-                        lg:"16px",
+                        lg:"13px",
                         xs:"13px"
                       },
                       // lineHeight: "65px",
                       color: "#ffff",
                       letterSpacing: "0.67px",
                       backgroundColor: "#D32F2F",
-                      p: "10px 20px",
+                      p: "7px 20px",
                       borderRadius: "5px",
                       display: "flex",
                    
@@ -382,29 +387,27 @@ const Home = () => {
               justifyContent: "center",
               paddingLeft: "26px",
               flexShrink:"2",
-              minHeight: "130px",
+              minHeight: "100px",
               // maxHeight:"210px",
-              height:"130px",
+              height:"110px",
               maxHeight:"100%"
              
             }}>
 
-              {/* <Typography sx={{
-                  fontSize: "20px",
-                  fontWeight: "500",
-                  lineHeight: "30px",
-                  color: "#A0A4A9"
-                }}>
-                  Total Analyzed
-                </Typography> */}
+            
               <Typography sx={{
                 color: "#190247",
                 fontSize: {
-                  md:"40px",
-                  xs:"35px"
+                  xl:"40px",
+                  xs:"35px",
+                  lg:"30px"
                 },
                 lineHeight: "50px",
-                fontWeight: "600"
+                fontWeight: "600",
+                lineHeight:{
+                  lg:"34px",
+                  xl:"48px"
+                }
               }}>
                 {numberOfAnalyzed} Analyzed <br />
                 So far
