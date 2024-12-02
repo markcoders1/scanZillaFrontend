@@ -307,7 +307,7 @@ const Home = () => {
                   fontSize: {
                     xl:"23px",
                     xs:"20px",
-                     lg:credits >= 10 ? "18px": "30px"
+                     lg:credits <= 10 ? "18px": "30px"
 
                   },
                   lineHeight: "30px",
@@ -322,7 +322,7 @@ const Home = () => {
                   fontSize: {
                     xl:"56px",
                     xs:"45px",
-                    lg:credits >= 10 ? "37px": "50px"
+                    lg:credits <= 10 ? "37px": "50px"
 
                   },
                   lineHeight: {
@@ -337,7 +337,7 @@ const Home = () => {
                 </Typography>
                 </Box>
                 {
-                  credits >= 10 ? (
+                  credits <= 10 ? (
                     <Box sx={{
                       mt: "10px",
                       fontWeight: "600",
