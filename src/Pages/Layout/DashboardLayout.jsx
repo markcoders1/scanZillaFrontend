@@ -88,11 +88,11 @@ useNavigation()
         justifyContent: 'center',
         alignItems: 'flex-start',
         minHeight:{
-          xs:"70vh",
+          xs:"100vh",
           sm:"100vh"
         },
         maxHeight:{
-          xs:"110vh",
+          xs:"100vh",
           sm:"100vh"  
         },
         backgroundImage: `linear-gradient(rgba(27, 2, 75, .7), rgba(27, 2, 75, .8)), url(${dashboardImg1})`,

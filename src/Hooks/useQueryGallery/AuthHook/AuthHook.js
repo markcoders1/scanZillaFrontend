@@ -1,12 +1,11 @@
 // src/api/axiosInstance.js
-import axios from 'axios';
-import {store} from '../../../Redux/Store/Store.js';
-import { handleAuth } from '../../../Redux/Slice/UserSlice/UserSlice';
-// import { navigate } from './../utils/navigation';
+  import axios from 'axios';
+  import {store} from '../../../Redux/Store/Store.js';
+  import { handleAuth } from '../../../Redux/Slice/UserSlice/UserSlice';
+  
 import {navigate} from '../../../utilis/navigattion.js'
 import SnackAlert from '../../../Components/SnackAlert/SnackAlert.jsx';
-// import { API_BASE_URL } from '../constants';
-// import { ROUTES } from '../../routesName';
+
 import {ROUTES} from './Routes.js'
 import { handleSnackAlert } from '../../../Redux/Slice/SnackAlertSlice/SnackAlertSlice.js';
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
@@ -48,7 +47,7 @@ const processQueue = (error, tokens = null) => {
   failedQueue = [];
 };
 
-// Response interceptor to handle 401 errors and refresh tokens
+
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {

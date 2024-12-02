@@ -77,9 +77,12 @@ const ChangeNameModal = ({
       onNameChange(name); // Update the name in parent component
       handleClose(); // Close the modal
       console.log(response);
-       dispatch(handleAuth({
-        userName: response.data.user.userName  
-       }))
+      if (response) {
+        dispatch(handleAuth({
+         userName: response.data.user.userName  
+        }))
+
+      }
 
       if (response) {
         setSnackAlertData({

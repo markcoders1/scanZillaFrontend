@@ -67,7 +67,6 @@ const Home = () => {
 
     if (auth.email) {
       fetchUser();
-     
     }
   }, [auth.email, dispatch]);
 
@@ -218,7 +217,7 @@ const Home = () => {
             background: "#b30000"
           },
 
-          // border: "2px solid red",
+         
 
         }}>
 
@@ -226,7 +225,7 @@ const Home = () => {
             display: "flex",
             flexDirection: "column",
             gap: {
-              md: "30px",
+              md: "20px",
               xs: "30px"
             },
             flexGrow: 1,
@@ -234,31 +233,30 @@ const Home = () => {
               md: "50%",
               xs: "100%"
             },
-           
-
-
+            // border:"2px solid red",
             flexShrink: 1,
           }}>
 
             <Box sx={{
 
-              flexGrow: 2,
+              
               flexShrink: "1",
-              height: "150px",
+             
              
             }}>
               <CardIWithImageBackground
-                text={username}
+                text={auth.userName}
                 title="Hello,"
               />
             </Box>
             <Box sx={{
               flexBasis: {
-                xl: "154px"
+                // xl: "154px"
               },
-              flexGrow: 1,
+        
               flexShrink: "1",
               cursor: "pointer",
+           
 
             }}
               onClick={() => navigate("/credits")}>
@@ -274,7 +272,9 @@ const Home = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "start",
-                height: "212px",
+                 minHeight: "140px",
+              maxHeight:"190px",
+            
                 justifyContent: "center",
                 // gap: "20px",
                 '&:hover': {
@@ -289,7 +289,7 @@ const Home = () => {
                   color: "#333333",
                   fontWeight: "600",
                   fontSize: {
-                    md:"27px",
+                    md:"24px",
                     xs:"20px"
                   },
                   lineHeight: "30px",
@@ -302,8 +302,8 @@ const Home = () => {
                   mt: "0px",
                   fontWeight: "600",
                   fontSize: {
-                    md:"80px",
-                    xs:"50px"
+                    md:"60px",
+                    xs:"45px"
                   },
                   lineHeight: "65px",
                   color: "#190247",
@@ -365,7 +365,7 @@ const Home = () => {
                 <CustomChart data={graphdata} />
               </Box> */}
             <Box sx={{
-              flexBasis: "254px",
+              // flexBasis: "254px",
               flexGrow: 1,
               display: "flex",
               gap: "20px",
@@ -375,6 +375,9 @@ const Home = () => {
               borderRadius: "10px",
               justifyContent: "center",
               paddingLeft: "26px",
+              flexShrink:"2",
+              minHeight: "150px",
+              // maxHeight:"210px",
              
             }}>
 

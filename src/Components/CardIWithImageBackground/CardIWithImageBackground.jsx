@@ -22,6 +22,7 @@ const CardIWithImageBackground = ({
             flexDirection: "column",
             justifyContent: "center",
             height: "150px",
+            
             boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
 
         }}>
@@ -42,7 +43,8 @@ const CardIWithImageBackground = ({
                     sm: "27px",
                     xs: "24px"
                 },
-                lineHeight: "40px"
+                lineHeight: "40px",
+
             }}>
                 {text}
             </Typography>
