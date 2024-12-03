@@ -103,7 +103,7 @@ useNavigation()
 
         padding: {
           sm: "15px 30px",
-          xs: "30px 13px"
+          xs: "30px 2px"
         },
         // marginLeft: "-15px",
         boxSizing: 'border-box',
