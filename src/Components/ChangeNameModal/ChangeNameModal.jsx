@@ -145,12 +145,12 @@ const ChangeNameModal = ({
                 onChange={handleInput}
                 name="fullName"
                 value={data?.fullName}
-                placeholder="Please enter your full name"
+                placeholder="Please enter your name"
                 border=""
                 boxShadow={true}
               />
             
-              <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <Box sx={{ display: 'flex', justifyContent: 'center',margin:"25px 0 0 0" }}>
                 <CustomButton
                   loading={loading}
                   border="2px solid #1A0049"
@@ -164,7 +164,7 @@ const ChangeNameModal = ({
                       xs: '20px 40px',
                     },
                   }}
-                  ButtonText="Change Name"
+                  ButtonText="Update"
                   color={'white'}
                   fullWidth={false}
                   variant="contained"
