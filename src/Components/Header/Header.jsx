@@ -9,7 +9,7 @@ const Header = ({ title, sx }) => {
       justifyContent: "space-between",
       p: {
         sm: "0px 30px 0px 0px",
-        xs: "0px 0px 0px 0px"
+        xs: "0px 15px 0px 15px"
       },
       alignItems: "center",
       
