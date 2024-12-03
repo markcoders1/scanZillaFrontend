@@ -28,8 +28,7 @@ const ChangeNameModal = ({
     open: false,
   });
   const [data, setData] = React.useState({
-    firstName: '',
-    lastName: '',
+   fullName:''
 
   });
 
@@ -60,28 +59,15 @@ const ChangeNameModal = ({
       severity: 'success',
     });
 
-    if (!data?.firstName && !data?.firstName) {
-      return setSnackAlertData({
-        open: true,
-        message: 'First name & last name is required',
-        severity: 'error',
-      });
-    }
 
-    if (!data?.firstName) {
+    if (!data?.fullName) {
       return setSnackAlertData({
         open: true,
-        message: 'First name is required',
+        message: 'Full name is required',
         severity: 'error',
       });
     }
-    if (!data?.lastName) {
-      return setSnackAlertData({
-        open: true,
-        message: 'Last name is required',
-        severity: 'error',
-      });
-    }
+ 
 
     try {
       setLoading(true);
@@ -89,14 +75,15 @@ const ChangeNameModal = ({
         url: appUrl + '/changeName',
         method: 'post',
         data: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-
+          fullName: data.fullName,
         },
       });
       setLoading(false);
-      onNameChange(name); // Update the name in parent component
-      handleClose(); // Close the modal
+      onNameChange(name); 
+      setData({
+        fullName: ''
+      })
+      handleClose(); 
       console.log(response);
       if (response) {
         dispatch(handleAuth({
@@ -156,21 +143,13 @@ const ChangeNameModal = ({
               <CustomTextField
                 handleKeyDown={() => {}}
                 onChange={handleInput}
-                name="firstName"
-                value={data?.firstName}
-                placeholder="Enter your First name"
+                name="fullName"
+                value={data?.fullName}
+                placeholder="Please enter your full name"
                 border=""
                 boxShadow={true}
               />
-              <CustomTextField
-                handleKeyDown={() => {}}
-                onChange={handleInput}
-                name="lastName"
-                value={data?.lastName}
-                placeholder="Enter your Last name"
-                border=""
-                boxShadow={true}
-              />
+            
               <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                 <CustomButton
                   loading={loading}
