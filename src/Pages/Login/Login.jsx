@@ -43,13 +43,17 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleSignIn = async () => {
+    dispatch(handleAuth({}));
+    console.log(auth)
     try {
       const responseData = await signInWithGooglePopup();
     
       const data = responseData.data;
+      console.log(data);
       data.authenticated = true;
-  
+      
       dispatch(handleAuth(data));
+      console.log(auth)
   
     
       setSnackAlertData({

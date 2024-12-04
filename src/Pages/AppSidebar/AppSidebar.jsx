@@ -196,7 +196,7 @@ const AppSidebar = () => {
             color: '#ffff',
           }}
         >
-          {auth.userName}
+          {auth?.userName}
         </Typography>
         <Typography
           sx={{
@@ -206,7 +206,7 @@ const AppSidebar = () => {
            
           }}
         >
-          {email}
+          {auth?.email}
         </Typography>
         <Typography
           sx={{

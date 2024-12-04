@@ -8,7 +8,7 @@ const userSlice = createSlice({
     accessToken: null,
     refreshToken: null,
     _id: null,
-    username: null,
+    userName: null,
     email: null,
     credits: null,
     autocharge: null,

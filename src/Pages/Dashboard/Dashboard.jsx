@@ -43,6 +43,7 @@ const Home = () => {
   const [modalData, setModalData] = useState({});
 
   useEffect(() => {
+    console.log(auth)
     const fetchUser = async () => {
       try {
         setLoading(true);
@@ -246,7 +247,7 @@ const Home = () => {
              
             }}>
               <CardIWithImageBackground
-                text={auth.userName}
+                text={auth?.userName}
                 title="Hello,"
                 sxCardCss={{
                 
