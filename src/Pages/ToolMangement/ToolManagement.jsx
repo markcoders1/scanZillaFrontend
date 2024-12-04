@@ -123,6 +123,8 @@ const ToolManagement = () => {
       const response = await axiosInstance.post(`${appUrl}/words`, {
         word: newKeyword,
       });
+
+      console.log("=========>",response.data)
       return response.data;
     },
     onSuccess: () => {
@@ -276,6 +278,7 @@ const ToolManagement = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      console.log(response)
       return response.data;
     },
     onSuccess: (data) => {
@@ -417,7 +420,7 @@ const ToolManagement = () => {
         dispatch(
           handleSnackAlert({
             open: true,
-            message: "Keyword cannot be empty",
+            message: "Add Abbrevation cannot be empty",
             severity: "error",
           })
         );
@@ -430,7 +433,7 @@ const ToolManagement = () => {
 
 
   const downloadAbbCsv = async () => {
-    console.log("abb CSv func");
+   
     try {
       const response = await axiosInstance({
         url: `${appUrl}/abbcsv`,
@@ -452,11 +455,46 @@ const ToolManagement = () => {
     }
   };
 
+  const uploadCsvMutationAbbrevation = useMutation({
+    mutationFn: async (file) => {
+      console.log(file)
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axiosInstance.post(`${appUrl}/abbcsv`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response)
+      return response.data;
+    },
+    onSuccess: (data) => {
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: data.message,
+          severity: "success",
+        })
+      );
+      queryClient.invalidateQueries(["allowedAbbrevation"]);
+    },
+    onError: (error) => {
+      console.error("Error uploading the file:", error);
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: error.response?.data?.message || "An error occurred",
+          severity: "error",
+        })
+      );
+    },
+  });
+
   const uploadCsvMutationAbb = useMutation({
     mutationFn: async (file) => {
       const formData = new FormData();
       formData.append("file", file);
-
       const response = await axiosInstance.post(`${appUrl}/abbcsv`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -472,7 +510,7 @@ const ToolManagement = () => {
           severity: "success",
         })
       );
-      queryClient.invalidateQueries(["restrictedKeywords"]);
+      queryClient.invalidateQueries(["allowedAbbrevation"]);
     },
     onError: (error) => {
       console.error("Error uploading the file:", error);
@@ -486,15 +524,26 @@ const ToolManagement = () => {
     },
   });
 
+  // const handleFileChangeAbb = (event) => {
+  //   console.log(event.target.files[0]);
+  //   console.log("function for select file");
+  //   const file = event.target.files[0];
+  //   console.log("file selected")
+
+  //   if (file) {
+  //     uploadCsvMutationAbb.mutate(file);
+  //   }
+  // };
+
   const handleFileChangeAbb = (event) => {
-    console.log(event.target.files[0]);
-    console.log("function for select file");
     const file = event.target.files[0];
+    console.log(file)
 
     if (file) {
-      uploadCsvMutationAbb.mutate(file);
+      uploadCsvMutationAbbrevation.mutate(file);
     }
   };
+
 
 
   // Handle Loading and Error States
@@ -1076,14 +1125,14 @@ const ToolManagement = () => {
             <div>
               <input
                 type="file"
-                id="fileInput"
+                id="fileInput1"
                 onChange={handleFileChangeAbb}
                 style={{
                   display: "none",
                 }}
               />
               <label
-                htmlFor="fileInput"
+                htmlFor="fileInput1"
                 style={{
                   display: "inline-block",
                   padding: "16px 20px",
@@ -1095,7 +1144,7 @@ const ToolManagement = () => {
                   fontSize:"14px"
                 }}
               >
-                Select CSV File
+                Select  Abb File
               </label>
             </div>
           </Box>
