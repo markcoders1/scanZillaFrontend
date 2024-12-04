@@ -16,7 +16,7 @@ const Logout = () => {
     dispatch(
         handleSnackAlert({
           open: true,
-          message: "Logout successfully.",
+          message: "Logged out successfully.",
           severity: "success",
         })
       );
