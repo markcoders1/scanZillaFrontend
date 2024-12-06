@@ -134,7 +134,8 @@ const UserTable = () => {
     (user) =>
       (filter === "all" || user.role === filter) &&
       (user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.credits.toString().toLowerCase().includes(searchTerm.toLowerCase()))
+        user.credits.toString().toLowerCase().includes(searchTerm.toLowerCase())) || 
+        user?.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const renderActionButtons = (userId) => {
