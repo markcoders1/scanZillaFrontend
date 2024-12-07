@@ -42,10 +42,12 @@ const Details = () => {
 
   const [data, setData] = useState({
     sendCredits: "",
+    removeCredits: "",
   });
 
   const [errors, setErrors] = useState({
     sendCredits: "",
+    removeCredits:"",
   });
 
   const handleInput = (e) => {
@@ -69,6 +71,35 @@ const Details = () => {
           data: {
             userId: id,
             credits: data.sendCredits,
+          },
+        });
+        console.log(response)
+      //  setUserData.credits((response.data.userCredits));
+      setCredits(response.data.userCredits)
+      } catch (error) {
+        // setError(error.toString());
+    
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleButton = async () => {
+    if (data.removeCredits === "") {
+      setErrors({ removeCredits: "You have not entered credits" });
+    } else {
+      setData("")
+      console.log(data.removeCredits);
+
+      try {
+        setLoading(true);
+        const response = await axiosInstance({
+          url: `${appUrl}/takecredits`,
+          method: "post",
+          data: {
+            userId: id,
+            credits: data.removeCredits,
           },
         });
         console.log(response)
@@ -356,6 +387,47 @@ const Details = () => {
                   color="white"
                   background="linear-gradient(to right, #1A0049, #3F016A)"
                   onClick={handleSave}
+                />
+              </Typography>
+
+            </Box>
+          </Box>
+
+          <Box
+            sx={{
+              display: "flex",
+              gap: "0.5rem",
+              flexDirection: "column",
+              marginTop: "30px",
+            }}
+          >
+            <Heading Heading="Revoke Credits" />
+            <Box
+              sx={{
+                position: "relative",
+              }}
+            >
+              <CustomInputShadow
+                ref={inputRef}
+                handlekeydown={handlekeydown}
+                error={errors.removeCredits}
+                onChange={handleInput}
+                name="removeCredits"
+                value={data.removeCredits}
+                rows={1}
+                color={"blue"}
+                type={"number"}
+              />
+              <Typography sx={{ position: "absolute", top: "10px", right: "20px" }} >
+                <CustomButton
+                  borderRadius="5px"
+                  padding="4px 0px"
+                  fontSize="12px"
+                  ButtonText="Save"
+                  width="90.43px"
+                  color="white"
+                  background="linear-gradient(to right, #1A0049, #3F016A)"
+                  onClick={handleButton}
                 />
               </Typography>
 
