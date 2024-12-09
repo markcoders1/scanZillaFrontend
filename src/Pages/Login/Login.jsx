@@ -54,7 +54,7 @@ const Login = () => {
       
       dispatch(handleAuth(data));
       console.log(auth)
-  
+      console.log(responseData)
     
       setSnackAlertData({
         open: true,
@@ -73,9 +73,16 @@ const Login = () => {
       dispatch(handleSnackAlert({ open: true, message: "Logged in successfully.", severity: "success" }));
   
     } catch (error) {
-      console.error("Sign-in failed:", error);
-  
-      // Check if error response exists (meaning server returned a response)
+      console.log(error);
+      if (error.code === "auth/popup-closed-by-user") {
+        setSnackAlertData({
+          open: true,
+          message: "Sign-in process was cancelled by the user.",
+          severity: "info",
+        });
+        return; 
+      }
+      
       if (error.response) {
         setSnackAlertData({
           open: true,
@@ -100,11 +107,7 @@ const Login = () => {
         });
       }
       
-      dispatch(handleSnackAlert({
-        open: true,
-        message: error.response?.data?.message || "An error occurred.",
-        severity: "error",
-      }));
+    
     }
   };
   

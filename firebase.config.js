@@ -22,7 +22,13 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 export const auth = getAuth();
 
 export const signInWithGooglePopup = async () => {
-    const result = await signInWithPopup(auth, provider)
+    provider.setCustomParameters({
+        prompt: 'select_account', 
+
+      });
+      console.log(provider)
+    const result = await signInWithPopup(auth, provider);
+   
     const idToken = await getIdToken(result.user)
 
     const response = await axiosInstance({
