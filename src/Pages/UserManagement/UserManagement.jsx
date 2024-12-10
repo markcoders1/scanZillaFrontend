@@ -130,12 +130,16 @@ const UserTable = () => {
     setFilter(newValue);
   };
 
+ 
+
   const filteredUsers = users.filter(
     (user) =>
       (filter === "all" || user.role === filter) &&
-      (user.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user.credits.toString().toLowerCase().includes(searchTerm.toLowerCase())) || 
+      (
+        user?.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user?.credits.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
         user?.email.toLowerCase().includes(searchTerm.toLowerCase())
+      )
   );
 
   const renderActionButtons = (userId) => {
@@ -282,9 +286,7 @@ const UserTable = () => {
               <Tab label="Users" value="user" />
               <Tab label="Admins" value="admin" />
             </Tabs>
-
           </Box>
-
 
           <TableContainer component={Paper}>
             <Table
