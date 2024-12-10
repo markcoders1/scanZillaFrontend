@@ -216,7 +216,7 @@ const MobileSidebar = () => {
                   Analyze
                 </NavLink>
               </Typography>
-              <Typography>
+              {/* <Typography>
                 <NavLink
                   to="/credits"
                   className={({ isActive }) =>
@@ -226,7 +226,7 @@ const MobileSidebar = () => {
                 >
                   Credits Top Up
                 </NavLink>
-              </Typography>
+              </Typography> */}
               <Typography>
                 <NavLink
                   to="/history"

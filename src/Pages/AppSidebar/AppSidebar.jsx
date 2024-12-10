@@ -138,7 +138,7 @@ const AppSidebar = () => {
                 Analyze
               </NavLink>
             </Typography>
-            <Typography>
+            {/* <Typography>
               <NavLink
                 to="/credits"
                 className={({ isActive }) =>
@@ -147,7 +147,7 @@ const AppSidebar = () => {
               >
                Credits Top Up
               </NavLink>
-            </Typography>
+            </Typography> */}
             <Typography>
               <NavLink
                 to="/history"
