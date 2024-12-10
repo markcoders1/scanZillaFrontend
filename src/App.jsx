@@ -54,7 +54,7 @@ function App() {
             <Route path='/' element={<DashboardLayout />}>
               <Route path="dashboard" element={<Protected children={<Dashboard />} />} />
               <Route path="analyze" element={<Protected children={<Analyzed />} />} />
-              <Route path="credits" element={<Protected children={<Credits />} />} />
+              {/* <Route path="credits" element={<Protected children={<Credits />} />} /> */}
               <Route path="card-details" element={<Protected children={<Debit />} />} />
               <Route path="history" element={<Protected children={<History />} />} />
               <Route path="profile" element={<Protected children={<Profile />} />} />
