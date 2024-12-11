@@ -76,6 +76,7 @@ const Credits = () => {
         method: "get",
       });
       setLoading(false);
+      console.log(response)
       if (response) {
         setCreditsHistory(response?.data?.payments);
         setSnackAlertData({

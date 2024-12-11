@@ -21,6 +21,11 @@ const CreditsHistory = ({ index, item }) => {
         const options = { year: 'numeric', month: 'short', day: '2-digit' };  // Format options
         return date.toLocaleDateString('en-US', options).replace(',', '');  // Format and remove comma
     }
+    function formatUnixTimestamp(timestamp) {
+        const date = new Date(timestamp * 1000); // Convert to milliseconds
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
     
     const formattedDate = formatDate('2024-11-27T17:10:01.720Z');
     console.log(formattedDate);
@@ -35,11 +40,11 @@ const CreditsHistory = ({ index, item }) => {
             <Typography
                 sx={{
                     fontWeight: "400",
-                    fontSize: "20px",
+                    fontSize: "16px",
                     color: "#A0A4A9",
                 }}
             >
-                {formatDate(item?.createdAt)}
+                {formatUnixTimestamp(item?.date)}
             </Typography>
             <Typography
                 sx={{
