@@ -141,17 +141,36 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
 
                                     {error?.joi == true ?
                                         error?.BE?.map((item, index) => {
-                                            if (item.message.includes("|-|")) {
-                                                const messages = item.message.split("|-|")
+
+                                            if(typeof item == "string"){
+                                                return (
+                                                    <Typography sx={{ padding: "10px 0" }} key={index}>
+                                                        <span style={{ paddingLeft: "10px" }}>• {item}</span>
+                                                    </Typography>
+                                                )
+                                            }
+
+                                            
+                                            if (item?.message.includes("|-|")) {
+                                                const messages = item?.message.split("|-|")
                                                 return (
                                                     <Typography sx={{ padding: "10px 0" }} key={index}>
                                                         {item.point}.
                                                         <br />
                                                         <Box sx={{ paddingLeft: "10px" }}>
                                                             {messages.map((el, ind) => {
+                                                                let val = el.split("||||")
                                                                 return (
                                                                     <>
-                                                                        <span key={ind}> • {el.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
+                                                                        <span key={ind}> • {val[0]}</span>
+                                                                        {val[1] && <br />}
+                                                                        {val[1] && val[1].split("||").map(word=>{
+                                                                            return (
+                                                                            <>
+                                                                                <span>&nbsp;&nbsp;⁃{word}</span><br />
+                                                                            </>
+                                                                            )
+                                                                        })}
                                                                         {ind < messages.length - 1 && <br />}
                                                                     </>
                                                                 )
@@ -162,15 +181,9 @@ export const ViewDetailModal = ({ open, handleClose, title, bullets, description
                                             }
                                             if (item.point == -10) {
                                                 return (<Typography sx={{ padding: "10px 0" }} key={index}>
-                                                    • {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}
+                                                    • {item && item?.message.replace(/"bulletpoints\[\d+\]"/g, "")}
                                                 </Typography>)
                                             }
-                                            return (
-                                                <Typography sx={{ padding: "10px 0" }} key={index}>
-                                                    {item.point}. <br />
-                                                    <span style={{ paddingLeft: "10px" }}>• {item.message.replace(/"bulletpoints\[\d+\]"/g, "")}</span>
-                                                </Typography>
-                                            )
                                         })
                                         :
                                         error?.BE?.map((item, index) =>
