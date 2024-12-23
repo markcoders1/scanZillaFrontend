@@ -182,9 +182,9 @@ const Analyze = () => {
         message: value.message,
         severity: "success",
       });
-      value?.description &&
-        setData((prev) => ({ ...prev, description: value.description }));
+      value?.description && setData((prev) => ({ ...prev, description: value.description }));
       value?.title && setData((prev) => ({ ...prev, title: value.title }));
+      
       if (value?.bullets.length > 0) {
         let bullets = value?.bullets;
         bullets = bullets.map((el, ind) => {
@@ -192,6 +192,9 @@ const Analyze = () => {
         });
         setData((prev) => ({ ...prev, bulletpoints: bullets }));
       }
+
+      value?.category && setData((prev) => ({ ...prev, category: value.category }));
+
       setLoaderAsin(false);
     } catch (error) {
       console.log(error);
