@@ -18,7 +18,7 @@ import Uiverse from "../../Components/Uiverse/Uiverse";
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY;
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Button, Link, animateScroll as scroll } from "react-scroll";
 
 function hasValues(obj) {
     return Object.values(obj).some((arr) => arr.length > 0 && !(arr.length === 1 && arr[0] === ""));
@@ -61,6 +61,8 @@ const Analyze = () => {
     const dispatch = useDispatch();
     const AnalyzeErrros = useSelector((state) => state.analyze);
     const [bulletPointsCredits, setBulletPointsCredits] = useState(0);
+
+    const [asin,setAsin] = useState("");
 
     function hasValues(obj) {
         return Object.values(obj).some((arr) => arr.length > 0 && !(arr.length === 1 && arr[0] === ""));
@@ -120,6 +122,24 @@ const Analyze = () => {
             setData((prev) => ({ ...prev, subtitle: "" }));
         }
     };
+
+    const handleASIN = (e) => {
+        let value = e.target.value;
+        setAsin(value);
+    };
+
+    const clickASIN = async () => {
+        const {data:value} = await axiosInstance.get(`${appUrl}/prefill/${asin}`)
+        value?.description && setData((prev)=>({...prev,"description":value.description}))
+        value?.title && setData((prev)=>({...prev,"title":value.title}))
+        if(value?.bullets.length > 0){
+            let bullets = value?.bullets
+            bullets = bullets.map((el,ind)=>{
+                return {index:ind,value:el}
+            })
+            setData((prev)=>({...prev,"bulletpoints":bullets}))
+        }
+    }
 
     const handleAnalyze = async () => {
         setErrors({ title: "", bulletpoints: "", description: "", keywords: "" });
@@ -419,7 +439,28 @@ const Analyze = () => {
                                 Disclaimer: This tool is designed to assist in identifying potential TOS violations and evaluating indexing performance within Amazon listings. While it is regularly updated, it may not capture every TOS
                                 violation. Please note that thorough keyword research is essential for achieving optimal ranking and visibility. Personal review and discretion are advised for best results.
                             </div>
-
+                            <div style={{display:"flex",flexDirection:"row",width:"100%",alignItems:"center"}}>
+                                <Heading Heading="ASIN:" sx={{margin:" 0 0 16px 0"}}/>
+                                <CustomTextField handleKeyDown={() => {}} onChange={handleASIN} name="" value={asin} error={errors?.title} placeholder="" border="" boxShadow={true} maxLength={500} sx={{width:"80%"}} mb={0} />
+                                <CustomButton
+                                    border="2px solid #1A0049"
+                                    borderRadius="10px"
+                                    background="#1A0049"
+                                    hoverBg="white"
+                                    hovercolor="#1A0049"
+                                    buttonTextStyle={{}}
+                                    buttonStyle={{ padding: { lg: "12px 20px" }, margin:{lg:"0 10px 16px 10px"} }}
+                                    ButtonText={`Fill`}
+                                    fontSize
+                                    color="white"
+                                    fontWeight
+                                    fullWidth={true}
+                                    width="20%"
+                                    variant="contained"
+                                    padding
+                                    onClick={clickASIN}
+                                />
+                            </div>
                             <CustomSelect categoryError={errors?.category} data={category} handleChange={handleCategoryChange} value={data.category} placeHolder={"Select Category"} />
                             <Box
                                 sx={{
