@@ -196,6 +196,12 @@ const Analyze = () => {
     } catch (error) {
       console.log(error);
       setLoaderAsin(false);
+         
+      setSnackAlertData({
+        open: true,
+        message: error?.response?.data?.error || error?.response?.data?.message || value?.message || "Error occured",
+        severity: "error",
+      });
 
     }
   };
