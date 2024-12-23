@@ -19,6 +19,7 @@ import Uiverse from "../../Components/Uiverse/Uiverse";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY;
 import { Button, Link, animateScroll as scroll } from "react-scroll";
+import SpinnerLoader from "../../Components/Loader/spinnerLoader";
 
 function hasValues(obj) {
   return Object.values(obj).some(
@@ -88,6 +89,8 @@ const Analyze = () => {
   const dispatch = useDispatch();
   const AnalyzeErrros = useSelector((state) => state.analyze);
   const [bulletPointsCredits, setBulletPointsCredits] = useState(0);
+  const [loaderAsin, setLoaderAsin] = useState(false);
+  
 
   const [asin, setAsin] = useState("");
 
@@ -167,19 +170,33 @@ const Analyze = () => {
   };
 
   const clickASIN = async () => {
-    const { data: value } = await axiosInstance.get(
-      `${appUrl}/prefill/${asin}`
-    );
-    console.log(data);
-    value?.description &&
-      setData((prev) => ({ ...prev, description: value.description }));
-    value?.title && setData((prev) => ({ ...prev, title: value.title }));
-    if (value?.bullets.length > 0) {
-      let bullets = value?.bullets;
-      bullets = bullets.map((el, ind) => {
-        return { index: ind, value: el };
+    try {
+      setLoaderAsin(true);
+      const { data: value } = await axiosInstance.get(
+        `${appUrl}/prefill/${asin}`
+      );
+      console.log(value.message);
+      
+      setSnackAlertData({
+        open: true,
+        message: value.message,
+        severity: "success",
       });
-      setData((prev) => ({ ...prev, bulletpoints: bullets }));
+      value?.description &&
+        setData((prev) => ({ ...prev, description: value.description }));
+      value?.title && setData((prev) => ({ ...prev, title: value.title }));
+      if (value?.bullets.length > 0) {
+        let bullets = value?.bullets;
+        bullets = bullets.map((el, ind) => {
+          return { index: ind, value: el };
+        });
+        setData((prev) => ({ ...prev, bulletpoints: bullets }));
+      }
+      setLoaderAsin(false);
+    } catch (error) {
+      console.log(error);
+      setLoaderAsin(false);
+
     }
   };
 
@@ -505,13 +522,14 @@ const Analyze = () => {
                 visibility. Personal review and discretion are advised for best
                 results.
               </div>
-              <Heading Heading="ASIN &nbsp;" sx={{ display:"none"}} />
+              <Heading Heading="ASIN &nbsp;" sx={{ display: "none" }} />
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: { md: "row", xs: "column" },
                   width: "100%",
                   alignItems: "start",
+                  gap: "20px",
                 }}
               >
                 <CustomTextField
@@ -542,14 +560,14 @@ const Analyze = () => {
                     border="2px solid #1A0049"
                     borderRadius="10px"
                     background="#1A0049"
-                    hoverBg="white"
-                    hovercolor="#1A0049"
+                    hoverBg="#1A0049"
+                    hovercolor="white"
                     buttonTextStyle={{}}
                     buttonStyle={{
                       padding: { lg: "13.5px 20px" },
-                      margin: { lg: "0 10px 16px 10px" },
+                      // margin: { lg: "0 10px 16px 10px" },
                     }}
-                    ButtonText={`Fill`}
+                    ButtonText={loaderAsin ? <SpinnerLoader /> : "Fill"}
                     fontSize
                     color="white"
                     fontWeight
@@ -561,6 +579,7 @@ const Analyze = () => {
                   />
                 </Box>
               </Box>
+              <Box sx={{mt:"2px"}} ></Box>
               <CustomSelect
                 categoryError={errors?.category}
                 data={category}
@@ -636,7 +655,6 @@ const Analyze = () => {
                   Heading="Bullet Points"
                   creditText={"Credits"}
                   creditUtilized={bulletPointsCredits}
-                  
                 />
                 {data.bulletpoints.map((item, index) => (
                   <>
