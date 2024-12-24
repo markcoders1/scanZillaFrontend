@@ -531,7 +531,7 @@ const Analyze = () => {
                 visibility. Personal review and discretion are advised for best
                 results.
               </div>
-              <Heading Heading="ASIN &nbsp;" sx={{ display: "none" }} />
+              <Heading Heading="Enter Your ASIN to Automatically Fill the Fields &nbsp;" sx={{ display: "none" }} />
               <Box
                 sx={{
                   display: "flex",
@@ -576,7 +576,7 @@ const Analyze = () => {
                       padding: { lg: "13.5px 20px" },
                       // margin: { lg: "0 10px 16px 10px" },
                     }}
-                    ButtonText={loaderAsin ? <SpinnerLoader /> : "Fill"}
+                    ButtonText={loaderAsin ? <SpinnerLoader /> : "Auto Fill"}
                     fontSize
                     color="white"
                     fontWeight
@@ -588,7 +588,23 @@ const Analyze = () => {
                   />
                 </Box>
               </Box>
-              <Box sx={{mt:"2px"}} ></Box>
+              <Box sx={{mt:"2px", display:"flex", justifyContent:"center", alignItems:"center",position:"relative", mb:3, mt:3}} >
+              <hr style={{width:"100%",position:"absolute", }} />
+              <Box
+              sx={{
+                // border:"2px solid red",
+                backgroundColor:"white",
+                zIndex:10,
+                p:"0px 20px"
+              }}
+              >
+              <Heading Heading="Or Manually Fill in the Details &nbsp;" bgTrue={true} sx={{ display: "none", }} />
+
+              </Box>
+
+              </Box>
+              <Heading Heading="Category &nbsp;" bgTrue={true} sx={{ display: "none", }} />
+                  
               <CustomSelect
                 categoryError={errors?.category}
                 data={category}

@@ -10,6 +10,7 @@ const Heading = ({
   creditText,
   creditUtilized,
   sx,
+  bgTrue= false,
 
 }) => {
   return (
@@ -30,7 +31,7 @@ const Heading = ({
         {number}
         </Typography>
         :
-        <Typography sx={{ fontSize: "22px", fontWeight: "600", lineHeight: "33px" }}>
+        <Typography sx={{ fontSize: "22px", fontWeight: "600", lineHeight: "33px", zIndex: bgTrue ? 2000 : 0 }}>
         {Heading}
         </Typography>
       }
