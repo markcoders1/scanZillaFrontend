@@ -574,7 +574,7 @@ const Analyze = () => {
                     buttonTextStyle={{}}
                     buttonStyle={{
                       padding: { lg: "13.5px 20px" },
-                      // margin: { lg: "0 10px 16px 10px" },
+               
                     }}
                     ButtonText={loaderAsin ? <SpinnerLoader /> : "Auto Fill"}
                     fontSize
@@ -603,7 +603,7 @@ const Analyze = () => {
               </Box>
 
               </Box>
-              <Heading Heading="Category &nbsp;" bgTrue={true} sx={{ display: "none", }} />
+              <Heading Heading="Category &nbsp;" sx={{ display: "none", }} />
                   
               <CustomSelect
                 categoryError={errors?.category}
