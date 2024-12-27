@@ -20,6 +20,7 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY;
 import { Button, Link, animateScroll as scroll } from "react-scroll";
 import SpinnerLoader from "../../Components/Loader/spinnerLoader";
+import { scrollToTop } from "react-scroll/modules/mixins/animate-scroll";
 
 function hasValues(obj) {
   return Object.values(obj).some(
@@ -289,6 +290,7 @@ const Analyze = () => {
     setIsLoading(false);
   };
 
+
   useEffect(() => {
     if (isScroll && scrollBoxRef.current) {
       scrollBoxRef.current.scrollTo({
@@ -393,6 +395,10 @@ const Analyze = () => {
     // getRules()
   }, []);
 
+  const scrollAt = () => {
+    scrollToTop()
+  }
+
   const handleClear = () => {
     setData({
       title: "",
@@ -404,6 +410,10 @@ const Analyze = () => {
     });
     setResult("");
     setReccomendations("");
+    scrollBoxRef.current.scrollTo({
+      top: document.getElementById("topBox"), 
+      behavior: "smooth",
+    });
 
     console.log("data", data);
 
@@ -476,6 +486,7 @@ const Analyze = () => {
         <>
           <Box
             ref={scrollBoxRef}
+            id="topBox"
             sx={{
               height: "70vh",
               display: "flex",
@@ -501,6 +512,7 @@ const Analyze = () => {
               // zIndex:"-1"
               backgroundColor: "transparent",
             }}
+
           >
             <Box
               sx={{
@@ -943,7 +955,7 @@ const Analyze = () => {
                         hoverBg="white"
                         hovercolor="#1A0049"
                         buttonStyle={{ padding: { lg: "12px 20px" } }}
-                        ButtonText={`Clear All  `}
+                        ButtonText={`Check Another Product`}
                         fontSize
                         color="#1A0049"
                         fontWeight
