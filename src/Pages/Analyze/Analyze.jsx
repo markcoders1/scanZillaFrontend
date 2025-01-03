@@ -459,7 +459,8 @@ const Analyze = () => {
                 padding:{
                   md:"6px 16px",
                   xs:"0px 4px"
-                }
+                },
+                margin: "10px 0px 10px 0px"
               }}
               severity={
                 prirority == "low"
