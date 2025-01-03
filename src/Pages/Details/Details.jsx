@@ -14,6 +14,8 @@ import LoaderMain from "../../Components/Loader/LoaderMain";
 import { useDispatch } from "react-redux";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 
+
+
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 const Details = () => {
@@ -73,6 +75,8 @@ const Details = () => {
             credits: data.sendCredits,
           },
         });
+            dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
+      
         console.log(response)
       //  setUserData.credits((response.data.userCredits));
       setCredits(response.data.userCredits)
@@ -103,6 +107,8 @@ const Details = () => {
           },
         });
         console.log(response)
+        dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
+
       //  setUserData.credits((response.data.userCredits));
       setCredits(response.data.userCredits)
       } catch (error) {

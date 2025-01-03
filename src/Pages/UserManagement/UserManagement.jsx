@@ -44,6 +44,8 @@ const UserTable = () => {
         },
       });
       console.log(response);
+      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
+      
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === userId ? { ...user, active: !user.active } : user
