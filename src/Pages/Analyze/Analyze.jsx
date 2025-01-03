@@ -21,6 +21,7 @@ const tinyMCEAPIKey = import.meta.env.VITE_TINYMCEAPIKEY;
 import { Button, Link, animateScroll as scroll } from "react-scroll";
 import SpinnerLoader from "../../Components/Loader/spinnerLoader";
 import { scrollToTop } from "react-scroll/modules/mixins/animate-scroll";
+import Alert from "@mui/material/Alert";
 
 function hasValues(obj) {
   return Object.values(obj).some(
@@ -294,15 +295,15 @@ const Analyze = () => {
     setIsLoading(false);
   };
 
-  // useEffect(() => {
-  //   if (isScroll && scrollBoxRef.current) {
-  //     scrollBoxRef.current.scrollTo({
-  //       top: document.getElementById("result").offsetTop - 150, // Scroll to bottom
-  //       behavior: "smooth",
-  //     });
-  //     setScroll(false);
-  //   }
-  // }, [setScroll, handleAnalyze]);
+  useEffect(() => {
+    if (isScroll && scrollBoxRef.current) {
+      scrollBoxRef.current.scrollTo({
+        top: document.getElementById("result").offsetTop - 150, // Scroll to bottom
+        behavior: "smooth",
+      });
+      setScroll(false);
+    }
+  }, [setScroll, handleAnalyze]);
 
   const getLimits = async () => {
     const response = await axiosInstance({
@@ -434,10 +435,47 @@ const Analyze = () => {
 
     return (
       <>
-        {length > 0 && prirority !== "none" && "● "}
+        <Box sx={{display:"flex", alignItems:"center", justifyContent:"space-between"}} >
+          <Typography
+          sx={{
+            width:"70%"
+          }}
+          >
 
-        {beforeDelimiter}
-        <br />
+          {length > 0 && prirority !== "none" && "● "}
+          {beforeDelimiter}
+          </Typography>
+          &nbsp;
+          {
+            prirority == "high" || prirority == "medium" || prirority == "low" ? (
+              <Alert 
+              variant="outlined"
+              sx={{
+                width: "fit-content",
+                fontSize:{
+                  md:"16px",
+                  xs:"9px"
+                },
+                padding:{
+                  md:"6px 16px",
+                  xs:"0px 4px"
+                }
+              }}
+              severity={
+                prirority == "low"
+                  ? "info"
+                  : prirority == "medium"
+                  ? "warning"
+                  : "error"
+              }
+              >
+               Severity : {prirority}
+              </Alert>
+            ) : ""
+          }
+         
+        </Box>
+        {/* <br /> */}
         {blacklistWords.length > 0 && (
           <ul style={{ marginLeft: "30px" }}>
             {blacklistWords.map((word, index) => (
@@ -1001,9 +1039,12 @@ const Analyze = () => {
                       Results
                     </Typography>
                     <Box>
-                      {!data.title ? (
+                      {
+                      !data.title ? (
                         ""
-                      ) : AnalyzeErrros.TE.length > 0 &&
+                      ) : 
+                      
+                      AnalyzeErrros.TE.length > 0 &&
                         AnalyzeErrros.TE[0] !== "" ? (
                         <Paper
                           sx={{
@@ -1018,14 +1059,7 @@ const Analyze = () => {
                             <Typography
                               sx={{
                                 padding: "10px 0",
-                                color:
-                                  item.priority == "high"
-                                    ? "red !important"
-                                    : item.priority == "medium"
-                                    ? "#feb236 !important"
-                                    : item.priority == "low !important"
-                                    ? "#feb236 !important"
-                                    : "black !important  ",
+                             
                                 // border:"2px solid red"
                               }}
                               key={index}
@@ -1059,9 +1093,11 @@ const Analyze = () => {
                     </Box>
 
                     <Box>
-                      {!data.bulletpoints[0].value ? (
+                      {
+                      !data.bulletpoints[0].value ? (
                         ""
-                      ) : AnalyzeErrros.BE.length > 0 &&
+                      ) :
+                       AnalyzeErrros.BE.length > 0 &&
                         AnalyzeErrros.BE[0] !== "" ? (
                         <Paper
                           sx={{
@@ -1083,14 +1119,17 @@ const Analyze = () => {
                             .sort((a, b) => a[0] - b[0]) // Sort by the point number
                             .map(([point, errors]) => (
                               <div key={point} style={{ marginBottom: "15px" }}>
-                                <Typography
-                                  sx={{
-                                    fontWeight: "500",
-                                    marginBottom: "10px",
-                                  }}
-                                >
-                                  Bullet {point}.
-                                </Typography>
+                                {point !== "-1" || point !== null ? (
+                                 ""
+                                ) :  <Typography
+                                sx={{
+                                  fontWeight: "500",
+                                  marginBottom: "10px",
+                                }}
+                              >
+                                Bullet {point}.
+                              </Typography>}
+
                                 <div>
                                   {errors.map((item, index) => (
                                     <Typography
@@ -1098,21 +1137,16 @@ const Analyze = () => {
                                       sx={{
                                         marginLeft: "20px",
                                         listStyleType: "none",
-                                        color:
-                                          item.priority === "high"
-                                            ? "red"
-                                            : item.priority === "medium"
-                                            ? "#feb236"
-                                            : item.priority === "low"
-                                            ? "#feb236"
-                                            : "black",
+                                      
                                       }}
                                     >
                                       {TextWithBlacklist(
                                         item.error, // Pass the 'error' text
                                         errors.length,
                                         index,
-                                        item.error
+                                        item.error,
+                                  item.priority
+
                                       )}
                                     </Typography>
                                   ))}
@@ -1129,7 +1163,7 @@ const Analyze = () => {
                             borderRadius: "12px",
                           }}
                         >
-                          <Heading Heading="Title" />
+                          <Heading Heading="Bullet Points" />
                           <Typography sx={{ padding: "10px 0" }}>
                             No issues found, you're good to go.
                           </Typography>
@@ -1138,9 +1172,11 @@ const Analyze = () => {
                     </Box>
 
                     <Box>
-                      {!data.description ? (
+                      {
+                      !data.description ? (
                         ""
-                      ) : AnalyzeErrros.DE.length > 0 &&
+                      ) : 
+                      AnalyzeErrros.DE.length > 0 &&
                         AnalyzeErrros.DE[0] !== "" ? (
                         <Paper
                           sx={{
@@ -1155,14 +1191,7 @@ const Analyze = () => {
                             <Typography
                               sx={{
                                 padding: "10px 0",
-                                color:
-                                  item.priority == "high"
-                                    ? "red !important"
-                                    : item.priority == "medium"
-                                    ? "#feb236 !important"
-                                    : item.priority == "low !important"
-                                    ? "#feb236 !important"
-                                    : "black !important  ",
+                              
                                 // border:"2px solid red"
                               }}
                               key={index}
@@ -1196,34 +1225,85 @@ const Analyze = () => {
                     </Box>
 
                     <Box>
-                    {reccomendations.length > 0 && reccomendations[0] !== "" ? (
-                  <Paper
-                    sx={{
-                      padding: "20px",
-                      margin: "20px 0",
-                      boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <Heading Heading="Indexing Recommendations" />
-                    {reccomendations?.map((item, index) => (
-                      <Typography sx={{ padding: "10px 0" }} key={index}>
-                        {item.split("|-|").map((el, i) => {
-                          return (
-                            <>
-                              {reccomendations?.length > 1 && "•"} {el}
-                              {i < item.split("|-|").length - 1 && <br />}
-                            </>
-                          );
-                        })}
-                      </Typography>
-                    ))}
-                  </Paper>
-                ) : null}
+                      {
+                        !data.keywords ? (
+                          ""
+                        ) :
+                        AnalyzeErrros.KE.length > 0 &&
+                        AnalyzeErrros.KE[0] !== "" ? (
+                          <Paper
+                            sx={{
+                              padding: "20px",
+                              margin: "10px 0",
+                              boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                              borderRadius: "12px",
+                            }}
+                          >
+                            <Heading Heading="Keywords Errors" />
+                            {AnalyzeErrros?.KE?.map((item, index) => (
+                              <Typography
+                                sx={{
+                                  padding: "10px 0",
+                                }}
+                                key={index}
+                              >
+                                {/* {item.error} */}
+                                {TextWithBlacklist(
+                                  item.error,
+                                  AnalyzeErrros.KE.length,
+                                  index,
+                                  item.error,
+                                  item.priority
+                                )}
+                              </Typography>
+                            ))}
+                          </Paper>
+                        ) : (
+                          <Paper
+                            sx={{
+                              padding: "20px",
+                              margin: "10px 0",
+                              boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                              borderRadius: "12px",
+                            }}
+                          >
+                            <Heading Heading="Keywords" />
+                            <Typography sx={{ padding: "10px 0" }}>
+                              No issues found, you're good to go.
+                            </Typography>
+                          </Paper>
+                        )
+                      }
+                    </Box>
+
+                    <Box>
+                      {reccomendations.length > 0 &&
+                      reccomendations[0] !== "" ? (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "20px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          <Heading Heading="Indexing Recommendations" />
+                          {reccomendations?.map((item, index) => (
+                            <Typography sx={{ padding: "10px 0" }} key={index}>
+                              {item.split("|-|").map((el, i) => {
+                                return (
+                                  <>
+                                    {reccomendations?.length > 1 && "•"} {el}
+                                    {i < item.split("|-|").length - 1 && <br />}
+                                  </>
+                                );
+                              })}
+                            </Typography>
+                          ))}
+                        </Paper>
+                      ) : null}
                     </Box>
                   </Box>
-
-                 
                 ) : null}
               </Box>
               {/* <Box id="result">
