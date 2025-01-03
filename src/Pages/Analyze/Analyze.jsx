@@ -91,7 +91,6 @@ const Analyze = () => {
   const AnalyzeErrros = useSelector((state) => state.analyze);
   const [bulletPointsCredits, setBulletPointsCredits] = useState(0);
   const [loaderAsin, setLoaderAsin] = useState(false);
-  
 
   const [asin, setAsin] = useState("");
 
@@ -177,15 +176,16 @@ const Analyze = () => {
         `${appUrl}/prefill/${asin}`
       );
       console.log(value.message);
-      
+
       setSnackAlertData({
         open: true,
         message: value.message,
         severity: "success",
       });
-      value?.description && setData((prev) => ({ ...prev, description: value.description }));
+      value?.description &&
+        setData((prev) => ({ ...prev, description: value.description }));
       value?.title && setData((prev) => ({ ...prev, title: value.title }));
-      
+
       if (value?.bullets.length > 0) {
         let bullets = value?.bullets;
         bullets = bullets.map((el, ind) => {
@@ -194,19 +194,23 @@ const Analyze = () => {
         setData((prev) => ({ ...prev, bulletpoints: bullets }));
       }
 
-      value?.category && setData((prev) => ({ ...prev, category: value.category }));
+      value?.category &&
+        setData((prev) => ({ ...prev, category: value.category }));
 
       setLoaderAsin(false);
     } catch (error) {
       console.log(error);
       setLoaderAsin(false);
-         
+
       setSnackAlertData({
         open: true,
-        message: error?.response?.data?.error || error?.response?.data?.message || value?.message || "Error occured",
+        message:
+          error?.response?.data?.error ||
+          error?.response?.data?.message ||
+          value?.message ||
+          "Error occured",
         severity: "error",
       });
-
     }
   };
 
@@ -290,16 +294,15 @@ const Analyze = () => {
     setIsLoading(false);
   };
 
-
-  useEffect(() => {
-    if (isScroll && scrollBoxRef.current) {
-      scrollBoxRef.current.scrollTo({
-        top: document.getElementById("result").offsetTop - 150, // Scroll to bottom
-        behavior: "smooth",
-      });
-      setScroll(false);
-    }
-  }, [setScroll, handleAnalyze]);
+  // useEffect(() => {
+  //   if (isScroll && scrollBoxRef.current) {
+  //     scrollBoxRef.current.scrollTo({
+  //       top: document.getElementById("result").offsetTop - 150, // Scroll to bottom
+  //       behavior: "smooth",
+  //     });
+  //     setScroll(false);
+  //   }
+  // }, [setScroll, handleAnalyze]);
 
   const getLimits = async () => {
     const response = await axiosInstance({
@@ -396,8 +399,8 @@ const Analyze = () => {
   }, []);
 
   const scrollAt = () => {
-    scrollToTop()
-  }
+    scrollToTop();
+  };
 
   const handleClear = () => {
     setData({
@@ -411,7 +414,7 @@ const Analyze = () => {
     setResult("");
     setReccomendations("");
     scrollBoxRef.current.scrollTo({
-      top: document.getElementById("topBox"), 
+      top: document.getElementById("topBox"),
       behavior: "smooth",
     });
 
@@ -422,7 +425,7 @@ const Analyze = () => {
     dispatch(handleAnalyzeErrors({ TE: [], BE: [], DE: [], CE: [], KE: [] }));
   };
 
-  const TextWithBlacklist = (text, length, i, item) => {
+  const TextWithBlacklist = (text, length, i, item, prirority) => {
     // Split the input text at '||||'
     const [beforeDelimiter, afterDelimiter] = text.split("||||");
 
@@ -431,7 +434,7 @@ const Analyze = () => {
 
     return (
       <>
-        {length > 1 && "● "}
+        {length > 0 && prirority !== "none" && "● "}
 
         {beforeDelimiter}
         <br />
@@ -446,24 +449,6 @@ const Analyze = () => {
         {i < text.split("|-|").length - 1 && <br />}
       </>
     );
-
-    // return {beforeDelimiter, afterDelimiter}
-
-    // (
-    //   <div>
-    //     {/* Display normal text before '||||' */}
-    //     <p>{beforeDelimiter}</p>
-
-    //     {/* If there are blacklisted words, display them in an unordered list */}
-    //     {blacklistWords.length > 0 && (
-    //       <ul style={{marginLeft:"30px"}} >
-    //         {blacklistWords.map((word, index) => (
-    //           <li key={index}> {word.trim()}</li>
-    //         ))}
-    //       </ul>
-    //     )}
-    //   </div>
-    // );
   };
 
   return (
@@ -512,7 +497,6 @@ const Analyze = () => {
               // zIndex:"-1"
               backgroundColor: "transparent",
             }}
-
           >
             <Box
               sx={{
@@ -543,7 +527,10 @@ const Analyze = () => {
                 visibility. Personal review and discretion are advised for best
                 results.
               </div>
-              <Heading Heading="Enter Your ASIN to Automatically Fill the Fields &nbsp;" sx={{ display: "none" }} />
+              <Heading
+                Heading="Enter Your ASIN to Automatically Fill the Fields &nbsp;"
+                sx={{ display: "none" }}
+              />
               <Box
                 sx={{
                   display: "flex",
@@ -586,7 +573,6 @@ const Analyze = () => {
                     buttonTextStyle={{}}
                     buttonStyle={{
                       padding: { lg: "13.5px 20px" },
-               
                     }}
                     ButtonText={loaderAsin ? <SpinnerLoader /> : "Auto Fill"}
                     fontSize
@@ -600,23 +586,35 @@ const Analyze = () => {
                   />
                 </Box>
               </Box>
-              <Box sx={{mt:"2px", display:"flex", justifyContent:"center", alignItems:"center",position:"relative", mb:3, mt:3}} >
-              <hr style={{width:"100%",position:"absolute", }} />
               <Box
-              sx={{
-                // border:"2px solid red",
-                backgroundColor:"white",
-                zIndex:10,
-                p:"0px 20px"
-              }}
+                sx={{
+                  mt: "2px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  position: "relative",
+                  mb: 3,
+                  mt: 3,
+                }}
               >
-              <Heading Heading="Or Manually Fill in the Details &nbsp;" bgTrue={true} sx={{ display: "none", }} />
-
+                <hr style={{ width: "100%", position: "absolute" }} />
+                <Box
+                  sx={{
+                    // border:"2px solid red",
+                    backgroundColor: "white",
+                    zIndex: 10,
+                    p: "0px 20px",
+                  }}
+                >
+                  <Heading
+                    Heading="Or Manually Fill in the Details &nbsp;"
+                    bgTrue={true}
+                    sx={{ display: "none" }}
+                  />
+                </Box>
               </Box>
+              <Heading Heading="Category &nbsp;" sx={{ display: "none" }} />
 
-              </Box>
-              <Heading Heading="Category &nbsp;" sx={{ display: "none", }} />
-                  
               <CustomSelect
                 categoryError={errors?.category}
                 data={category}
@@ -988,6 +986,7 @@ const Analyze = () => {
                   </div>
                 )}
               </Box>
+              {console.log(AnalyzeErrros)}
               <Box id="result">
                 {hasValues(AnalyzeErrros) ? (
                   <Box sx={{ mt: "50px" }}>
@@ -999,7 +998,246 @@ const Analyze = () => {
                       }}
                       id="result"
                     >
-                      {result}
+                      Results
+                    </Typography>
+                    <Box>
+                      {!data.title ? (
+                        ""
+                      ) : AnalyzeErrros.TE.length > 0 &&
+                        AnalyzeErrros.TE[0] !== "" ? (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "10px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "12px",
+                          }}
+                        >
+                          <Heading Heading="Title Errors" />
+                          {AnalyzeErrros?.TE?.map((item, index) => (
+                            <Typography
+                              sx={{
+                                padding: "10px 0",
+                                color:
+                                  item.priority == "high"
+                                    ? "red !important"
+                                    : item.priority == "medium"
+                                    ? "#feb236 !important"
+                                    : item.priority == "low !important"
+                                    ? "#feb236 !important"
+                                    : "black !important  ",
+                                // border:"2px solid red"
+                              }}
+                              key={index}
+                            >
+                              {/* {item.error} */}
+                              {TextWithBlacklist(
+                                item.error,
+                                AnalyzeErrros.TE.length,
+                                index,
+                                item.error,
+                                item.priority
+                              )}
+                            </Typography>
+                          ))}
+                        </Paper>
+                      ) : (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "10px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "12px",
+                          }}
+                        >
+                          <Heading Heading="Title" />
+                          <Typography sx={{ padding: "10px 0" }}>
+                            No issues found, you're good to go.
+                          </Typography>
+                        </Paper>
+                      )}
+                    </Box>
+
+                    <Box>
+                      {!data.bulletpoints[0].value ? (
+                        ""
+                      ) : AnalyzeErrros.BE.length > 0 &&
+                        AnalyzeErrros.BE[0] !== "" ? (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "20px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          <Heading Heading="Bullet Point Errors" />
+
+                          {Object.entries(
+                            [...AnalyzeErrros.BE].reduce((acc, item) => {
+                              acc[item.point] = acc[item.point] || [];
+                              acc[item.point].push(item); // Push the entire item to access 'priority'
+                              return acc;
+                            }, {})
+                          )
+                            .sort((a, b) => a[0] - b[0]) // Sort by the point number
+                            .map(([point, errors]) => (
+                              <div key={point} style={{ marginBottom: "15px" }}>
+                                <Typography
+                                  sx={{
+                                    fontWeight: "500",
+                                    marginBottom: "10px",
+                                  }}
+                                >
+                                  Bullet {point}.
+                                </Typography>
+                                <div>
+                                  {errors.map((item, index) => (
+                                    <Typography
+                                      key={index}
+                                      sx={{
+                                        marginLeft: "20px",
+                                        listStyleType: "none",
+                                        color:
+                                          item.priority === "high"
+                                            ? "red"
+                                            : item.priority === "medium"
+                                            ? "#feb236"
+                                            : item.priority === "low"
+                                            ? "#feb236"
+                                            : "black",
+                                      }}
+                                    >
+                                      {TextWithBlacklist(
+                                        item.error, // Pass the 'error' text
+                                        errors.length,
+                                        index,
+                                        item.error
+                                      )}
+                                    </Typography>
+                                  ))}
+                                </div>
+                              </div>
+                            ))}
+                        </Paper>
+                      ) : (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "10px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "12px",
+                          }}
+                        >
+                          <Heading Heading="Title" />
+                          <Typography sx={{ padding: "10px 0" }}>
+                            No issues found, you're good to go.
+                          </Typography>
+                        </Paper>
+                      )}
+                    </Box>
+
+                    <Box>
+                      {!data.description ? (
+                        ""
+                      ) : AnalyzeErrros.DE.length > 0 &&
+                        AnalyzeErrros.DE[0] !== "" ? (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "10px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "12px",
+                          }}
+                        >
+                          <Heading Heading="Description Errors" />
+                          {AnalyzeErrros?.DE?.map((item, index) => (
+                            <Typography
+                              sx={{
+                                padding: "10px 0",
+                                color:
+                                  item.priority == "high"
+                                    ? "red !important"
+                                    : item.priority == "medium"
+                                    ? "#feb236 !important"
+                                    : item.priority == "low !important"
+                                    ? "#feb236 !important"
+                                    : "black !important  ",
+                                // border:"2px solid red"
+                              }}
+                              key={index}
+                            >
+                              {/* {item.error} */}
+                              {TextWithBlacklist(
+                                item.error,
+                                AnalyzeErrros.DE.length,
+                                index,
+                                item.error,
+                                item.priority
+                              )}
+                            </Typography>
+                          ))}
+                        </Paper>
+                      ) : (
+                        <Paper
+                          sx={{
+                            padding: "20px",
+                            margin: "10px 0",
+                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                            borderRadius: "12px",
+                          }}
+                        >
+                          <Heading Heading="Description" />
+                          <Typography sx={{ padding: "10px 0" }}>
+                            No issues found, you're good to go.
+                          </Typography>
+                        </Paper>
+                      )}
+                    </Box>
+
+                    <Box>
+                    {reccomendations.length > 0 && reccomendations[0] !== "" ? (
+                  <Paper
+                    sx={{
+                      padding: "20px",
+                      margin: "20px 0",
+                      boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <Heading Heading="Indexing Recommendations" />
+                    {reccomendations?.map((item, index) => (
+                      <Typography sx={{ padding: "10px 0" }} key={index}>
+                        {item.split("|-|").map((el, i) => {
+                          return (
+                            <>
+                              {reccomendations?.length > 1 && "•"} {el}
+                              {i < item.split("|-|").length - 1 && <br />}
+                            </>
+                          );
+                        })}
+                      </Typography>
+                    ))}
+                  </Paper>
+                ) : null}
+                    </Box>
+                  </Box>
+
+                 
+                ) : null}
+              </Box>
+              {/* <Box id="result">
+                {hasValues(AnalyzeErrros) ? (
+                  <Box sx={{ mt: "50px" }}>
+                    <Typography
+                      sx={{
+                        fontSize: "40px",
+                        fontWeight: "600",
+                        color: "#333333",
+                      }}
+                      id="result"
+                    >
+                      Results
                     </Typography>
                     <Box>
                       {!data.title ? (
@@ -1304,7 +1542,7 @@ const Analyze = () => {
                     ))}
                   </Paper>
                 ) : null}
-              </Box>
+              </Box> */}
 
               <SnackAlert
                 message={snackAlertData.message}
