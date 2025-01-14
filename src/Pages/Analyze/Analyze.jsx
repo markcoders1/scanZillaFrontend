@@ -1010,9 +1010,13 @@ const Analyze = () => {
                                                         margin: "20px 0",
                                                         boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
                                                         borderRadius: "10px",
+
                                                     }}
                                                 >
                                                     <Heading Heading="Bullet Point Errors" />
+
+                                                    <br />
+                                                    <br />
 
                                                     {Object.entries(
                                                         [...AnalyzeErrros.BE].reduce((acc, item) => {
@@ -1024,7 +1028,7 @@ const Analyze = () => {
                                                         .sort((a, b) => a[0] - b[0]) // Sort by the point number
                                                         .map(([point, errors]) => (
                                                             
-                                                            <div key={point} style={{ marginBottom: "15px" }}>
+                                                            <div key={point} style={{ marginBottom: "15px", }}>
 
                                                             {/* <pre>
                                                                 {typeof point}
@@ -1033,11 +1037,11 @@ const Analyze = () => {
                                                                 {point == "-1" || point == "null" ? ("") : (
                                                                     <Typography
                                                                         sx={{
-                                                                            fontWeight: "500",
+                                                                            fontWeight: "600",
                                                                             marginBottom: "10px",
                                                                         }}
                                                                     >
-                                                                        Bullet {point}.
+                                                                        Bullet {point}
                                                                     </Typography>
                                                                 )}
 
