@@ -71,10 +71,12 @@ useNavigation()
   }
   // contact-admin
   const headerTitle = getHeaderTitle(location.pathname);
-
+useEffect(()=>  {
   setTimeout(()=>{
  setLoading(false)
   },[])
+
+},[])
 
   // if (loading) {
   //   return <>loading</>

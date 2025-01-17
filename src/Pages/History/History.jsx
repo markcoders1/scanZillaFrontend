@@ -34,7 +34,7 @@ const History = () => {
         method: "get",
       });
       setLoading(false);
-      
+
       if (response) {
         setCreditsHistory(response?.data?.payments);
         setSnackAlertData({
@@ -107,6 +107,7 @@ const History = () => {
   }, []);
 
   const openModal = (data) => {
+    console.log("view button clicked",data)
     setModalData(data);
     setOpen(true);
   };
@@ -147,7 +148,7 @@ const History = () => {
             },
             overflowY: "auto",
             // overflowX: "hidden",
-            padding: {sm:"20px 15px", xs:"5px 8px"},
+            padding: { sm: "20px 15px", xs: "5px 8px" },
             "&::-webkit-scrollbar": {
               width: "8px",
             },
@@ -170,7 +171,7 @@ const History = () => {
               display: "flex",
               gap: "1.8rem",
               flexBasis: "50%",
-              padding: {sm:"24px 30px", xs:"14px 20px"},
+              padding: { sm: "24px 30px", xs: "14px 20px" },
               borderRadius: "10px",
               flexDirection: "column",
               maxHeight: "680px",
@@ -196,7 +197,7 @@ const History = () => {
           >
             <Typography
               sx={{
-                fontSize: {sm:"27px", xs:"22px"},
+                fontSize: { sm: "27px", xs: "22px" },
                 fontWeight: "600",
                 color: "#333333",
               }}
@@ -207,7 +208,7 @@ const History = () => {
             {analyzeHistory.length < 1 ? (
               <Typography>You have not analyzed yet</Typography>
             ) : (
-              analyzeHistory.map((item, index) => (
+              analyzeHistory?.map((item, index) => (
                 <GiftCard
                   key={item?._id}
                   id={item?._id}
@@ -233,7 +234,7 @@ const History = () => {
               borderRadius: "10px",
               flexDirection: "column",
               maxHeight: "680px",
-             
+
               overflow: "auto",
               boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
               "&::-webkit-scrollbar": {
@@ -254,7 +255,7 @@ const History = () => {
           >
             <Typography
               sx={{
-                fontSize: {sm:"27px", xs:"22px"},
+                fontSize: { sm: "27px", xs: "22px" },
 
                 fontWeight: "600",
                 color: "#333333",
@@ -272,6 +273,7 @@ const History = () => {
           </Box>
 
           <ViewDetailModal
+          key={modalData.id}
             open={open}
             handleClose={handleClose}
             title={modalData.title}
@@ -279,10 +281,8 @@ const History = () => {
             description={modalData.description}
             error={modalData.error}
             keywords={modalData.keywords}
-            reccomendations= {modalData?.reccomendations}
-
+            reccomendations={modalData?.reccomendations}
           />
-       
 
           <SnackAlert
             message={snackAlertData.message}

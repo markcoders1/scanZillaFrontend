@@ -983,7 +983,7 @@ const Analyze = () => {
                                                     {AnalyzeErrros?.TE?.map((item, index) => (
                                                         <Typography
                                                             sx={{
-                                                                padding: "10px 0",
+                                                                padding: "0px 0",
 
                                                                 // border:"2px solid red"
                                                             }}
@@ -1004,7 +1004,7 @@ const Analyze = () => {
                                                     }}
                                                 >
                                                     <Heading Heading="Title" />
-                                                    <Typography sx={{ padding: "10px 0" }}>No issues found, you're good to go.</Typography>
+                                                    <Typography sx={{ padding: "0px 0" }}>No issues found, you're good to go.</Typography>
                                                 </Paper>
                                             )}
                                         </Box>
@@ -1025,7 +1025,7 @@ const Analyze = () => {
                                                     <Heading Heading="Bullet Point Errors" />
 
                                                     <br />
-                                                    <br />
+                                                    
 
                                                     {Object.entries(
                                                         [...AnalyzeErrros.BE].reduce((acc, item) => {
@@ -1090,7 +1090,7 @@ const Analyze = () => {
                                                     }}
                                                 >
                                                     <Heading Heading="Bullet Points" />
-                                                    <Typography sx={{ padding: "10px 0" }}>No issues found, you're good to go.</Typography>
+                                                    <Typography sx={{ padding: "0px 0" }}>No issues found, you're good to go.</Typography>
                                                 </Paper>
                                             )}
                                         </Box>
@@ -1132,7 +1132,7 @@ const Analyze = () => {
                                                     }}
                                                 >
                                                     <Heading Heading="Description" />
-                                                    <Typography sx={{ padding: "10px 0" }}>No issues found, you're good to go.</Typography>
+                                                    <Typography sx={{ padding: "0px 0" }}>No issues found, you're good to go.</Typography>
                                                 </Paper>
                                             )}
                                         </Box>
@@ -1149,11 +1149,11 @@ const Analyze = () => {
                                                         borderRadius: "12px",
                                                     }}
                                                 >
-                                                    <Heading Heading="Keywords Errors" />
+                                                    <Heading Heading="Search Terms (Generic Keywords) Errors" />
                                                     {AnalyzeErrros?.KE?.map((item, index) => (
                                                         <Typography
                                                             sx={{
-                                                                padding: "10px 0",
+                                                                padding: "0px 0",
                                                             }}
                                                             key={index}
                                                         >
@@ -1171,8 +1171,8 @@ const Analyze = () => {
                                                         borderRadius: "12px",
                                                     }}
                                                 >
-                                                    <Heading Heading="Keywords" />
-                                                    <Typography sx={{ padding: "10px 0" }}>No issues found, you're good to go.</Typography>
+                                                    <Heading Heading="Search Terms (Generic Keywords)" />
+                                                    <Typography sx={{ padding: "0px 0" }}>No issues found, you're good to go.</Typography>
                                                 </Paper>
                                             )}
                                         </Box>

@@ -28,7 +28,7 @@ const CreditsHistory = ({ index, item }) => {
     }
     
     const formattedDate = formatDate('2024-11-27T17:10:01.720Z');
-    console.log(formattedDate);
+    // console.log(formattedDate);
     return (
         <Box
             sx={{
