@@ -22,6 +22,7 @@ import { Button, Link, animateScroll as scroll } from "react-scroll";
 import SpinnerLoader from "../../Components/Loader/spinnerLoader";
 import { scrollToTop } from "react-scroll/modules/mixins/animate-scroll";
 import Alert from "@mui/material/Alert";
+import AlertDialog from "../../Components/AbuseModalDialog/AbuseModalDialog";
 
 function hasValues(obj) {
     return Object.values(obj).some((arr) => arr.length > 0 && !(arr.length === 1 && arr[0] === ""));
@@ -77,6 +78,8 @@ const Analyze = () => {
     const scrollBoxRef = useRef(null);
     const [rules, setRules] = useState([]);
     const [reccomendations, setReccomendations] = useState([]);
+  const [openAbuseDialog, setOpenAbuseDialog] = useState(false)
+
 
     const [result, setResult] = useState("");
     const [data, setData] = useState({
@@ -252,6 +255,8 @@ const Analyze = () => {
             });
             console.log(response.data.error);
             console.log(response.data.reccomendations);
+      setOpenAbuseDialog(response.data.error.abuse == true ? true : false );
+
             setReccomendations(response.data.reccomendations);
 
             setSnackAlertData({
@@ -290,6 +295,10 @@ const Analyze = () => {
         }
         setIsLoading(false);
     };
+
+    const handleClosedAbuseDialog = () => {
+        setOpenAbuseDialog(false)
+      }
 
     useEffect(() => {
         if (isScroll && scrollBoxRef.current) {
@@ -1524,6 +1533,12 @@ const Analyze = () => {
                                 }}
                             />
                         </Box>
+                        <AlertDialog
+            title={"Abuse Detected"}
+            message={"Suspicious activity detected and flagged for review. If you believe this is an error, please contact support."}
+            open={openAbuseDialog}
+            handleClose={handleClosedAbuseDialog} 
+            />
                     </Box>
                 </>
             )}
