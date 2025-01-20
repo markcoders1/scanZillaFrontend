@@ -17,6 +17,7 @@ import CustomButton from "../../Components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
 import SearchIcon from "../../assets/images/searchIcon.png";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
+
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import { useDispatch } from "react-redux";

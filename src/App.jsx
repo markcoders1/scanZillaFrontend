@@ -30,6 +30,7 @@ import AssistantInstructions from './Pages/Assistant/Assistant';
 import ContactForm from './Pages/ContactForm/ContactForm';
 import Contactus from "./Pages/ContactUs/Contactus";
 import PageNotFound from "./Pages/404page/PageNotFound";
+import Liscenced from "./Pages/Liscenced/Liscenced";
 
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
@@ -69,6 +70,8 @@ function App() {
               <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
               <Route path="contact" element={<Protected children={<ContactForm />} />} />
               <Route path="support" element={<Protected children={<Contactus />} />} />
+              <Route path="license" element={<Protected children={<Liscenced />} />} />
+
             </Route>
             <Route path="*" element={<PageNotFound/>} />
           </Routes>

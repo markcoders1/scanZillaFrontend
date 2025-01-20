@@ -170,6 +170,16 @@ const AppSidebar = () => {
             </Typography>
             <Typography>
               <NavLink
+                to="/license"
+                className={({ isActive }) =>
+                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                }
+              >
+                License
+              </NavLink>
+            </Typography>
+            <Typography>
+              <NavLink
                 to="/support"
                 className={({ isActive }) =>
                   isActive ? 'anchortag anchorActive' : 'anchortag'

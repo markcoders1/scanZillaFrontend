@@ -64,6 +64,8 @@ useNavigation()
           return 'Choose Your Perfect Plan';
           case '/support':
             return 'Got a Question? Email Us';
+            case '/license':
+              return 'License';
       // Add more cases as needed for other routes
       default:
         return '';
