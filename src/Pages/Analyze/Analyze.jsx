@@ -559,7 +559,7 @@ const Analyze = () => {
                                     border=""
                                     boxShadow={true}
                                     maxLength={500}
-                                    sx={{ width: { md: "80%", xs: "100%" } }}
+                                    sx={{ width: { md: "100%", xs: "100%" } }}
                                     mb={0}
                                 />
                                 <Box
