@@ -133,18 +133,21 @@ const Login = () => {
   const handleLogin = async () => {
     setIsLoading(true);
     setErrors({ password: "", email: "" });
-
-    if (data?.email === "" && data?.password === "") {
+    if (!data.email || !data.password) {
       setIsLoading(false);
-      return setErrors({ password: "Password can not be empty", email: "Email can not be empty" });
-    }
-    if (data?.email === "") {
-      setIsLoading(false);
-      return setErrors({ password: "", email: "Email can not be empty" });
-    }
-    if (data?.password === "") {
-      setIsLoading(false);
-      return setErrors({ password: "Password can not be empty", email: "" });
+      setErrors({
+        email: !data.email ? "Email cannot be empty" : "",
+        password: !data.password ? "Password cannot be empty" : "",
+      });
+  
+      // Show alert message
+      setSnackAlertData({
+        open: true,
+        message: "Please fill in all fields",
+        severity: "error",
+      });
+  
+      return;
     }
 
     try {

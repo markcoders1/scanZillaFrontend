@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Tooltip } from '@mui/material'
 import CustomTextField from '../../Components/CustomInputField/CustomInputField'
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import Heading from '../../Components/Heading/Heading';
@@ -9,7 +9,7 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import { Mail, MapPinHouse } from 'lucide-react';
 import { Clock } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-
+import whatsappIcon from '../../assets/images/whatsapp.png'
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -114,6 +114,7 @@ const Contactus = () => {
         "&::-webkit-scrollbar-thumb:hover": {
           background: "#b30000"
         },
+        position:"relative"
       }}
     >
       <Box
@@ -164,6 +165,22 @@ const Contactus = () => {
         onClick={handleSubmit}
       />
 
+  <a href="https://wa.link/54in2r" target='_blank' >
+<Tooltip title="Whatsapp Support" >
+      <Box
+      sx={{
+        position:"absolute",
+        bottom:"20px",
+        right:"20px",
+        cursor:"pointer",
+
+      }}
+      >
+        <img src={whatsappIcon} style={{width:"80px"}} alt="" />
+      
+      </Box>
+      </Tooltip>
+      </a>
 
 
     </Box>

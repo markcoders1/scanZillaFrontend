@@ -48,23 +48,25 @@ const Signup = () => {
     setIsLoading(true);
 
     setErrors({ fullName: "", email: "", password: "", });
-    if (data?.fullName === "" && data?.password === "", data?.email === "") {
-      setIsLoading(false);
-      return setErrors({ fullName: "Full name can not be empty", password: "Password can not be empty", email: "Email can not be empty" });
-    }
-    if (data?.email === "") {
-      setIsLoading(false);
-      return setErrors({ fullName: "", password: "", email: "Email can not be empty" });
-    }
-    if (data?.fullName === "") {
-      setIsLoading(false);
-      return setErrors({ fullName: "Password can not be empty", email: "", password: "" });
-    }
-    if (data?.password === "") {
-      setIsLoading(false);
-      return setErrors({ password: "Password can not be empty", email: "", fullName: "" });
-    }
+   // Validate empty fields
+   if (!data.fullName || !data.email || !data.password) {
+    setIsLoading(false);
+    
+    setErrors({
+      fullName: !data.fullName ? "Full name cannot be empty" : "",
+      email: !data.email ? "Email cannot be empty" : "",
+      password: !data.password ? "Password cannot be empty" : "",
+    });
 
+    // Show alert message
+    setSnackAlertData({
+      open: true,
+      message: "Please fill in all fields",
+      severity: "error",
+    });
+
+    return;
+  }
     try {
       await axiosInstance({ url: appUrl + "/createUser", method: "post", data: { email: data?.email, password: data?.password, userName: data?.fullName } }).then(response => {
         if (response) {
@@ -133,10 +135,10 @@ const Signup = () => {
       <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
         <Typography sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           <Typography sx={{ color: "#1B004D", lineHeight: "36.9px",               fontSize: {md:"50px", xs:"40px"},
- fontWeight: "600" }}>
+ fontWeight: "600",   textAlign:{lg:"start", xs:"center"} }}>
             Sign up
           </Typography>
-          <Typography sx={{ color: "#A0A4A9", fontSize: "1rem", fontWeight: "400" }}>
+          <Typography sx={{ color: "#A0A4A9", fontSize: "1rem", fontWeight: "400",  textAlign:{lg:"start", xs:"center"} }}>
             Sign up now to unlock exclusive benefits!
           </Typography>
         </Typography>

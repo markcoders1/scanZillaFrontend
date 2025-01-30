@@ -1,7 +1,14 @@
 import React from 'react'
 import { Box, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 const Footer = () => {
+    const navigate = useNavigate();
+
+
+    const handleNavigate = (route) => {
+        navigate(route)
+    }
   return (
     <Box
     sx={{
@@ -38,6 +45,7 @@ const Footer = () => {
   ScanZilla Co.
 </Typography>
         <Box sx={{borderLeft:"1px solid white", height:"20px"}} ></Box>
+        <a href="#" style={{color:"white"}} >
         <Typography
           sx={{
             fontFamily: "Oswald !important",
@@ -51,12 +59,14 @@ const Footer = () => {
               color: "black",
             },
           }}
+          
         >
      Privacy Notice
 
         </Typography>
+        </a>
         <Box sx={{borderLeft:"1px solid white", height:"20px"}} ></Box>
-
+        <a href="#" style={{color:"white"}} >
         <Typography
         sx={{
             fontFamily: "Oswald !important",
@@ -73,6 +83,7 @@ const Footer = () => {
         >
         Terms of Service
         </Typography>
+        </a>
         </Box>
     </Box>
   )
