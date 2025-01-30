@@ -5,7 +5,7 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Protected from "./Pages/Protected/Protected";
 import { PageLoader } from "./Components/Loader/PageLoader";
-
+import Signup from "./Pages/Signup/Signup";
 import LayoutForOnePageScreens from './Pages/Layout/LayoutSinglePage';
 
 import OTP from './Pages/OTP/OTP';
@@ -46,6 +46,8 @@ function App() {
           <Routes>
             <Route path='/' element={<LayoutForOnePageScreens />}>
               <Route path='' element={<Login />} />
+              <Route path='/signup' element={<Signup />} />
+
               
               <Route path='otp' element={<OTP />} />
               <Route path='setpassword' element={<SetPassword />} />

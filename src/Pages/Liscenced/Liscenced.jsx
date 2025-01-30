@@ -16,7 +16,6 @@ import SearchIcon from "../../assets/images/searchIcon.png";
 import array from "../../utilis/value.json";
 import array1 from "../../utilis/value2.json";
 
-
 const Liscenced = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("frontend");
@@ -37,11 +36,10 @@ const Liscenced = () => {
   const filteredLicenses = licensesToFilter.filter((license) => {
     const matchesSearch =
       license.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (license.publisher?.toLowerCase() || "").includes(
-        searchTerm.toLowerCase()
-      ) ||
-      (license.email?.toLowerCase() || "").includes(searchTerm.toLowerCase());
-
+      (license.publisher?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
+      (license.email?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
+      (license.licenses?.toLowerCase() || "").includes(searchTerm.toLowerCase()); // Check licenses
+  
     return matchesSearch;
   });
 
@@ -78,11 +76,11 @@ const Liscenced = () => {
           display: "flex",
           justifyContent: "space-between",
           marginBottom: "20px",
-          flexDirection:{
-            md:"row",
-            xs:"column"
+          flexDirection: {
+            md: "row",
+            xs: "column",
           },
-          gap:"30px"
+          gap: "30px",
         }}
       >
         <Box sx={{ position: "relative", width: "350px" }}>
@@ -91,17 +89,16 @@ const Liscenced = () => {
             name="search"
             placeholder="Search"
             style={{
-                color: "#A0A4A9",
-                fontSize: "18px",
-                padding: "9px 47px 9px 27px",
-                borderRadius: "44px",
-                boxShadow: "4px 3px 10px 0px #C8C8C8 ",
-                border: "none",
-                outline: "none",
-                position: "relative",
-                width: "100%",
-                
-              }}
+              color: "#A0A4A9",
+              fontSize: "18px",
+              padding: "9px 47px 9px 27px",
+              borderRadius: "44px",
+              boxShadow: "4px 3px 10px 0px #C8C8C8 ",
+              border: "none",
+              outline: "none",
+              position: "relative",
+              width: "100%",
+            }}
             value={searchTerm}
             onChange={handleSearchChange}
           />
@@ -119,15 +116,14 @@ const Liscenced = () => {
         <Tabs value={filter} onChange={handleFilterChange}>
           <Tab label="Frontend Licenses" value="frontend" />
           <Tab label="Backend Licenses" value="backend" />
-       
         </Tabs>
       </Box>
 
       {/* Table */}
       <TableContainer component={Paper}>
         <Table
-           sx={{ minWidth: 650, padding: "0px 15px" }}
-              aria-label="user table"
+          sx={{ minWidth: 650, padding: "0px 15px" }}
+          aria-label="user table"
         >
           <TableHead>
             <TableRow>
@@ -214,7 +210,7 @@ const Liscenced = () => {
                     fontWeight: "500",
                     border: "none",
                     borderRadius: "10px 0px 0px 10px",
-                    width:"fit-content !important"
+                    width: "fit-content !important",
                   }}
                 >
                   {license.name || "N/A"}
@@ -256,7 +252,6 @@ const Liscenced = () => {
                     color: "#333333",
                     fontWeight: "500",
                     border: "none",
-                    
                   }}
                 >
                   <a
@@ -268,7 +263,7 @@ const Liscenced = () => {
                   </a>
                 </TableCell>
                 <TableCell
-                 sx={{
+                  sx={{
                     fontSize: "14px",
                     textAlign: "center",
                     padding: "20px !important",
@@ -278,7 +273,9 @@ const Liscenced = () => {
                     border: "none",
                     borderRadius: "0px 10px 10px 0px !important",
                   }}
-                >{license.email || "N/A"}</TableCell>
+                >
+                  {license.email || "N/A"}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

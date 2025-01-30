@@ -11,6 +11,7 @@ import { handleAnalyzeErrors } from '../../Redux/Slice/AnalyzeSlice/AnalyzeSlice
 import Heading from '../../Components/Heading/Heading';
 import { handleSnackAlert } from '../../Redux/Slice/SnackAlertSlice/SnackAlertSlice';
 import { useNavigation } from '../../utilis/navigattion';
+import Footer from '../../Components/Footer/Footer';
 
 const DashboardLayout = () => {
   const location = useLocation();
@@ -106,11 +107,16 @@ useEffect(()=>  {
         backgroundAttachment:"fixed",
 
         padding: {
-          sm: "15px 30px",
+          xl: "15px 30px",
+          lg: "3px 30px",
+          md: "0px 30px",
+          sm: "30px 15px",
           xs: "30px 5px"
+
         },
-        // marginLeft: "-15px",
+        
         boxSizing: 'border-box',
+        
       }}
     >
       <Box
@@ -178,8 +184,9 @@ useEffect(()=>  {
             
             <Box sx={{
                padding: {
-                xl: '40px 40px',
+                xl: '30px40px',
                 md:"20px 30px",
+                sm:"30px 10px",
                 xs: '30px 2px',
                 borderRadius: '30px',
               },
@@ -203,11 +210,20 @@ useEffect(()=>  {
         </Box>
 
 
-    
+
       </Box>  
       <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
       
 
+      <Box
+    sx={{
+      position:"absolute",
+      bottom:"0px"
+    }}
+    >
+        <Footer/>
+
+    </Box>
     </Box>
   );
 };

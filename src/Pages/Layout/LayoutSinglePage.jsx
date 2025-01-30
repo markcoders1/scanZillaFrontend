@@ -69,7 +69,9 @@ const LayoutSinglePage = () => {
                     md:"1"
                 },
                 p: {
-                  md: "23px 30px",
+                  xl: "23px 30px",
+
+                  md: "0px 30px",
                   xs: "0px 20px",
       
                 },

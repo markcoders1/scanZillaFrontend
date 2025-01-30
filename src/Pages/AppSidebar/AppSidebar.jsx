@@ -115,7 +115,7 @@ const AppSidebar = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: {xl:'1.5rem', xs:".8rem"},
+              gap: {xl:'1.5rem', md:".7rem" ,xs:".8rem"},
             }}
           >
             <Typography>
@@ -168,7 +168,7 @@ const AppSidebar = () => {
                 Profile
               </NavLink>
             </Typography>
-            <Typography>
+            {/* <Typography>
               <NavLink
                 to="/license"
                 className={({ isActive }) =>
@@ -177,7 +177,7 @@ const AppSidebar = () => {
               >
                 License
               </NavLink>
-            </Typography>
+            </Typography> */}
             <Typography>
               <NavLink
                 to="/support"
@@ -195,7 +195,7 @@ const AppSidebar = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap: '5px',
+          gap: '0px',
           justifyContent: 'center',
         }}
       >

@@ -13,6 +13,8 @@ import { blue } from '@mui/material/colors';
 import { NavLink } from "react-router-dom";
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+import logo from '../../assets/images/sample.webp'
+
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -91,6 +93,7 @@ const Signup = () => {
       }).catch(error => {
         if (error && error?.response && error?.response?.data && error?.response?.data.message) {
           console.log("error.data.message", error.response.data.message)
+          console.log(error)
           setIsLoading(false)
           setSnackAlertData({
             open: true,
@@ -117,17 +120,28 @@ const Signup = () => {
 
   return (
     <Box>
+       <Box
+              sx={{
+                display:{lg:"none", xs:"flex"},
+                justifyContent:"center",
+                alignItems:"center",
+              }}
+              >
+              <img src={logo} style={{width:"80px"}} alt="" />
+      
+              </Box>  
       <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-        <Typography sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Typography sx={{ color: "#1B004D", lineHeight: "36.9px", fontSize: "40px", fontWeight: "600" }}>
+        <Typography sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <Typography sx={{ color: "#1B004D", lineHeight: "36.9px",               fontSize: {md:"50px", xs:"40px"},
+ fontWeight: "600" }}>
             Sign up
           </Typography>
           <Typography sx={{ color: "#A0A4A9", fontSize: "1rem", fontWeight: "400" }}>
             Sign up now to unlock exclusive benefits!
           </Typography>
         </Typography>
-        {/* <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-          <Typography sx={{ display: "flex", gap: "5px", flexDirection: "column", marginTop: "50px" }}>
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+          <Typography sx={{ display: "flex", gap: "5px", flexDirection: "column", marginTop: "30px" }}>
             <label style={{ color: "#666666", fontWeight: "400" }}>Full Name</label>
             <CustomTextField
               border={true}
@@ -140,7 +154,7 @@ const Signup = () => {
               rows={1}
             />
           </Typography>
-          <Typography sx={{ display: "flex", gap: "5px", flexDirection: "column" }}>
+          <Typography sx={{ display: "flex", gap: "4px", flexDirection: "column" }}>
             <label style={{ color: "#666666", fontWeight: "400" }}>Email</label>
             <CustomTextField
               border={true}
@@ -153,7 +167,7 @@ const Signup = () => {
               rows={1}
             />
           </Typography>
-          <Typography sx={{ display: "flex", gap: "5px", flexDirection: "column" }}>
+          <Typography sx={{ display: "flex", gap: "3px", flexDirection: "column" }}>
             <label style={{ color: "#666666", fontWeight: "400" }}>Password</label>
             <CustomTextField
               border={true}
@@ -167,9 +181,9 @@ const Signup = () => {
               showPasswordToggle={true} // Add this prop
             />
           </Typography>
-        </Box> */}
-        <Box sx={{ position: "relative", marginTop: "65px", display: "flex", flexDirection: "column", gap: "1.56rem" }}>
-          {/* <Button
+        </Box>
+        <Box sx={{ position: "relative", marginTop: "25px", display: "flex", flexDirection: "column", gap: "1.56rem" }}>
+          <Button
             sx={{
               p: "15px 20px",
               background: "linear-gradient(to right, #1A0049, #41016C)",
@@ -190,8 +204,8 @@ const Signup = () => {
             onClick={handleSignup}
           >
             {isLoading ? <LoaderW /> : "Sign up"}
-          </Button> */}
-          <Button
+          </Button>
+          {/* <Button
             sx={{
               p: "15px 20px",
               background: "white",
@@ -209,7 +223,7 @@ const Signup = () => {
               boxShadow: "none",
               border: "1px solid grey",
               color: "black",
-              mt: "100px"
+              mt: "0px"
             }}
             variant="contained"
             onClick={handleSignup}
@@ -218,11 +232,11 @@ const Signup = () => {
               <img src={GoogleIcon} alt="Google Icon" style={{ height: "40px" }} />
               <span>Sign up With Google</span>
             </span>
-          </Button>
+          </Button> */}
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: "4px", justifyContent: "center", marginTop: "40px", marginTop: "260px" }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: "4px", justifyContent: "center", marginTop: "40px", marginTop: "30px" }}>
           <Typography sx={{ fontSize: { xs: "12px", sm: "18px" }, color: "#A0A4A9" }}>
-            Don’t have an account?
+            Already have an account?
           </Typography>
           <Typography sx={{ color: "#1E004D", textDecoration: "underline" }}>
             <NavLink to='/' style={{ color: "#1E004D", fontWeight: "600" }}>

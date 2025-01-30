@@ -130,63 +130,63 @@ const Login = () => {
     setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
   };
 
-  // const handleLogin = async () => {
-  //   setIsLoading(true);
-  //   setErrors({ password: "", email: "" });
+  const handleLogin = async () => {
+    setIsLoading(true);
+    setErrors({ password: "", email: "" });
 
-  //   if (data?.email === "" && data?.password === "") {
-  //     setIsLoading(false);
-  //     return setErrors({ password: "Password can not be empty", email: "Email can not be empty" });
-  //   }
-  //   if (data?.email === "") {
-  //     setIsLoading(false);
-  //     return setErrors({ password: "", email: "Email can not be empty" });
-  //   }
-  //   if (data?.password === "") {
-  //     setIsLoading(false);
-  //     return setErrors({ password: "Password can not be empty", email: "" });
-  //   }
+    if (data?.email === "" && data?.password === "") {
+      setIsLoading(false);
+      return setErrors({ password: "Password can not be empty", email: "Email can not be empty" });
+    }
+    if (data?.email === "") {
+      setIsLoading(false);
+      return setErrors({ password: "", email: "Email can not be empty" });
+    }
+    if (data?.password === "") {
+      setIsLoading(false);
+      return setErrors({ password: "Password can not be empty", email: "" });
+    }
 
-  //   try {
-  //     let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
-  //     console.log(response)
-  //     response = response?.data;
-  //     const responseData = response;
-  //     dispatch(handleAuth({ ...responseData, authenticated: true }));
+    try {
+      let response = await axiosInstance({ url: appUrl + "/login", method: "post", data: data });
+      console.log(response)
+      response = response?.data;
+      const responseData = response;
+      dispatch(handleAuth({ ...responseData, authenticated: true }));
 
-  //     dispatch(handleSnackAlert({
-  //       open: true,
-  //       message: response.message,
-  //       severity: "success",
-  //     }));
+      dispatch(handleSnackAlert({
+        open: true,
+        message: response.message,
+        severity: "success",
+      }));
 
-  //     setIsLoading(false);
-  //     sessionStorage.setItem("accessToken", response?.accessToken);
-  //     sessionStorage.setItem("refreshToken", response?.refreshToken);
-  //     setData({
-  //       email: "",
-  //       password: "",
-  //     });
+      setIsLoading(false);
+      sessionStorage.setItem("accessToken", response?.accessToken);
+      sessionStorage.setItem("refreshToken", response?.refreshToken);
+      setData({
+        email: "",
+        password: "",
+      });
 
-  //     navigate("/dashboard");
-  //   } catch (error) {
-  //     console.log(error)
-  //     const errorData = error.response.data;
-  //     if (error?.response?.data?.errorType?.includes("email")) {
-  //       setErrors({ password: "", email: error.response.data.message });
-  //     }
-  //     if (error?.response?.data?.errorType?.includes("password")) {
-  //       setErrors({ email: "", password: error.response.data.message });
-  //     }
-  //     setIsLoading(false);
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error)
+      const errorData = error.response.data;
+      if (error?.response?.data?.errorType?.includes("email")) {
+        setErrors({ password: "", email: error.response.data.message });
+      }
+      if (error?.response?.data?.errorType?.includes("password")) {
+        setErrors({ email: "", password: error.response.data.message });
+      }
+      setIsLoading(false);
 
-  //     dispatch(handleSnackAlert({
-  //       open: true,
-  //       message: errorData?.message,
-  //       severity: "error",
-  //     }));
-  //   }
-  // };
+      dispatch(handleSnackAlert({
+        open: true,
+        message: errorData?.message,
+        severity: "error",
+      }));
+    }
+  };
 
   // const handleInput = (e) => {
   //   setData((prev) => ({ ...prev, [e?.target?.name]: e?.target?.value }));
@@ -224,8 +224,7 @@ const Login = () => {
           flexDirection: "column",
           justifyContent: "center",
           gap: "0px",
-          
-         
+        
         }}
       >
        
@@ -243,8 +242,8 @@ const Login = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "25px",
-            mt:"20px",
+            gap: "20px",
+            mt:"0px",
             textAlign:{lg:"start", xs:"center"}
           }}
         >
@@ -270,11 +269,11 @@ const Login = () => {
           </Typography>
         </Typography>
 
-        {/* <Box
+         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "20px"
+            gap: "0px"
           }}
         >
           <Typography
@@ -326,9 +325,11 @@ const Login = () => {
               value={data.password}
               rows={1}
               showPasswordToggle={true} // Add this prop
+         
+              
             />
           </Typography>
-        </Box> */}
+        </Box> 
         {/* <Box
           sx={{
             // display: "flex",
@@ -380,13 +381,13 @@ const Login = () => {
         </Box> */}
         <Box sx={{
           // position: "relative",
-          marginTop: {xl:"70px", xs:"0px"},
+          marginTop: {xl:"40px", lg:"20px", xs:"40px"},
           display: "flex",
           flexDirection: "column",
           gap: "1.56rem",
           // border:"2px solid red"
         }}>
-          {/* <Button
+          <Button
             sx={{
               p: "15px 20px",
               background: "linear-gradient(to right, #1A0049, #41016C)",
@@ -410,7 +411,7 @@ const Login = () => {
             onClick={handleLogin}
           >
             {isLoading ? <LoaderW /> : "Sign in"}
-          </Button> */}
+          </Button>
 
           <Button
             sx={{
@@ -433,7 +434,7 @@ const Login = () => {
               boxShadow: "none",
               border: "1px solid grey",
               color: "black",
-              mt: "150px"
+              mt: "0px"
             }}
             variant="contained"
             onClick={handleSignIn}
@@ -444,6 +445,25 @@ const Login = () => {
               <span>Continue with Google</span>
             </span>
           </Button>
+        </Box>
+        <Box
+        sx={{
+          mt:"50px",
+          textAlign:"center"
+        }}
+        >
+          <Typography
+          sx={{
+            fontWeight:"400",
+            fontSize:"16px",
+            lineHeight:"24px",
+            alignItems:"center",
+            color:"rgba(160, 164, 169, 1)",
+
+          }}
+          >
+          Dont't have an account? <NavLink style={{color:"rgba(30, 0, 77, 1)", textDecoration:"underline", lineHeight:"24px", fontWeight:"500"}} to={"/signup"} >Sign Up</NavLink>
+          </Typography>
         </Box>
       
 
