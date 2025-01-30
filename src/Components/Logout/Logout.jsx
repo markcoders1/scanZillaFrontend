@@ -55,7 +55,9 @@ const Logout = () => {
           buttonStyle={{
             borderRadius:"8px",
             padding:{
-              md : "10px 35px",
+              lg : "13px 35px",
+
+              md : "5px 35px",
               xs: "5px 10px"
             }
           }}

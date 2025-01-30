@@ -31,9 +31,9 @@ const AppSidebar = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '2.5rem',
+        gap: '1rem',
         justifyContent: 'center',
-        marginTop: {xl:'20px', xs:"10px"},
+        marginTop: {xl:'20px', xs:"0px"},
         padding: '20px', // Added padding for better spacing
       }}
     >
@@ -41,7 +41,7 @@ const AppSidebar = () => {
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          gap:  {xl:'30px', xs:"10px"},
+          gap:  {xl:'30px', xs:"0px"},
           justifyContent: 'center',
         }}
       >
@@ -54,7 +54,7 @@ const AppSidebar = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: {xl:'1.5rem', xs:".8rem"},
+              gap: {xl:'1.5rem', xs:".7rem"},
 
             }}
           >
@@ -203,7 +203,7 @@ const AppSidebar = () => {
           sx={{
             fontWeight: '600',
             fontSize: '1.9rem',
-            color: '#ffff',
+            color: '#ffff', 
           }}
         >
           {auth?.userName}
