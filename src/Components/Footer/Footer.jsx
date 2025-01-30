@@ -16,7 +16,7 @@ const Footer = () => {
         justifyContent:"center",
         alignItems:"center",
         height:"45px",
-        background:"#13ABFF",
+        background:"#3C2784",
         color:"white",
         width:"100vw",
         fontFamily: "Oswald !important",

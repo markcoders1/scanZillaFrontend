@@ -9,7 +9,7 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import { Mail, MapPinHouse } from 'lucide-react';
 import { Clock } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import whatsappIcon from '../../assets/images/whastapp1.webp'
+import whatsappIcon from '../../assets/images/contact.png'
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -169,14 +169,19 @@ const Contactus = () => {
 <Tooltip title="Whatsapp Support" >
       <Box
       sx={{
-        position:"absolute",
-        bottom:"20px",
-        right:"20px",
+       mt:"10px",
         cursor:"pointer",
+        textDecoration:"underline",
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        gap:"8px",
+        color:"black",
+        
 
       }}
       >
-        <img src={whatsappIcon} style={{width:"80px"}} alt="" />
+        <img src={whatsappIcon} style={{width:"20px"}} alt="" /> Or Contact Us Through Whatsapp
       
       </Box>
       </Tooltip>

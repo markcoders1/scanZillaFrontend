@@ -220,7 +220,7 @@ const AppSidebar = () => {
         </Typography>
         <Typography
           sx={{
-            marginTop: '10px',
+            marginTop: '25px',
           }}
         >
           <Logout />
