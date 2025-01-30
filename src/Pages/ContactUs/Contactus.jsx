@@ -9,7 +9,7 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import { Mail, MapPinHouse } from 'lucide-react';
 import { Clock } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
-import whatsappIcon from '../../assets/images/whatsapp.png'
+import whatsappIcon from '../../assets/images/whastapp1.webp'
 
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL
 
