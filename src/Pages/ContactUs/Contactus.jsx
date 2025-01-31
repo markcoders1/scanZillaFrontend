@@ -180,7 +180,7 @@ const Contactus = () => {
         
 
       }}
-      >
+      > 
         <img src={whatsappIcon} style={{width:"20px"}} alt="" /> Or Contact Us Through Whatsapp
       
       </Box>

@@ -502,6 +502,7 @@ const Details = () => {
                     index={index}
                     error={item.error}
                     openModal={openModal}
+                    reccomendations={item?.reccomendations}
                   />
                   // <p key={index}>{item._id}</p>
                 ))}
@@ -553,12 +554,15 @@ const Details = () => {
           </Box>
 
           <ViewDetailModal
+            key={modalData.id}
             open={open}
             handleClose={handleClose}
             title={modalData.title}
             bullets={modalData.bullets}
             description={modalData.description}
             error={modalData.error}
+            keywords={modalData.keywords}
+            reccomendations={modalData.reccomendations}
           />
 
           <SnackAlert

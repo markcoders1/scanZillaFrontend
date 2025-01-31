@@ -283,6 +283,7 @@ const History = () => {
             keywords={modalData.keywords}
             reccomendations={modalData?.reccomendations}
           />
+        
 
           <SnackAlert
             message={snackAlertData.message}

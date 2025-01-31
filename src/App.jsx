@@ -31,7 +31,8 @@ import ContactForm from './Pages/ContactForm/ContactForm';
 import Contactus from "./Pages/ContactUs/Contactus";
 import PageNotFound from "./Pages/404page/PageNotFound";
 import Liscenced from "./Pages/Liscenced/Liscenced";
-
+import TermOfServices from "./Pages/TermOfServices/TermOfServices";
+import PrivacyNotice from "./Pages/PrivacyNotice/PrivacyNotice";
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 
@@ -73,6 +74,10 @@ function App() {
               <Route path="contact" element={<Protected children={<ContactForm />} />} />
               <Route path="support" element={<Protected children={<Contactus />} />} />
               <Route path="license" element={<Protected children={<Liscenced />} />} />
+              <Route path="terms-of-service" element={<Protected children={<TermOfServices />} />} />
+              <Route path="privacy-notice" element={<Protected children={<PrivacyNotice />} />} />
+
+
 
             </Route>
             <Route path="*" element={<PageNotFound/>} />
