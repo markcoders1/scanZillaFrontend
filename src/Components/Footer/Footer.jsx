@@ -42,7 +42,7 @@ const Footer = () => {
               cursor: "pointer",
               transition: ".1s ease-in",
               "&:hover": {
-                color: "black",
+              textDecoration:"underline"
               },
             }}
           >
@@ -61,7 +61,8 @@ const Footer = () => {
               cursor: "pointer",
               transition: ".1s ease-in",
               "&:hover": {
-                color: "black",
+                textDecoration:"underline"
+
               },
             }}
           >
