@@ -1145,7 +1145,7 @@ const Analyze = () => {
                                                 <Paper
                                                     sx={{
                                                         padding: "20px",
-                                                        margin: "10px 0",
+                                                        margin: "22px 0",
                                                         boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
                                                         borderRadius: "12px",
                                                     }}
@@ -1213,9 +1213,9 @@ const Analyze = () => {
                                             }}
                                         >
                                             <CustomButton
-                                                border="2px solid #1A0049"
+                                                // border="2px solid #3C2784"
                                                 borderRadius="10px"
-                                                background="#1A0049"
+                                                background="#3C2784"
                                                 hoverBg="white"
                                                 hovercolor="#1A0049"
                                                 buttonTextStyle={{}}
