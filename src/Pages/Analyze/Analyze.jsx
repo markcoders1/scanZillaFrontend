@@ -914,21 +914,22 @@ const Analyze = () => {
                                             }}
                                         >
                                             <CustomButton
-                                                border="2px solid #1A0049"
+                                                
                                                 borderRadius="10px"
-                                                background="white"
+                                                background="#3C2784"
                                                 hoverBg="white"
                                                 hovercolor="#1A0049"
                                                 buttonStyle={{ padding: { lg: "12px 20px" } }}
                                                 ButtonText={`Check Another Product`}
                                                 fontSize
-                                                color="#1A0049"
+                                                color="white"
                                                 fontWeight
                                                 // buttonTextStyle={{
                                                 //   width:{}
                                                 // }}
                                                 fullWidth={true}
                                                 variant="contained"
+                                                hovercolor={"black"}
                                                 padding
                                                 onClick={handleClear}
                                             />
@@ -1203,7 +1204,36 @@ const Analyze = () => {
                                                 </Paper>
                                             ) : null}
                                         </Box>
+                                        <Box
+                                            sx={{
+                                                flexBasis: {
+                                                    sm: "100%",
+                                                    xs: "100%",
+                                                },
+                                            }}
+                                        >
+                                            <CustomButton
+                                                border="2px solid #1A0049"
+                                                borderRadius="10px"
+                                                background="#1A0049"
+                                                hoverBg="white"
+                                                hovercolor="#1A0049"
+                                                buttonTextStyle={{}}
+                                                buttonStyle={{ padding: { lg: "12px 20px" } }}
+                                                // ButtonText={`Analyze (${creditDynamic} ${creditDynamic == 1 ? "Credit" : "Credits"})`}
+                                                ButtonText="Check Another Product"
+                                                fontSize
+                                                color="white"
+                                                fontWeight
+                                                fullWidth={true}
+                                                // width="75%"
+                                                variant="contained"
+                                                padding
+                                                onClick={handleClear}
+                                            />
+                                        </Box>
                                     </Box>
+                                    
                                 ) : null}
                             </Box>
                             {/* <Box id="result">

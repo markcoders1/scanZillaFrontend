@@ -22,7 +22,8 @@ const CreditsHistory = ({ index, item }) => {
         return date.toLocaleDateString('en-US', options).replace(',', '');  // Format and remove comma
     }
     function formatUnixTimestamp(timestamp) {
-        const date = new Date(timestamp * 1000); // Convert to milliseconds
+        console.log(timestamp)
+        const date = new Date(timestamp ); // Convert to milliseconds
         const options = { year: 'numeric', month: 'short', day: 'numeric' };
         return date.toLocaleDateString('en-US', options);
     }
@@ -44,7 +45,8 @@ const CreditsHistory = ({ index, item }) => {
                     color: "#A0A4A9",
                 }}
             >
-                {formatUnixTimestamp(item?.date)}
+                {console.log(item)}
+                {formatUnixTimestamp(item?.createdAt)}
             </Typography>
             <Typography
                 sx={{
