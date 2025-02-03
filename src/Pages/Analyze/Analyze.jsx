@@ -52,7 +52,6 @@ const Analyze = () => {
         "Appliances",
         "Arts, Crafts & Sewing",
         "Automotive",
-        "Baby",
         "Beauty & Personal Care",
         "Books",
         "Camera & Photo Products",
@@ -201,7 +200,7 @@ const Analyze = () => {
                 setData((prev) => ({ ...prev, bulletpoints: bullets }));
             }
 
-            value?.category && setData((prev) => ({ ...prev, category: value.category }));
+            value?.category && setData((prev) => ({ ...prev, category: value.category||"" }));
 
             setLoaderAsin(false);
         } catch (error) {
