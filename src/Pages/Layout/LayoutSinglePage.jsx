@@ -55,14 +55,14 @@ const LayoutSinglePage = () => {
             minWidth: {
               md: "400px"
             },
-            
           
           }}
         >
             <Box
              sx={{
                 flexBasis: {
-                  xs: "50%",
+                  md:"50%",
+                  xs: "100%",
                 },
                 flexShrink: "1",
                 flexGrow: {
