@@ -115,12 +115,12 @@ useEffect(()=>  {
           lg: "3px 30px",
           md: "0px 30px",
           sm: "30px 15px",
-          xs: "30px 5px"
+          xs: "0px 5px"
 
         },
         
         boxSizing: 'border-box',
-        
+        border:"2px solid red "
       }}
     >
       <Box
@@ -219,7 +219,15 @@ useEffect(()=>  {
       <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
       
 
-    
+      <Box
+    sx={{
+      position:"absolute",
+      bottom:"0px"
+    }}
+    >
+        <Footer/>
+
+    </Box>
     </Box>
   );
 };
