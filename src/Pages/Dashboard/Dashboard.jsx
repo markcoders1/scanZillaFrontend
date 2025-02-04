@@ -294,6 +294,7 @@ const Home = () => {
                   boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
                   backgroundColor: "#edecec"
                 }
+                // ,border:"2px solid red"
                
               }}>
                 <Box
@@ -345,15 +346,16 @@ const Home = () => {
                       fontSize:{
                         md:"14px",
                         lg:"13px",
-                        xs:"13px"
+                        xs:"11px"
                       },
                       // lineHeight: "65px",
                       color: "#ffff",
                       letterSpacing: "0.67px",
                       backgroundColor: "#D32F2F",
-                      p: "7px 20px",
+                      p: "7px 10px",
                       borderRadius: "5px",
                       display: "flex",
+                      alignItems:"center",
                    
                     }}>
                       You have low credits<Typography sx={{
