@@ -262,10 +262,7 @@ const Home = () => {
               />
             </Box>
             <Box sx={{
-             
               cursor: "pointer",
-           
-
             }}
               onClick={() => navigate("/credits")}>
 

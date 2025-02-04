@@ -73,6 +73,8 @@ const Analyze = () => {
         "Tools & Home Improvement",
         "Toys & Games",
     ]);
+
+    
     const navigate = useNavigate();
     const scrollBoxRef = useRef(null);
     const [rules, setRules] = useState([]);
@@ -200,7 +202,15 @@ const Analyze = () => {
                 setData((prev) => ({ ...prev, bulletpoints: bullets }));
             }
 
-            value?.category && setData((prev) => ({ ...prev, category: value.category||"" }));
+            // value?.category && setData((prev) => ({ ...prev, category: value.category||"" }));
+            if (value?.category) {
+                setData((prev) => ({ ...prev, category: value.category || "" }));
+    
+                // Add category if not in the list
+                setCategory((prev) => 
+                    prev.includes(value.category) ? prev : [...prev, value.category]
+                );
+            }
 
             setLoaderAsin(false);
         } catch (error) {
@@ -481,7 +491,7 @@ const Analyze = () => {
                         backgroundColor: "white",
                     }}
                 >
-                    <Uiverse progress={loaderState} />
+                    <LoaderMain />
                 </Box>
             ) : (
                 <>
