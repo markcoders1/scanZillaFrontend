@@ -492,6 +492,16 @@ const Analyze = () => {
                     }}
                 >
                     <LoaderMain />
+                    
+                    <Typography
+                    sx={{
+                        color: "#333333",
+                        fontWeight: "400",
+                        fontSize:"18px"
+                    }}
+                    >
+                        Analyzing
+                    </Typography>
                 </Box>
             ) : (
                 <>

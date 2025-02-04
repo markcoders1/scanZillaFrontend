@@ -320,7 +320,7 @@ const Home = () => {
                   fontWeight: "600",
                   fontSize: {
                     xl:"56px",
-                    xs:"45px",
+                    xs:"35px",
                     lg:credits <= 10 ? "37px": "50px"
 
                   },

@@ -115,7 +115,7 @@ useEffect(()=>  {
           lg: "3px 30px",
           md: "0px 30px",
           sm: "30px 15px",
-          xs: "20px 5px"
+          xs: "20px 10px"
 
         },
         
