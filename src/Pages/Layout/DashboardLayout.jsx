@@ -221,7 +221,7 @@ useEffect(()=>  {
 
       <Box
     sx={{
-      position:"absolute",
+      position:"fixed",
       bottom:"0px"
     }}
     >
