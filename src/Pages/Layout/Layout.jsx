@@ -27,7 +27,7 @@ const Layout = () => {
        <Outlet/>
        <Box
     sx={{
-      position:"fixed",
+      position:"absolute",
       bottom:"0px"
     }}
     >
