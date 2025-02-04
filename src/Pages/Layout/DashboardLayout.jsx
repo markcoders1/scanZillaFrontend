@@ -219,15 +219,7 @@ useEffect(()=>  {
       <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
       
 
-      <Box
-    sx={{
-      position:"fixed",
-      bottom:"0px"
-    }}
-    >
-        <Footer/>
-
-    </Box>
+    
     </Box>
   );
 };

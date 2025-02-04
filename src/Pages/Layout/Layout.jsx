@@ -20,10 +20,20 @@ const Layout = () => {
       backgroundSize:"cover",
       backgroundPosition:"center",
       backgroundRepeat:"no-repeat",
+      position:"relative"
      
       
     }}>
        <Outlet/>
+       <Box
+    sx={{
+      position:"fixed",
+      bottom:"0px"
+    }}
+    >
+        <Footer/>
+
+    </Box>
       <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
 
     </Box>
