@@ -1,17 +1,14 @@
 .datatable-responsive-demo .MuiTable-root {
     border: none;
-    
 }
 
 .MuiTable-root {
     border-collapse: separate !important;
     border-spacing: 0px 30px !important;
-  
 }
 .MuiTableContainer-root{
     background-color: rgb(255, 255, 255) !important;
     box-shadow: none !important;
-    
    
 }
 .MuiTableHead-root {
@@ -31,7 +28,6 @@
     font-weight: 600;
     padding: 10px;
     /* border: 5px solid yellow; */
-    
 }
 
 .MuiTableBody-root {
@@ -60,7 +56,6 @@
     /* margin-top: 15px; */
     /* border: 2px solid red !important; */
     border-radius: 10px !important;
-    
 }
 
 .MuiTableRow-root:hover {

@@ -45,30 +45,33 @@ const Liscenced = () => {
 
   return (
     <Box
-      sx={{
-        top: {
-          lg: "0px",
-          xs: "80px",
-        },
-        height: "70vh",
-        overflowY: "auto",
-        overflowX: "hidden",
-        padding: "20px 0px",
-        "&::-webkit-scrollbar": {
-          width: "8px",
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "#DFDFDF",
-          borderRadius: "10px",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          background: "black",
-          borderRadius: "10px",
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-          background: "#b30000",
-        },
-      }}
+    sx={{
+          
+      top: {
+        lg: "0px",
+        xs: "80px",
+      },
+      height: "80vh",
+      overflowY: "auto",
+      overflowY: "hidden",
+      overflowX:"auto",
+      padding: "20px 15px",
+      "&::-webkit-scrollbar": {
+        width: "8px"
+      },
+      "&::-webkit-scrollbar-track": {
+        background: "#DFDFDF",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb": {
+        background: "black",
+        borderRadius: "10px"
+      },
+      "&::-webkit-scrollbar-thumb:hover": {
+        background: "#b30000"
+      },
+      
+    }}
     >
       {/* Search and Tabs */}
       <Box
@@ -120,7 +123,7 @@ const Liscenced = () => {
       </Box>
 
       {/* Table */}
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{height:"87%", overflowX:"auto",}} >
         <Table
           sx={{ minWidth: 650, padding: "0px 15px" }}
           aria-label="user table"
