@@ -307,18 +307,28 @@ const TOSSignUp = () => {
         content={
           'These terms and conditions govern the use of Scanzilla (the “*Service*”) which is powered by artificial intelligence technology licensed to us by certain AI technology providers (the "*AI Platforms*"),and serves as a binding contract between you, a user using the Service (the "*User*" or "*You*"), and Tomer Levin (the "*Company*", "*Us*", "*We*" or similar wording), Who owns and operates the Service, available to You through our website scanzilla.blazecopywriting.com (the "*Website*"). '
         }
+
+        sx={{
+            mt:"17px"
+          }}
       />
 
       <TOSSection
         content={
           'BY ACCESSING OR USING THE SERVICE, YOU HEREBY ACKNOWLEDGE YOU HAVE READ AND UNDERSTOOD THESE SERVICE TERMS OF USE (THE "*TERMS*") AND AGREE TO BE BOUND BY THEM.  IF YOU DO NOT AGREE TO THESE TERMS, YOU MAY NOT USE THE SERVICE. '
         }
+        sx={{
+            mt:"17px"
+          }}
       />
 
       <TOSSection
         content={
           "NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, IN CASE ANY TERM OF THESE TERMS IS IN CONFLICT WITH MANDATORY TERMS OF AMAZON AND/OR ANY APPLICABLE AI PLATFORMS (AS DEFINED HEREIN), THE LATTER SHALL PREVAIL, AS BETWEEN YOU AND US."
         }
+        sx={{
+            mt:"17px"
+          }}
       />
       <br />
       <h2>PART 1: Some information about the Service </h2>
