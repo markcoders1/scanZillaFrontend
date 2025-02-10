@@ -73,9 +73,9 @@ function App() {
               <Route path="assistant-instruction" element={<Protected children={<AssistantInstructions />} />} />
               <Route path="contact" element={<Protected children={<ContactForm />} />} />
               <Route path="support" element={<Protected children={<Contactus />} />} />
-              <Route path="license" element={<Protected children={<Liscenced />} />} />
-              {/* <Route path="terms-of-service" element={<Protected children={<TermOfServices />} />} /> */}
-              {/* <Route path="privacy-notice" element={<Protected children={<PrivacyNotice />} />} /> */}
+              <Route path="OS-Library-List" element={<Protected children={<Liscenced />} />} />
+              <Route path="terms-of-service" element={<Protected children={<TermOfServices />} />} /> 
+               <Route path="privacy-notice" element={<Protected children={<PrivacyNotice />} />} />
 
 
 

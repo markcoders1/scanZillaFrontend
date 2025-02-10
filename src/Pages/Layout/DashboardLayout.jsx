@@ -67,10 +67,10 @@ useNavigation()
             return 'Got a Question? Email Us';
             case '/license':
               return 'License';
-            //   case '/terms-of-service':
-            //     return 'Terms Of Service';
-            //     case '/privacy-notice':
-            //       return 'Privacy Notice';
+              case '/terms-of-service':
+                return 'Scanzilla Terms Of Use';
+                case '/privacy-notice':
+                  return 'Privacy Notice';
       // Add more cases as needed for other routes
       default:
         return '';
