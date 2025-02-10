@@ -482,21 +482,21 @@ const PN = () => {
       <table>
         <thead>
           <tr>
-            <th>Instance in which personal data is collected</th>
-            <th>Categories of personal data that are processed</th>
-            <th>Purposes of processing </th>
-            <th>Lawful Basis under GPDR</th>
+            <th style={{border:"1px solid black"}} >Instance in which personal data is collected</th>
+            <th style={{border:"1px solid black"}} >Categories of personal data that are processed</th>
+            <th style={{border:"1px solid black"}} >Purposes of processing </th>
+            <th style={{border:"1px solid black"}} >Lawful Basis under GPDR</th>
           </tr>
         </thead>
         <tbody style={{ borderCollapse: "hidden" }}>
           {tableData.map((item, ind) => (
             <tr>
-              <td>{item.firstColumn}</td>
-              <td>{item.secondColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.firstColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.secondColumn}</td>
 
-              <td>{item.thirdColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.thirdColumn}</td>
 
-              <td>{item.fourthColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.fourthColumn}</td>
             </tr>
           ))}
         </tbody>
@@ -674,34 +674,6 @@ const PN = () => {
         children={Data9}
       />
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: "40px",
-        }}
-      >
-        <CustomButton
-          border="2px solid #1A0049"
-          borderRadius="10px"
-          background="#1A0049"
-          hoverBg="white"
-          hovercolor="#1A0049"
-          buttonTextStyle={{}}
-          buttonStyle={{
-            padding: {
-              xs: "7px 40px",
-            },
-          }}
-          ButtonText="Back to Top"
-          color={"white"}
-          fullWidth={false}
-          variant="contained"
-          padding
-          onClick={handleTop}
-        />
-      </Box>
     </Box>
   );
 };

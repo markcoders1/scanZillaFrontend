@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { useNavigate, Link } from "react-router-dom";
 
 
-const Footer = () => {
+const Footer1 = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (route) => {
@@ -31,7 +31,7 @@ const Footer = () => {
           gap: "1rem",
         }}
       >
-        <Link to="/privacy-notice" style={{ color: "white" }}>
+        <Link to="unauth/privacy-notice" style={{ color: "white" }}>
           <Typography
             sx={{
               fontFamily: "Oswald !important",
@@ -50,7 +50,7 @@ const Footer = () => {
           </Typography>
         </Link>
         <Box sx={{ borderLeft: "1px solid white", height: "20px" }}></Box>
-        <Link to={"/terms-of-service"} style={{ color: "white" }}>
+        <Link to={"/unauth/terms-of-service"} style={{ color: "white" }}>
           <Typography
             sx={{
               fontFamily: "Oswald !important",
@@ -74,4 +74,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default Footer1;

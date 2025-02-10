@@ -7,7 +7,8 @@ import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSl
 import logo from '../../assets/images/sample.webp'
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import { useSelector, useDispatch } from "react-redux";
-import Footer from "../../Components/Footer/Footer";
+
+import Footer1 from "../../Components/Footer/Footer1";
 
 
 
@@ -122,15 +123,20 @@ const LayoutSinglePage = () => {
       </Box>
 
         </Box>
-      <Box
-      sx={{
-        position:"absolute",
-        bottom:"0px"
-      }}
-      >
-        <Footer />
-
-      </Box>
+        {
+          location.pathname == "/signup" && (
+            <Box
+            sx={{
+              position:"absolute",
+              bottom:"0px"
+            }}
+            >
+              <Footer1 />
+      
+            </Box>
+          )
+        }
+    
         <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
     </div>
   )

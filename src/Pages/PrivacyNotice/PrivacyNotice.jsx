@@ -440,21 +440,21 @@ const PrivacyNotice = () => {
       <table>
         <thead>
           <tr>
-            <th>Instance in which personal data is collected</th>
-            <th>Categories of personal data that are processed</th>
-            <th>Purposes of processing </th>
-            <th>Lawful Basis under GPDR</th>
+            <th style={{border:"1px solid black"}} >Instance in which personal data is collected</th>
+            <th style={{border:"1px solid black"}} >Categories of personal data that are processed</th>
+            <th style={{border:"1px solid black"}} >Purposes of processing </th>
+            <th style={{border:"1px solid black"}} >Lawful Basis under GPDR</th>
           </tr>
         </thead>
         <tbody style={{ borderCollapse: "hidden" }}>
           {tableData.map((item, ind) => (
             <tr>
-              <td>{item.firstColumn}</td>
-              <td>{item.secondColumn}</td>
+              <td style={{border:"1px solid black"}}  >{item.firstColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.secondColumn}</td>
 
-              <td>{item.thirdColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.thirdColumn}</td>
 
-              <td>{item.fourthColumn}</td>
+              <td style={{border:"1px solid black"}} >{item.fourthColumn}</td>
             </tr>
           ))}
         </tbody>

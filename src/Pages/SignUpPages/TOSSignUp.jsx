@@ -17,8 +17,9 @@ const TOSSignUp = () => {
   const navigate = useNavigate();
 
   const handleTop = () => {
+    console.log("scroll function")
     scrollBoxRef.current.scrollTo({
-      top: document.getElementById("top"),
+      top: 0,
       behavior: "smooth",
     });
   };
@@ -700,34 +701,7 @@ const TOSSignUp = () => {
         row={false}
       />
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: "40px",
-        }}
-      >
-        <CustomButton
-          border="2px solid #1A0049"
-          borderRadius="10px"
-          background="#1A0049"
-          hoverBg="white"
-          hovercolor="#1A0049"
-          buttonTextStyle={{}}
-          buttonStyle={{
-            padding: {
-              xs: "7px 40px",
-            },
-          }}
-          ButtonText="Back to Top"
-          color={"white"}
-          fullWidth={false}
-          variant="contained"
-          padding
-          onClick={handleTop}
-        />
-      </Box>
+    
     
     </Box>
   );
