@@ -129,7 +129,7 @@ useEffect(()=>  {
         sx={{
           display: 'flex',
           width: '100%',
-          maxWidth: `1540px`,
+          maxWidth: `1640px`,
           boxSizing: 'border-box',
           gap: "1rem",
           flexDirection:{

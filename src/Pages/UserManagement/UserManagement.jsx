@@ -219,7 +219,7 @@ const UserTable = () => {
             },
             height: "70vh",
             overflowY: "auto",
-            overflowX: "hidden",
+            overflowY: "hidden",
             padding: "20px 15px",
             "&::-webkit-scrollbar": {
               width: "8px"
@@ -291,7 +291,7 @@ const UserTable = () => {
             </Tabs>
           </Box>
 
-          <TableContainer component={Paper}>
+          <TableContainer component={Paper} sx={{overflow:"auto",height:"95%"}} >
             <Table
               sx={{ minWidth: 650, padding: "0px 15px" }}
               aria-label="user table"
