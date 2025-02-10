@@ -8,15 +8,18 @@ import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
+import { Element } from "react-scroll";
+
 const PN = () => {
   const [isScroll, setScroll] = useState(false);
   const scrollBoxRef = useRef(null);
   const navigate = useNavigate();
 
   const handleTop = () => {
-    scrollBoxRef.current.scrollTo({
-      top: document.getElementById("top"),
-      behavior: "smooth",
+    scroller.scrollTo("top-section", {
+      duration: 800,
+      smooth: "easeInOutQuad",
     });
   };
 
@@ -302,6 +305,7 @@ const PN = () => {
         },
       }}
     >
+         <Element name="top-section" ></Element>
          <Box
     sx={{
         display:"flex",
@@ -317,7 +321,9 @@ const PN = () => {
            xs: "26px"
          },
       }} >
-        Scanzilla Terms Of Use
+     Privacy Notice
+
+
       </Typography>
      <Box
      sx={{
@@ -673,6 +679,36 @@ const PN = () => {
         row={false}
         children={Data9}
       />
+
+<Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "40px",
+        }}
+      >
+        <CustomButton
+          border="2px solid #1A0049"
+          borderRadius="10px"
+          background="#1A0049"
+          hoverBg="white"
+          hovercolor="#1A0049"
+          buttonTextStyle={{}}
+          buttonStyle={{
+            padding: {
+              xs: "7px 40px",
+            },  
+          }}
+          ButtonText="Back to Top"
+          color={"white"}
+          fullWidth={false}
+          variant="contained"
+          padding
+          onClick={ ()=> handleTop()}
+        />
+      </Box>
+    
 
     </Box>
   );

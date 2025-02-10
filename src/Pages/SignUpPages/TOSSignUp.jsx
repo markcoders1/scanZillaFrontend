@@ -10,6 +10,9 @@ import Header from "../../Components/Header/Header";
 import MobileSidebar from "../../Components/MobileSidebar/MobileSidebar";
 import backIcon from '../../assets/images/backIcon.png'
 import { useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
+import { Element } from "react-scroll";
+
 import { ArrowLeft } from 'lucide-react';
 const TOSSignUp = () => {
   const [isScroll, setScroll] = useState(false);
@@ -17,12 +20,12 @@ const TOSSignUp = () => {
   const navigate = useNavigate();
 
   const handleTop = () => {
-    console.log("scroll function")
-    scrollBoxRef.current.scrollTo({
-      top: 0,
-      behavior: "smooth",
+    scroller.scrollTo("top-section", {
+      duration: 800,
+      smooth: "easeInOutQuad",
     });
   };
+  
 
   const Data3 = [
     {
@@ -232,6 +235,7 @@ const TOSSignUp = () => {
         },
       }}
     >
+        <Element name="top-section" ></Element>
     <Box
     sx={{
         display:"flex",
@@ -701,7 +705,34 @@ const TOSSignUp = () => {
         row={false}
       />
 
-    
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: "40px",
+        }}
+      >
+        <CustomButton
+          border="2px solid #1A0049"
+          borderRadius="10px"
+          background="#1A0049"
+          hoverBg="white"
+          hovercolor="#1A0049"
+          buttonTextStyle={{}}
+          buttonStyle={{
+            padding: {
+              xs: "7px 40px",
+            },  
+          }}
+          ButtonText="Back to Top"
+          color={"white"}
+          fullWidth={false}
+          variant="contained"
+          padding
+          onClick={ ()=> handleTop()}
+        />
+      </Box>
     
     </Box>
   );
