@@ -6,18 +6,23 @@ import TOSSection from "../../Components/TOS/TOS";
 
 import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
-const TermOfServices = () => {
-      const [isScroll, setScroll] = useState(false);
-      const scrollBoxRef = useRef(null);
-  
+import Header from "../../Components/Header/Header";
+import MobileSidebar from "../../Components/MobileSidebar/MobileSidebar";
+import backIcon from '../../assets/images/backIcon.png'
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from 'lucide-react';
+const TOSSignUp = () => {
+  const [isScroll, setScroll] = useState(false);
+  const scrollBoxRef = useRef(null);
+  const navigate = useNavigate();
 
-    const handleTop = () => {
-      scrollBoxRef.current.scrollTo({
-        top: document.getElementById("top"),
-        behavior: "smooth",
+  const handleTop = () => {
+    scrollBoxRef.current.scrollTo({
+      top: document.getElementById("top"),
+      behavior: "smooth",
     });
-    }
-  
+  };
+
   const Data3 = [
     {
       count: "3.1",
@@ -189,19 +194,19 @@ const TermOfServices = () => {
   };
   return (
     <Box
-    id="top"
-    ref={scrollBoxRef}
+      id="top"
+      ref={scrollBoxRef}
       sx={{
         // padding: { xs: "16px", sm: "32px" },
         maxWidth: "1200px",
         margin: "0 auto",
         overflow: "hidden",
-        height: "70vh",
+        // height: "70vh",
         width: "100%",
         // marginTop: "15px",
         display: "flex",
 
-        height: "70vh",
+        // height: "70vh",
 
         flexDirection: {
           lg: "column",
@@ -226,6 +231,47 @@ const TermOfServices = () => {
         },
       }}
     >
+    <Box
+    sx={{
+        display:"flex",
+        justifyContent:"space-between",
+        alignItems:"center"
+    }}
+    >
+    <Typography sx={{
+         color: "#333333",
+         fontWeight: "600",
+         fontSize: {
+           sm: "40px",
+           xs: "26px"
+         },
+      }} >
+        Scanzilla Terms Of Use
+      </Typography>
+     <Box
+     sx={{
+        // border:"2px solid red",
+        width:"40px",
+        height:"40px",
+        borderRadius:"50%",
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        color: "#333333",
+        cursor:"pointer",
+        transition:".3s ease-in",
+        ":hover":{
+            color:"white",
+            bgcolor:"#1A0049"
+        }
+     }}
+     onClick={()=>navigate('/')}
+     >
+     <ArrowLeft  />
+     </Box>
+    </Box>
+     
+      <br />
       <Typography
         sx={{
           fontSize: { xs: "14px", sm: "16px" },
@@ -311,8 +357,6 @@ const TermOfServices = () => {
         children={Data4}
       />
 
-      
-      
       <Box
         sx={{
           display: "flex",
@@ -357,7 +401,10 @@ const TermOfServices = () => {
       </Box>
 
       <br />
-      <h2>PART 2: Some important notifications about the Service underlying AI technology</h2>
+      <h2>
+        PART 2: Some important notifications about the Service underlying AI
+        technology
+      </h2>
       <Box
         sx={{
           display: "flex",
@@ -681,8 +728,9 @@ const TermOfServices = () => {
           onClick={handleTop}
         />
       </Box>
+    
     </Box>
   );
 };
 
-export default TermOfServices;
+export default TOSSignUp;

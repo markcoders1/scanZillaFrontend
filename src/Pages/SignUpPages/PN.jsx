@@ -3,12 +3,15 @@ import Heading from "../../Components/Heading/Heading";
 import { Typography, Box, Tooltip } from "@mui/material";
 import whatsappIcon from "../../assets/images/contact.png";
 import TOSSection from "../../Components/TOS/TOS";
-import "./PrivacyNotice.css";
+import "./PN.css";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
-const PrivacyNotice = () => {
+import { ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+const PN = () => {
   const [isScroll, setScroll] = useState(false);
   const scrollBoxRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleTop = () => {
     scrollBoxRef.current.scrollTo({
@@ -269,12 +272,12 @@ const PrivacyNotice = () => {
         maxWidth: "1200px",
         margin: "0 auto",
 
-        height: "70vh",
+        
         width: "100%",
         // marginTop: "15px",
         display: "flex",
 
-        height: "70vh",
+        
 
         flexDirection: {
           lg: "column",
@@ -299,6 +302,45 @@ const PrivacyNotice = () => {
         },
       }}
     >
+         <Box
+    sx={{
+        display:"flex",
+        justifyContent:"space-between",
+        alignItems:"center"
+    }}
+    >
+    <Typography sx={{
+         color: "#333333",
+         fontWeight: "600",
+         fontSize: {
+           sm: "40px",
+           xs: "26px"
+         },
+      }} >
+        Scanzilla Terms Of Use
+      </Typography>
+     <Box
+     sx={{
+        // border:"2px solid red",
+        width:"40px",
+        height:"40px",
+        borderRadius:"50%",
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        color: "#333333",
+        cursor:"pointer",
+        transition:".3s ease-in",
+        ":hover":{
+            color:"white",
+            bgcolor:"#1A0049"
+        }
+     }}
+     onClick={()=>navigate('/')}
+     >
+     <ArrowLeft  />
+     </Box>
+    </Box>
       <Typography
         sx={{
           fontSize: { xs: "14px", sm: "16px" },
@@ -664,4 +706,4 @@ const PrivacyNotice = () => {
   );
 };
 
-export default PrivacyNotice;
+export default PN;

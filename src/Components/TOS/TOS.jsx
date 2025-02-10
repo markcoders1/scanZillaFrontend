@@ -1,5 +1,6 @@
 import React from "react";
 import { Typography, Box } from "@mui/material";
+import { startsWith } from "lodash";
 
 const TOSSection = ({
   heading = "",
@@ -66,18 +67,36 @@ const TOSSection = ({
         {children &&
           children.map((child, index) => (
             <Box key={index} sx={{ ml: "0px", display: "flex", gap: "5px" }}>
-              <Typography
-                sx={{
-                  fontSize: { xs: "14px", sm: "16px" },
-                  fontWeight: "400",
-                  color: "black",
-                  //   mt: '17px',
-                  lineHeight: 1.8,
-                  ml:child.count.length > 4 ? "27px": "",
-                }}
-              >
-                {child.count}.
-              </Typography>
+              {
+                child.count ? (
+                  <Typography
+                  sx={{
+                    fontSize: { xs: "14px", sm: "16px" },
+                    fontWeight: "400",
+                    color: "black",
+                    //   mt: '17px',
+                    lineHeight: 1.8,
+                    ml:child.count.length >= 5? "27px": "",
+                  }}
+                >
+                  {child.count}.
+                </Typography>
+                ) : (
+                  <Typography
+                  sx={{
+                    fontSize: { xs: "14px", sm: "16px" },
+                    fontWeight: "400",
+                    color: "black",
+                    //   mt: '17px',
+                    lineHeight: 1.8,
+                    // ml:child.count.length >= 5? "27px": "",
+                  }}
+                >
+                  {child.count1}.
+                </Typography>
+                )
+              }
+             
 
               <Typography
                 sx={{

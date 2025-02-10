@@ -7,6 +7,7 @@ import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSl
 import logo from '../../assets/images/sample.webp'
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import { useSelector, useDispatch } from "react-redux";
+import Footer from "../../Components/Footer/Footer";
 
 
 
@@ -55,6 +56,7 @@ const LayoutSinglePage = () => {
             minWidth: {
               md: "400px"
             },
+            position:"relative"
           
           }}
         >
@@ -120,6 +122,15 @@ const LayoutSinglePage = () => {
       </Box>
 
         </Box>
+      <Box
+      sx={{
+        position:"absolute",
+        bottom:"0px"
+      }}
+      >
+        <Footer />
+
+      </Box>
         <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
     </div>
   )
