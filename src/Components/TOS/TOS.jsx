@@ -73,6 +73,7 @@ const TOSSection = ({
                   color: "black",
                   //   mt: '17px',
                   lineHeight: 1.8,
+                  ml:child.count.length > 4 ? "27px": "",
                 }}
               >
                 {child.count}.
@@ -85,6 +86,7 @@ const TOSSection = ({
                   color: "black",
                   //   mt: '17px',
                   lineHeight: 1.8,
+                 
                 }}
               >
                 <span

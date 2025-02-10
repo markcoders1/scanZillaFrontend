@@ -48,7 +48,7 @@ const TermOfServices = () => {
         'We hereby grant You, the User, a limited, revocable, non-exclusive, non-transferable and non-sublicensable license to use the Service, solely for Your internal business purposes as an Amazon Seller, in relation to Your listings, to support Your own internal business needs (the "**Intended Purpose**"). The use of the Service is subject to Your compliance with any and all applicable laws, these Terms and the AI Platforms Terms. Users shall not, nor shall assist others or attempt, directly or indirectly, to (i) modify or create derivative works based on the Service; (ii) copy, frame or mirror any part of the Service, other than copying Outputs for Your own Intended Purpose ; (iii) compile or create any digests, manuals or otherwise use the Service and/or Content (as defined below) other than for Your own Intended Purpose; or (iv) reverse engineer the Service or any of its features.',
     },
     {
-      count: "3.2",
+      count: "4.2",
       content:
         "The license granted herein is solely for personal, non-commercial use. Users are expressly prohibited from reselling, leasing, renting, or otherwise making available for commercial use, whether as a managed service or service bureau, any aspect of the Service, the Content or the AI Platforms technology powering the Service. Commercial use in this context refers to any use with the primary purpose of generating revenue, directly or indirectly. Any such commercial exploitation is strictly forbidden and constitutes a breach of these Terms.",
     },
