@@ -270,7 +270,7 @@ const PN = () => {
   };
   return (
     <Box>
-        <Element name="top-section"></Element>
+      <Element name="top-section"></Element>
 
       <Box
         id="top"
@@ -307,8 +307,13 @@ const PN = () => {
           },
         }}
       >
-
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
           <CustomButton2
             border="2px solid #1A0049"
             borderRadius="10px"
@@ -321,13 +326,39 @@ const PN = () => {
                 xs: "7px 20px",
               },
             }}
-            ButtonText="Back"
+            ButtonText="Sign in"
             color={"white"}
             fullWidth={false}
             variant="contained"
             padding
             onClick={() => navigate("/")}
           />
+          <Box
+            sx={{
+              // border:"2px solid red",
+              width: "90px",
+              
+              borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#333333",
+              cursor: "pointer",
+              transition: ".3s ease-in",
+              ":hover": {
+                color: "white",
+                bgcolor: "#1A0049",
+              },
+            }}
+            //  onClick={()=>navigate('/')}
+          >
+            <img
+              src={logo}
+              style={{ objectFit: "cover", width: "90px" }}
+              alt="logo"
+            />
+            
+          </Box>
         </Box>
         <Box
           sx={{
@@ -349,32 +380,7 @@ const PN = () => {
           >
             Privacy Notice
           </Typography>
-          <Box
-            sx={{
-              // border:"2px solid red",
-              width: "40px",
-              height: "40px",
-              borderRadius: "50%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "#333333",
-              cursor: "pointer",
-              transition: ".3s ease-in",
-              ":hover": {
-                color: "white",
-                bgcolor: "#1A0049",
-              },
-            }}
-            //  onClick={()=>navigate('/')}
-          >
-            <img
-              src={logo}
-              style={{ objectFit: "cover", width: "90px" }}
-              alt="logo"
-            />
-            {/* <ArrowLeft  /> */}
-          </Box>
+          
         </Box>
         <Typography
           sx={{
@@ -744,7 +750,7 @@ const PN = () => {
               padding: {
                 xs: "7px 40px",
               },
-              marginBottom: "80px",
+              marginBottom: "25px",
             }}
             ButtonText="Back to Top"
             color={"white"}

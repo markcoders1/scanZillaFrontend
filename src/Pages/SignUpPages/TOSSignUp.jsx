@@ -242,7 +242,14 @@ const TOSSignUp = () => {
         }}
       >
 
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            
+          }}
+        >
           <CustomButton2
             border="2px solid #1A0049"
             borderRadius="10px"
@@ -255,39 +262,18 @@ const TOSSignUp = () => {
                 xs: "7px 20px",
               },
             }}
-            ButtonText="Back"
+            ButtonText="Sign in"
             color={"white"}
             fullWidth={false}
             variant="contained"
             padding
             onClick={() => navigate("/")}
           />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            mt:"20px"
-          }}
-        >
-          <Typography
-            sx={{
-              color: "#333333",
-              fontWeight: "600",
-              fontSize: {
-                sm: "40px",
-                xs: "26px",
-              },
-            }}
-          >
-            Scanzilla Terms Of Use
-          </Typography>
-          <Box
+           <Box
             sx={{
               // border:"2px solid red",
-              width: "40px",
-              height: "40px",
+              width: "90px",
+              
               borderRadius: "50%",
               display: "flex",
               justifyContent: "center",
@@ -309,6 +295,28 @@ const TOSSignUp = () => {
             />
             {/* <ArrowLeft  /> */}
           </Box>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mt:"20px"
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#333333",
+              fontWeight: "600",
+              fontSize: {
+                sm: "40px",
+                xs: "26px",
+              },
+            }}
+          >
+            Scanzilla Terms Of Use
+          </Typography>
+         
         </Box>
 
         <br />
@@ -770,7 +778,8 @@ const TOSSignUp = () => {
                 xs: "7px 40px",
                 
               },
-              marginBottom: "80px",
+              marginBottom: "25px",
+
 
             }}
             ButtonText="Back to Top"
