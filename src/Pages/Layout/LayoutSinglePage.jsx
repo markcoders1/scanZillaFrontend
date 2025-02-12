@@ -39,10 +39,8 @@ const LayoutSinglePage = () => {
               md: "100%",
             },
             height: {
-              height: {
-                sm:"100vh",
-                xs:"120vh",
-              },
+              sm:"100vh",
+              xs:"120vh"
             },
     
             p: {
