@@ -245,7 +245,11 @@ const Login = () => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: "20px",
+            gap: {
+              xl:"20px",
+              xs:"20px",
+              lg:"10px"
+            },
             mt:"0px",
             textAlign:{lg:"start", xs:"center"}
           }}
@@ -255,7 +259,7 @@ const Login = () => {
 
               color: "#1B004D",
               lineHeight: "36.9px",
-              fontSize: {md:"50px", xs:"40px"},
+              fontSize: {xl:"50px", xs:"40px"},
               fontWeight: "600",
             }}
           >
@@ -264,7 +268,7 @@ const Login = () => {
           <Typography
             sx={{
               color: "#A0A4A9",
-              fontSize: "1rem",
+              fontSize:"1rem",
               fontWeight: "400",
             }}
           >
@@ -284,14 +288,18 @@ const Login = () => {
               display: "flex",
               gap: "5px",
               flexDirection: "column",
-              marginTop: "30px"
+              marginTop: {
+                xl:"30px",
+                xs:"20px"
+              }
             }}
           >
 
             <label
               style={{
                 color: "#666666",
-                fontWeight: "400"
+                fontWeight: "400",
+              
               }}
             >Email</label>
             <CustomTextField
@@ -387,7 +395,11 @@ const Login = () => {
           marginTop: {xl:"40px", lg:"20px", xs:"40px"},
           display: "flex",
           flexDirection: "column",
-          gap: "1.56rem",
+          gap: {
+            xl:"1.56rem",
+            md:"1rem",
+           xs: "1.56rem"
+          },
           // border:"2px solid red"
         }}>
           <Button
@@ -451,7 +463,11 @@ const Login = () => {
         </Box>
         <Box
         sx={{
-          mt:"50px",
+          mt:{
+            xl:"50px",
+            md:"30px",
+            xs:"40px"
+          },
           textAlign:"center"
         }}
         >

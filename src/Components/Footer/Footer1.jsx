@@ -18,7 +18,7 @@ const Footer1 = () => {
         height: "45px",
         background: "#3C2784",
         color: "white",
-        width: "100vw",
+        width: "100%",
         fontFamily: "Oswald !important",
         fontSize: "13px",
       }}

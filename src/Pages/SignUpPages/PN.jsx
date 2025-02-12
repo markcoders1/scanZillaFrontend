@@ -6,10 +6,14 @@ import TOSSection from "../../Components/TOS/TOS";
 import "./PN.css";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
+import CustomButton2 from "../../Components/CustomButton/CustomButton2";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import { Element } from "react-scroll";
+import logo from '../../assets/images/sample.webp'
+import Footer1 from "../../Components/Footer/Footer1";
+
 
 const PN = () => {
   const [isScroll, setScroll] = useState(false);
@@ -267,6 +271,7 @@ const PN = () => {
     }
   };
   return (
+    <Box>
     <Box
       id="top"
       ref={scrollBoxRef}
@@ -274,7 +279,6 @@ const PN = () => {
         // padding: { xs: "16px", sm: "32px" },
         maxWidth: "1200px",
         margin: "0 auto",
-
         
         width: "100%",
         // marginTop: "15px",
@@ -305,12 +309,37 @@ const PN = () => {
         },
       }}
     >
+      <Box>
+      <CustomButton2
+          border="2px solid #1A0049"
+          borderRadius="10px"
+          background="#1A0049"
+          hoverBg="white"
+          hovercolor="#1A0049"
+          buttonTextStyle={{}}
+          buttonStyle={{
+            padding: {
+              xs: "7px 20px",
+            },  
+          }}
+          ButtonText="Back"
+          color={"white"}
+          fullWidth={false}
+          variant="contained"
+          padding
+          onClick={ ()=> navigate("/")}
+        />
+      </Box>
          <Element name="top-section" ></Element>
          <Box
     sx={{
         display:"flex",
         justifyContent:"space-between",
-        alignItems:"center"
+        alignItems:"center",
+        mt:"20px",
+
+
+
     }}
     >
     <Typography sx={{
@@ -342,9 +371,10 @@ const PN = () => {
             bgcolor:"#1A0049"
         }
      }}
-     onClick={()=>navigate('/')}
+    //  onClick={()=>navigate('/')}
      >
-     <ArrowLeft  />
+      <img src={logo} style={{objectFit:"cover", width:"90px"}} alt="logo" />
+     {/* <ArrowLeft  /> */}
      </Box>
     </Box>
       <Typography
@@ -699,6 +729,7 @@ const PN = () => {
             padding: {
               xs: "7px 40px",
             },  
+            marginBottom:"80px"
           }}
           ButtonText="Back to Top"
           color={"white"}
@@ -709,7 +740,16 @@ const PN = () => {
         />
       </Box>
     
+    
 
+    </Box>
+    <Box
+    sx={{
+      width:"100%"
+    }}
+    >
+      <Footer1  />
+      </Box>
     </Box>
   );
 };

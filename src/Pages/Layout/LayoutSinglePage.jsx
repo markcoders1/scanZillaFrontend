@@ -44,7 +44,7 @@ const LayoutSinglePage = () => {
             },
     
             p: {
-              md: "20px 20px",
+              xl: "20px 20px",
             },
             // maxWidth: "1440px",
             margin: "0 auto",
@@ -128,7 +128,8 @@ const LayoutSinglePage = () => {
             <Box
             sx={{
               position:"absolute",
-              bottom:"0px"
+              bottom:"0px",
+              width:"100%"
             }}
             >
               <Footer1 />
