@@ -28,7 +28,7 @@ const LayoutSinglePage = () => {
     
 
   return (
-    <div>
+    <div style={{position:"relative"}} >
         <Box
         sx={{
             boxSizing: "border-box",
@@ -57,7 +57,7 @@ const LayoutSinglePage = () => {
             minWidth: {
               md: "400px"
             },
-            position:"relative"
+          
           
           }}
         >
@@ -123,8 +123,7 @@ const LayoutSinglePage = () => {
       </Box>
 
         </Box>
-        {
-          location.pathname == "/signup" && (
+       
             <Box
             sx={{
               position:"absolute",
@@ -134,8 +133,7 @@ const LayoutSinglePage = () => {
               <Footer1 />
       
             </Box>
-          )
-        }
+         
     
         <SnackAlert open={snackAlert?.open} message={snackAlert.message} severity={snackAlert?.severity} handleClose={handleCloseSnackAlert}/>
     </div>
