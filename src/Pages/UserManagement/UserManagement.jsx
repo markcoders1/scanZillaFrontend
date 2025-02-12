@@ -178,7 +178,7 @@ const UserTable = () => {
           fontSize="10px"
           color="#333333"
           fontWeight="500"
-          width="100px"
+          width="130px"
           ButtonText={role ? "Make User" : "Make Admin"}
           onClick={() => toggleAdmin(userId)}
           loading={loadingButtonAdmin[userId] || false}

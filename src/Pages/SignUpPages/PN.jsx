@@ -11,9 +11,8 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import { Element } from "react-scroll";
-import logo from '../../assets/images/sample.webp'
+import logo from "../../assets/images/sample.webp";
 import Footer1 from "../../Components/Footer/Footer1";
-
 
 const PN = () => {
   const [isScroll, setScroll] = useState(false);
@@ -250,7 +249,6 @@ const PN = () => {
     },
   ];
 
-  
   const Data9 = [
     {
       count: "9.1",
@@ -272,123 +270,124 @@ const PN = () => {
   };
   return (
     <Box>
-    <Box
-      id="top"
-      ref={scrollBoxRef}
-      sx={{
-        // padding: { xs: "16px", sm: "32px" },
-        maxWidth: "1200px",
-        margin: "0 auto",
-        
-        width: "100%",
-        // marginTop: "15px",
-        display: "flex",
+        <Element name="top-section"></Element>
 
-        
-
-        flexDirection: {
-          lg: "column",
-          xs: "column",
-        },
-        overflowY: "auto",
-        // overflowX: "hidden",
-        padding: { sm: "20px 25px", xs: "5px 8px" },
-        "&::-webkit-scrollbar": {
-          width: "8px",
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "#DFDFDF",
-          borderRadius: "10px",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          background: "black",
-          borderRadius: "10px",
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-          background: "#b30000",
-        },
-      }}
-    >
-      <Box>
-      <CustomButton2
-          border="2px solid #1A0049"
-          borderRadius="10px"
-          background="#1A0049"
-          hoverBg="white"
-          hovercolor="#1A0049"
-          buttonTextStyle={{}}
-          buttonStyle={{
-            padding: {
-              xs: "7px 20px",
-            },  
-          }}
-          ButtonText="Back"
-          color={"white"}
-          fullWidth={false}
-          variant="contained"
-          padding
-          onClick={ ()=> navigate("/")}
-        />
-      </Box>
-         <Element name="top-section" ></Element>
-         <Box
-    sx={{
-        display:"flex",
-        justifyContent:"space-between",
-        alignItems:"center",
-        mt:"20px",
-
-
-
-    }}
-    >
-    <Typography sx={{
-         color: "#333333",
-         fontWeight: "600",
-         fontSize: {
-           sm: "40px",
-           xs: "26px"
-         },
-      }} >
-     Privacy Notice
-
-
-      </Typography>
-     <Box
-     sx={{
-        // border:"2px solid red",
-        width:"40px",
-        height:"40px",
-        borderRadius:"50%",
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-        color: "#333333",
-        cursor:"pointer",
-        transition:".3s ease-in",
-        ":hover":{
-            color:"white",
-            bgcolor:"#1A0049"
-        }
-     }}
-    //  onClick={()=>navigate('/')}
-     >
-      <img src={logo} style={{objectFit:"cover", width:"90px"}} alt="logo" />
-     {/* <ArrowLeft  /> */}
-     </Box>
-    </Box>
-      <Typography
+      <Box
+        id="top"
+        ref={scrollBoxRef}
         sx={{
-          fontSize: { xs: "14px", sm: "16px" },
-          fontWeight: "400",
-          color: "black",
-          mt: "0px",
-          lineHeight: 1.8,
+          // padding: { xs: "16px", sm: "32px" },
+          maxWidth: "1200px",
+          margin: "0 auto",
+
+          width: "100%",
+          // marginTop: "15px",
+          display: "flex",
+
+          flexDirection: {
+            lg: "column",
+            xs: "column",
+          },
+          overflowY: "auto",
+          // overflowX: "hidden",
+          padding: { sm: "20px 25px", xs: "5px 8px" },
+          "&::-webkit-scrollbar": {
+            width: "8px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#DFDFDF",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "black",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#b30000",
+          },
         }}
       >
-        <strong>Effective date:</strong> February, 6th 2025
-      </Typography>
-      {/* <Typography
+
+        <Box>
+          <CustomButton2
+            border="2px solid #1A0049"
+            borderRadius="10px"
+            background="#1A0049"
+            hoverBg="white"
+            hovercolor="#1A0049"
+            buttonTextStyle={{}}
+            buttonStyle={{
+              padding: {
+                xs: "7px 20px",
+              },
+            }}
+            ButtonText="Back"
+            color={"white"}
+            fullWidth={false}
+            variant="contained"
+            padding
+            onClick={() => navigate("/")}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mt: "20px",
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#333333",
+              fontWeight: "600",
+              fontSize: {
+                sm: "40px",
+                xs: "26px",
+              },
+            }}
+          >
+            Privacy Notice
+          </Typography>
+          <Box
+            sx={{
+              // border:"2px solid red",
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#333333",
+              cursor: "pointer",
+              transition: ".3s ease-in",
+              ":hover": {
+                color: "white",
+                bgcolor: "#1A0049",
+              },
+            }}
+            //  onClick={()=>navigate('/')}
+          >
+            <img
+              src={logo}
+              style={{ objectFit: "cover", width: "90px" }}
+              alt="logo"
+            />
+            {/* <ArrowLeft  /> */}
+          </Box>
+        </Box>
+        <Typography
+          sx={{
+            fontSize: { xs: "14px", sm: "16px" },
+            fontWeight: "400",
+            color: "black",
+            mt: "0px",
+            lineHeight: 1.8,
+          }}
+        >
+          <strong>Effective date:</strong> February, 6th 2025
+        </Typography>
+        {/* <Typography
         sx={{
           fontSize: { xs: "14px", sm: "16px" },
           fontWeight: "400",
@@ -401,354 +400,367 @@ const PN = () => {
         Service. If you do not agree to these terms, please refrain from using
         our service.
       </Typography> */}
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          mt: "17px",
-        }}
-      >
-        <Typography
+        <Box
           sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400",
-            color: "black",
-            //   mt: '17px',
-            lineHeight: 1.8,
+            display: "flex",
+            gap: "10px",
+            mt: "17px",
           }}
         >
-          This Privacy Notice states our policy and provides information
-          regarding how we process Personal Data collected through the Service
-          and our Website (“<strong>this Notice</strong>“). Capitalized terms
-          not otherwise defined herein, shall have the meaning assigned to them
-          in the Scanzilla Terms of Use available here{" "}
-          <Link
-            style={{
-              textDecoration: "underline",
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
               fontWeight: "400",
-              color: "blue",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
             }}
-            to={"/terms-of-service"}
           >
-            {" "}
-            https://scanzilla.blazecopywriting.com/terms-of-service
-          </Link>
-          . This Privacy Notice is hereby incorporated into our Terms of Use and
-          is an integral part thereof.
-        </Typography>
-      </Box>
-      <br />
-      <h2>Contents:</h2>
-      <TOSSection
-        content={
-          "What Personal Data we collect, how, and how is it being processed"
-        }
-        count={"1."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"How we share your Personal Data"}
-        count={"2."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"Data transfers and global processing"}
-        count={"3."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"Data subject rights"}
-        count={"4."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"Cookies and similar technologies"}
-        count={"5."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"Security of processing"}
-        count={"6."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"Data retention"}
-        count={"7."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"Changes to this privacy notice"}
-        count={"8."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-      <TOSSection
-        content={"General"}
-        count={"9."}
-        sx={{
-          ml: "15px",
-        }}
-      />
-
-      <TOSSection
-        heading="What Personal Data We Collect, How, and How is it Being Processed"
-        count={"1."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data1}
-      />
-      <br />
-      <table>
-        <thead>
-          <tr>
-            <th style={{border:"1px solid black"}} >Instance in which personal data is collected</th>
-            <th style={{border:"1px solid black"}} >Categories of personal data that are processed</th>
-            <th style={{border:"1px solid black"}} >Purposes of processing </th>
-            <th style={{border:"1px solid black"}} >Lawful Basis under GPDR</th>
-          </tr>
-        </thead>
-        <tbody style={{ borderCollapse: "hidden" }}>
-          {tableData.map((item, ind) => (
-            <tr>
-              <td style={{border:"1px solid black"}} >{item.firstColumn}</td>
-              <td style={{border:"1px solid black"}} >{item.secondColumn}</td>
-
-              <td style={{border:"1px solid black"}} >{item.thirdColumn}</td>
-
-              <td style={{border:"1px solid black"}} >{item.fourthColumn}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <TOSSection
-        heading=""
-        count={""}
-        sx={{
-          mt: "17px",
-          ml: "20px",
-        }}
-        row={true}
-        children={Data1Con}
-      />
-      <TOSSection
-        heading="How we Share Your Personal Data"
-        content={""}
-        count={"2."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data2}
-      />
-      <TOSSection
-        heading="Data Transfers and Global Processing"
-        content={""}
-        count={"3."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data3}
-      />
-      <TOSSection
-        heading="Data Subject Rights"
-        count={"4."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data4}
-      />
-
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          mt: "17px",
-          ml: "30px",
-        }}
-      >
-        <Typography
+            This Privacy Notice states our policy and provides information
+            regarding how we process Personal Data collected through the Service
+            and our Website (“<strong>this Notice</strong>“). Capitalized terms
+            not otherwise defined herein, shall have the meaning assigned to
+            them in the Scanzilla Terms of Use available here{" "}
+            <Link
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              to={"/terms-of-service"}
+            >
+              {" "}
+              https://scanzilla.blazecopywriting.com/terms-of-service
+            </Link>
+            . This Privacy Notice is hereby incorporated into our Terms of Use
+            and is an integral part thereof.
+          </Typography>
+        </Box>
+        <br />
+        <h2>Contents:</h2>
+        <TOSSection
+          content={
+            "What Personal Data we collect, how, and how is it being processed"
+          }
+          count={"1."}
           sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400 !important",
+            ml: "15px",
           }}
-        >
-          4.9
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400",
-            color: "black",
-            //   mt: '17px',
-            lineHeight: 1.8,
-          }}
-        >
-          You may exercise these rights to the extent these rights apply to you
-          by emailing Company to:
-          <Link
-            style={{
-              textDecoration: "underline",
-              fontWeight: "400",
-              color: "blue",
-            }}
-            to={"https://mailto:amz@blazecopywriting.com"}
-          >
-            {" "}
-            amz@blazecopywriting.com
-          </Link>{" "}
-          We will undertake to respond to your request within the applicable
-          time frame prescribed by applicable law. Although we will make
-          reasonable efforts to accommodate your requests, in some circumstances
-          we may deem your request unfounded or not eligible under applicable
-          law. In such instances we reserve the right to refuse your request. We
-          shall require, as pre-requisite to fulfilling any request, to verify
-          your identity which we may do by asking you to provide certain
-          information or identification to ensure that all data subjects’
-          privacy is protected.
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          mt: "17px",
-          ml: "30px",
-        }}
-      >
-        <Typography
-          sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400 !important",
-          }}
-        >
-          4.10
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400",
-            color: "black",
-            //   mt: '17px',
-            lineHeight: 1.8,
-          }}
-        >
-          If you think that the way we process your Personal Data does not
-          comply with applicable data protection laws, you are invited to
-          contact us and we will consider your request, but in any event you may
-          contact the relevant competent data protection authority.
-        </Typography>
-      </Box>
-
-      <TOSSection
-        heading="Security of Processing"
-        count={"5."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data5}
-      />
-      <TOSSection
-        heading="Data retention"
-        count={"6."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data6}
-      />
-
-      <TOSSection
-        heading="Changes to This Privacy Notice"
-        count={"7."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data7}
-      />
-      <TOSSection
-        heading="California and Delaware “do not track” Disclosures"
-        count={"8."}
-        sx={{
-          mt: "17px",
-        }}
-        content="We do not monitor or respond to Do Not Track browser requests. Hence please ensure to change any settings of your browser and/or our Services, whenever you wish cookies to cease."
-        row={false}
-      />
-
-      <TOSSection
-        heading="General"
-        content=" Without derogating from any other restrictions and limitations set forth herein, You hereby represent and warrant that You will not, nor will You authorize anyone on Your behalf, to:"
-        count={"9."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-        children={Data9}
-      />
-
-<Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: "40px",
-        }}
-      >
-        <CustomButton
-          border="2px solid #1A0049"
-          borderRadius="10px"
-          background="#1A0049"
-          hoverBg="white"
-          hovercolor="#1A0049"
-          buttonTextStyle={{}}
-          buttonStyle={{
-            padding: {
-              xs: "7px 40px",
-            },  
-            marginBottom:"80px"
-          }}
-          ButtonText="Back to Top"
-          color={"white"}
-          fullWidth={false}
-          variant="contained"
-          padding
-          onClick={ ()=> handleTop()}
         />
-      </Box>
-    
-    
+        <TOSSection
+          content={"How we share your Personal Data"}
+          count={"2."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"Data transfers and global processing"}
+          count={"3."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"Data subject rights"}
+          count={"4."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"Cookies and similar technologies"}
+          count={"5."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"Security of processing"}
+          count={"6."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"Data retention"}
+          count={"7."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"Changes to this privacy notice"}
+          count={"8."}
+          sx={{
+            ml: "15px",
+          }}
+        />
+        <TOSSection
+          content={"General"}
+          count={"9."}
+          sx={{
+            ml: "15px",
+          }}
+        />
 
-    </Box>
-    <Box
-    sx={{
-      width:"100%"
-    }}
-    >
-      <Footer1  />
+        <TOSSection
+          heading="What Personal Data We Collect, How, and How is it Being Processed"
+          count={"1."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data1}
+        />
+        <br />
+        <table>
+          <thead>
+            <tr>
+              <th style={{ border: "1px solid black" }}>
+                Instance in which personal data is collected
+              </th>
+              <th style={{ border: "1px solid black" }}>
+                Categories of personal data that are processed
+              </th>
+              <th style={{ border: "1px solid black" }}>
+                Purposes of processing{" "}
+              </th>
+              <th style={{ border: "1px solid black" }}>
+                Lawful Basis under GPDR
+              </th>
+            </tr>
+          </thead>
+          <tbody style={{ borderCollapse: "hidden" }}>
+            {tableData.map((item, ind) => (
+              <tr>
+                <td style={{ border: "1px solid black" }}>
+                  {item.firstColumn}
+                </td>
+                <td style={{ border: "1px solid black" }}>
+                  {item.secondColumn}
+                </td>
+
+                <td style={{ border: "1px solid black" }}>
+                  {item.thirdColumn}
+                </td>
+
+                <td style={{ border: "1px solid black" }}>
+                  {item.fourthColumn}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <TOSSection
+          heading=""
+          count={""}
+          sx={{
+            mt: "17px",
+            ml: "20px",
+          }}
+          row={true}
+          children={Data1Con}
+        />
+        <TOSSection
+          heading="How we Share Your Personal Data"
+          content={""}
+          count={"2."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data2}
+        />
+        <TOSSection
+          heading="Data Transfers and Global Processing"
+          content={""}
+          count={"3."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data3}
+        />
+        <TOSSection
+          heading="Data Subject Rights"
+          count={"4."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data4}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            mt: "17px",
+            ml: "30px",
+          }}
+        >
+          <Typography
+            sx={{
+              lineHeight: 1.8,
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400 !important",
+            }}
+          >
+            4.9
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
+            }}
+          >
+            You may exercise these rights to the extent these rights apply to
+            you by emailing Company to:
+            <Link
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              to={"https://mailto:amz@blazecopywriting.com"}
+            >
+              {" "}
+              amz@blazecopywriting.com
+            </Link>{" "}
+            We will undertake to respond to your request within the applicable
+            time frame prescribed by applicable law. Although we will make
+            reasonable efforts to accommodate your requests, in some
+            circumstances we may deem your request unfounded or not eligible
+            under applicable law. In such instances we reserve the right to
+            refuse your request. We shall require, as pre-requisite to
+            fulfilling any request, to verify your identity which we may do by
+            asking you to provide certain information or identification to
+            ensure that all data subjects’ privacy is protected.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            mt: "17px",
+            ml: "30px",
+          }}
+        >
+          <Typography
+            sx={{
+              lineHeight: 1.8,
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400 !important",
+            }}
+          >
+            4.10
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
+            }}
+          >
+            If you think that the way we process your Personal Data does not
+            comply with applicable data protection laws, you are invited to
+            contact us and we will consider your request, but in any event you
+            may contact the relevant competent data protection authority.
+          </Typography>
+        </Box>
+
+        <TOSSection
+          heading="Security of Processing"
+          count={"5."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data5}
+        />
+        <TOSSection
+          heading="Data retention"
+          count={"6."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data6}
+        />
+
+        <TOSSection
+          heading="Changes to This Privacy Notice"
+          count={"7."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data7}
+        />
+        <TOSSection
+          heading="California and Delaware “do not track” Disclosures"
+          count={"8."}
+          sx={{
+            mt: "17px",
+          }}
+          content="We do not monitor or respond to Do Not Track browser requests. Hence please ensure to change any settings of your browser and/or our Services, whenever you wish cookies to cease."
+          row={false}
+        />
+
+        <TOSSection
+          heading="General"
+          content=" Without derogating from any other restrictions and limitations set forth herein, You hereby represent and warrant that You will not, nor will You authorize anyone on Your behalf, to:"
+          count={"9."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+          children={Data9}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: "40px",
+          }}
+        >
+          <CustomButton
+            border="2px solid #1A0049"
+            borderRadius="10px"
+            background="#1A0049"
+            hoverBg="white"
+            hovercolor="#1A0049"
+            buttonTextStyle={{}}
+            buttonStyle={{
+              padding: {
+                xs: "7px 40px",
+              },
+              marginBottom: "80px",
+            }}
+            ButtonText="Back to Top"
+            color={"white"}
+            fullWidth={false}
+            variant="contained"
+            padding
+            onClick={() => handleTop()}
+          />
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Footer1 />
       </Box>
     </Box>
   );

@@ -8,12 +8,16 @@ import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 import Header from "../../Components/Header/Header";
 import MobileSidebar from "../../Components/MobileSidebar/MobileSidebar";
-import backIcon from '../../assets/images/backIcon.png'
+import backIcon from "../../assets/images/backIcon.png";
 import { useNavigate } from "react-router-dom";
 import { scroller } from "react-scroll";
 import { Element } from "react-scroll";
+import logo from "../../assets/images/sample.webp";
 
-import { ArrowLeft } from 'lucide-react';
+import Footer1 from "../../Components/Footer/Footer1";
+
+import { ArrowLeft } from "lucide-react";
+import CustomButton2 from "../../Components/CustomButton/CustomButton2";
 const TOSSignUp = () => {
   const [isScroll, setScroll] = useState(false);
   const scrollBoxRef = useRef(null);
@@ -25,7 +29,6 @@ const TOSSignUp = () => {
       smooth: "easeInOutQuad",
     });
   };
-  
 
   const Data3 = [
     {
@@ -197,99 +200,131 @@ const TOSSignUp = () => {
     }
   };
   return (
-    <Box
-      id="top"
-      ref={scrollBoxRef}
-      sx={{
-        // padding: { xs: "16px", sm: "32px" },
-        maxWidth: "1200px",
-        margin: "0 auto",
-        overflow: "hidden",
-        // height: "70vh",
-        width: "100%",
-        // marginTop: "15px",
-        display: "flex",
+    <Box>
+        <Element name="top-section"></Element>
 
-        // height: "70vh",
-
-        flexDirection: {
-          lg: "column",
-          xs: "column",
-        },
-        overflowY: "auto",
-        // overflowX: "hidden",
-        padding: { sm: "20px 25px", xs: "5px 8px" },
-        "&::-webkit-scrollbar": {
-          width: "8px",
-        },
-        "&::-webkit-scrollbar-track": {
-          background: "#DFDFDF",
-          borderRadius: "10px",
-        },
-        "&::-webkit-scrollbar-thumb": {
-          background: "black",
-          borderRadius: "10px",
-        },
-        "&::-webkit-scrollbar-thumb:hover": {
-          background: "#b30000",
-        },
-      }}
-    >
-        <Element name="top-section" ></Element>
-    <Box
-    sx={{
-        display:"flex",
-        justifyContent:"space-between",
-        alignItems:"center"
-    }}
-    >
-    <Typography sx={{
-         color: "#333333",
-         fontWeight: "600",
-         fontSize: {
-           sm: "40px",
-           xs: "26px"
-         },
-      }} >
-        Scanzilla Terms Of Use
-      </Typography>
-     <Box
-     sx={{
-        // border:"2px solid red",
-        width:"40px",
-        height:"40px",
-        borderRadius:"50%",
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
-        color: "#333333",
-        cursor:"pointer",
-        transition:".3s ease-in",
-        ":hover":{
-            color:"white",
-            bgcolor:"#1A0049"
-        }
-     }}
-     onClick={()=>navigate('/')}
-     >
-     <ArrowLeft  />
-     </Box>
-    </Box>
-     
-      <br />
-      <Typography
+      <Box
+        id="top"
+        ref={scrollBoxRef}
         sx={{
-          fontSize: { xs: "14px", sm: "16px" },
-          fontWeight: "400",
-          color: "black",
-          mt: "0px",
-          lineHeight: 1.8,
+          // padding: { xs: "16px", sm: "32px" },
+          maxWidth: "1200px",
+          margin: "0 auto",
+          overflow: "hidden",
+          // height: "70vh",
+          width: "100%",
+          // marginTop: "15px",
+          display: "flex",
+
+          // height: "70vh",
+
+          flexDirection: {
+            lg: "column",
+            xs: "column",
+          },
+          overflowY: "auto",
+          // overflowX: "hidden",
+          padding: { sm: "20px 25px", xs: "5px 8px" },
+          "&::-webkit-scrollbar": {
+            width: "8px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "#DFDFDF",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "black",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#b30000",
+          },
         }}
       >
-        <strong>Last Updated:</strong> February, 6th 2025
-      </Typography>
 
-      {/* <Typography
+        <Box>
+          <CustomButton2
+            border="2px solid #1A0049"
+            borderRadius="10px"
+            background="#1A0049"
+            hoverBg="white"
+            hovercolor="#1A0049"
+            buttonTextStyle={{}}
+            buttonStyle={{
+              padding: {
+                xs: "7px 20px",
+              },
+            }}
+            ButtonText="Back"
+            color={"white"}
+            fullWidth={false}
+            variant="contained"
+            padding
+            onClick={() => navigate("/")}
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            mt:"20px"
+          }}
+        >
+          <Typography
+            sx={{
+              color: "#333333",
+              fontWeight: "600",
+              fontSize: {
+                sm: "40px",
+                xs: "26px",
+              },
+            }}
+          >
+            Scanzilla Terms Of Use
+          </Typography>
+          <Box
+            sx={{
+              // border:"2px solid red",
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "#333333",
+              cursor: "pointer",
+              transition: ".3s ease-in",
+              ":hover": {
+                color: "white",
+                bgcolor: "#1A0049",
+              },
+            }}
+            //  onClick={()=>navigate('/')}
+          >
+            <img
+              src={logo}
+              style={{ objectFit: "cover", width: "90px" }}
+              alt="logo"
+            />
+            {/* <ArrowLeft  /> */}
+          </Box>
+        </Box>
+
+        <br />
+        <Typography
+          sx={{
+            fontSize: { xs: "14px", sm: "16px" },
+            fontWeight: "400",
+            color: "black",
+            mt: "0px",
+            lineHeight: 1.8,
+          }}
+        >
+          <strong>Last Updated:</strong> February, 6th 2025
+        </Typography>
+
+        {/* <Typography
         sx={{
           fontSize: { xs: "14px", sm: "16px" },
           fontWeight: "400",
@@ -303,447 +338,457 @@ const TOSSignUp = () => {
         our service.
       </Typography> */}
 
-      <TOSSection
-        content={
-          'These terms and conditions govern the use of Scanzilla (the “*Service*”) which is powered by artificial intelligence technology licensed to us by certain AI technology providers (the "*AI Platforms*"),and serves as a binding contract between you, a user using the Service (the "*User*" or "*You*"), and Tomer Levin (the "*Company*", "*Us*", "*We*" or similar wording), Who owns and operates the Service, available to You through our website scanzilla.blazecopywriting.com (the "*Website*"). '
-        }
-
-        sx={{
-            mt:"17px"
-          }}
-      />
-
-      <TOSSection
-        content={
-          'BY ACCESSING OR USING THE SERVICE, YOU HEREBY ACKNOWLEDGE YOU HAVE READ AND UNDERSTOOD THESE SERVICE TERMS OF USE (THE "*TERMS*") AND AGREE TO BE BOUND BY THEM.  IF YOU DO NOT AGREE TO THESE TERMS, YOU MAY NOT USE THE SERVICE. '
-        }
-        sx={{
-            mt:"17px"
-          }}
-      />
-
-      <TOSSection
-        content={
-          "NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, IN CASE ANY TERM OF THESE TERMS IS IN CONFLICT WITH MANDATORY TERMS OF AMAZON AND/OR ANY APPLICABLE AI PLATFORMS (AS DEFINED HEREIN), THE LATTER SHALL PREVAIL, AS BETWEEN YOU AND US."
-        }
-        sx={{
-            mt:"17px"
-          }}
-      />
-      <br />
-      <h2>PART 1: Some information about the Service </h2>
-      <TOSSection
-        heading="The Service."
-        content={
-          "We created the Service as a tool for Merchants, available through the following link *scanzilla.blazecopywriting.com* to assist in identifying potential Amazon TOS violations and evaluating indexing performance within Amazon listings in a way that will help You get quick pointers related to Your listings, using our vast professional knowledge and experience, including based on resources mostly not available publicly, and  without having to browse through enormous amounts of information made available by Amazon. The Service is currently available for US listings, in English. *Please note however that although intended to help You get information conveniently, the Service is not a substitute for professional advice and keyword research and analysis, and We encourage You to review the official policies and seek professional advice for specific counseling tailored to Your needs.* "
-        }
-        count={"1."}
-      />
-
-      <TOSSection
-        heading="Access to the Service:"
-        content={
-          "to Access the Service and receive the Outputs (defined below) You are required to register to the Service using Your email address. You may use Your Google account to sign in. "
-        }
-        count={"2."}
-        sx={{
-          mt: "17px",
-        }}
-      />
-
-      <TOSSection
-        heading="Payment."
-        content={""}
-        count={"3."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data3}
-      />
-
-      <TOSSection
-        heading="License Grant and Limitations. "
-        count={"4."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data4}
-      />
-
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          mt: "17px",
-        }}
-      >
-        <Typography
+        <TOSSection
+          content={
+            'These terms and conditions govern the use of Scanzilla (the “*Service*”) which is powered by artificial intelligence technology licensed to us by certain AI technology providers (the "*AI Platforms*"),and serves as a binding contract between you, a user using the Service (the "*User*" or "*You*"), and Tomer Levin (the "*Company*", "*Us*", "*We*" or similar wording), Who owns and operates the Service, available to You through our website scanzilla.blazecopywriting.com (the "*Website*"). '
+          }
           sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "600 !important",
+            mt: "17px",
           }}
-        >
-          5.
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400",
-            color: "black",
-            //   mt: '17px',
-            lineHeight: 1.8,
-          }}
-        >
-          As an exception to section 4 above, some components or libraries of
-          the Service, as detailed in the
-          <Link
-            style={{
-              textDecoration: "underline",
-              fontWeight: "400",
-              color: "blue",
-            }}
-            to={"/OS-Library-List"}
-          >
-            {" "}
-            OS Library List
-          </Link>{" "}
-          appended to these Terms, are subject to open-source licenses as
-          applicable according to the list provided in the link.
-        </Typography>
-      </Box>
-
-      <br />
-      <h2>
-        PART 2: Some important notifications about the Service underlying AI
-        technology
-      </h2>
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          mt: "17px",
-        }}
-      >
-        <Typography
-          sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "600 !important",
-          }}
-        >
-          6.
-        </Typography>
-        <Typography
-          sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400",
-            color: "black",
-            //   mt: '17px',
-            lineHeight: 1.8,
-          }}
-        >
-          <strong>AI Platform.</strong> The Service is powered AI models made
-          available by Open AI, L.L.C ("<strong>Open AI</strong>") (the "
-          <strong>AI Model</strong>"). Your use of the Service is also governed
-          by OpenAI's{" "}
-          <a
-            style={{
-              textDecoration: "underline",
-              fontWeight: "400",
-              color: "blue",
-            }}
-            href="https://openai.com/policies/service-terms/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Service Terms
-          </a>
-          ,{" "}
-          <a
-            style={{
-              textDecoration: "underline",
-              fontWeight: "400",
-              color: "blue",
-            }}
-            href="https://openai.com/policies/sharing-publication-policy/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Sharing & Publication Policy
-          </a>
-          ,&nbsp;
-          <a
-            style={{
-              textDecoration: "underline",
-              fontWeight: "400",
-              color: "blue",
-            }}
-            href="https://openai.com/policies/sharing-publication-policy/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Usage Policies
-          </a>
-          , and any other guidelines or policies OpenAI may provide in writing
-          (collectively, the "<strong>AI Platform Terms</strong>"). Please
-          familiarize yourself with the AI Platform Terms to ensure compliance.
-        </Typography>
-      </Box>
-
-      <TOSSection
-        heading="Limitations of the Service."
-        count={"7."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data7}
-      />
-
-      <br />
-      <h2>PART 3: the Service Content and Ownership of IP </h2>
-
-      <TOSSection
-        heading="Content. "
-        count={"8."}
-        sx={{
-          mt: "17px",
-        }}
-        row={true}
-        children={Data8}
-      />
-
-      <TOSSection
-        heading="Feedback:"
-        count={"9."}
-        sx={{
-          mt: "17px",
-        }}
-        content="You may provide feedback regarding the Service to: amz@blazecopywriting.com (“*Feedback*”). The Feedback may include insights or comments regarding the performance, features that may be missing, bugs encountered during the use of the Service or other suggestions for modifications or improvements of the Service. By providing any Feedback You hereby grant Us a perpetual, irrevocable, non-exclusive, worldwide, fully paid, sub-licensable, assignable license to incorporate into the Service or otherwise use Your Feedback. You irrevocably waive any rights in such Feedback or any outcomes of such Feedback including any moral rights therein pursuant to applicable copyright law. We acknowledge that any Feedback is provided on an “as-is” basis with no warranties of any kind."
-        row={false}
-      />
-
-      <br />
-      <h2>PART 4: Do's and Don'ts </h2>
-
-      <TOSSection
-        heading="Acceptable Use Policy “AUP”:"
-        content=" Without derogating from any other restrictions and limitations set forth herein, You hereby represent and warrant that You will not, nor will You authorize anyone on Your behalf, to:"
-        count={"10."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-        children={Data10}
-      />
-
-      <TOSSection
-        heading="Eligibility."
-        count={"11."}
-        sx={{
-          mt: "17px",
-        }}
-        content="You may not use the Service and may not accept these Terms if You are less than legal age to form a binding contract in the territory where You reside or at least 16 years old, if such legal age in Your territory is lower."
-        row={false}
-      />
-
-      <br />
-      <h2>PART 5: Privacy matters. For more info see our privacy notice.</h2>
-
-      <TOSSection
-        // heading="Eligibility."
-
-        count={"12."}
-        sx={{
-          mt: "17px",
-        }}
-        content="You may be requested to provide certain personal information in relation to Your use of the Service. Any personal information that You provide will be processed by us in accordance with our https://scanzilla.blazecopywriting.com/privacy-notice and OpenAI's data usage policies as found in the AI Platform Terms."
-        row={false}
-      />
-
-      <br />
-      <h2>
-        PART 6: Legal notices related to warranties, disclaimers, and risk
-        allocation.{" "}
-      </h2>
-
-      <TOSSection
-        heading="Disclaimer on Accuracy:"
-        count={"13."}
-        sx={{
-          mt: "17px",
-        }}
-        content="While we strive to provide accurate and up-to-date information through the Service, we cannot guarantee the accuracy or completeness of the Service including any Output. Use the information at Your own risk and refer to professional advice and the official documentation available Through Your Seller Account."
-        row={false}
-      />
-
-      <Box
-        sx={{
-          display: "flex",
-          gap: "10px",
-          mt: "17px",
-        }}
-      >
-        <Typography
-          sx={{
-            lineHeight: 1.8,
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "600 !important",
-          }}
-        >
-          14.
-        </Typography>
-
-        <Typography
-          sx={{
-            fontSize: { xs: "14px", sm: "16px" },
-            fontWeight: "400",
-            color: "black",
-            //   mt: '17px',
-            lineHeight: 1.8,
-          }}
-        >
-          <strong>Restrictions and Trade Controls:</strong> The Service may
-          solely be used in the jurisdictions that allow use of the AI Platform,
-          as provided{" "}
-          <a
-            style={{
-              textDecoration: "underline",
-              fontWeight: "400",
-              color: "blue",
-            }}
-            href="https://platform.openai.com/docs/supported-countries"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>
-          . The Service may not be used in or for the benefit of (a) any U.S.
-          embargoed country or territory by the US or Israeli government; or (b)
-          any individual or entity with whom dealings are prohibited or
-          restricted under applicable trade laws. The Service may not be used
-          for any purpose prohibited by applicable trade laws, and Your Input
-          may not include material or information that requires a government
-          license for release or export.
-        </Typography>
-      </Box>
-
-      <TOSSection
-        heading="Warranty Disclaimers: "
-        count={"15."}
-        sx={{
-          mt: "17px",
-        }}
-        content="Except for any express warranties and in addition to any other disclaimers provided herein these Terms, the Service is provided “as is”, and We and our affiliates and licensors hereby disclaim all warranties, express or implied, as to the operation of the Service, or the information, text, and Content thereof, or the use of the Output, including without limitation, all implied warranties of merchantability, fitness for a particular purpose and title, noninfringement, or quiet enjoyment, and any warranties arising out of course of dealing or trade usage. In addition and despite anything to the contrary that may be included or inferred in these Terms, we make no representations or warranties  (a) that use of the Service will be uninterrupted, error free, or secure, (b) that defects will be corrected, (c) that the Service and the Content will be accurate, or (d) that any position, act or omission You take or conduct, based on the Service and/or any Content will be acceptable to any third party and that it will not be challenged by such third party or by applicable law enforcement authorities."
-        row={false}
-      />
-
-      <TOSSection
-        heading="Limitations on Liability:"
-        content=" Without derogating from any other restrictions and limitations set forth herein, You hereby represent and warrant that You will not, nor will You authorize anyone on Your behalf, to:"
-        count={"16."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-        children={Data16}
-      />
-
-      <TOSSection
-        content="The Service may contain links to or be linked from other websites or pages which are not maintained by the Company. Links to third party websites are provided for Your convenience and information only. Third party websites are not under Company’s control and Company is not responsible for the content or accuracy of those sites or the products or services offered on or through those sites. The inclusion of a link through the Service or our Website or the reference from third party's website or pages to our Service does not imply Company’s endorsement of the third-party website, content, or the offerings included therein, nor that Company is affiliated with the third-party website’s owners or sponsors."
-        count={"17."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-      <TOSSection
-        content="You acknowledge and agree that we are not liable for any loss or damage which may be incurred by You as a result of the availability of those external sites, resources or advertisements, or as a result of any reliance placed by You on the completeness, accuracy or existence of any advertising, products or other materials on, or available from, such websites or resources. We recommend that You be aware when You leave our Service pages or our Website and read the terms and conditions and privacy policy of each website that You visit."
-        count={"18."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-
-      <br />
-      <h2>PART 6: General terms </h2>
-
-      <TOSSection
-        content="Changes to Terms: We reserve the right to update these Terms at any time. Any changes will be effective immediately upon posting on this page. Your continued use of the Service after the changes constitute acceptance of the revised terms."
-        count={"19."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-      <TOSSection
-        content="Termination of Access: We reserve the right to terminate or suspend User's access to the Service at our discretion, with or without notice, for any reason, including violation of these Terms of Use or the AI Platform's terms."
-        count={"20."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-
-      <TOSSection
-        content="Discontinuation of the Service. We may decide to discontinue the Service, with or without advance notice, at our sole discretion. If You have any unused credits at the time of our voluntary discontinuation of the Service, You are eligible to receive a refund accordingly."
-        count={"21."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-
-      <TOSSection
-        content="Miscellaneous. These Terms constitute the entire agreement between the parties concerning the subject matter hereof. These Terms shall be governed by the laws of the State of Israel without giving effect to any principles of conflicts of laws thereof, and the eligible courts in Tel Aviv, Israel shall have exclusive jurisdiction over all disputes between the parties related to these Terms and/or any dispute in relation thereto or the use of the Service. Company expressly reserves its right to assign or transfer these Terms and to delegate any of its obligations hereunder at its sole discretion. If any part of these Terms is found void and/or unenforceable, it will not affect the validity of the remainder of the Terms, which shall remain valid and enforceable according to its terms. The failure of Company to act with respect to a breach of these Terms by You or others shall not constitute a waiver and shall not limit Company’s rights with respect to such breach or any subsequent breaches."
-        count={"22."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-      <TOSSection
-        content="Contact Information: If You have any questions or concerns about these Terms of Use or the Service, please contact us at *amz@blazecopywriting.com*.  "
-        count={"23."}
-        sx={{
-          mt: "17px",
-        }}
-        row={false}
-      />
-
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: "40px",
-        }}
-      >
-        <CustomButton
-          border="2px solid #1A0049"
-          borderRadius="10px"
-          background="#1A0049"
-          hoverBg="white"
-          hovercolor="#1A0049"
-          buttonTextStyle={{}}
-          buttonStyle={{
-            padding: {
-              xs: "7px 40px",
-            },  
-          }}
-          ButtonText="Back to Top"
-          color={"white"}
-          fullWidth={false}
-          variant="contained"
-          padding
-          onClick={ ()=> handleTop()}
         />
+
+        <TOSSection
+          content={
+            'BY ACCESSING OR USING THE SERVICE, YOU HEREBY ACKNOWLEDGE YOU HAVE READ AND UNDERSTOOD THESE SERVICE TERMS OF USE (THE "*TERMS*") AND AGREE TO BE BOUND BY THEM.  IF YOU DO NOT AGREE TO THESE TERMS, YOU MAY NOT USE THE SERVICE. '
+          }
+          sx={{
+            mt: "17px",
+          }}
+        />
+
+        <TOSSection
+          content={
+            "NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, IN CASE ANY TERM OF THESE TERMS IS IN CONFLICT WITH MANDATORY TERMS OF AMAZON AND/OR ANY APPLICABLE AI PLATFORMS (AS DEFINED HEREIN), THE LATTER SHALL PREVAIL, AS BETWEEN YOU AND US."
+          }
+          sx={{
+            mt: "17px",
+          }}
+        />
+        <br />
+        <h2>PART 1: Some information about the Service </h2>
+        <TOSSection
+          heading="The Service."
+          content={
+            "We created the Service as a tool for Merchants, available through the following link *scanzilla.blazecopywriting.com* to assist in identifying potential Amazon TOS violations and evaluating indexing performance within Amazon listings in a way that will help You get quick pointers related to Your listings, using our vast professional knowledge and experience, including based on resources mostly not available publicly, and  without having to browse through enormous amounts of information made available by Amazon. The Service is currently available for US listings, in English. *Please note however that although intended to help You get information conveniently, the Service is not a substitute for professional advice and keyword research and analysis, and We encourage You to review the official policies and seek professional advice for specific counseling tailored to Your needs.* "
+          }
+          count={"1."}
+        />
+
+        <TOSSection
+          heading="Access to the Service:"
+          content={
+            "to Access the Service and receive the Outputs (defined below) You are required to register to the Service using Your email address. You may use Your Google account to sign in. "
+          }
+          count={"2."}
+          sx={{
+            mt: "17px",
+          }}
+        />
+
+        <TOSSection
+          heading="Payment."
+          content={""}
+          count={"3."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data3}
+        />
+
+        <TOSSection
+          heading="License Grant and Limitations. "
+          count={"4."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data4}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            mt: "17px",
+          }}
+        >
+          <Typography
+            sx={{
+              lineHeight: 1.8,
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "600 !important",
+            }}
+          >
+            5.
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
+            }}
+          >
+            As an exception to section 4 above, some components or libraries of
+            the Service, as detailed in the
+            <Link
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              to={"/OS-Library-List"}
+            >
+              {" "}
+              OS Library List
+            </Link>{" "}
+            appended to these Terms, are subject to open-source licenses as
+            applicable according to the list provided in the link.
+          </Typography>
+        </Box>
+
+        <br />
+        <h2>
+          PART 2: Some important notifications about the Service underlying AI
+          technology
+        </h2>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            mt: "17px",
+          }}
+        >
+          <Typography
+            sx={{
+              lineHeight: 1.8,
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "600 !important",
+            }}
+          >
+            6.
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
+            }}
+          >
+            <strong>AI Platform.</strong> The Service is powered AI models made
+            available by Open AI, L.L.C ("<strong>Open AI</strong>") (the "
+            <strong>AI Model</strong>"). Your use of the Service is also
+            governed by OpenAI's{" "}
+            <a
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              href="https://openai.com/policies/service-terms/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Service Terms
+            </a>
+            ,{" "}
+            <a
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              href="https://openai.com/policies/sharing-publication-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Sharing & Publication Policy
+            </a>
+            ,&nbsp;
+            <a
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              href="https://openai.com/policies/sharing-publication-policy/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Usage Policies
+            </a>
+            , and any other guidelines or policies OpenAI may provide in writing
+            (collectively, the "<strong>AI Platform Terms</strong>"). Please
+            familiarize yourself with the AI Platform Terms to ensure
+            compliance.
+          </Typography>
+        </Box>
+
+        <TOSSection
+          heading="Limitations of the Service."
+          count={"7."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data7}
+        />
+
+        <br />
+        <h2>PART 3: the Service Content and Ownership of IP </h2>
+
+        <TOSSection
+          heading="Content. "
+          count={"8."}
+          sx={{
+            mt: "17px",
+          }}
+          row={true}
+          children={Data8}
+        />
+
+        <TOSSection
+          heading="Feedback:"
+          count={"9."}
+          sx={{
+            mt: "17px",
+          }}
+          content="You may provide feedback regarding the Service to: amz@blazecopywriting.com (“*Feedback*”). The Feedback may include insights or comments regarding the performance, features that may be missing, bugs encountered during the use of the Service or other suggestions for modifications or improvements of the Service. By providing any Feedback You hereby grant Us a perpetual, irrevocable, non-exclusive, worldwide, fully paid, sub-licensable, assignable license to incorporate into the Service or otherwise use Your Feedback. You irrevocably waive any rights in such Feedback or any outcomes of such Feedback including any moral rights therein pursuant to applicable copyright law. We acknowledge that any Feedback is provided on an “as-is” basis with no warranties of any kind."
+          row={false}
+        />
+
+        <br />
+        <h2>PART 4: Do's and Don'ts </h2>
+
+        <TOSSection
+          heading="Acceptable Use Policy “AUP”:"
+          content=" Without derogating from any other restrictions and limitations set forth herein, You hereby represent and warrant that You will not, nor will You authorize anyone on Your behalf, to:"
+          count={"10."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+          children={Data10}
+        />
+
+        <TOSSection
+          heading="Eligibility."
+          count={"11."}
+          sx={{
+            mt: "17px",
+          }}
+          content="You may not use the Service and may not accept these Terms if You are less than legal age to form a binding contract in the territory where You reside or at least 16 years old, if such legal age in Your territory is lower."
+          row={false}
+        />
+
+        <br />
+        <h2>PART 5: Privacy matters. For more info see our privacy notice.</h2>
+
+        <TOSSection
+          // heading="Eligibility."
+
+          count={"12."}
+          sx={{
+            mt: "17px",
+          }}
+          content="You may be requested to provide certain personal information in relation to Your use of the Service. Any personal information that You provide will be processed by us in accordance with our https://scanzilla.blazecopywriting.com/privacy-notice and OpenAI's data usage policies as found in the AI Platform Terms."
+          row={false}
+        />
+
+        <br />
+        <h2>
+          PART 6: Legal notices related to warranties, disclaimers, and risk
+          allocation.{" "}
+        </h2>
+
+        <TOSSection
+          heading="Disclaimer on Accuracy:"
+          count={"13."}
+          sx={{
+            mt: "17px",
+          }}
+          content="While we strive to provide accurate and up-to-date information through the Service, we cannot guarantee the accuracy or completeness of the Service including any Output. Use the information at Your own risk and refer to professional advice and the official documentation available Through Your Seller Account."
+          row={false}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            gap: "10px",
+            mt: "17px",
+          }}
+        >
+          <Typography
+            sx={{
+              lineHeight: 1.8,
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "600 !important",
+            }}
+          >
+            14.
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
+            }}
+          >
+            <strong>Restrictions and Trade Controls:</strong> The Service may
+            solely be used in the jurisdictions that allow use of the AI
+            Platform, as provided{" "}
+            <a
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              href="https://platform.openai.com/docs/supported-countries"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            </a>
+            . The Service may not be used in or for the benefit of (a) any U.S.
+            embargoed country or territory by the US or Israeli government; or
+            (b) any individual or entity with whom dealings are prohibited or
+            restricted under applicable trade laws. The Service may not be used
+            for any purpose prohibited by applicable trade laws, and Your Input
+            may not include material or information that requires a government
+            license for release or export.
+          </Typography>
+        </Box>
+
+        <TOSSection
+          heading="Warranty Disclaimers: "
+          count={"15."}
+          sx={{
+            mt: "17px",
+          }}
+          content="Except for any express warranties and in addition to any other disclaimers provided herein these Terms, the Service is provided “as is”, and We and our affiliates and licensors hereby disclaim all warranties, express or implied, as to the operation of the Service, or the information, text, and Content thereof, or the use of the Output, including without limitation, all implied warranties of merchantability, fitness for a particular purpose and title, noninfringement, or quiet enjoyment, and any warranties arising out of course of dealing or trade usage. In addition and despite anything to the contrary that may be included or inferred in these Terms, we make no representations or warranties  (a) that use of the Service will be uninterrupted, error free, or secure, (b) that defects will be corrected, (c) that the Service and the Content will be accurate, or (d) that any position, act or omission You take or conduct, based on the Service and/or any Content will be acceptable to any third party and that it will not be challenged by such third party or by applicable law enforcement authorities."
+          row={false}
+        />
+
+        <TOSSection
+          heading="Limitations on Liability:"
+          content=" Without derogating from any other restrictions and limitations set forth herein, You hereby represent and warrant that You will not, nor will You authorize anyone on Your behalf, to:"
+          count={"16."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+          children={Data16}
+        />
+
+        <TOSSection
+          content="The Service may contain links to or be linked from other websites or pages which are not maintained by the Company. Links to third party websites are provided for Your convenience and information only. Third party websites are not under Company’s control and Company is not responsible for the content or accuracy of those sites or the products or services offered on or through those sites. The inclusion of a link through the Service or our Website or the reference from third party's website or pages to our Service does not imply Company’s endorsement of the third-party website, content, or the offerings included therein, nor that Company is affiliated with the third-party website’s owners or sponsors."
+          count={"17."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+        <TOSSection
+          content="You acknowledge and agree that we are not liable for any loss or damage which may be incurred by You as a result of the availability of those external sites, resources or advertisements, or as a result of any reliance placed by You on the completeness, accuracy or existence of any advertising, products or other materials on, or available from, such websites or resources. We recommend that You be aware when You leave our Service pages or our Website and read the terms and conditions and privacy policy of each website that You visit."
+          count={"18."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+
+        <br />
+        <h2>PART 6: General terms </h2>
+
+        <TOSSection
+          content="Changes to Terms: We reserve the right to update these Terms at any time. Any changes will be effective immediately upon posting on this page. Your continued use of the Service after the changes constitute acceptance of the revised terms."
+          count={"19."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+        <TOSSection
+          content="Termination of Access: We reserve the right to terminate or suspend User's access to the Service at our discretion, with or without notice, for any reason, including violation of these Terms of Use or the AI Platform's terms."
+          count={"20."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+
+        <TOSSection
+          content="Discontinuation of the Service. We may decide to discontinue the Service, with or without advance notice, at our sole discretion. If You have any unused credits at the time of our voluntary discontinuation of the Service, You are eligible to receive a refund accordingly."
+          count={"21."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+
+        <TOSSection
+          content="Miscellaneous. These Terms constitute the entire agreement between the parties concerning the subject matter hereof. These Terms shall be governed by the laws of the State of Israel without giving effect to any principles of conflicts of laws thereof, and the eligible courts in Tel Aviv, Israel shall have exclusive jurisdiction over all disputes between the parties related to these Terms and/or any dispute in relation thereto or the use of the Service. Company expressly reserves its right to assign or transfer these Terms and to delegate any of its obligations hereunder at its sole discretion. If any part of these Terms is found void and/or unenforceable, it will not affect the validity of the remainder of the Terms, which shall remain valid and enforceable according to its terms. The failure of Company to act with respect to a breach of these Terms by You or others shall not constitute a waiver and shall not limit Company’s rights with respect to such breach or any subsequent breaches."
+          count={"22."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+        <TOSSection
+          content="Contact Information: If You have any questions or concerns about these Terms of Use or the Service, please contact us at *amz@blazecopywriting.com*.  "
+          count={"23."}
+          sx={{
+            mt: "17px",
+          }}
+          row={false}
+        />
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            mt: "40px",
+          }}
+        >
+          <CustomButton
+            border="2px solid #1A0049"
+            borderRadius="10px"
+            background="#1A0049"
+            hoverBg="white"
+            hovercolor="#1A0049"
+            buttonTextStyle={{}}
+            buttonStyle={{
+              padding: {
+                xs: "7px 40px",
+                
+              },
+              marginBottom: "80px",
+
+            }}
+            ButtonText="Back to Top"
+            color={"white"}
+            fullWidth={false}
+            variant="contained"
+            padding
+            onClick={() => handleTop()}
+          />
+        </Box>
       </Box>
-    
+      <Box
+        sx={{
+          width: "100%",
+        }}
+      >
+        <Footer1 />
+      </Box>
     </Box>
   );
 };

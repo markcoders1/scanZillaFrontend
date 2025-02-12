@@ -38,6 +38,7 @@ import PrivacyNotice from "./Pages/PrivacyNotice/PrivacyNotice";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import PN from "./Pages/SignUpPages/PN";
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import TOSSignUp from "./Pages/SignUpPages/TOSSignUp";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
@@ -46,6 +47,7 @@ function App() {
   return (
     <Elements stripe={stripePromise}>
       <BrowserRouter>
+      <ScrollToTop/>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<LayoutForOnePageScreens />}>

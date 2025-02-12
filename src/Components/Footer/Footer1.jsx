@@ -31,8 +31,9 @@ const Footer1 = () => {
           gap: "1rem",
         }}
       >
-        <Link to="unauth/privacy-notice" style={{ color: "white" }}>
+        <Box  style={{ color: "white" }}>
           <Typography
+           onClick={()=> navigate("/unauth/privacy-notice")}
             sx={{
               fontFamily: "Oswald !important",
               fontSize: {
@@ -48,10 +49,11 @@ const Footer1 = () => {
           >
             Privacy Notice
           </Typography>
-        </Link>
+        </Box>
         <Box sx={{ borderLeft: "1px solid white", height: "20px" }}></Box>
-        <Link to={"/unauth/terms-of-service"} style={{ color: "white" }}>
+        <Box  style={{ color: "white" }}>
           <Typography
+          onClick={()=> navigate("/unauth/terms-of-service")}
             sx={{
               fontFamily: "Oswald !important",
               fontSize: {
@@ -68,7 +70,7 @@ const Footer1 = () => {
           >
             Terms of Service
           </Typography>
-        </Link>
+        </Box>
       </Box>
     </Box>
   );
