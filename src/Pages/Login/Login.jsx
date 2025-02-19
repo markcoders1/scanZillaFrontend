@@ -481,7 +481,7 @@ const Login = () => {
 
           }}
           >
-          Dont't have an account? <NavLink style={{color:"rgba(30, 0, 77, 1)", textDecoration:"underline", lineHeight:"24px", fontWeight:"500"}} to={"/signup"} >Sign Up</NavLink>
+          Don't have an account? <NavLink style={{color:"rgba(30, 0, 77, 1)", textDecoration:"underline", lineHeight:"24px", fontWeight:"500"}} to={"/signup"} >Sign Up</NavLink>
           </Typography>
         </Box>
       
