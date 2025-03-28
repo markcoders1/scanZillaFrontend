@@ -893,22 +893,22 @@ const Analyze = () => {
                                             gap: "15px",
                                             flexDirection: {
                                                 xs: "column",
-                                                sm: "row",
+                                                sm: "column",
                                             },
                                         }}
                                     >
                                         <Box
                                             sx={{
                                                 flexBasis: {
-                                                    sm: "75%",
+                                                    sm: "100%",
                                                     xs: "100%",
                                                 },
                                             }}
                                         >
                                             <CustomButton
-                                                border="2px solid #1A0049"
+                                                border="2px solid #6e20ff"
                                                 borderRadius="10px"
-                                                background="#1A0049"
+                                                background="#6e20ff"
                                                 hoverBg="white"
                                                 hovercolor="#1A0049"
                                                 buttonTextStyle={{}}
@@ -927,7 +927,7 @@ const Analyze = () => {
                                         <Box
                                             sx={{
                                                 flexBasis: {
-                                                    sm: "25%",
+                                                    sm: "100%",
                                                     xs: "100%",
                                                 },
                                             }}
