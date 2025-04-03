@@ -893,20 +893,20 @@ const Analyze = () => {
                                             gap: "15px",
                                             flexDirection: {
                                                 xs: "column",
-                                                sm: "column",
+                                                sm: "row-reverse",
                                             },
                                         }}
                                     >
                                         <Box
                                             sx={{
                                                 flexBasis: {
-                                                    sm: "100%",
+                                                    sm: "50%",
                                                     xs: "100%",
                                                 },
                                             }}
                                         >
                                             <CustomButton
-                                                border="2px solid #6e20ff"
+                                                // border="2px solid #6e20ff"
                                                 borderRadius="10px"
                                                 background="#6e20ff"
                                                 hoverBg="white"
@@ -918,7 +918,7 @@ const Analyze = () => {
                                                 color="white"
                                                 fontWeight
                                                 fullWidth={true}
-                                                // width="75%"
+                                                // width="75%"  
                                                 variant="contained"
                                                 padding
                                                 onClick={handleAnalyze}
@@ -927,7 +927,7 @@ const Analyze = () => {
                                         <Box
                                             sx={{
                                                 flexBasis: {
-                                                    sm: "100%",
+                                                    sm: "50%",
                                                     xs: "100%",
                                                 },
                                             }}
