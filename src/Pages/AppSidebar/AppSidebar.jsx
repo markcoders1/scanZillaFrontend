@@ -6,6 +6,7 @@ import CustomButton from '../../Components/CustomButton/CustomButton';
 import Logout from '../../Components/Logout/Logout';
 import { useSelector } from 'react-redux';
 import logo from '../../assets/images/sample.webp';
+import { useLocation } from 'react-router-dom';
 
 const AppSidebar = () => {
   const [username, setUsername] = useState('');
@@ -25,6 +26,8 @@ const AppSidebar = () => {
     setUsername(auth.userName);
     setEmail(auth.email);
   }, []);
+
+  const {pathname} = useLocation()
 
   return (
     <Box
@@ -121,9 +124,10 @@ const AppSidebar = () => {
             <Typography>
               <NavLink
                 to="/dashboard"
-                className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
-                }
+                // className={({ isActive }) =>
+                //   isActive ? 'anchortag anchorActive' : 'anchortag'
+                // }
+                className={pathname == '/dashboard' ? 'anchortag anchorActive': 'anchortag'}
               >
                 Dashboard
               </NavLink>

@@ -350,10 +350,10 @@ const PrivacyNotice = () => {
               fontWeight: "400",
               color: "blue",
             }}
-            to={"/terms-of-service"}
+            to={"/dashboard/terms-of-service"}
           >
             {" "}
-            https://scanzilla.blazecopywriting.com/terms-of-service
+            https://scanzilla.blazecopywriting.com/dashboard/terms-of-service
           </Link>
           . This Privacy Notice is hereby incorporated into our Terms of Use and
           is an integral part thereof.

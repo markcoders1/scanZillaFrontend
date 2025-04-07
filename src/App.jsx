@@ -40,6 +40,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import PN from "./Pages/SignUpPages/PN";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import TOSSignUp from "./Pages/SignUpPages/TOSSignUp";
+import LayoutPublic from "./Pages/Layout/LayoutPublic";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -47,7 +48,7 @@ function App() {
   return (
     <Elements stripe={stripePromise}>
       <BrowserRouter>
-      <ScrollToTop/>
+        <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<LayoutForOnePageScreens />}>
@@ -62,16 +63,10 @@ function App() {
               />
             </Route>
 
-            
-              <Route
-                path="/unauth/terms-of-service"
-                element={<TOSSignUp />}
-              />
-              <Route
-                path="/unauth/privacy-notice"
-                element={<PN />}
-              />
-            
+            <Route path="/" element={<LayoutPublic />}>
+              <Route path="/terms-of-service" element={<TOSSignUp />} />
+              <Route path="/privacy-notice" element={<PN />} />
+            </Route>
 
             <Route path="/" element={<DashboardLayout />}>
               <Route
@@ -147,11 +142,11 @@ function App() {
                 element={<Protected children={<Liscenced />} />}
               />
               <Route
-                path="terms-of-service"
+                path="dashboard/terms-of-service"
                 element={<Protected children={<TermOfServices />} />}
               />
               <Route
-                path="privacy-notice"
+                path="dashboard/privacy-notice"
                 element={<Protected children={<PrivacyNotice />} />}
               />
             </Route>

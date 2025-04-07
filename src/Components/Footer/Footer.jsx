@@ -31,7 +31,7 @@ const Footer = () => {
           gap: "1rem",
         }}
       >
-        <Link to="/privacy-notice" style={{ color: "white" }}>
+        <Link to="/dashboard/privacy-notice" style={{ color: "white" }}>
           <Typography
             sx={{
               fontFamily: "Oswald !important",
@@ -50,7 +50,7 @@ const Footer = () => {
           </Typography>
         </Link>
         <Box sx={{ borderLeft: "1px solid white", height: "20px" }}></Box>
-        <Link to={"/terms-of-service"} style={{ color: "white" }}>
+        <Link to={"/dashboard/terms-of-service"} style={{ color: "white" }}>
           <Typography
             sx={{
               fontFamily: "Oswald !important",

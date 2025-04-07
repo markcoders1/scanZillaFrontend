@@ -159,11 +159,15 @@ const Signup = () => {
         }}
       >
         <Typography
-          sx={{ display: "flex", flexDirection: "column", gap:{
-            xl: "20px",
-            md:"10px",
-            xs:"20px"
-          } }}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: {
+              xl: "20px",
+              md: "10px",
+              xs: "20px",
+            },
+          }}
         >
           <Typography
             sx={{
@@ -194,9 +198,9 @@ const Signup = () => {
               gap: "5px",
               flexDirection: "column",
               marginTop: {
-                xl:"30px",
-                lg:"10px",
-                xs:"30px"
+                xl: "30px",
+                lg: "10px",
+                xs: "30px",
               },
             }}
           >
@@ -248,13 +252,23 @@ const Signup = () => {
             />
           </Typography>
         </Box>
+        <Typography
+          sx={{
+            color: "#A0A4A9",
+            fontSize: "1rem",
+            fontWeight: "400",
+            textAlign: { lg: "justify", xs: "justify" },
+            
+          }}
+        >
+          By Signing in, I confirm that I have read and understood the Privacy Notice, and that I accept the Terms of Service.
+        </Typography>
         <Box
           sx={{
             position: "relative",
             marginTop: "25px",
             display: "flex",
             flexDirection: "column",
-            
           }}
         >
           <Button
@@ -315,11 +329,10 @@ const Signup = () => {
             gap: "4px",
             justifyContent: "center",
             marginTop: {
-              xl:"40px",
-              lg:"20px",
-              xs:"30px"
+              xl: "40px",
+              lg: "20px",
+              xs: "30px",
             },
-            
           }}
         >
           <Typography

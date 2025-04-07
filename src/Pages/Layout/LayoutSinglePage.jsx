@@ -127,7 +127,7 @@ const LayoutSinglePage = () => {
        
             <Box
             sx={{
-              position:"absolute",
+              position:"sticky",
               bottom:"0px",
               width:"100%"
             }}

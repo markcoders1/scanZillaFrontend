@@ -33,7 +33,7 @@ const Footer1 = () => {
       >
         <Box  style={{ color: "white" }}>
           <Typography
-           onClick={()=> navigate("/unauth/privacy-notice")}
+           onClick={()=> navigate("/privacy-notice")}
             sx={{
               fontFamily: "Oswald !important",
               fontSize: {
@@ -53,7 +53,7 @@ const Footer1 = () => {
         <Box sx={{ borderLeft: "1px solid white", height: "20px" }}></Box>
         <Box  style={{ color: "white" }}>
           <Typography
-          onClick={()=> navigate("/unauth/terms-of-service")}
+          onClick={()=> navigate("/terms-of-service")}
             sx={{
               fontFamily: "Oswald !important",
               fontSize: {

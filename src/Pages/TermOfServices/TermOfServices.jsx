@@ -7,17 +7,16 @@ import TOSSection from "../../Components/TOS/TOS";
 import { Link } from "react-router-dom";
 import CustomButton from "../../Components/CustomButton/CustomButton";
 const TermOfServices = () => {
-      const [isScroll, setScroll] = useState(false);
-      const scrollBoxRef = useRef(null);
-  
+  const [isScroll, setScroll] = useState(false);
+  const scrollBoxRef = useRef(null);
 
-    const handleTop = () => {
-      scrollBoxRef.current.scrollTo({
-        top: document.getElementById("top"),
-        behavior: "smooth",
+  const handleTop = () => {
+    scrollBoxRef.current.scrollTo({
+      top: document.getElementById("top"),
+      behavior: "smooth",
     });
-    }
-  
+  };
+
   const Data3 = [
     {
       count: "3.1",
@@ -189,8 +188,8 @@ const TermOfServices = () => {
   };
   return (
     <Box
-    id="top"
-    ref={scrollBoxRef}
+      id="top"
+      ref={scrollBoxRef}
       sx={{
         // padding: { xs: "16px", sm: "32px" },
         maxWidth: "1200px",
@@ -257,7 +256,7 @@ const TermOfServices = () => {
           'These terms and conditions govern the use of Scanzilla (the “*Service*”) which is powered by artificial intelligence technology licensed to us by certain AI technology providers (the "*AI Platforms*"),and serves as a binding contract between you, a user using the Service (the "*User*" or "*You*"), and Tomer Levin (the "*Company*", "*Us*", "*We*" or similar wording), Who owns and operates the Service, available to You through our website scanzilla.blazecopywriting.com (the "*Website*"). '
         }
         sx={{
-          mt:"17px"
+          mt: "17px",
         }}
       />
 
@@ -266,7 +265,7 @@ const TermOfServices = () => {
           'BY ACCESSING OR USING THE SERVICE, YOU HEREBY ACKNOWLEDGE YOU HAVE READ AND UNDERSTOOD THESE SERVICE TERMS OF USE (THE "*TERMS*") AND AGREE TO BE BOUND BY THEM.  IF YOU DO NOT AGREE TO THESE TERMS, YOU MAY NOT USE THE SERVICE. '
         }
         sx={{
-          mt:"17px"
+          mt: "17px",
         }}
       />
 
@@ -275,7 +274,7 @@ const TermOfServices = () => {
           "NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, IN CASE ANY TERM OF THESE TERMS IS IN CONFLICT WITH MANDATORY TERMS OF AMAZON AND/OR ANY APPLICABLE AI PLATFORMS (AS DEFINED HEREIN), THE LATTER SHALL PREVAIL, AS BETWEEN YOU AND US."
         }
         sx={{
-          mt:"17px"
+          mt: "17px",
         }}
       />
       <br />
@@ -320,8 +319,6 @@ const TermOfServices = () => {
         children={Data4}
       />
 
-      
-      
       <Box
         sx={{
           display: "flex",
@@ -366,7 +363,10 @@ const TermOfServices = () => {
       </Box>
 
       <br />
-      <h2>PART 2: Some important notifications about the Service underlying AI technology</h2>
+      <h2>
+        PART 2: Some important notifications about the Service underlying AI
+        technology
+      </h2>
       <Box
         sx={{
           display: "flex",
@@ -499,17 +499,46 @@ const TermOfServices = () => {
 
       <br />
       <h2>PART 5: Privacy matters. For more info see our privacy notice.</h2>
-
-      <TOSSection
-        // heading="Eligibility."
-
-        count={"12."}
+      <Box
         sx={{
-          mt: "17px",
+          display: "flex",
+          gap: "10px",
+     
         }}
-        content="You may be requested to provide certain personal information in relation to Your use of the Service. Any personal information that You provide will be processed by us in accordance with our https://scanzilla.blazecopywriting.com/privacy-notice and OpenAI's data usage policies as found in the AI Platform Terms."
-        row={false}
-      />
+      >
+        <Typography
+          sx={{
+            lineHeight: 1.8,
+            fontSize: { xs: "14px", sm: "16px" },
+            fontWeight: "600 !important",
+          }}
+        >
+          12.
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: { xs: "14px", sm: "16px" },
+            fontWeight: "400",
+            color: "black",
+            //   mt: '17px',
+            lineHeight: 1.8,
+          }}
+        >
+         You may be requested to provide certain personal information in relation to Your use of the Service. Any personal information that You provide will be processed by us in accordance with our{" "}
+          <Link
+            style={{
+              textDecoration: "underline",
+              fontWeight: "400",
+              color: "blue",
+            }}
+            to={"/dashboard/privacy-notice"}
+          >
+            {" "}
+            https://scanzilla.blazecopywriting.com/dashboard/privacy-notice
+          </Link>
+          {" "}and OpenAI's data usage policies as found in the AI Platform Terms..
+        </Typography>
+      </Box>
 
       <br />
       <h2>
