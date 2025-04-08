@@ -261,7 +261,7 @@ const Signup = () => {
             
           }}
         >
-          By Signing in, I confirm that I have read and understood the Privacy Notice, and that I accept the Terms of Service.
+          By Signing up, I confirm that I have read and understood the Privacy Notice, and that I accept the Terms of Service.
         </Typography>
         <Box
           sx={{
