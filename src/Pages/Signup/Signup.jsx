@@ -279,7 +279,7 @@ const Signup = () => {
               height: "56px",
               borderRadius: "32px",
               fontSize: { xs: "14px", sm: "18px" },
-              fontWeight: "500",
+              fontWeight: "500",  
               textTransform: "none",
               transition: "background 0.9s ease, color 0.4s ease",
               "&:hover": {

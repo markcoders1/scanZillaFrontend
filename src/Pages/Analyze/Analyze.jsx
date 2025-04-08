@@ -538,7 +538,7 @@ const Analyze = () => {
     if (!input) return;
 
     const canvas = await html2canvas(input, {
-      scale: 4, // Higher quality
+      scale: 2, // Higher quality
       useCORS: true, // If using remote images
     });
 
