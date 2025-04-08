@@ -761,13 +761,7 @@ const PN = () => {
           />
         </Box>
       </Box>
-      <Box
-        sx={{
-          width: "100%",
-        }}
-      >
-        <Footer1 />
-      </Box>
+     
     </Box>
   );
 };

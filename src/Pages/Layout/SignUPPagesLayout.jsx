@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 
+
 const SignUPPagesLayout = () => {
   return (
     <div>

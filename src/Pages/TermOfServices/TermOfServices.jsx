@@ -352,7 +352,7 @@ const TermOfServices = () => {
               fontWeight: "400",
               color: "blue",
             }}
-            to={"/OS-Library-List"}
+            to={"/dashboard/OS-Library-List"}
           >
             {" "}
             OS Library List

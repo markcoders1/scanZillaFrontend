@@ -23,6 +23,8 @@ import SpinnerLoader from "../../Components/Loader/spinnerLoader";
 import { scrollToTop } from "react-scroll/modules/mixins/animate-scroll";
 import Alert from "@mui/material/Alert";
 import AlertDialog from "../../Components/AbuseModalDialog/AbuseModalDialog";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 function hasValues(obj) {
   return Object.values(obj).some(
@@ -529,6 +531,47 @@ const Analyze = () => {
         {i < text.split("|-|").length - 1 && <br />}
       </>
     );
+  };
+
+  const exportResultToPDF = async () => {
+    const input = document.getElementById("result");
+    if (!input) return;
+
+    const canvas = await html2canvas(input, {
+      scale: 4, // Higher quality
+      useCORS: true, // If using remote images
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+  
+    const margin = 15; // 👈 Left/right margin in mm
+    const usableWidth = pdfWidth - margin * 2;
+  
+    const imgProps = pdf.getImageProperties(imgData);
+    const imageRatio = imgProps.height / imgProps.width;
+    const imgHeight = usableWidth * imageRatio;
+  
+    let heightLeft = imgHeight;
+    let position = 0;
+  
+    // Add first page
+    pdf.addImage(imgData, "PNG", margin, position, usableWidth, imgHeight);
+    heightLeft -= pdfHeight;
+  
+
+    // Handle multi-page
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", margin, position, usableWidth, imgHeight);
+      heightLeft -= pdfHeight;
+    }
+
+    pdf.save("analysis-report.pdf");
   };
 
   return (
@@ -1351,355 +1394,33 @@ const Analyze = () => {
                         </Paper>
                       ) : null}
                     </Box>
-                    <Box
-                      sx={{
-                        flexBasis: {
-                          sm: "100%",
-                          xs: "100%",
-                        },
-                      }}
-                    >
-                      <CustomButton
-                        // border="2px solid #3C2784"
-                        borderRadius="10px"
-                        background="#3C2784"
-                        hoverBg="white"
-                        hovercolor="#1A0049"
-                        buttonTextStyle={{}}
-                        buttonStyle={{ padding: { lg: "12px 20px" } }}
-                        // ButtonText={`Analyze (${creditDynamic} ${creditDynamic == 1 ? "Credit" : "Credits"})`}
-                        ButtonText="Check Another Product"
-                        fontSize
-                        color="white"
-                        fontWeight
-                        fullWidth={true}
-                        // width="75%"
-                        variant="contained"
-                        padding
-                        onClick={handleClear}
-                      />
-                    </Box>
+                   
                   </Box>
                 ) : null}
               </Box>
-              {/* <Box id="result">
-                {hasValues(AnalyzeErrros) ? (
-                  <Box sx={{ mt: "50px" }}>
-                    <Typography
-                      sx={{
-                        fontSize: "40px",
-                        fontWeight: "600",
-                        color: "#333333",
-                      }}
-                      id="result"
-                    >
-                      Results
-                    </Typography>
-                    <Box>
-                      {!data.title ? (
-                        ""
-                      ) : AnalyzeErrros.TE.length > 0 &&
-                        AnalyzeErrros.TE[0] !== "" ? (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "10px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "12px",
-                          }}
-                        >
-                          <Heading Heading="Title Errors" />
-                          {AnalyzeErrros?.TE?.map((item, index) => (
-                            <Typography sx={{ padding: "10px 0" }} key={index}>
-                              {item.split("|-|").map((el, i) => {
-                                return (
-                                  <>
-                                    {TextWithBlacklist(
-                                      el,
-                                      AnalyzeErrros.TE.length,
-                                      i,
-                                      item
-                                    )}
-                                  </>
-                                );
-                              })}
-                            </Typography>
-                          ))}
-                        </Paper>
-                      ) : (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "10px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "12px",
-                          }}
-                        >
-                          <Heading Heading="Title" />
-                          <Typography sx={{ padding: "10px 0" }}>
-                            No issues found, you're good to go.
-                          </Typography>
-                        </Paper>
-                      )}
-                      {!data.bulletpoints[0].value ? (
-                        ""
-                      ) : AnalyzeErrros.BE.length > 0 &&
-                        AnalyzeErrros.BE[0] !== "" ? (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "20px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          <Heading Heading="Bullet Point Errors" />
-
-                          {AnalyzeErrros.joi == true
-                            ? AnalyzeErrros?.BE?.map((item, index) => {
-                                if (typeof item !== "object") {
-                                  return (
-                                    <Typography
-                                      key={index}
-                                      sx={{ padding: "10px 0" }}
-                                    >
-                                      • {item}
-                                    </Typography>
-                                  );
-                                }
-
-                                if (item.message.includes("|-|")) {
-                                  const messages = item.message.split("|-|");
-
-                                  return (
-                                    <Typography
-                                      sx={{ padding: "10px 0" }}
-                                      key={index}
-                                    >
-                                      Bullet {item.point}.
-                                      <br />
-                                      <Box sx={{ paddingLeft: "10px" }}>
-                                        {messages.map((el, ind) => {
-                                          return (
-                                            <>
-                                              {TextWithBlacklist(
-                                                el,
-                                                messages.length,
-                                                ind,
-                                                item
-                                              )}
-                                            </>
-                                          );
-                                        })}
-                                      </Box>
-                                    </Typography>
-                                  );
-                                }
-
-                                if (item.point == -10) {
-                                  return (
-                                    <Typography
-                                      sx={{ padding: "10px 0" }}
-                                      key={index}
-                                    >
-                                      •{" "}
-                                      {item.message.replace(
-                                        /"bulletpoints\[\d+\]"/g,
-                                        ""
-                                      )}
-                                    </Typography>
-                                  );
-                                }
-
-                                return (
-                                  <Typography
-                                    sx={{ padding: "10px 0" }}
-                                    key={index}
-                                  >
-                                    Bullet {item.point}. <br />
-                                    {TextWithBlacklist(item.message, 1, 0)}
-                                  </Typography>
-                                );
-                              })
-                            : AnalyzeErrros?.BE?.map((item, index) => (
-                                <Typography
-                                  sx={{ padding: "10px 0" }}
-                                  key={index}
-                                >
-                                  {item.split("|-|").map((el, i) => {
-                                    return (
-                                      <>
-                                        {AnalyzeErrros?.BE.length > 1 && "•"}{" "}
-                                        {el}
-                                        {i < item.split("|-|").length - 1 && (
-                                          <br />
-                                        )}
-                                      </>
-                                    );
-                                  })}
-                                </Typography>
-                              ))}
-                        </Paper>
-                      ) : (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "10px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "12px",
-                          }}
-                        >
-                          <Heading Heading="Bullet Points" />
-                          <Typography sx={{ padding: "10px 0" }}>
-                            No issues found, you're good to go.
-                          </Typography>
-                        </Paper>
-                      )}
-                      {!data.description ? (
-                        ""
-                      ) : AnalyzeErrros.DE.length > 0 &&
-                        AnalyzeErrros.DE[0] !== "" ? (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "20px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          <Heading Heading="Description Errors" />
-                          {AnalyzeErrros?.DE?.map((item, index) => (
-                            <Typography sx={{ padding: "10px 0" }} key={index}>
-                              {item.split("|-|").map((el, i) => {
-                                return (
-                                  <>
-                                    {TextWithBlacklist(
-                                      el,
-                                      AnalyzeErrros.DE.length,
-                                      i,
-                                      item
-                                    )}
-                                  </>
-                                );
-                              })}
-                            </Typography>
-                          ))}
-                        </Paper>
-                      ) : (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "10px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "12px",
-                          }}
-                        >
-                          <Heading Heading="Description" />
-                          <Typography sx={{ padding: "10px 0" }}>
-                            No issues found, you're good to go.
-                          </Typography>
-                        </Paper>
-                      )}
-                      {!data.keywords ? (
-                        ""
-                      ) : AnalyzeErrros.KE.length > 0 &&
-                        AnalyzeErrros.KE[0] !== "" ? (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "20px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          <Heading Heading="Search Terms (Generic Keywords) Errors" />
-                          {AnalyzeErrros?.KE?.map((item, index) => (
-                            <Typography sx={{ padding: "10px 0" }} key={index}>
-                              {item.split("|-|").map((el, i) => {
-                                return (
-                                  <>
-                                    {TextWithBlacklist(
-                                      el,
-                                      AnalyzeErrros.KE.length,
-                                      i,
-                                      item
-                                    )}
-                                  </>
-                                );
-                              })}
-                            </Typography>
-                          ))}
-                        </Paper>
-                      ) : (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "10px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "12px",
-                          }}
-                        >
-                          <Heading Heading="Search Terms (Generic Keywords)" />
-                          <Typography sx={{ padding: "10px 0" }}>
-                            No issues found, you're good to go.
-                          </Typography>
-                        </Paper>
-                      )}
-                      {AnalyzeErrros.CE.length > 0 &&
-                      AnalyzeErrros.CE[0] !== "" ? (
-                        <Paper
-                          sx={{
-                            padding: "20px",
-                            margin: "20px 0",
-                            boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                            borderRadius: "10px",
-                          }}
-                        >
-                          <Heading Heading="Category Errors" />
-                          {AnalyzeErrros?.CE?.map((item, index) => (
-                            <Typography sx={{ padding: "10px 0" }} key={index}>
-                              {item.split("|-|").map((el, i) => {
-                                return (
-                                  <>
-                                    {AnalyzeErrros?.CE.length > 1 && "•"} {el}
-                                    {i < item.split("|-|").length - 1 && <br />}
-                                  </>
-                                );
-                              })}
-                            </Typography>
-                          ))}
-                        </Paper>
-                      ) : null}
-                    </Box>
-                  </Box>
-                ) : null}
-
-                {reccomendations.length > 0 && reccomendations[0] !== "" ? (
-                  <Paper
-                    sx={{
-                      padding: "20px",
-                      margin: "20px 0",
-                      boxShadow: "0px 8px 26px -4px rgba(0, 0, 0, 0.2)",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <Heading Heading="Indexing Recommendations" />
-                    {reccomendations?.map((item, index) => (
-                      <Typography sx={{ padding: "10px 0" }} key={index}>
-                        {item.split("|-|").map((el, i) => {
-                          return (
-                            <>
-                              {reccomendations?.length > 1 && "•"} {el}
-                              {i < item.split("|-|").length - 1 && <br />}
-                            </>
-                          );
-                        })}
-                      </Typography>
-                    ))}
-                  </Paper>
-                ) : null}
-              </Box> */}
-
+                {
+                   hasValues(AnalyzeErrros) ? (
+                    <CustomButton
+                    // border="2px solid #6e20ff"
+                    borderRadius="10px"
+                    background="#6e20ff"
+                    hoverBg="white"
+                    hovercolor="#1A0049"
+                    buttonTextStyle={{}}
+                    buttonStyle={{ padding: { lg: "12px 20px" } }}
+                    ButtonText={'Export'}
+                    fontSize
+                    color="white"
+                    fontWeight
+                    fullWidth={true}
+                    // width="75%"
+                    variant="contained"
+                    padding
+                    onClick={exportResultToPDF}
+                  />
+                   ): null
+                }
+              
               <SnackAlert
                 message={snackAlertData.message}
                 severity={snackAlertData.severity}

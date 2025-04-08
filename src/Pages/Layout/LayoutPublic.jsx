@@ -30,7 +30,15 @@ const LayoutPublic = () => {
     <div style={{ position: "relative" }}>
 
         <Outlet />
-    
+        <Box
+        sx={{
+          width: "100%",
+          position:'sticky',
+          bottom:'0px'
+        }}
+      >
+        <Footer1 />
+      </Box>
       <SnackAlert
         open={snackAlert?.open}
         message={snackAlert.message}

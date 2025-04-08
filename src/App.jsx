@@ -41,6 +41,7 @@ import PN from "./Pages/SignUpPages/PN";
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop";
 import TOSSignUp from "./Pages/SignUpPages/TOSSignUp";
 import LayoutPublic from "./Pages/Layout/LayoutPublic";
+import Liscenced2 from "./Pages/Liscenced/Lisceneced2";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -66,6 +67,10 @@ function App() {
             <Route path="/" element={<LayoutPublic />}>
               <Route path="/terms-of-service" element={<TOSSignUp />} />
               <Route path="/privacy-notice" element={<PN />} />
+            <Route
+              path="/os-Library-list"
+              element={<Liscenced2 />}
+            />
             </Route>
 
             <Route path="/" element={<DashboardLayout />}>
@@ -138,9 +143,10 @@ function App() {
                 element={<Protected children={<Contactus />} />}
               />
               <Route
-                path="OS-Library-List"
+                path="/dashboard/OS-Library-List"
                 element={<Protected children={<Liscenced />} />}
               />
+
               <Route
                 path="dashboard/terms-of-service"
                 element={<Protected children={<TermOfServices />} />}

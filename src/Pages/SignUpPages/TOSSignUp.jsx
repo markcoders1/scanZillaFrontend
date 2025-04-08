@@ -201,7 +201,7 @@ const TOSSignUp = () => {
   };
   return (
     <Box>
-        <Element name="top-section"></Element>
+      <Element name="top-section"></Element>
 
       <Box
         id="top"
@@ -241,13 +241,11 @@ const TOSSignUp = () => {
           },
         }}
       >
-
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            
           }}
         >
           <CustomButton2
@@ -269,11 +267,11 @@ const TOSSignUp = () => {
             padding
             onClick={() => navigate("/")}
           />
-           <Box
+          <Box
             sx={{
               // border:"2px solid red",
               width: "90px",
-              
+
               borderRadius: "50%",
               display: "flex",
               justifyContent: "center",
@@ -301,7 +299,7 @@ const TOSSignUp = () => {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mt:"20px"
+            mt: "20px",
           }}
         >
           <Typography
@@ -316,7 +314,6 @@ const TOSSignUp = () => {
           >
             Scanzilla Terms Of Use
           </Typography>
-         
         </Box>
 
         <br />
@@ -596,16 +593,47 @@ const TOSSignUp = () => {
         <br />
         <h2>PART 5: Privacy matters. For more info see our privacy notice.</h2>
 
-        <TOSSection
-          // heading="Eligibility."
-
-          count={"12."}
+        <Box
           sx={{
-            mt: "17px",
+            display: "flex",
+            gap: "10px",
           }}
-          content="You may be requested to provide certain personal information in relation to Your use of the Service. Any personal information that You provide will be processed by us in accordance with our https://scanzilla.blazecopywriting.com/privacy-notice and OpenAI's data usage policies as found in the AI Platform Terms."
-          row={false}
-        />
+        >
+          <Typography
+            sx={{
+              lineHeight: 1.8,
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "600 !important",
+            }}
+          >
+            12.
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "14px", sm: "16px" },
+              fontWeight: "400",
+              color: "black",
+              //   mt: '17px',
+              lineHeight: 1.8,
+            }}
+          >
+            You may be requested to provide certain personal information in
+            relation to Your use of the Service. Any personal information that
+            You provide will be processed by us in accordance with our{" "}
+            <Link
+              style={{
+                textDecoration: "underline",
+                fontWeight: "400",
+                color: "blue",
+              }}
+              to={"/privacy-notice"}
+            >
+              {" "}
+              https://scanzilla.blazecopywriting.com/privacy-notice
+            </Link>{" "}
+            and OpenAI's data usage policies as found in the AI Platform Terms..
+          </Typography>
+        </Box>
 
         <br />
         <h2>
@@ -776,11 +804,8 @@ const TOSSignUp = () => {
             buttonStyle={{
               padding: {
                 xs: "7px 40px",
-                
               },
               marginBottom: "25px",
-
-
             }}
             ButtonText="Back to Top"
             color={"white"}
@@ -791,13 +816,7 @@ const TOSSignUp = () => {
           />
         </Box>
       </Box>
-      <Box
-        sx={{
-          width: "100%",
-        }}
-      >
-        <Footer1 />
-      </Box>
+     
     </Box>
   );
 };
