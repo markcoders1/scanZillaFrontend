@@ -20,11 +20,10 @@ import { useNavigate } from "react-router-dom";
 import logo from "../../assets/images/sample.webp";
 import Footer1 from "../../Components/Footer/Footer1";
 
-
 const Liscenced2 = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("frontend");
-  const navigate= useNavigate()
+  const navigate = useNavigate();
 
   // Handle search input change
   const handleSearchChange = (event) => {
@@ -42,104 +41,106 @@ const Liscenced2 = () => {
   const filteredLicenses = licensesToFilter.filter((license) => {
     const matchesSearch =
       license.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (license.publisher?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
+      (license.publisher?.toLowerCase() || "").includes(
+        searchTerm.toLowerCase()
+      ) ||
       (license.email?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
-      (license.licenses?.toLowerCase() || "").includes(searchTerm.toLowerCase()); // Check licenses
-  
+      (license.licenses?.toLowerCase() || "").includes(
+        searchTerm.toLowerCase()
+      ); // Check licenses
+
     return matchesSearch;
   });
 
   return (
     <Box
-    sx={{
-          
-         // padding: { xs: "16px", sm: "32px" },
-         maxWidth: "1200px",
-         margin: "0 auto",
-         overflow: "hidden",
-         // height: "70vh",
-         width: "100%",
-         // marginTop: "15px",
-         display: "flex",
+      sx={{
+        // padding: { xs: "16px", sm: "32px" },
+        maxWidth: "1200px",
+        margin: "0 auto",
+        overflow: "hidden",
+        // height: "70vh",
+        width: "100%",
+        // marginTop: "15px",
+        display: "flex",
 
-         height: "100vh",
+        height: "100vh",
 
-         flexDirection: {
-           lg: "column",
-           xs: "column",
-         },
-         overflowY: "auto",
-         // overflowX: "hidden",
-         padding: { sm: "20px 25px", xs: "5px 8px" },
-         "&::-webkit-scrollbar": {
-           width: "8px",
-         },
-         "&::-webkit-scrollbar-track": {
-           background: "#DFDFDF",
-           borderRadius: "10px",
-         },
-         "&::-webkit-scrollbar-thumb": {
-           background: "black",
-           borderRadius: "10px",
-         },
-         "&::-webkit-scrollbar-thumb:hover": {
-           background: "#b30000",
-         },
-    }}
+        flexDirection: {
+          lg: "column",
+          xs: "column",
+        },
+        overflowY: "auto",
+        // overflowX: "hidden",
+        padding: { sm: "20px 25px", xs: "5px 8px" },
+        "&::-webkit-scrollbar": {
+          width: "8px",
+        },
+        "&::-webkit-scrollbar-track": {
+          background: "#DFDFDF",
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "black",
+          borderRadius: "10px",
+        },
+        "&::-webkit-scrollbar-thumb:hover": {
+          background: "#b30000",
+        },
+      }}
     >
-         <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <CustomButton2
-                    border="2px solid #1A0049"
-                    borderRadius="10px"
-                    background="#1A0049"
-                    hoverBg="white"
-                    hovercolor="#1A0049"
-                    buttonTextStyle={{}}
-                    buttonStyle={{
-                      padding: {
-                        xs: "7px 20px",
-                      },
-                    }}
-                    ButtonText="Sign in"
-                    color={"white"}
-                    fullWidth={false}
-                    variant="contained"
-                    padding
-                    onClick={() => navigate("/")}
-                  />
-                  <Box
-                    sx={{
-                      // border:"2px solid red",
-                      width: "90px",
-                      
-                      borderRadius: "50%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      color: "#333333",
-                      cursor: "pointer",
-                      transition: ".3s ease-in",
-                      ":hover": {
-                        color: "white",
-                        bgcolor: "#1A0049",
-                      },
-                    }}
-                    //  onClick={()=>navigate('/')}
-                  >
-                    <img
-                      src={logo}
-                      style={{ objectFit: "cover", width: "90px" }}
-                      alt="logo"
-                    />
-                    
-                  </Box>
-                </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <CustomButton2
+          border="2px solid #1A0049"
+          borderRadius="10px"
+          background="#1A0049"
+          hoverBg="white"
+          hovercolor="#1A0049"
+          buttonTextStyle={{}}
+          buttonStyle={{
+            padding: {
+              xs: "7px 20px",
+            },
+          }}
+          ButtonText="Sign in"
+          color={"white"}
+          fullWidth={false}
+          variant="contained"
+          padding
+          onClick={() => navigate("/")}
+        />
+        <Box
+          sx={{
+            // border:"2px solid red",
+            width: "90px",
+
+            borderRadius: "50%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "#333333",
+            cursor: "pointer",
+            transition: ".3s ease-in",
+            ":hover": {
+              color: "white",
+              bgcolor: "#1A0049",
+            },
+          }}
+          //  onClick={()=>navigate('/')}
+        >
+          <img
+            src={logo}
+            style={{ objectFit: "cover", width: "90px" }}
+            alt="logo"
+          />
+        </Box>
+      </Box>
       {/* Search and Tabs */}
       <Box
         sx={{
@@ -151,6 +152,7 @@ const Liscenced2 = () => {
             xs: "column",
           },
           gap: "30px",
+          mt:'30px'
         }}
       >
         <Box sx={{ position: "relative", width: "350px" }}>
@@ -190,12 +192,18 @@ const Liscenced2 = () => {
       </Box>
 
       {/* Table */}
-      <TableContainer component={Paper} sx={{height:{
-        xs:"60vh", 
-        sm:'50vh',
-        md:'60vh',
-        xl:'70vh'
-      }, overflowX:"auto",}} >
+      <TableContainer
+        component={Paper}
+        sx={{
+          height: {
+            xs: "60vh",
+            sm: "50vh",
+            md: "60vh",
+            xl: "65vh",
+          },
+          overflowX: "auto",
+        }}
+      >
         <Table
           sx={{ minWidth: 650, padding: "0px 15px" }}
           aria-label="user table"
@@ -356,7 +364,6 @@ const Liscenced2 = () => {
           </TableBody>
         </Table>
       </TableContainer>
-          
     </Box>
   );
 };
