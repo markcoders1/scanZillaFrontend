@@ -350,7 +350,7 @@ const Login = () => {
         </Box>
         <Typography
           sx={{
-            color: "#A0A4A9",
+            color: "#1B004D",
             fontSize: "1rem",
             fontWeight: "400",
             textAlign: { lg: "justify", xs: "justify" },
