@@ -68,7 +68,7 @@ useNavigation()
             case '/license':
               return 'License';
               case '/dashboard/terms-of-service':
-                return 'Scanzilla Terms Of Use';
+                return 'Scanzilla Terms Of Service';
                 case '/dashboard/privacy-notice':
                   return 'Privacy Notice';
       // Add more cases as needed for other routes

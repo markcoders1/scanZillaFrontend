@@ -312,7 +312,7 @@ const TOSSignUp = () => {
               },
             }}
           >
-            Scanzilla Terms Of Use
+            Scanzilla Terms Of Service
           </Typography>
         </Box>
 
