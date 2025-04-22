@@ -118,7 +118,7 @@ const AppSidebar = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              gap: {xl:'1.5rem', md:".7rem" ,xs:".8rem"},
+              gap: {xl:'1.5rem', md:".5rem" ,xs:".8rem"},
             }}
           >
             <Typography>
@@ -206,7 +206,10 @@ const AppSidebar = () => {
         <Typography
           sx={{
             fontWeight: '600',
-            fontSize: '1.9rem',
+            fontSize: {
+              xl:'1.9rem',
+              md:'1.5rem'
+            },
             color: '#ffff', 
           }}
         >
@@ -215,7 +218,10 @@ const AppSidebar = () => {
         <Typography
           sx={{
             fontWeight: '400',
-            fontSize: '0.9rem',
+            fontSize: {
+              xl:'0.9rem',
+              md:'0.8rem'
+            },
             color: '#a49ab7',
            
           }}
@@ -224,7 +230,10 @@ const AppSidebar = () => {
         </Typography>
         <Typography
           sx={{
-            marginTop: '25px',
+            marginTop:{
+              xl: "25px",
+              md:"15px"
+            },
           }}
         >
           <Logout />
