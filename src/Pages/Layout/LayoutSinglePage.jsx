@@ -28,15 +28,16 @@ const LayoutSinglePage = () => {
 
   return (
     <Box style={{ position: "relative" }} sx={{
-    width: {
-            xs: "100vw",
-            sm: "100vw",
-            md: "100%",
-          },
-          height: {
-            sm: "100vh",
-            xs: "110vh",
-          },
+      width: {
+        xs: "100vw",
+        sm: "100vw",
+        md: "100%",
+      },
+      height: {
+        sm: "100vh",
+        xs: "110vh",
+      },
+    
     }} >
       <Box
         sx={{
