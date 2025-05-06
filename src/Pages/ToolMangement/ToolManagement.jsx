@@ -23,6 +23,7 @@ const ToolManagement = () => {
     "Baby",
     "Beauty & Personal Care",
     "Books",
+    "Baby Products",
     "Camera & Photo Products",
     "Cell Phones & Accessories",
     "Clothing, Shoes & Jewelry",
@@ -41,6 +42,7 @@ const ToolManagement = () => {
     "Sports & Outdoors",
     "Tools & Home Improvement",
     "Toys & Games",
+
   ]);
 
   const dispatch = useDispatch();

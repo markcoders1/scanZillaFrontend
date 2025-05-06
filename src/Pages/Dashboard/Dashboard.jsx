@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
-import SnackAlert from '../../Components/SnackAlert/SnackAlert';
+import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import { ViewDetailModal } from "../../Components/ViewDetailModal/ViewDetailModal";
 import React from "react";
 import LoaderMain from "../../Components/Loader/LoaderMain";
@@ -26,11 +26,12 @@ const Home = () => {
   const [credits, setCredits] = useState(0);
   const [numberOfAnalyzed, setNumberOfAnalyzed] = useState(null);
   const [analyzeHistory, setAnalyzeHistory] = useState([]);
-  const [graphdata, setGraphdata] = useState([])
+  const [graphdata, setGraphdata] = useState([]);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
+  const [loadingForAnalyzeHistory, setLoadingForAnalyzeHistory] = useState(false);
 
   const [snackAlertData, setSnackAlertData] = useState({
     message: "",
@@ -38,18 +39,17 @@ const Home = () => {
     open: false,
   });
 
-
   const [open, setOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
   useEffect(() => {
-    console.log(auth)
+    console.log(auth);
     const fetchUser = async () => {
       try {
         setLoading(true);
         const response = await axiosInstance({
           url: `${appUrl}/getuser`,
-          method: 'get',
+          method: "get",
           params: { email: auth?.email },
         });
 
@@ -61,7 +61,7 @@ const Home = () => {
         dispatch(handleAuth({ credits: userData?.credits }));
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
         setLoading(false);
       }
     };
@@ -111,6 +111,7 @@ const Home = () => {
   };
 
   const fetchAnalyzeHistory = async () => {
+    setLoadingForAnalyzeHistory(true)
     setSnackAlertData({
       open: false,
       message: "",
@@ -118,11 +119,11 @@ const Home = () => {
     });
     try {
       const response = await axiosInstance({
-        url: `${appUrl}/getuserhistory`,
+        url: `${appUrl}/getuserhistory?limit=100`,
         method: "get",
       });
       if (response) {
-        const histories = response?.data?.Histories?.slice(0, 3);
+        const histories = response?.data?.Histories;
         setAnalyzeHistory(histories);
         setSnackAlertData({
           open: true,
@@ -137,8 +138,11 @@ const Home = () => {
           });
         }
       }
+    setLoadingForAnalyzeHistory(false)
+
     } catch (error) {
       setLoading(false);
+    setLoadingForAnalyzeHistory(false)
 
     }
   };
@@ -147,16 +151,22 @@ const Home = () => {
     const response = await axiosInstance({
       url: `${appUrl}/getgraphdata`,
       method: "get",
-    })
-    setGraphdata(response?.data)
-  }
+    });
+    setGraphdata(response?.data);
+  };
 
   const WarningToBuyCredits = () => {
     if (credits < 30) {
-      dispatch(handleSnackAlert({ open: true, message: "Your Credits are Low", severity: "error" }));
-      console.log("hi")
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: "Your Credits are Low",
+          severity: "error",
+        })
+      );
+      console.log("hi");
     }
-  }
+  };
 
   useEffect(() => {
     fetchAnalysed();
@@ -185,165 +195,164 @@ const Home = () => {
             width: "100%",
             justifyContent: "center",
             alignItems: "center",
-            flexDirection: "column"
+            flexDirection: "column",
           }}
         >
           <LoaderMain />
-
         </Box>
       ) : (
-        <Box sx={{
-          display: "flex",
-          flexDirection: {
-            xs: "column",
-            md: "row"
-          },
-          gap: "30px",
-          height:"70vh",
-          overflowY: "auto",
-          overflowX: "hidden",
-          padding: "20px 15px",
-          "&::-webkit-scrollbar": {
-            width: "8px",
-          },
-          "&::-webkit-scrollbar-track": {
-            background: "#DFDFDF",
-            borderRadius: "10px"
-          },
-          "&::-webkit-scrollbar-thumb": {
-            background: "black",
-            borderRadius: "10px"
-          },
-          "&::-webkit-scrollbar-thumb:hover": {
-            background: "#b30000"
-          },
-
-         
-
-        }}>
-
-          <Box sx={{
+        <Box
+          sx={{
             display: "flex",
-            flexDirection: "column",
-            gap: {
-              md: "15px",
-              xs: "30px",
-              xl:"40px"
+            flexDirection: {
+              xs: "column",
+              md: "row",
             },
-            flexGrow: 1,
-            flexBasis: {
-              md: "50%",
-              xs: "100%"
+            gap: "30px",
+            height: "70vh",
+            overflowY: "auto",
+            overflowX: "hidden",
+            padding: "20px 15px",
+            "&::-webkit-scrollbar": {
+              width: "8px",
             },
-            // border:"2px solid red",
-            flexShrink: 1,
-          }}>
-
-            <Box sx={{
-
-              
-              flexShrink: "1",
-             
-             
-            }}>
+            "&::-webkit-scrollbar-track": {
+              background: "#DFDFDF",
+              borderRadius: "10px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "black",
+              borderRadius: "10px",
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#b30000",
+            },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: {
+                md: "15px",
+                xs: "30px",
+                xl: "40px",
+              },
+              flexGrow: 1,
+              flexBasis: {
+                md: "50%",
+                xs: "100%",
+              },
+              // border:"2px solid red",
+              flexShrink: 1,
+            }}
+          >
+            <Box
+              sx={{
+                flexShrink: "1",
+              }}
+            >
               <CardIWithImageBackground
                 text={auth?.userName}
                 title="Hello,"
                 sxCardCss={{
-                
-                  minHeight:"90px",
-                  height:{
-                    lg:"120px",
-                    xs:"140px",
-                    xl:"140px"
+                  minHeight: "90px",
+                  height: {
+                    lg: "120px",
+                    xs: "140px",
+                    xl: "140px",
                   },
-
                 }}
               />
             </Box>
-            <Box sx={{
-              cursor: "pointer",
-            }}
-              onClick={() => navigate("/credits")}>
-
-              <Box sx={{
-                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-
-                padding: {
-                  sm: "19px 26px",
-                  xs: "26px 32px"
-                },
-                borderRadius: "10px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-               minHeight:"160px",
-               height:{
-                lg:"150px",
-                xs:"160px",
-                xl:"160px"
-               },
-               flexGrow:"1",
-              maxHeight:"190px",
-                justifyContent: "center",
-
-                '&:hover': {
-                  boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
-                  backgroundColor: "#edecec"
-                }
-                // ,border:"2px solid red"
-               
-              }}>
-                <Box
+            <Box
+              sx={{
+                cursor: "pointer",
+              }}
+              onClick={() => navigate("/credits")}
+            >
+              <Box
                 sx={{
-                  // border:"2px solid red"
+                  boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+
+                  padding: {
+                    sm: "19px 26px",
+                    xs: "26px 32px",
+                  },
+                  borderRadius: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "start",
+                  minHeight: "160px",
+                  height: {
+                    lg: "150px",
+                    xs: "160px",
+                    xl: "160px",
+                  },
+                  flexGrow: "1",
+                  maxHeight: "190px",
+                  justifyContent: "center",
+
+                  "&:hover": {
+                    boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
+                    backgroundColor: "#edecec",
+                  },
+                  // ,border:"2px solid red"
                 }}
+              >
+                <Box
+                  sx={
+                    {
+                      // border:"2px solid red"
+                    }
+                  }
                 >
-                <Typography sx={{
+                  <Typography
+                    sx={{
+                      color: "#333333",
+                      fontWeight: "600",
+                      fontSize: {
+                        xl: "23px",
+                        xs: "20px",
+                        lg: credits <= 10 ? "18px" : "30px",
+                      },
+                      lineHeight: "30px",
+                      letterSpacing: "0.34px",
+                    }}
+                  >
+                    Total Credits
+                  </Typography>
 
-                  color: "#333333",
-                  fontWeight: "600",
-                  fontSize: {
-                    xl:"23px",
-                    xs:"20px",
-                     lg:credits <= 10 ? "18px": "30px"
-
-                  },
-                  lineHeight: "30px",
-                  letterSpacing: "0.34px"
-                }}>
-                  Total Credits
-                </Typography>
-
-                <Typography sx={{
-                  mt: "0px",
-                  fontWeight: "600",
-                  fontSize: {
-                    xl:"56px",
-                    xs:"35px",
-                    lg:credits <= 10 ? "37px": "50px"
-
-                  },
-                  lineHeight: {
-                    xl:"65px",
-                    lg:"45px",
-                    xs:"65px"
-                  },
-                  color: "#190247",
-                  letterSpacing: "0.67px"
-                }}>
-                  {credits.toLocaleString()}
-                </Typography>
+                  <Typography
+                    sx={{
+                      mt: "0px",
+                      fontWeight: "600",
+                      fontSize: {
+                        xl: "56px",
+                        xs: "35px",
+                        lg: credits <= 10 ? "37px" : "50px",
+                      },
+                      lineHeight: {
+                        xl: "65px",
+                        lg: "45px",
+                        xs: "65px",
+                      },
+                      color: "#190247",
+                      letterSpacing: "0.67px",
+                    }}
+                  >
+                    {credits.toLocaleString()}
+                  </Typography>
                 </Box>
-                {
-                  credits <= 10 ? (
-                    <Box sx={{
+                {credits <= 10 ? (
+                  <Box
+                    sx={{
                       mt: "10px",
                       fontWeight: "600",
-                      fontSize:{
-                        md:"14px",
-                        lg:"13px",
-                        xs:"11px"
+                      fontSize: {
+                        md: "14px",
+                        lg: "13px",
+                        xs: "11px",
                       },
                       // lineHeight: "65px",
                       color: "#ffff",
@@ -352,10 +361,12 @@ const Home = () => {
                       p: "7px 10px",
                       borderRadius: "5px",
                       display: "flex",
-                      alignItems:"center",
-                   
-                    }}>
-                      You have low credits<Typography sx={{
+                      alignItems: "center",
+                    }}
+                  >
+                    You have low credits
+                    <Typography
+                      sx={{
                         color: "white",
                         backgroundColor: "#1F044C",
                         ml: "20px",
@@ -365,19 +376,21 @@ const Home = () => {
                         alignItems: "center",
                         padding: "5px 10px",
                         borderRadius: "5px",
-                        '&:hover': {
+                        "&:hover": {
                           boxShadow: "4px 5px 20px rgba(200, 200, 200, 0.9)", // Change this value to whatever effect you desire
-                          backgroundColor: "blue"
-                        }
-                      }} > Buy Now</Typography>
-                    </Box>
-                  ) : ""
-                }
-
-
+                          backgroundColor: "blue",
+                        },
+                      }}
+                    >
+                      {" "}
+                      Buy Now
+                    </Typography>
+                  </Box>
+                ) : (
+                  ""
+                )}
               </Box>
             </Box>
-
 
             {/* <Box sx={{
                 maxHeight: "400px",
@@ -388,68 +401,66 @@ const Home = () => {
               }}>
                 <CustomChart data={graphdata} />
               </Box> */}
-            <Box sx={{
-              // flexBasis: "254px",
-              flexGrow: 1,
-              display: "flex",
-              gap: "20px",
-              flexDirection: "column",
-              boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
-              padding: "20px",
-              borderRadius: "10px",
-              justifyContent: "center",
-              paddingLeft: "26px",
-              flexShrink:"2",
-              minHeight: "100px",
-              // maxHeight:"210px",
-              height:{
-                lg:"110px",
-                xs:"140px",
-                xl:"140px"
-              },
-              maxHeight:"100%"
-             
-            }}>
-
-            
-              <Typography sx={{
-                color: "#190247",
-                fontSize: {
-                  xl:"40px",
-                  xs:"35px",
-                  lg:"30px"
+            <Box
+              sx={{
+                // flexBasis: "254px",
+                flexGrow: 1,
+                display: "flex",
+                gap: "20px",
+                flexDirection: "column",
+                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                padding: "20px",
+                borderRadius: "10px",
+                justifyContent: "center",
+                paddingLeft: "26px",
+                flexShrink: "2",
+                minHeight: "100px",
+                // maxHeight:"210px",
+                height: {
+                  lg: "110px",
+                  xs: "140px",
+                  xl: "140px",
                 },
-               
-                fontWeight: "600",
-                lineHeight:{
-                  lg:"34px",
-                  xl:"48px"
-                }
-              }}>
+                maxHeight: "100%",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: "#190247",
+                  fontSize: {
+                    xl: "40px",
+                    xs: "35px",
+                    lg: "30px",
+                  },
+
+                  fontWeight: "600",
+                  lineHeight: {
+                    lg: "34px",
+                    xl: "48px",
+                  },
+                }}
+              >
                 {numberOfAnalyzed} Analyzed <br />
                 So far
               </Typography>
-
             </Box>
           </Box>
 
-
-
-
-          <Box sx={{
-            display: "flex",
-            gap: "20px",
-            flexDirection: {
-              xs: "column",
-              md: "column"
-            },
-            flexBasis: {
-              md: "50%",
-              xs: "100%"
-            },
-            // border: "2px solid red"
-          }}>
-
+          <Box
+            sx={{
+              display: "flex",
+              gap: "20px",
+              flexDirection: {
+                xs: "column",
+                md: "column",
+              },
+              flexBasis: {
+                md: "50%",
+                xs: "100%",
+              },
+              // border: "2px solid red"
+            }}
+          >
             <Box
               sx={{
                 flexBasis: {
@@ -458,84 +469,93 @@ const Home = () => {
                 flexShrink: 0,
                 flexGrow: 1,
                 height: "450px",
-                p: "30px 30px 30px 30px",
+                p: "30px 20px 0px 20px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "40px",
+                gap: {
+                  xl:"40px",
+                  lg:"20px",
+                  xs:"40px"
+                },
                 boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
                 borderRadius: "10px",
                 position: "relative",
                 // border: "2px solid red"
               }}
             >
-
               <Typography
                 sx={{
                   fontSize: "27px",
                   fontWeight: "600",
-                  color: "#333333"
+                  color: "#333333",
                 }}
               >
                 Analysis History
               </Typography>
-              <Box sx={{
-                overflowY: "auto",
-                "&::-webkit-scrollbar": {
-                  width: "8px"
-                },
-                "&::-webkit-scrollbar-track": {
-                  background: "#DFDFDF",
-                  borderRadius: "10px"
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  background: "black",
-                  borderRadius: "10px"
-                },
-                "&::-webkit-scrollbar-thumb:hover": {
-                  background: "#b30000"
-                },
-                display: "flex",
-                flexDirection: "column",
-                gap: "20px",
-                borderRadius: "10px",
-                paddingRight: "10px"
-              }}>
-
-                {
-                  analyzeHistory.length < 1 ? (
-                    <Box>
-                      You Have Not Analyzed Yet
-                    </Box>
-                  ) : (
-                    analyzeHistory.map((item, index) => (
-                      <GiftCard
-                        key={item._id}
-                        id={item._id}
-                        title={item.title}
-                        description={item.description}
-                        bullets={item.bullets}
-                        error={item.error}
-                        index={index}
-                        openModal={openModal}
-                        keywords ={item.keywords}
-                      />
-                    ))
-                  )
-                }
-              </Box>
               <Box
                 sx={{
-                  position: "absolute",
-                  bottom: {
-                    xs:"30px",
-                    lg:"20px",
-                    xl:"30px"
+                  overflowY: "auto",
+                  height:{
+                    xl:"155px",
+                    lg:'100px',
+                    xs:"140px"
                   },
-                  width: "90%",
-                  left: "0px",
-                  right: "0px",
-                  margin: "auto"
+                  "&::-webkit-scrollbar": {
+                    width: "8px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    background: "#DFDFDF",
+                    borderRadius: "10px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "black",
+                    borderRadius: "10px",
+                  },
+                  "&::-webkit-scrollbar-thumb:hover": {
+                    background: "#b30000",
+                  },
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: {
+                    xl:"20px",
+                    lg:"15px",
+                    xs:"20px"
+                  },
+                  borderRadius: "10px",
+                  paddingRight: "10px",
                 }}
+              >
+                 { loadingForAnalyzeHistory ? <Box>Loading Analysis History </Box> : analyzeHistory.length < 1 ? (
+                  <Box>You Have Not Analyzed Yet</Box>
+                ) : (
+                  analyzeHistory.map((item, index) => (
+                    <GiftCard
+                      key={item._id}
+                      id={item._id}
+                      title={item.title}
+                      description={item.description}
+                      bullets={item.bullets}
+                      error={item.error}
+                      index={index}
+                      openModal={openModal}
+                      keywords={item.keywords}
+                    />
+                  ))
+                )}
+              </Box>
+              <Box
+                // sx={{
+                //   position: "",
+                //   bottom: {
+                //     xs: "30px",
+                //     lg: "20px",
+                //     xl: "30px",
+                //   },
+                //   width: "90%",
+                //   left: "0px",
+                //   right: "0px",
+                //   margin: "auto",
+                // }}
               >
                 <CustomButton
                   fullWidth={true}
@@ -544,8 +564,8 @@ const Home = () => {
                   buttonTextStyle={{}}
                   buttonStyle={{
                     padding: {
-                      lg: "12px 20px"
-                    }
+                      lg: "12px 20px",
+                    },
                   }}
                   ButtonText="History"
                   fontSize
@@ -564,21 +584,30 @@ const Home = () => {
             <Box
               onClick={() => navigate("/analyze")}
               sx={{
-                flexBasis: "30%", cursor: "pointer", flexGrow: 1, justifyContent: "center", display: "flex", gap: "20px", flexDirection: "column",
+                flexBasis: "30%",
+                cursor: "pointer",
+                flexGrow: 1,
+                justifyContent: "center",
+                display: "flex",
+                gap: "20px",
+                flexDirection: "column",
                 background: `linear-gradient(rgba(27, 2, 75, .1), rgba(27, 2, 75, .1)), url(${bg})`,
-                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)", padding: "20px", borderRadius: "10px",
-              }}>
-
-              <Typography sx={{
-                fontSize: "30px",
-                fontWeight: "600",
-                lineHeight: "45px",
-                color: "white",
-                textAlign: "center"
-              }}>
+                boxShadow: "4px 5px 15px rgba(200, 200, 200, 0.61)",
+                padding: "20px",
+                borderRadius: "10px",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "30px",
+                  fontWeight: "600",
+                  lineHeight: "45px",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
                 Let’s Analyze
               </Typography>
-
             </Box>
           </Box>
 
@@ -596,7 +625,9 @@ const Home = () => {
             message={snackAlertData.message}
             severity={snackAlertData.severity}
             open={snackAlertData.open}
-            handleClose={() => { setSnackAlertData(prev => ({ ...prev, open: false })) }}
+            handleClose={() => {
+              setSnackAlertData((prev) => ({ ...prev, open: false }));
+            }}
           />
         </Box>
       )}
