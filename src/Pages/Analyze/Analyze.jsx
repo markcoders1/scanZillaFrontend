@@ -1055,7 +1055,7 @@ const Analyze = () => {
                         hoverBg="white"
                         hovercolor="#1A0049"
                         buttonStyle={{ padding: { lg: "12px 20px" } }}
-                        ButtonText={`Check Another Product`}
+                        ButtonText={`Check another product`}
                         fontSize
                         color="white"
                         fontWeight
@@ -1426,7 +1426,7 @@ const Analyze = () => {
                     hoverBg="white"
                     hovercolor="#1A0049"
                     buttonStyle={{ padding: { lg: "12px 20px" } }}
-                    ButtonText={`Check Another Product`}
+                    ButtonText={`Analyze a new product`}
                     fontSize
                     color="white"
                     fontWeight
