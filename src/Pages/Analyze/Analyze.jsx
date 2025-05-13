@@ -547,21 +547,20 @@ const Analyze = () => {
 
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
-  
+
     const margin = 15; // 👈 Left/right margin in mm
     const usableWidth = pdfWidth - margin * 2;
-  
+
     const imgProps = pdf.getImageProperties(imgData);
     const imageRatio = imgProps.height / imgProps.width;
     const imgHeight = usableWidth * imageRatio;
-  
+
     let heightLeft = imgHeight;
     let position = 0;
-  
+
     // Add first page
     pdf.addImage(imgData, "PNG", margin, position, usableWidth, imgHeight);
     heightLeft -= pdfHeight;
-  
 
     // Handle multi-page
     while (heightLeft > 0) {
@@ -1394,13 +1393,16 @@ const Analyze = () => {
                         </Paper>
                       ) : null}
                     </Box>
-                   
                   </Box>
                 ) : null}
               </Box>
-                {
-                   hasValues(AnalyzeErrros) ? (
-                    <CustomButton
+              {hasValues(AnalyzeErrros) ? (
+                <Box sx={{
+                  display:"flex",
+                  flexDirection:'column',
+                  gap:"20px"
+                }} >
+                  <CustomButton
                     // border="2px solid #6e20ff"
                     borderRadius="10px"
                     background="#6e20ff"
@@ -1408,7 +1410,7 @@ const Analyze = () => {
                     hovercolor="#1A0049"
                     buttonTextStyle={{}}
                     buttonStyle={{ padding: { lg: "12px 20px" } }}
-                    ButtonText={'Export'}
+                    ButtonText={"Export"}
                     fontSize
                     color="white"
                     fontWeight
@@ -1418,9 +1420,36 @@ const Analyze = () => {
                     padding
                     onClick={exportResultToPDF}
                   />
-                   ): null
-                }
-              
+                  <CustomButton
+                    borderRadius="10px"
+                    background="#3C2784"
+                    hoverBg="white"
+                    hovercolor="#1A0049"
+                    buttonStyle={{ padding: { lg: "12px 20px" } }}
+                    ButtonText={`Check Another Product`}
+                    fontSize
+                    color="white"
+                    fontWeight
+                    // buttonTextStyle={{
+                    //   width:{}
+                    // }}
+                    fullWidth={true}
+                    variant="contained"
+                    hovercolor={"black"}
+                    padding
+                    onClick={handleClear}
+                  />
+                </Box>
+              ) : null}
+              <Box
+                sx={{
+                  flexBasis: {
+                    sm: "100%",
+                    xs: "100%",
+                  },
+                }}
+              ></Box>
+
               <SnackAlert
                 message={snackAlertData.message}
                 severity={snackAlertData.severity}
