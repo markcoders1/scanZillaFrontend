@@ -57,7 +57,6 @@ const Analyze = () => {
     "Appliances",
     "Arts, Crafts & Sewing",
     "Automotive",
-    "Baby",
     "Baby Products",
     "Beauty & Personal Care",
     "Books",
