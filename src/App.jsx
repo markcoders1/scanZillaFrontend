@@ -43,6 +43,7 @@ import TOSSignUp from "./Pages/SignUpPages/TOSSignUp";
 import LayoutPublic from "./Pages/Layout/LayoutPublic";
 import Liscenced2 from "./Pages/Liscenced/Lisceneced2";
 
+import LoginFallBack from "./Pages/Login/LoginFallBack";
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function App() {
@@ -52,8 +53,8 @@ function App() {
         <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
+            <Route path="" element={<LoginFallBack />} />
             <Route path="/" element={<LayoutForOnePageScreens />}>
-              <Route path="" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
 
               <Route path="otp" element={<OTP />} />
@@ -67,10 +68,7 @@ function App() {
             <Route path="/" element={<LayoutPublic />}>
               <Route path="/terms-of-service" element={<TOSSignUp />} />
               <Route path="/privacy-notice" element={<PN />} />
-            <Route
-              path="/os-Library-list"
-              element={<Liscenced2 />}
-            />
+              <Route path="/os-Library-list" element={<Liscenced2 />} />
             </Route>
 
             <Route path="/" element={<DashboardLayout />}>
