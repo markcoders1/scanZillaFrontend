@@ -53,8 +53,8 @@ function App() {
         <ScrollToTop />
         <Suspense fallback={<PageLoader />}>
           <Routes>
-            <Route path="" element={<LoginFallBack />} />
             <Route path="/" element={<LayoutForOnePageScreens />}>
+              <Route path="" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
 
               <Route path="otp" element={<OTP />} />
