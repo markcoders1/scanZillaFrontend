@@ -25,7 +25,6 @@ const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 // import SnackAlert from '../SnackAlert/SnackAlert';
 import SnackAlert from "../../Components/SnackAlert/SnackAlert";
 import logo from "../../assets/images/sample.webp";
-import LoginFallBack from "./LoginFallBack";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -86,6 +85,9 @@ const Login = () => {
       console.log(error);
 
       setStatusCode(error.response.status)
+      if (error.response.status) {
+        navigate('maintenance')
+      }
       if (error.code === "auth/popup-closed-by-user") {
         setSnackAlertData({
           open: true,
@@ -233,25 +235,7 @@ const Login = () => {
   useEffect(() => {
     inputRef?.current?.focus();
   }, []);
-
-  if (statusCode === 503){
-    return (
-     <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems:'center',
-          gap: "0px",
-          flexBasis:'40%',
-          height:'100%'
-        }}
-      >
-        <LoginFallBack />
-
-      </Box>
-      )
-  }
+  
   return (
     <Box>
       <Box

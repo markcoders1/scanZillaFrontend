@@ -20,20 +20,42 @@ const LoginFallBack = () => {
   return (
     <Box
       sx={{
-        // maxWidth: "1440px",
+        maxWidth: "1440px",
         // backgroundColor: "black",
-        // margin: "auto",
-        // height: "100vh",
+        margin: "auto",
+        height: "100vh",
         color: "white",
         display: "flex",
         // justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        justifyContent:'center',
         gap: "1.3rem",
       }}
     >
-   
+      {/* <Box
+                sx={{
+                    // border: "2px solid red",
+                    fontWeight: "600",
+                    fontSize: "40px",
+                    color: "#D081FF",
+                    mt:"40px"
+
+                }}
+            >
+                ScanZilla
+            </Box> */}
+      <Box>
+        <img
+          src={logo}
+          alt=""
+          style={{
+            width: "120px",
+            backgroundColor: "transparent",
+              marginTop:"30px"
+            // marginLeft: "-20px",
+          }}
+        />
+      </Box>
       <Box
         sx={{
           mb: "20px",

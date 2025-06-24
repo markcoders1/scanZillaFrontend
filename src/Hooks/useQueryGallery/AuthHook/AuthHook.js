@@ -52,7 +52,10 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    if (error.response.status === 503){
+        navigate("/maintenance");
 
+    }
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
