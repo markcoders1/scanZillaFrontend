@@ -21,6 +21,9 @@ import axiosInstance from "../../Hooks/useQueryGallery/AuthHook/AuthHook";
 import LoaderMain from "../../Components/Loader/LoaderMain";
 import { handleSnackAlert } from "../../Redux/Slice/SnackAlertSlice/SnackAlertSlice";
 import { useDispatch } from "react-redux";
+
+import ModalDeleteUser from "../../Components/ModalDeleteUser.jsx/ModalDeleteUser";
+
 const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 const UserTable = () => {
   const [users, setUsers] = useState([]);
@@ -34,6 +37,9 @@ const UserTable = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+
   const toggleBlock = async (userId) => {
     try {
       setLoadingButton((prev) => ({ ...prev, [userId]: true }));
@@ -45,8 +51,14 @@ const UserTable = () => {
         },
       });
       console.log(response);
-      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
-      
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: response.data.message,
+          severity: "success",
+        })
+      );
+
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
           user._id === userId ? { ...user, active: !user.active } : user
@@ -70,11 +82,19 @@ const UserTable = () => {
         },
       });
       console.log(response);
-      dispatch(handleSnackAlert({ open: true, message: response.data.message, severity: "success" }));
+      dispatch(
+        handleSnackAlert({
+          open: true,
+          message: response.data.message,
+          severity: "success",
+        })
+      );
 
       setUsers((prevUsers) =>
         prevUsers.map((user) =>
-          user._id === userId ? { ...user, role: user.role === "admin" ? "user" : "admin" } : user
+          user._id === userId
+            ? { ...user, role: user.role === "admin" ? "user" : "admin" }
+            : user
         )
       );
     } catch (error) {
@@ -91,7 +111,6 @@ const UserTable = () => {
         method: "get",
       });
       setUsers(response.data);
-     
     } catch (error) {
       console.log(error);
     } finally {
@@ -133,16 +152,15 @@ const UserTable = () => {
     setFilter(newValue);
   };
 
- 
-
   const filteredUsers = users.filter(
     (user) =>
       (filter === "all" || user.role === filter) &&
-      (
-        user?.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user?.credits.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-        user?.email.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      (user?.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user?.credits
+          .toString()
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        user?.email.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   const renderActionButtons = (userId) => {
@@ -183,6 +201,21 @@ const UserTable = () => {
           onClick={() => toggleAdmin(userId)}
           loading={loadingButtonAdmin[userId] || false}
         />
+        <CustomButton
+                border={active ? "2px solid #EE1D52" : "2px solid #31BA96"}
+
+        borderRadius="10px"
+        // background="#ff4444"
+        hoverBg="white"
+        hovercolor="#ff4444"
+        fontSize="10px"
+                color={active ? "#EE1D52" : "#31BA96"}
+
+        fontWeight="500"
+        width="80px"
+        ButtonText="Delete"
+        onClick={() => handleDeleteClick(user)}
+      />
       </Box>
     );
   };
@@ -190,11 +223,30 @@ const UserTable = () => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
-    const month = date.toLocaleString('default', { month: 'short' });
+    const month = date.toLocaleString("default", { month: "short" });
     const year = date.getFullYear();
     return `${month}-${day}-${year}`;
   };
 
+  const handleDeleteClick = (user) => {
+    setSelectedUser(user);
+    setDeleteModalOpen(true);
+  };
+
+  // After successful deletion
+const handleDeleteSuccess = () => {
+  setUsers(users.filter(user => user._id !== selectedUser._id));
+  setSelectedUser(null);
+  setDeleteModalOpen(false);
+  
+  dispatch(
+    handleSnackAlert({
+      open: true,
+      message: "User deleted successfully",
+      severity: "success",
+    })
+  );
+};
   return (
     <>
       {loading ? (
@@ -212,7 +264,6 @@ const UserTable = () => {
       ) : (
         <Box
           sx={{
-          
             top: {
               lg: "0px",
               xs: "80px",
@@ -222,35 +273,34 @@ const UserTable = () => {
             overflowY: "hidden",
             padding: "20px 15px",
             "&::-webkit-scrollbar": {
-              width: "8px"
+              width: "8px",
             },
             "&::-webkit-scrollbar-track": {
               background: "#DFDFDF",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb": {
               background: "black",
-              borderRadius: "10px"
+              borderRadius: "10px",
             },
             "&::-webkit-scrollbar-thumb:hover": {
-              background: "#b30000"
+              background: "#b30000",
             },
           }}
         >
           <Box
             sx={{
-              display:"flex",
-              flexDirection:{md:"row-reverse",xs:"column-reverse"},
-              justifyContent:"space-between",
-            gap:"1rem"
-
+              display: "flex",
+              flexDirection: { md: "row-reverse", xs: "column-reverse" },
+              justifyContent: "space-between",
+              gap: "1rem",
             }}
           >
             <Box
               sx={{
                 position: "relative",
-             
-                width:{md:"350px", xs:"100%"}
+
+                width: { md: "350px", xs: "100%" },
               }}
             >
               <input
@@ -267,7 +317,6 @@ const UserTable = () => {
                   outline: "none",
                   position: "relative",
                   width: "100%",
-                  
                 }}
                 placeholder="Search"
                 value={searchTerm}
@@ -291,7 +340,10 @@ const UserTable = () => {
             </Tabs>
           </Box>
 
-          <TableContainer component={Paper} sx={{overflow:"auto",height:"95%"}} >
+          <TableContainer
+            component={Paper}
+            sx={{ overflow: "auto", height: "95%" }}
+          >
             <Table
               sx={{ minWidth: 650, padding: "0px 15px" }}
               aria-label="user table"
@@ -307,7 +359,7 @@ const UserTable = () => {
                       fontSize: "14px",
                       textAlign: "center",
                       borderRadius: "8px 0px 0px 8px",
-                      minWidth:"260px"
+                      minWidth: "260px",
                     }}
                   >
                     All Users
@@ -320,8 +372,7 @@ const UserTable = () => {
                       padding: "15px 10px",
                       fontSize: "14px",
                       textAlign: "center",
-                      minWidth:"160px"
-
+                      minWidth: "160px",
                     }}
                   >
                     No of Credits
@@ -336,7 +387,6 @@ const UserTable = () => {
                     }}
                   >
                     Email
-                    
                   </TableCell>
                   <TableCell
                     sx={{
@@ -346,8 +396,7 @@ const UserTable = () => {
                       padding: "15px 10px",
                       fontSize: "16px",
                       textAlign: "center",
-                      minWidth:"160px"
-
+                      minWidth: "160px",
                     }}
                   >
                     <TableSortLabel
@@ -384,8 +433,7 @@ const UserTable = () => {
               </TableHead>
               <TableBody>
                 {filteredUsers.map((user) => (
-           
-                  <TableRow key={user._id} sx={{ marginTop: "12px",  }}>
+                  <TableRow key={user._id} sx={{ marginTop: "12px" }}>
                     <TableCell
                       component="th"
                       scope="row"
@@ -452,13 +500,16 @@ const UserTable = () => {
               </TableBody>
             </Table>
           </TableContainer>
+          <ModalDeleteUser
+            open={deleteModalOpen}
+            handleClose={() => setDeleteModalOpen(false)}
+            user={selectedUser}
+            onDeleteSuccess={handleDeleteSuccess}
+          />
         </Box>
       )}
     </>
   );
 };
-   
-
-
 
 export default UserTable;

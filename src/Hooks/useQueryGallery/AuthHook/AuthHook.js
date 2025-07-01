@@ -1,14 +1,14 @@
 // src/api/axiosInstance.js
-  import axios from 'axios';
-  import {store} from '../../../Redux/Store/Store.js';
-  import { handleAuth } from '../../../Redux/Slice/UserSlice/UserSlice';
-  
-import {navigate} from '../../../utilis/navigattion.js'
-import SnackAlert from '../../../Components/SnackAlert/SnackAlert.jsx';
+import axios from "axios";
+import { store } from "../../../Redux/Store/Store.js";
+import { handleAuth } from "../../../Redux/Slice/UserSlice/UserSlice";
 
-import {ROUTES} from './Routes.js'
-import { handleSnackAlert } from '../../../Redux/Slice/SnackAlertSlice/SnackAlertSlice.js';
-const appUrl = import.meta.env.VITE_REACT_APP_API_URL
+import { navigate } from "../../../utilis/navigattion.js";
+import SnackAlert from "../../../Components/SnackAlert/SnackAlert.jsx";
+
+import { ROUTES } from "./Routes.js";
+import { handleSnackAlert } from "../../../Redux/Slice/SnackAlertSlice/SnackAlertSlice.js";
+const appUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
 // Create an Axios instance
 const axiosInstance = axios.create({
@@ -23,7 +23,7 @@ axiosInstance.interceptors.request.use(
     const accessToken = state.auth?.accessToken;
 
     if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
+      config.headers["Authorization"] = `Bearer ${accessToken}`;
     }
 
     return config;
@@ -47,26 +47,34 @@ const processQueue = (error, tokens = null) => {
   failedQueue = [];
 };
 
-
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.status === 503){
-        navigate("/maintenance");
-
+    if (error.response.status === 503) {
+      sessionStorage.clear();
+      localStorage.clear();
+      store.dispatch(
+        handleAuth({
+          accessToken: null,
+          refreshToken: null,
+          authenticated: false,
+        })
+      );
+      navigate("/maintenance");
     }
     if (
       error.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.endsWith('/token')
+      !originalRequest.url.endsWith("/token")
     ) {
       if (isRefreshing) {
         return new Promise(function (resolve, reject) {
           failedQueue.push({ resolve, reject });
         })
           .then((tokens) => {
-            originalRequest.headers['Authorization'] = 'Bearer ' + tokens.accessToken;
+            originalRequest.headers["Authorization"] =
+              "Bearer " + tokens.accessToken;
             return axiosInstance(originalRequest);
           })
           .catch((err) => {
@@ -81,16 +89,18 @@ axiosInstance.interceptors.response.use(
       const refreshToken = state.auth?.refreshToken;
       console.log(refreshToken);
       if (!refreshToken) {
-        store.dispatch(handleAuth({
-          accessToken:null,
-          refreshToken:null,
-          authenticated:false
-        }));
-        store.dispatch(({
-          message:"Your session has expired. Please log in again to continue.",
-          severity:"error",
-          open:true
-        }))
+        store.dispatch(
+          handleAuth({
+            accessToken: null,
+            refreshToken: null,
+            authenticated: false,
+          })
+        );
+        store.dispatch({
+          message: "Your session has expired. Please log in again to continue.",
+          severity: "error",
+          open: true,
+        });
         navigate("/");
         return Promise.reject(error);
       }
@@ -100,21 +110,20 @@ axiosInstance.interceptors.response.use(
           refreshToken,
         });
 
-        console.log("403 response",response.status)
-        
+        console.log("403 response", response.status);
 
         const newAccessToken = response.data.accessToken;
-        
+
         store.dispatch(
           handleAuth({
-            
-              accessToken: newAccessToken,
-        
+            accessToken: newAccessToken,
           })
         );
 
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+        axiosInstance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${newAccessToken}`;
+        originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
         processQueue(null, {
           accessToken: newAccessToken,
@@ -122,21 +131,22 @@ axiosInstance.interceptors.response.use(
 
         return axiosInstance(originalRequest);
       } catch (err) {
-        console.log(err)
+        console.log(err);
         processQueue(err, null);
-        store.dispatch(handleAuth({
-          accessToken: null,
-          refreshToken:null,
-          authenticated:false
-
-        }));
+        store.dispatch(
+          handleAuth({
+            accessToken: null,
+            refreshToken: null,
+            authenticated: false,
+          })
+        );
         navigate("/");
-        store.dispatch(({
-          message:"Your session has expired. Please log in again to continue.",
-          severity:"error",
-          open:true
-        }))
-        
+        store.dispatch({
+          message: "Your session has expired. Please log in again to continue.",
+          severity: "error",
+          open: true,
+        });
+
         return Promise.reject(err);
       } finally {
         isRefreshing = false;
