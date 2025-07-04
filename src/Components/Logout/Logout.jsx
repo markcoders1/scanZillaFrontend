@@ -7,23 +7,25 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { handleAuth } from "../../Redux/Slice/UserSlice/UserSlice";
 import CustomButton from "../CustomButton/CustomButton";
 import { BiBorderRadius } from "react-icons/bi";
+import { handleAnalyzeErrors } from "../../Redux/Slice/AnalyzeSlice/AnalyzeSlice";
 
 const Logout = () => {
   const auth = useSelector((state) => state?.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const handleLogout = ()=>{
+  const navigate = useNavigate();
+  const handleLogout = () => {
     dispatch(
-        handleSnackAlert({
-          open: true,
-          message: "Logged out successfully.",
-          severity: "success",
-        })
-      );
-      sessionStorage.clear()
-      localStorage.clear()
-      navigate("/", {replace:true})
-      dispatch(handleAuth({
+      handleSnackAlert({
+        open: true,
+        message: "Logged out successfully.",
+        severity: "success",
+      })
+    );
+    sessionStorage.clear();
+    localStorage.clear();
+    navigate("/", { replace: true });
+    dispatch(
+      handleAuth({
         message: null,
         accessToken: null,
         refreshToken: null,
@@ -39,33 +41,34 @@ const Logout = () => {
         customerId: null,
         success: null,
         authenticated: false,
-      }))
-  }
+      })
+    );
+    dispatch(handleAnalyzeErrors({ TE: [], BE: [], DE: [], CE: [], KE: [] }));
+  };
   return (
     <>
       {auth?.authenticated ? (
         <Box
-      onClick={handleLogout}
+          onClick={handleLogout}
           sx={{
             fontSize: "clamp(1vw, 2rem, 10vw)",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
         >
           <CustomButton
-          buttonStyle={{
-            borderRadius:"8px",
-            padding:{
-              lg : "13px 35px",
+            buttonStyle={{
+              borderRadius: "8px",
+              padding: {
+                lg: "13px 35px",
 
-              md : "5px 35px",
-              xs: "5px 10px"
-            }
-          }}
-          border={"2px solid white"}
-          ButtonText={"Log Out"}
-          color={"white"}
-          fontSize={"14px"}
-          
+                md: "5px 35px",
+                xs: "5px 10px",
+              },
+            }}
+            border={"2px solid white"}
+            ButtonText={"Log Out"}
+            color={"white"}
+            fontSize={"14px"}
           />
         </Box>
       ) : null}

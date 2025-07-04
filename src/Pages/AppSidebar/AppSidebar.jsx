@@ -1,22 +1,28 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
-import './AppSidebar.css';
-import CustomButton from '../../Components/CustomButton/CustomButton';
-import Logout from '../../Components/Logout/Logout';
-import { useSelector } from 'react-redux';
-import logo from '../../assets/images/sample.webp';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Box, Typography } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import "./AppSidebar.css";
+import CustomButton from "../../Components/CustomButton/CustomButton";
+import Logout from "../../Components/Logout/Logout";
+import { useDispatch, useSelector } from "react-redux";
+import logo from "../../assets/images/sample.webp";
+import { useLocation } from "react-router-dom";
+import { handleAnalyzeErrors } from "../../Redux/Slice/AnalyzeSlice/AnalyzeSlice";
 
 const AppSidebar = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [admin, setAdmin] = useState(false);
+  const dispatch = useDispatch();
+
+  const clearStoreAnalysis = () => {
+    dispatch(handleAnalyzeErrors({ TE: [], BE: [], DE: [], CE: [], KE: [] }));
+  };
 
   const auth = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (auth.role == 'admin') {
+    if (auth.role == "admin") {
       setAdmin(true);
       // console.log(auth.role)
     } else {
@@ -27,45 +33,52 @@ const AppSidebar = () => {
     setEmail(auth.email);
   }, []);
 
-  const {pathname} = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-        justifyContent: 'center',
-        marginTop: {xl:'20px', xs:"0px"},
-        padding: '20px', // Added padding for better spacing
+        display: "flex",
+        flexDirection: "column",
+        gap: "1rem",
+        justifyContent: "center",
+        marginTop: { xl: "20px", xs: "0px" },
+        padding: "20px", // Added padding for better spacing
       }}
     >
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap:  {xl:'30px', xs:"0px"},
-          justifyContent: 'center',
+          display: "flex",
+          flexDirection: "column",
+          gap: { xl: "30px", xs: "0px" },
+          justifyContent: "center",
         }}
       >
         <Box>
-          <img src={logo} alt="" style={{width:"120px",backgroundColor:"transparent", marginLeft:"-20px"}} />
+          <img
+            src={logo}
+            alt=""
+            style={{
+              width: "120px",
+              backgroundColor: "transparent",
+              marginLeft: "-20px",
+            }}
+          />
         </Box>
 
         {admin ? (
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: {xl:'1.5rem', xs:".7rem"},
-
+              display: "flex",
+              flexDirection: "column",
+              gap: { xl: "1.5rem", xs: ".7rem" },
             }}
           >
             <Typography>
               <NavLink
                 to="/dashboard-admin"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
               >
                 Dashboard
@@ -75,7 +88,7 @@ const AppSidebar = () => {
               <NavLink
                 to="/tool-management"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
               >
                 Tool Management
@@ -85,7 +98,7 @@ const AppSidebar = () => {
               <NavLink
                 to="/assistant-instruction"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
               >
                 Assistant Instructions
@@ -95,30 +108,29 @@ const AppSidebar = () => {
               <NavLink
                 to="/user-management"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
               >
                 User Management
               </NavLink>
-            </Typography> 
+            </Typography>
             <Typography>
               <NavLink
                 to="/credits-management"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
               >
                 Credits Management
               </NavLink>
             </Typography>
-            
           </Box>
         ) : (
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: {xl:'1.5rem', md:".5rem" ,xs:".8rem"},
+              display: "flex",
+              flexDirection: "column",
+              gap: { xl: "1.5rem", md: ".5rem", xs: ".8rem" },
             }}
           >
             <Typography>
@@ -127,7 +139,12 @@ const AppSidebar = () => {
                 // className={({ isActive }) =>
                 //   isActive ? 'anchortag anchorActive' : 'anchortag'
                 // }
-                className={pathname == '/dashboard' ? 'anchortag anchorActive': 'anchortag'}
+                className={
+                  pathname == "/dashboard"
+                    ? "anchortag anchorActive"
+                    : "anchortag"
+                }
+                onClick={()=> clearStoreAnalysis()}
               >
                 Dashboard
               </NavLink>
@@ -136,8 +153,10 @@ const AppSidebar = () => {
               <NavLink
                 to="/analyze"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
+                onClick={()=> clearStoreAnalysis()}
+
               >
                 Analyze
               </NavLink>
@@ -146,18 +165,22 @@ const AppSidebar = () => {
               <NavLink
                 to="/credits"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
+                onClick={()=> clearStoreAnalysis()}
+
               >
-               Credits Top Up
+                Credits Top Up
               </NavLink>
             </Typography>
             <Typography>
               <NavLink
                 to="/history"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
+                onClick={()=> clearStoreAnalysis()}
+
               >
                 History
               </NavLink>
@@ -166,8 +189,10 @@ const AppSidebar = () => {
               <NavLink
                 to="/profile"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
+                onClick={()=> clearStoreAnalysis()}
+
               >
                 Profile
               </NavLink>
@@ -186,8 +211,10 @@ const AppSidebar = () => {
               <NavLink
                 to="/support"
                 className={({ isActive }) =>
-                  isActive ? 'anchortag anchorActive' : 'anchortag'
+                  isActive ? "anchortag anchorActive" : "anchortag"
                 }
+                onClick={()=> clearStoreAnalysis()}
+
               >
                 Contact Us
               </NavLink>
@@ -197,42 +224,41 @@ const AppSidebar = () => {
       </Box>
       <Box
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0px',
-          justifyContent: 'center',
+          display: "flex",
+          flexDirection: "column",
+          gap: "0px",
+          justifyContent: "center",
         }}
       >
         <Typography
           sx={{
-            fontWeight: '600',
+            fontWeight: "600",
             fontSize: {
-              xl:'1.9rem',
-              md:'1.5rem'
+              xl: "1.9rem",
+              md: "1.5rem",
             },
-            color: '#ffff', 
+            color: "#ffff",
           }}
         >
           {auth?.userName}
         </Typography>
         <Typography
           sx={{
-            fontWeight: '400',
+            fontWeight: "400",
             fontSize: {
-              xl:'0.9rem',
-              md:'0.8rem'
+              xl: "0.9rem",
+              md: "0.8rem",
             },
-            color: '#a49ab7',
-           
+            color: "#a49ab7",
           }}
         >
           {auth?.email}
         </Typography>
         <Typography
           sx={{
-            marginTop:{
+            marginTop: {
               xl: "25px",
-              md:"15px"
+              md: "15px",
             },
           }}
         >
